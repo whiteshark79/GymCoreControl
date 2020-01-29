@@ -1,0 +1,104 @@
+/***********************************************************************************
+ * Style for data table 
+ */
+
+
+.thtable {
+    color: #ffffff;
+    background-color: #3C8DBC;
+    border-color: rgb(37, 87, 116);
+}
+
+.thead-table {
+  border-bottom: 3px solid #B6B6B6; 
+}
+
+table td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+@media (min-width: 600px){
+  .btnagregar {
+      margin-top: 1.9rem;
+      border-radius: 25px;
+  }
+}
+/***********************************************************************************
+* Customs styles
+*/ 
+
+.text-error{
+    color: red !important;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .text-info{
+    color: #3C8DBC !important;
+    font-size: 12px;
+  }
+
+  a:link    {color: white; }
+  a:visited {color: black; }
+  a:hover   {color: white; }
+  a:active  {color: white; }
+
+/**************************
+* modal
+*/
+
+.modal-primary .modal-content {
+  border-color: #3C8DBC; }
+
+.modal-primary .modal-header {
+  color: #fff;
+  background-color: #3C8DBC; }
+
+.modal-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  border-bottom: 1px solid #c2cfd6; 
+  padding: 10px;}
+  
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5; }
+
+/*************************************/
+#dtTable {
+  font-size: 14px;
+  border-collapse: collapse;
+  width: 100%;
+} 
+
+#dtTable td {
+  padding-top: 1.5px;
+  padding-bottom: 1.5px;}  
+
+/****************************/
+
+.num-col{
+  position: relative;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.num-col {
+  -ms-flex: 0 0 76.6%;
+  flex: 0 0 76.6%;
+  max-width: 76.6%;
+}
+
+/**************************************/
+.mostrar{
+  display: list-item !important;
+  opacity: 1 !important;
+  position: absolute !important;
+  background-color: #504e4e7a !important;
+}
