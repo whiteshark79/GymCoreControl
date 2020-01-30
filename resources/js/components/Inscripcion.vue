@@ -444,11 +444,7 @@
 
                 me.subtotal = this.total;
                 me.abono = this.total;
-                me.saldo = 0;
-
-                   
-
-                        
+                me.saldo = 0;                 
             },
             registrarInscripcion(){               
                 let me = this;

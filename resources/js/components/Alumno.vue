@@ -742,8 +742,7 @@
         }
     }
 </script>
-<style>    
-    
+<style>        
     .div-error{
         display: flex;
         justify-content: center;

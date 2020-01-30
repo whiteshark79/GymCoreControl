@@ -1,5 +1,5 @@
 <?php
- 
+  
 namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
@@ -13,7 +13,7 @@ class ProfesorController extends Controller
 {
     public function index(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
  
         $buscar = $request->buscar;
         $criterio = $request->criterio;
@@ -52,7 +52,21 @@ class ProfesorController extends Controller
             'personas' => $personas
         ];
     } 
-     
+    
+    public function selectProfesor(Request $request){
+        if (!$request->ajax()) return redirect('/');
+ 
+        $filtro = $request->filtro;
+        $profesores = Profesor::join('personas','profesores.id','=','personas.id')
+        ->where('personas.nombres', 'like', '%'. $filtro . '%')
+        ->orWhere('personas.apellidos', 'like', '%'. $filtro . '%')
+        ->orWhere('personas.num_documento', 'like', '%'. $filtro . '%')
+        ->select('personas.id','personas.nombres','personas.apellidos','personas.num_documento')
+        ->orderBy('personas.nombres', 'asc')->get();
+ 
+        return ['profesores' => $profesores];
+    } 
+
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
@@ -115,21 +129,5 @@ class ProfesorController extends Controller
         } catch (Exception $e){
             DB::rollBack();
         }
-    }    
-
-    // public function desactivar(Request $request)
-    // {
-    //     if (!$request->ajax()) return redirect('/');
-    //     $profesor = Profesor::findOrFail($request->id);
-    //     $profesor->condicion = '0';
-    //     $profesor->save();
-    // }
-
-    // public function activar(Request $request)
-    // {
-    //     if (!$request->ajax()) return redirect('/');
-    //     $profesor = Profesor::findOrFail($request->id);
-    //     $profesor->condicion = '1';
-    //     $profesor->save();
-    // }
+    }   
 }

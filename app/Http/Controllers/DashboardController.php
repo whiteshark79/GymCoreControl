@@ -26,7 +26,7 @@ class DashboardController extends Controller
         ->groupBy(DB::raw('MONTH(v.fecha_hora)'),DB::raw('YEAR(v.fecha_hora)'))
         ->get();
  
-        return ['ingresos'=>$ingresos,'ventas'=>$ventas,'anio'=>$anio];      
+        return ['ingresos'=>$ingresos,'ventas'=>$ventas,'anio'=>$anio];    
  
     }
 }

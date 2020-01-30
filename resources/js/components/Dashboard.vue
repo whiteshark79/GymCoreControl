@@ -43,7 +43,6 @@
               </div>
           </div>
       </div>
-
     </main>
 </template>
 
@@ -51,8 +50,8 @@
   export default {
     data (){
       return {
-        varIngreso:null,
-        charIngreso:null,
+        varIngreso:null,//id donde se muestra graf
+        charIngreso:null,//crea el graf alimentado por valores vinculados al id del canvas
         ingresos:[],
         varTotalIngreso:[],
         varMesIngreso:[], 
@@ -97,7 +96,7 @@
           me.varMesIngreso.push(x.mes);
           me.varTotalIngreso.push(x.total);
         });
-        me.varIngreso=document.getElementById('ingresos').getContext('2d');
+        me.varIngreso=document.getElementById('ingresos').getContext('2d');//id canvas donde se mostrará el graf
 
         me.charIngreso = new Chart(me.varIngreso, {
           type: 'bar',

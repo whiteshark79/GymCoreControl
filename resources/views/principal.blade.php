@@ -8,6 +8,9 @@
   <meta name="keyword" content="Sistema de Control de Gimnasios">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
+
   <link rel="shortcut icon" href="img/favicon.png">
   <title>GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</title>
   
@@ -37,7 +40,7 @@
 
             <div class="content-wrapper">
                 <section class="content">
-                    @yield('contenido')
+                    @yield('contenido')                    
                 </section>                       
             </div>
             

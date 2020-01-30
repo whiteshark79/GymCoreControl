@@ -120,6 +120,13 @@ class InscripcionController extends Controller
         }
     }
  
+    public function activar(Request $request){
+        if (!$request->ajax()) return redirect('/');
+        $inscripcion = Inscripcion::findOrFail($request->id);
+        $inscripcion->estado = 'Registrado';
+        $inscripcion->save();
+    }
+    
     public function desactivar(Request $request){
         if (!$request->ajax()) return redirect('/');
         $inscripcion = Inscripcion::findOrFail($request->id);

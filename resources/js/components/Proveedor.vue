@@ -17,7 +17,6 @@
                                 <div class="input-group input-group-sm col-7">                                
                                     <select class="form-control col-2 " v-model="criterio">
                                     <option value="nombres">Nombres</option>
-                                    <option value="apellidos">Apellidos</option>
                                     <option value="num_documento">Documento</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
@@ -151,7 +150,7 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
-                                        <input type="text" v-model="celular" class="form-control form-control-sm" placeholder="Teléfono">
+                                        <input type="number" v-model="celular" class="form-control form-control-sm" placeholder="Teléfono">
                                     </div>                                        
                                 </div> 
                                 <div class="form-group col-md-6">
@@ -213,9 +212,7 @@
                 persona_id: 0,
                 tipo_documento : 'R',
                 num_documento : '',                
-                nombres : '',
-                apellidos : '',
-                fec_nacimiento : '',                
+                nombres : '',               
                 direccion : '',
                 celular : '',
                 email : '',
@@ -302,9 +299,7 @@
                 axios.post('/proveedor/registrar',{
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
-                    'nombres' : this.nombres,
-                    'apellidos' : this.apellidos,
-                    'fec_nacimiento' : this.fec_nacimiento,                    
+                    'nombres' : this.nombres,                   
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
                     'email' : this.email,
@@ -325,9 +320,7 @@
                 axios.put('/proveedor/actualizar',{
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
-                    'nombres' : this.nombres,
-                    'apellidos' : this.apellidos,
-                    'fec_nacimiento' : this.fec_nacimiento,                    
+                    'nombres' : this.nombres,                   
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
                     'email' : this.email,
@@ -359,8 +352,6 @@
                 this.tipo_documento = 'R';
                 this.num_documento = '';
                 this.nombres = '';
-                this.apellidos = '';
-                this.fec_nacimiento = '';
                 this.direccion = '';                
                 this.celular = '';
                 this.email = '';
@@ -384,8 +375,6 @@
                                 this.tipo_documento = 'R';
                                 this.num_documento = '';
                                 this.nombres = '';
-                                this.apellidos = '';
-                                this.fec_nacimiento = '';
                                 this.direccion = '';                
                                 this.celular = '';
                                 this.email = '';
@@ -403,9 +392,7 @@
                                 this.persona_id=data['id'];
                                 this.tipo_documento=data['tipo_documento'];
                                 this.num_documento=data['num_documento'];                                
-                                this.nombres = data['nombres'];
-                                this.apellidos= data['apellidos'];
-                                this.fec_nacimiento = data['fec_nacimiento'];                               
+                                this.nombres = data['nombres'];                            
                                 this.direccion= data['direccion'];
                                 this.celular= data['celular'];
                                 this.email= data['email'];

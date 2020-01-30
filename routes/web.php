@@ -11,6 +11,7 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/dashboard','DashboardController'); 
+    Route::post('/notification/get', 'NotificationController@get');
      
     Route::get('/main', function () {
         return view('contenido/contenido');
@@ -68,6 +69,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/inscripcion', 'InscripcionController@index');
         Route::post('/inscripcion/registrar', 'InscripcionController@store');
         Route::put('/inscripcion/actualizar', 'InscripcionController@update');        
+        Route::put('/inscripcion/activar', 'InscripcionController@activar');         
         Route::put('/inscripcion/desactivar', 'InscripcionController@desactivar'); 
 
         Route::get('/especialidad', 'EspecialidadController@index');
