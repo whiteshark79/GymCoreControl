@@ -15,13 +15,11 @@ mix.styles([
    'resources/assets/css/style.css',
    'resources/assets/css/fontawesome-all.min.css',   
    'resources/assets/css/Chart.min.css',
-   //'resources/assets/css/dataTables.bootstrap4.min.css',
    'resources/assets/css/adminlte.css'
 ], 'public/css/plantilla.css')
 .scripts([
    'resources/assets/js/jquery.min.js',
    'resources/assets/js/Chart.min.js',
-   //'resources/assets/js/datatables.js',
    'resources/assets/js/adminlte.min.js',
    'resources/assets/js/jquery.pace.min.js',
    'resources/assets/js/popper.min.js',

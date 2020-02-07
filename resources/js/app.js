@@ -7,8 +7,7 @@
 
 require('./bootstrap');
 
-require('./jquery');
-window.$ = window.jQuery = $;
+window.$ = window.jQuery = require('jquery'); 
 
 window.Vue = require('vue');
 
@@ -37,17 +36,24 @@ Vue.component('profesor', require('./components/Profesor.vue').default);
 
 Vue.component('categoria', require('./components/Categoria.vue').default);
 Vue.component('articulo', require('./components/Articulo.vue').default);
+
+Vue.component('servicio', require('./components/Servicio.vue').default);
+Vue.component('clasificacion', require('./components/Clasificacion.vue').default);
+
 Vue.component('especialidad', require('./components/Especialidad.vue').default);
 Vue.component('modalidad', require('./components/Modalidad.vue').default);
 Vue.component('profesion', require('./components/Profesion.vue').default);
+
 Vue.component('universidad', require('./components/Universidad.vue').default);
 Vue.component('provincia', require('./components/Provincia.vue').default);
 Vue.component('canton', require('./components/Canton.vue').default);
 
 Vue.component('ingreso', require('./components/Ingreso.vue').default);
-Vue.component('inscripcion', require('./components/Inscripcion.vue').default);
-Vue.component('consultaingreso', require('./components/ConsultaIngreso.vue').default);
 Vue.component('venta', require('./components/Venta.vue').default);
+Vue.component('gasto', require('./components/Gasto.vue').default);
+Vue.component('inscripcion', require('./components/Inscripcion.vue').default);
+
+Vue.component('consultaingreso', require('./components/ConsultaIngreso.vue').default);
 Vue.component('consultaventa', require('./components/ConsultaVenta.vue').default);
 
 
@@ -63,19 +69,20 @@ const app = new Vue({
         menu : 0,
         notifications: []
     },
-    created(){
-        let me = this;
-        axios.post('notification/get').then(function(response){
-            //console.log(response.data);
-            me.notifications=response.data;
-        }).catch(function(error){
+    created() {
+        let me = this;     
+        axios.post('notification/get').then(function(response) {
+           //console.log(response.data);
+           me.notifications=response.data;    
+        }).catch(function(error) {
             console.log(error);
         });
 
         var userId = $('meta[name="userId"]').attr('content');
-
-        Echo.private('App.User.' + userId).notification((notification)=>{
-            me.notifications.unshift(notification);
-        });
-    }
+        
+        Echo.private('App.User.' + userId).notification((notification) => {
+             me.notifications.unshift(notification); 
+        }); 
+        
+    } 
 });

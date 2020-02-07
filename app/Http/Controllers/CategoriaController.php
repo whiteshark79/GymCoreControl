@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use App\Categoria;
 
@@ -38,7 +38,7 @@ class CategoriaController extends Controller
             'categorias' => $categorias
         ];
     }
-
+  
     public function selectCategoria(Request $request){
         if (!$request->ajax()) return redirect('/');
         $categorias = Categoria::where('condicion','=','1')

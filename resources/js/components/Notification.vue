@@ -6,15 +6,15 @@
         </a>
         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
             <div v-if="notifications.length">                
-                <li v-for="item in notifications" :key="item.id">
+                <li v-for="item in listar" :key="item.id">
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-shopping-cart mr-2"></i> {{ item.data.datos.ingresos.msj }}
-                        <span class="float-right badge badge-info">{{ item.data.datos.ingresos.numero }}</span>
+                        <i class="fas fa-shopping-cart mr-2"></i> {{item.ingresos.msj}}
+                        <span class="float-right badge badge-info">{{item.ingresos.numero}}</span>
                     </a>          
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-hand-holding-usd mr-2"></i> {{ item.data.datos.ventas.msj }}
-                        <span class="float-right badge badge-success">{{ item.data.datos.ventas.numero }}</span>
+                        <i class="fas fa-hand-holding-usd mr-2"></i> {{item.ventas.msj}}
+                        <span class="float-right badge badge-success">{{item.ventas.numero}}</span>
                     </a>
                 </li>
             </div>
@@ -25,11 +25,31 @@
     </li> 
 </template>
 <script>
-export default {
-    props : ['notifications'],
-    data (){
+export default {     
+	props : ['notifications'],
+    data (){         
         return {
-
+            arrayNotifications:[]
+        } 
+    },
+    computed:{
+        listar: function()  {
+            //return this.notifications[0];
+             this.arrayNotifications = Object.values(this.notifications[0]);
+            if (this.notifications == '') {
+                    return this.arrayNotifications = []; 
+            } else {
+                //Capturo la ultima notificación agregada 
+                this.arrayNotifications = Object.values(this.notifications[0]); 
+                //Validación por indice fuera de rango
+                if (this.arrayNotifications.length > 3) { 
+                    //Si el tamaño es > 3 Es cuando las notificaciones son obtenidas desde el mismo servidor, es decir por la consulta con AXIOS 
+                    return Object.values(this.arrayNotifications[4]); 
+                } else { 
+                    //Si el tamaño es < 3 Es cuando las notificaciones son obtenidas desde el canal privado, es decir mediante Laravel Echo y Pusher 
+                    return Object.values(this.arrayNotifications[0]);
+                } 
+            }
         }
     }
 }

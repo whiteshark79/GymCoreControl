@@ -9,8 +9,7 @@ Route::group(['middleware'=>['guest']],function(){
 
 Route::group(['middleware'=>['auth']],function(){
 
-    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-    Route::get('/dashboard','DashboardController'); 
+    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');    
     Route::post('/notification/get', 'NotificationController@get');
      
     Route::get('/main', function () {
@@ -18,6 +17,11 @@ Route::group(['middleware'=>['auth']],function(){
     })->name('main');
 
     Route::group(['middleware' => ['Administrador']], function () {
+
+        Route::get('/dashboard/grafIngVenIns','DashboardController@grafIngVenIns');
+        Route::get('/dashboard/widgetIngresosVentas','DashboardController@widgetIngresosVentas');
+        Route::get('/dashboard/widgetInscripciones','DashboardController@widgetInscripciones');
+        Route::get('/dashboard/widgetAlumnos','DashboardController@widgetAlumnos'); 
 
         Route::get('/user', 'UserController@index');
         Route::post('/user/registrar', 'UserController@store');
@@ -59,6 +63,12 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');
         Route::get('/ingreso/obtenerDetalles', 'IngresoController@obtenerDetalles');
 
+        Route::get('/gasto', 'GastoController@index');
+        Route::post('/gasto/registrar', 'GastoController@store');        
+        Route::put('/gasto/desactivar', 'GastoController@desactivar');        
+        Route::get('/gasto/obtenerCabecera', 'GastoController@obtenerCabecera');
+        Route::get('/gasto/obtenerDetalles', 'GastoController@obtenerDetalles');
+
         Route::get('/venta', 'VentaController@index');
         Route::post('/venta/registrar', 'VentaController@store');        
         Route::put('/venta/desactivar', 'VentaController@desactivar');        
@@ -72,6 +82,26 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/inscripcion/activar', 'InscripcionController@activar');         
         Route::put('/inscripcion/desactivar', 'InscripcionController@desactivar'); 
 
+        Route::get('/servicio', 'ServicioController@index');
+        Route::post('/servicio/registrar', 'ServicioController@store');
+        Route::put('/servicio/actualizar', 'ServicioController@update');
+        Route::put('/servicio/eliminar', 'ServicioController@destroy');
+        Route::put('/servicio/desactivar', 'ServicioController@desactivar');
+        Route::put('/servicio/activar', 'ServicioController@activar');
+        Route::get('/servicio/buscarServicio', 'ServicioController@buscarServicio');
+        Route::get('/servicio/buscarServicioGasto', 'ServicioController@buscarServicioGasto');
+        Route::get('/servicio/listarServicio', 'ServicioController@listarServicio');        
+        Route::get('/servicio/listarServicioGasto', 'ServicioController@listarServicioGasto');
+
+        Route::get('/clasificacion', 'ClasificacionController@index');
+        Route::post('/clasificacion/registrar', 'ClasificacionController@store');
+        Route::put('/clasificacion/actualizar', 'ClasificacionController@update');
+        Route::put('/clasificacion/eliminar', 'ClasificacionController@destroy');
+        Route::put('/clasificacion/desactivar', 'ClasificacionController@desactivar');
+        Route::put('/clasificacion/activar', 'ClasificacionController@activar');
+        Route::get('/clasificacion/selectClasificacion', 'ClasificacionController@selectClasificacion');
+        Route::get('/clasificacion/selectClasificacionB', 'ClasificacionController@selectClasificacionB');
+        
         Route::get('/especialidad', 'EspecialidadController@index');
         Route::post('/especialidad/registrar', 'EspecialidadController@store');
         Route::put('/especialidad/actualizar', 'EspecialidadController@update');

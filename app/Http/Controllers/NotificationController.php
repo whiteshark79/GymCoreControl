@@ -11,13 +11,13 @@ class NotificationController extends Controller
     public function get(){
         //return Notification::all();
         $unreadNotifications = Auth::user()->unreadNotifications;
-        $fechaActual = date('Y-m-d');
+        $fechaActual= date('Y-m-d');
+        foreach ($unreadNotifications as $notification) { 
+            if ($fechaActual != $notification->created_at->toDateString()) { 
+                $notification->markAsRead(); 
+            }                
+       }         
 
-        foreach ($unreadNotifications as $notification){
-            if($fechaActual != $notification->created_at->toDataString()){
-                $notification->markAsRead();
-            }
-        }
         return Auth::user()->unreadNotifications;
     }
 }

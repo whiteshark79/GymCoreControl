@@ -38,10 +38,10 @@ class ModalidadController extends Controller
             ],
             'modalidades' => $modalidades
         ];
-    }
+    } 
   
     public function selectModalidad(Request $request){
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
         $modalidades = Modalidad::where('condicion','=','1')
         ->select('id','nombre','duracion','precio')
         ->orderBy('nombre', 'asc')->get();

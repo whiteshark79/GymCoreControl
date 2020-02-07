@@ -9,7 +9,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
+  <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}"> 
 
   <link rel="shortcut icon" href="img/favicon.png">
   <title>GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</title>
@@ -50,5 +50,6 @@
     </div>
     <script src="js/app.js"></script>
     <script src="js/plantilla.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 </html>

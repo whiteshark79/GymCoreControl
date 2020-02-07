@@ -6,34 +6,34 @@
                 <div class="col-md-12">
                     <div class="card card-outline card-primary">
                         <div class="card-header">
-                            <div class="card-title"><h3>Ventas</h3></div>
+                            <div class="card-title"><h3>Gastos</h3></div>
                             <div class="card-tools">
                                 <template v-if="listado!=0">
-                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="fas fa-plus-circle">  Nueva Venta</i></button>
+                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="fas fa-plus-circle">  Nuevo Gasto</i></button>
                                 </template>
                             </div>
                         </div>                      
- 
+
                         <!-- Listado -->
                         <template v-if="listado==1">
                             <div class="card-body">
                                 <div class="form-group row justify-content-between">
                                     <div class="input-group input-group-sm col-7">                                
                                         <select class="form-control col-2 " v-model="criterio">
-                                            <option value="idcliente">Cliente</option>
+                                            <option value="idproveedor">Proveedor</option>
                                             <option value="fecha_hora">Fecha</option>
                                             <option value="tipo_comprobante">Tipo Doc.</option>
                                             <option value="num_comprobante">Núm. Doc.</option>                                           
                                         </select>
-                                        <template v-if="criterio=='idcliente'">
+                                        <template v-if="criterio=='idproveedor'">
                                             <div class="col-md-4">                                                        
                                                 <v-select
                                                     id="buscar"
-                                                    @search="selectCliente"
+                                                    @search="selectProveedor"
                                                     label="nombres"
-                                                    :options="arrayCliente"
-                                                    placeholder="Buscar Cliente..."
-                                                    @input="getDatosCliente2"                                    
+                                                    :options="arrayProveedor"
+                                                    placeholder="Buscar Proveedores..."
+                                                    @input="getDatosProveedor2"                                    
                                                 ></v-select>
                                             </div>
                                         </template>
@@ -47,13 +47,13 @@
                                             </select>
                                         </template>
                                         <template v-else>
-                                            <input type="number" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="No del comprobante">
+                                            <input type="number" v-model="buscar" @keyup.enter="listarGasto(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="No del comprobante">
                                         </template>                                       
-                                        <button type="submit" @click="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                        <button type="submit" @click="listarGasto(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
                                     </div>
                                     <div class="col-4"></div>
                                     <div class="input-group input-group-sm col-1">                                     
-                                        <select class="form-control" v-model="paginado" @change="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                        <select class="form-control" v-model="paginado" @change="listarGasto(1,buscar,criterio,paginado,ordenado,ascdesc)">
                                         <option value="10">10</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
@@ -61,58 +61,57 @@
                                     </div>
                                 </div>
 
-                                <div class="table-responsive-sm"> 
+                                <div class="table-responsive-sm">
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
                                                 <th width="16%">FECHA
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'asc') || (ordenado === 'fecha_hora' && ascdesc === 'desc') ">
-                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                        <a href="#" @click="listarGasto(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'desc') || (ordenado === 'fecha_hora' && ascdesc === 'asc')">
-                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'fecha_hora','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                        <a href="#" @click="listarGasto(1,buscar,criterio,paginado,'fecha_hora','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="25%">CLIENTE
-                                                    <template v-if="(ordenado !== 'idcliente' && ascdesc === 'asc') || (ordenado === 'idcliente' && ascdesc === 'desc')">
-                                                        <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'idcliente','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                <th width="25%">PROVEEDOR
+                                                    <template v-if="(ordenado !== 'idproveedor' && ascdesc === 'asc') || (ordenado === 'idproveedor' && ascdesc === 'desc')">
+                                                        <a href="#" @click="listarGasto(1,buscar,criterio,paginado,'idproveedor','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
-                                                    <template v-if="(ordenado !== 'idcliente' && ascdesc === 'desc') || (ordenado === 'idcliente' && ascdesc === 'asc')">
-                                                        <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'idcliente','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                    <template v-if="(ordenado !== 'idproveedor' && ascdesc === 'desc') || (ordenado === 'idproveedor' && ascdesc === 'asc')">
+                                                        <a href="#" @click="listarGasto(1,buscar,criterio,paginado,'idproveedor','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
-                                                </th>                                                                                                                                        
-                                                <th width="20%">DOCUMENTO</th>
+                                                </th>
+                                                <th width="20%">DOCUMENTO</th>                                         
                                                 <th width="6%">SUBTOTAL</th>
                                                 <th width="6%">IVA</th>
                                                 <th width="6%">TOTAL</th>                                           
                                                 <th width="9%">ESTADO
                                                     <template v-if="(ordenado !== 'estado' && ascdesc === 'asc') || (ordenado === 'estado' && ascdesc === 'desc')">
-                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                        <a href="#" @click="listarGasto(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
                                                     <template v-if="(ordenado !== 'estado' && ascdesc === 'desc') || (ordenado === 'estado' && ascdesc === 'asc')">
-                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'estado','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                        <a href="#" @click="listarGasto(1,buscar,criterio,paginado,'estado','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>                                                                                    
                                                 <th width="12%">ACCIONES</th>
                                             </tr>
                                         </thead>
-                                        <tbody v-if="arrayVenta.length">
-                                            <tr v-for="venta in arrayVenta" :key="venta.id">
-                                                <td v-text="venta.fecha_hora"></td>
-                                                <td>{{venta.nombres}} {{venta.apellidos}}</td> 
-                                                <td>{{venta.tipo_comprobante}} : {{venta.serie_comprobante}}-{{venta.num_comprobante}}</td>
-                                                <td align="right">$ {{ (venta.total-venta.impuesto*venta.total).toFixed(2) }}</td>
-                                                <td align="right">$ {{ (venta.impuesto*venta.total).toFixed(2) }}</td>
-                                                <td align="right">$ {{ venta.total  }}</td>
+                                        <tbody v-if="arrayGasto.length">
+                                            <tr v-for="gasto in arrayGasto" :key="gasto.id">
+                                                <td>{{ gasto.fecha_hora }}</td>
+                                                <td>{{gasto.nombres}} {{gasto.apellidos}}</td>                        
+                                                <td>{{gasto.tipo_comprobante}} : {{gasto.serie_comprobante}}-{{gasto.num_comprobante}}</td>
+                                                <td align="right">$ {{ (gasto.total-gasto.impuesto*gasto.total).toFixed(2) }}</td>
+                                                <td align="right">$ {{ (gasto.impuesto*gasto.total).toFixed(2) }}</td>
+                                                <td align="right">$ {{ gasto.total  }}</td>
                                                 <td align="center"> 
-                                                    <div v-if="venta.estado=='Registrado'"><span class="badge badge-success">Registrado</span></div>
+                                                    <div v-if="gasto.estado=='Registrado'"><span class="badge badge-success">Registrado</span></div>
                                                     <div v-else><span class="badge badge-danger">Anulado</span></div>                                    
                                                 </td>
                                                 <td align="center">
-                                                    <a class="btn btn-sm btn-default" @click="verVenta(venta.id)"><i class="far fa-eye"></i></a>
-                                                    <a class="btn btn-sm btn-default" @click="pdfVenta(venta.id)"><i class="fas fa-print"></i></a>                                   
-                                                    <template v-if="venta.estado=='Registrado'">
-                                                        <a class="btn btn-sm btn-default" @click="desactivarVenta(venta.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
+                                                    <a class="btn btn-sm btn-default" @click="verGasto(gasto.id)"><i class="far fa-eye"></i></a>                                   
+                                                    <template v-if="gasto.estado=='Registrado'">
+                                                        <a class="btn btn-sm btn-default" @click="desactivarGasto(gasto.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
                                             </tr>
@@ -148,7 +147,7 @@
                             <div class="card-body">
                                 <div class="table-title">
                                     <div class="row">
-                                        <div class="col-sm-6" ><h5>Nueva <b>Venta</b></h5></div>                                    
+                                        <div class="col-sm-6" ><h5>Nuevo <b>Gasto</b></h5></div>                                    
                                     </div>
                                 </div>
                                 <div class="row">
@@ -160,13 +159,13 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-8">
-                                                        <label for="">Cliente<span class="text-error" v-show="idcliente==''">(*)</span></label>
+                                                        <label for="">Proveedor<span class="text-error" v-show="idproveedor==''">(*)</span></label>
                                                         <v-select
-                                                            @search="selectCliente"
+                                                            @search="selectProveedor"
                                                             label="nombres"
-                                                            :options="arrayCliente"
-                                                            placeholder="Buscar Clientes..."
-                                                            @input="getDatosCliente"                                    
+                                                            :options="arrayProveedor"
+                                                            placeholder="Buscar Proveedores..."
+                                                            @input="getDatosProveedor"                                    
                                                         ></v-select>
                                                     </div> 
                                                     <div class="col-md-4">
@@ -193,9 +192,9 @@
                                                     </div>                                            
                                                 </div>
                                                 <div class="row">                                                
-                                                    <div v-show="errorVenta" class="col-md-12 form-group row div-error">                                                    
+                                                    <div v-show="errorGasto" class="col-md-12 form-group row div-error">                                                    
                                                         <div class="alert alert-danger" role="alert">
-                                                            <div v-for="error in errorMostrarMsjVenta" :key="error" v-text="error">                                                                
+                                                            <div v-for="error in errorMostrarMsjGasto" :key="error" v-text="error">                                                                
                                                             </div>
                                                             
                                                         </div>
@@ -212,28 +211,22 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-md-5">
-                                                        <label>Artículo <span class="text-error" v-show="idarticulo==0">(*)</span></label>
+                                                        <label>Servicio <span class="text-error" v-show="idservicio==0">(*)</span></label>
                                                         <div class="form-inline">
-                                                            <input type="text" class="form-control form-control-sm" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Cód. artículo" size="10">
+                                                            <input type="text" class="form-control form-control-sm" v-model="codigo" @keyup.enter="buscarServicio()" placeholder="Cód. servicio" size="10">
                                                             <button @click="abrirModal()" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
-                                                            <input type="text" readonly class="form-control form-control-sm" v-model="articulo" size="13">
+                                                            <input type="text" readonly class="form-control form-control-sm" v-model="servicio" size="13">
                                                             <span class="text-info">{{descripcion}}</span>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    
+                                                    <div class="col-md-2 offset-md-2">
                                                         <label>Precio <span class="text-error" v-show="precio==0">(*)</span></label>
-                                                        <input type="number" value="0" step="0.1" min="0.1" max="100" class="form-control form-control-sm" v-model="precio">                                                        
-                                                        <span class="text-info" v-show="precio<=precioB">Precio: ${{precioB}}</span>
+                                                        <input type="number" value="0" step="0.1" min="0" max="100" class="form-control form-control-sm" v-model="precio">
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <label>Cantidad <span class="text-error" v-show="cantidad==0">(*)</span></label>                                                        
-                                                        <input type="number" value="0" step="1" min="0" :max="stock" class="form-control form-control-sm" v-model="cantidad">
-                                                        <span class="text-error" v-show="cantidad>=stock">Stock: {{stock}}</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label>Descuento</label>
-                                                        <input type="number" value="0" step="0.1" min="0.1" :max="precio*cantidad" class="form-control form-control-sm" v-model="descuento">
-                                                        <span class="text-error" v-show="descuento>=(precio*cantidad)">Desc. inválido</span>
+                                                        <label>Cantidad <span class="text-error" v-show="cantidad==0">(*)</span></label>
+                                                        <input type="number" value="0" step="1" min="0" max="100" class="form-control form-control-sm" v-model="cantidad">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="fas fa-plus-circle"></i></button>
@@ -246,32 +239,24 @@
                                                             <thead class="thead-light">
                                                                 <tr align="center">                                            
                                                                     <th class="w-5">Opc.</th>
-                                                                    <th class="w-50">Artículo</th>
-                                                                    <th>Precio</th>
+                                                                    <th class="w-50">Servicio</th>
+                                                                    <th>Costo</th>
                                                                     <th>Cantidad</th>
-                                                                    <th>Descuento</th>
                                                                     <th>Subtotal</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody v-if="arrayDetalle.length">
                                                                 <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
                                                                     <td><a href="#" @click="eliminarDetalle(index)"><i class="fas fa-trash-alt"></i></a></td>                                                                 
-                                                                    <td v-text="detalle.articulo"></td>
-                                                                    <td><input v-model="detalle.precio" type="number" step="0.1" min="0.1" max="100" class="form-control form-control-sm"></td>
-                                                                    <td>                                                                        
-                                                                        <input v-model="detalle.cantidad" type="number" min="1" :max="detalle.stock" class="form-control form-control-sm">
-                                                                        <span class="text-error" v-show="detalle.cantidad>=detalle.stock">Stock: {{detalle.stock}}</span>
-                                                                    </td>
-                                                                    <td align="right">                                                                        
-                                                                        <input v-model="detalle.descuento" type="number" step="0.1" min="0.1" :max="precio*cantidad" class="form-control form-control-sm">
-                                                                        <span class="text-error" v-show="detalle.descuento>(detalle.precio*detalle.cantidad)">Desc. inválido</span>
-                                                                    </td>
-                                                                    <td align="right">$ {{ (detalle.precio*detalle.cantidad-detalle.descuento).toFixed(2) }}</td>
+                                                                    <td v-text="detalle.servicio"></td>
+                                                                    <td><input v-model="detalle.precio" type="number" step="any" min="0.1" max="100" class="form-control form-control-sm"></td>
+                                                                    <td><input v-model="detalle.cantidad" type="number" min="1" max="100" class="form-control form-control-sm"></td>
+                                                                    <td align="right">$ {{(detalle.precio*detalle.cantidad).toFixed(2)}}</td>
                                                                 </tr>                                                                
                                                             </tbody>
                                                             <tbody v-else>
                                                                 <tr>
-                                                                    <td colspan="6" class="text-center">
+                                                                    <td colspan="5" class="text-center">
                                                                         <span class="badge badge-pill badge-secondary">-- Sin registros --</span>                                       
                                                                     </td>
                                                                 </tr>
@@ -299,12 +284,7 @@
                                             </div>
                                             <div class="card-footer">
                                                 <button type="button" @click="ocultarDetalle()" class="btn btn-secondary btn-sm">Cerrar</button>
-                                                <button type="button" class="btn btn-primary btn-sm" @click="registrarVenta()">Guardar</button>
-                                                <div class="custom-control custom-checkbox float-right">
-                                                    <input class="custom-control-input" type="checkbox" id="cbPdf" value="1" v-model="cbPdf">
-                                                    <label for="cbPdf" class="custom-control-label">Generar PDF</label>
-                                                </div>
-                                                
+                                                <button type="button" class="btn btn-primary btn-sm" @click="registrarGasto()">Guardar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -313,14 +293,14 @@
                         </template>
                         <!-- Fin Detalle -->
 
-                        <!-- Ver venta -->
+                        <!-- Ver gasto -->
                         <template v-else-if="listado==2">
-                            <div class="card-body col-10 offset-md-1">                            
+                            <div class="card-body col-10 offset-md-1">   
                                 <div class="invoice p-3 mb-3">
                                     <div class="row">
                                         <div class="col-12">
                                             <h4>
-                                                <i class="fas fa-cash-register"></i> Factura de venta
+                                                <i class="fas fa-shopping-basket"></i> Orden de compra
                                                 <small class="float-right">Fecha: {{  }} </small>
                                             </h4>
                                         </div>
@@ -330,26 +310,15 @@
                                     <div class="col-sm-4 invoice-col">
                                     <h6>Proveedor</h6>                          
                                     <address>
-                                        <strong>Empresa, Inc.</strong><br>
-                                        Dirección:<br>
-                                        Ciudad<br>
-                                        Teléfono:<br>
-                                        Correo:
-                                    </address>
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4 invoice-col">
-                                    <h6>Cliente</h6> 
-                                    <address>
-                                        <strong>{{ cliente }}</strong><br>
+                                        <strong>{{ proveedor }}</strong><br>
                                         Dirección: {{ direccion }}<br>
                                         Ciudad<br>
                                         Teléfono: {{ celular }}<br>
                                         Correo: {{ email }}
                                     </address>
                                     </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4 invoice-col">
+                                    <!-- /.col -->                                    
+                                    <div class="col-sm-4 offset-sm-4 invoice-col">
                                     <b>{{ tipo_comprobante }}</b>  {{ serie_comprobante }} - {{ num_comprobante }}<br>
                                     <br>
                                     <b>ID:</b> {{ id }}<br>
@@ -358,7 +327,6 @@
                                     </div>
                                     <!-- /.col -->
                                 </div>
-                                <!-- /.row -->
                                 <div class="row">                                    
                                     <div class="col-12 table-responsive">         
                                         <div class="card card-primary card-outline">                                            
@@ -366,45 +334,43 @@
                                                 <div class="table-responsive col-md-12">
                                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                                         <thead class="thead-light">
-                                                            <tr align="center">                                                                                                         
-                                                                <th style="width: 30%">Artículo</th>
+                                                            <tr align="center">                                            
+                                                                <th style="width: 30%">Servicio</th>
                                                                 <th style="width: 40%">Descripción</th>
                                                                 <th width="4%">Cantidad</th>
-                                                                <th>Precio</th>                                                                
-                                                                <th>Descuento</th>
+                                                                <th>Precio</th>
                                                                 <th>Subtotal</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr v-for="detalle in arrayDetalle" :key="detalle.id">                                                                
-                                                                <td v-text="detalle.articulo"></td>
-                                                                <td v-text="detalle.articulo_descripcion"></td>
+                                                            <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+                                                                <td v-text="detalle.servicio"></td>
+                                                                <td v-text="detalle.servicio_descripcion"></td>
                                                                 <td align="right" v-text="detalle.cantidad"></td>
                                                                 <td align="right">$ {{ detalle.precio }}</td>                                                                
-                                                                <td align="right">$ {{ detalle.descuento }}</td>
-                                                                <td align="right">$ {{detalle.precio*detalle.cantidad-detalle.descuento}}</td>
+                                                                <td align="right">$ {{detalle.precio*detalle.cantidad}}</td>
                                                             </tr>                                                            
-                                                        </tbody>                                                                                            
-                                                    </table>
-                                                    <table align="right" border="1" bordercolor="white" v-if="arrayDetalle.length">
-                                                        <tr>
-                                                            <td align="left"><strong>Total Parcial:</strong></td>
-                                                            <td align="right">$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
-                                                            <td class="w-5"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="left"><strong>Total Impuesto:</strong></td>
-                                                            <td align="right">$ {{totalImpuesto=(total*impuesto).toFixed(2)}}</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="left"><strong>Total Neto:</strong></td>
-                                                            <td align="right">$ {{ total }}</td>
-                                                            <td></td>
-                                                        </tr>                                                       
-                                                    </table>
-                                                </div>                                                                                                                                
-                                            </div>
+                                                            </tbody>                                                                                            
+                                                        </table>
+                                                        <table align="right" border="1" bordercolor="white" v-if="arrayDetalle.length">
+                                                            <tr>
+                                                                <td align="left"><strong>Total Parcial:</strong></td>
+                                                                <td align="right">$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
+                                                                <td class="w-5"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left"><strong>Total Impuesto:</strong></td>
+                                                                <td align="right">$ {{totalImpuesto=((total*impuesto)).toFixed(2)}}</td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left"><strong>Total Neto:</strong></td>
+                                                                <td align="right">$ {{ total }}</td> 
+                                                                <td></td>
+                                                            </tr>                                                       
+                                                        </table>
+                                                    </div>
+                                                </div>                                                                                  
                                             <div class="card-footer">
                                                 <button type="button" @click="ocultarDetalle()" class="btn btn-secondary btn-sm float-right">Cerrar</button>
                                             </div>
@@ -413,7 +379,7 @@
                                 </div>                                    
                             </div>
                         </template>
-                        <!-- Fin Ver Venta -->
+                        <!-- Fin Ver Gasto -->
 
                     </div>
                 </div>
@@ -440,8 +406,8 @@
                                         <option value="descripcion">Descripción</option>
                                         
                                     </select>
-                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control form-control-sm" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                    <input type="text" v-model="buscarA" @keyup.enter="listarServicio(buscarA,criterioA)" class="form-control form-control-sm" placeholder="Texto a buscar">
+                                    <button type="submit" @click="listarServicio(buscarA,criterioA)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -452,24 +418,20 @@
                                     <tr align="center">                                
                                         <th width="8%">COD</th>
                                         <th>NOMBRE</th>                             
-                                        <th width="12%">PVP</th>
-                                        <th width="10%">STOCK</th>
                                         <th width="15%">ESTADO</th>                        
                                         <th width="12%">ACCIONES</th>
                                     </tr>
                                 </thead>
-                                <tbody v-if="arrayArticulo.length">
-                                    <tr v-for="articulo in arrayArticulo" :key="articulo.id">                                                                
-                                        <td v-text="articulo.codigo"></td>
-                                        <td v-text="articulo.nombre"></td>
-                                        <td align="right">$ {{ articulo.precio_venta }}</td>
-                                        <td align="right" v-text="articulo.stock"></td>
+                                <tbody v-if="arrayServicio.length">
+                                    <tr v-for="servicio in arrayServicio" :key="servicio.id">                                                                
+                                        <td v-text="servicio.codigo"></td>
+                                        <td v-text="servicio.nombre"></td>
                                         <td align="center">
-                                            <div v-if="articulo.condicion"><span class="badge badge-success">Activo</span></div>
+                                            <div v-if="servicio.condicion"><span class="badge badge-success">Activo</span></div>
                                             <div v-else><span class="badge badge-danger">Desactivo</span></div>                                    
                                         </td>
                                         <td align="center">
-                                            <button type="button" @click="agregarDetalleModal(articulo)" class="btn btn-default btn-sm"><i class="far fa-check-circle"></i></button>
+                                            <button type="button" @click="agregarDetalleModal(servicio)" class="btn btn-default btn-sm"><i class="far fa-check-circle"></i></button>
                                         </td>
                                     </tr>                       
                                 </tbody>
@@ -502,10 +464,10 @@
     export default {
         data (){
             return {
-                venta_id: 0,
-                idcliente:0,
+                gasto_id: 0,
+                idproveedor:0,
                 id:'',
-                cliente:'',
+                proveedor:'',                
                 direccion:'',
                 celular:'',
                 email:'',
@@ -519,22 +481,18 @@
                 totalImpuesto: 0.0,
                 totalParcial: 0.0,
 
-                arrayVenta : [],
-                arrayCliente: [],
+                arrayGasto : [],
+                arrayProveedor: [],
                 arrayDetalle : [],
 
                 listado:1,
 
-                arrayArticulo: [],
-                idarticulo: 0,
+                arrayServicio: [],
+                idservicio: 0,
                 codigo: '',
-                articulo: '',
-                descripcion: '',
+                servicio: '',
                 precio: 0,
-                precioB: 0,
-                cantidad:0,
-                descuento:0,
-                stock:0,          
+                cantidad:0,          
                 
                 criterioA:'nombre',
                 buscarA: '',
@@ -542,8 +500,8 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
-                errorVenta : 0,
-                errorMostrarMsjVenta : [],
+                errorGasto : 0,
+                errorMostrarMsjGasto : [],
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -555,7 +513,6 @@
                 offset : 3,
                 criterio : 'num_comprobante',
                 buscar : '',
-                cbPdf : 0,
                 paginado : 10,
                 ordenado : 'id',
                 ascdesc : 'desc'
@@ -595,18 +552,18 @@
             calcularTotal: function(){
                 var resultado=0.0;
                 for(var i=0;i<this.arrayDetalle.length;i++){
-                    resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad-this.arrayDetalle[i].descuento)
+                    resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad)
                 }
                 return resultado;
             }
         },
         methods : {
-            listarVenta (page,buscar,criterio,paginado,ordenado,ascdesc){
+            listarGasto (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
-                var url= '/venta?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
+                var url= '/gasto?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayVenta = respuesta.ventas.data;
+                    me.arrayGasto = respuesta.gastos.data;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
@@ -615,70 +572,66 @@
                 me.ordenado=ordenado;
                 me.ascdesc=ascdesc;
             },
-            selectCliente(search,loading){
+            selectProveedor(search,loading){
                 let me=this;
                 loading(true)
- 
-                var url= '/cliente/selectCliente?filtro='+search;
+
+                var url= '/proveedor/selectProveedor?filtro='+search;
                 axios.get(url).then(function (response) {
                     let respuesta = response.data;
                     q: search
-                    me.arrayCliente=respuesta.clientes;
+                    me.arrayProveedor=respuesta.proveedores;
                     loading(false)
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
             },
-            getDatosCliente(val1){
+            getDatosProveedor(val1){
                 let me = this;
                 me.loading = true;
-                me.idcliente = val1.id;
+                me.idproveedor = val1.id;
             },
-            getDatosCliente2(val2){
+            getDatosProveedor2(val2){
                 let me = this;
                 me.loading = true;
                 me.buscar = val2.id;
             },
-            buscarArticulo(){
+            buscarServicio(){
                 let me=this;
-                var url= '/articulo/buscarArticuloVenta?filtro=' + me.codigo;
+                var url= '/servicio/buscarServicio?filtro=' + me.codigo;
 
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayArticulo = respuesta.articulos;
+                    me.arrayServicio = respuesta.servicios;
 
-                    if (me.arrayArticulo.length>0){
-                        me.articulo=me.arrayArticulo[0]['nombre'];
-                        me.idarticulo=me.arrayArticulo[0]['id'];
-                        me.precio=me.arrayArticulo[0]['precio_venta'];
-                        me.precioB=me.arrayArticulo[0]['precio_venta'];                        
-                        me.stock=me.arrayArticulo[0]['stock'];
-                        me.descripcion=me.arrayArticulo[0]['descripcion'];
+                    if (me.arrayServicio.length>0){
+                        me.servicio=me.arrayServicio[0]['nombre'];
+                        me.idservicio=me.arrayServicio[0]['id'];
+                        me.descripcion=me.arrayServicio[0]['descripcion'];
+                        me.precio=1;
+                        me.cantidad=1;
                     }
                     else{
-                        me.articulo='No existe artículo/stock';
-                        me.idarticulo=0;
+                        me.servicio='No existe servicio';
+                        me.idservicio=0;
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
             },
-            pdfVenta(id){
-                window.open('http://localhost:8000/venta/pdf/' + id + ',' + '_blank');
-            },
             cambiarPagina(page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me = this;
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarVenta(page,buscar,criterio,paginado,ordenado,ascdesc);
+                me.listarGasto(page,buscar,criterio,paginado,ordenado,ascdesc);
             },
-            existeArticulo(id){
+            existeServicio(id){
                 var sw=0;
                 for(var i=0;i<this.arrayDetalle.length;i++){
-                    if(this.arrayDetalle[i].idarticulo==id){
+                    if(this.arrayDetalle[i].idservicio==id){
                         sw=true;
                     }
                 }
@@ -690,89 +643,70 @@
             },
             agregarDetalle(){
                 let me=this;
-                if(me.idarticulo==0 || me.cantidad==0 || me.precio==0){
+                if(me.idservicio==0 || me.cantidad==0 || me.precio==0){
                 }
                 else{
-                    if(me.existeArticulo(me.idarticulo)){
+                    if(me.existeServicio(me.idservicio)){
                         Swal.fire({
                             icon: 'error',
                             title: 'Error...',
-                            text: 'Ese artículo ya se encuentra agregado!',
-                        })
-                    }
-                    else{
-                       if(me.cantidad>me.stock){
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error...',
-                                text: 'NO hay stock disponible!',
-                            })
-                            me.cantidad= me.stock
-                       } 
-                       else{
-                           me.arrayDetalle.push({
-                                idarticulo: me.idarticulo,
-                                articulo: me.articulo,
-                                descripcion: me.descripcion,
-                                cantidad: me.cantidad,
-                                precio: me.precio,
-                                descuento: me.descuento,
-                                stock: me.stock
-                            });
-                        me.codigo="";
-                        me.idarticulo=0;
-                        me.articulo="";
-                        me.descripcion="";
-                        me.cantidad=0;
-                        me.precio=0;
-                        me.precioB=0;
-                        me.descuento=0;
-                        me.stock=0
-                        }                    
-                    }
-                }
-                           
-            },
-            agregarDetalleModal(data =[]){
-                let me=this;
-                if(me.existeArticulo(data['id'])){
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error...',
-                            text: 'Ese artículo ya se encuentra agregado!',
+                            text: 'Ese servicio ya se encuentra agregado!',
                             })
                     }
                     else{
                        me.arrayDetalle.push({
-                            idarticulo: data['id'],
-                            articulo: data['nombre'],
+                            idservicio: me.idservicio,
+                            servicio: me.servicio,
+                            cantidad: me.cantidad,
+                            precio: me.precio
+                        });
+                        me.codigo="";
+                        me.idservicio=0;
+                        me.servicio="";
+                        me.descripcion="";
+                        me.cantidad=0;
+                        me.precio=0; 
+                    }                    
+                }            
+            },
+            agregarDetalleModal(data =[]){
+                let me=this;
+                if(me.existeServicio(data['id'])){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error...',
+                            text: 'Ese servicio ya se encuentra agregado!',
+                            })
+                    }
+                    else{
+                       me.arrayDetalle.push({
+                            idservicio: data['id'],
+                            servicio: data['nombre'],
                             cantidad: 1,
-                            precio: data['precio_venta'],
-                            descuento:0,
-                            stock:data['stock']
+                            precio: 1
                         }); 
                     }
             },
-            listarArticulo (buscar,criterio){
+            listarServicio (buscar,criterio){
                 let me=this;
-                var url= '/articulo/listarArticuloVenta?buscar='+ buscar + '&criterio='+ criterio;
+                var url= '/servicio/listarServicio?buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayArticulo = respuesta.articulos.data;
+                    me.arrayServicio = respuesta.servicios.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
             },
-            registrarVenta(){
-                if (this.validarVenta()){
+            registrarGasto(){
+                if (this.validarGasto()){
                     return;
                 }
                 
                 let me = this;
 
-                axios.post('/venta/registrar',{
-                    'idcliente': this.idcliente,
+                axios.post('/gasto/registrar',{
+                    'idproveedor': this.idproveedor,
                     'tipo_comprobante': this.tipo_comprobante,
                     'serie_comprobante' : this.serie_comprobante,
                     'num_comprobante' : this.num_comprobante,
@@ -782,55 +716,37 @@
 
                 }).then(function (response) {
                     me.listado=1;
-                    me.listarVenta(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc); 
-                    me.idcliente=0;
+                    me.listarGasto(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc); 
+                    me.idproveedor=0;
                     me.tipo_comprobante='FACTURA';
                     me.serie_comprobante='';
                     me.num_comprobante='';
                     me.impuesto=0.12;
                     me.total=0.0;
-                    me.idarticulo=0;
-                    me.articulo='';
+                    me.idservicio=0;
+                    me.servicio='';
                     me.cantidad=0;
                     me.precio=0;
-                    me.stock=0;
-                    me.codigo='';
-                    me.descuento=0;
                     me.arrayDetalle=[];
-
-                    if(me.cbPdf) { 
-                        window.open('venta/pdf/'+response.data.id);
-                        }
-
-                   
                     
 
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
-            validarVenta(){
-                let me=this;
-                me.errorVenta=0;
-                me.errorMostrarMsjVenta =[];
-                var art;
-                
-                me.arrayDetalle.map(function(x){
-                    if (x.cantidad>x.stock){
-                        art=x.articulo + " sin stock";
-                        me.errorMostrarMsjVenta.push(art);
-                    }
-                });
+            validarGasto(){
+                this.errorGasto=0;
+                this.errorMostrarMsjGasto =[];
 
-                if (me.idcliente==0) me.errorMostrarMsjVenta.push("Seleccione un Cliente");
-                if (me.tipo_comprobante==0) me.errorMostrarMsjVenta.push("Seleccione el comprobante");
-                if (!me.num_comprobante) me.errorMostrarMsjVenta.push("Ingrese el número de comprobante");
-                if (!me.impuesto) me.errorMostrarMsjVenta.push("Ingrese el impuesto de compra");
-                if (me.arrayDetalle.length<=0) me.errorMostrarMsjVenta.push("Ingrese detalles");
+                if (this.idproveedor==0) this.errorMostrarMsjGasto.push("Seleccione un Proveedor");
+                if (this.tipo_comprobante==0) this.errorMostrarMsjGasto.push("Seleccione el comprobante");
+                if (!this.num_comprobante) this.errorMostrarMsjGasto.push("Ingrese el número de comprobante");
+                if (!this.impuesto) this.errorMostrarMsjGasto.push("Ingrese el impuesto de compra");
+                if (this.arrayDetalle.length<=0) this.errorMostrarMsjGasto.push("Ingrese detalles");
 
-                if (me.errorMostrarMsjVenta.length) me.errorVenta = 1;
+                if (this.errorMostrarMsjGasto.length) this.errorGasto = 1;
 
-                return me.errorVenta;
+                return this.errorGasto;
             },
             mostrarDetalle(){
                 let me=this;
@@ -842,8 +758,8 @@
                 me.num_comprobante='';
                 me.impuesto=0.12;
                 me.total=0.0;
-                me.idarticulo=0;
-                me.articulo='';
+                me.idservicio=0;
+                me.servicio='';
                 me.cantidad=0;
                 me.precio=0;
                 me.arrayDetalle=[];
@@ -851,36 +767,36 @@
             ocultarDetalle(){
                 this.listado=1;
             },
-            verVenta(id){
+            verGasto(id){
                 let me=this;
                 me.listado=2;
                 
-                //Obtener los datos del venta
-                var arrayVentaT=[];
-                var url= '/venta/obtenerCabecera?id=' + id;
+                //Obtener los datos del gasto
+                var arrayGastoT=[];
+                var url= '/gasto/obtenerCabecera?id=' + id;
                 
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    arrayVentaT = respuesta.venta;
+                    arrayGastoT = respuesta.gasto;
 
-                    me.id = arrayVentaT[0]['id'];
-                    me.cliente = arrayVentaT[0]['nombres'];
-                    me.direccion = arrayVentaT[0]['direccion'];
-                    me.celular = arrayVentaT[0]['celular'];
-                    me.email = arrayVentaT[0]['email'];
-                    me.tipo_comprobante=arrayVentaT[0]['tipo_comprobante'];
-                    me.serie_comprobante=arrayVentaT[0]['serie_comprobante'];
-                    me.num_comprobante=arrayVentaT[0]['num_comprobante'];
-                    me.fecha_hora=arrayVentaT[0]['fecha_hora'];
-                    me.impuesto=arrayVentaT[0]['impuesto'];
-                    me.total=arrayVentaT[0]['total'];
+                    me.id = arrayGastoT[0]['id'];
+                    me.proveedor = arrayGastoT[0]['nombres'];
+                    me.direccion = arrayGastoT[0]['direccion'];
+                    me.celular = arrayGastoT[0]['celular'];
+                    me.email = arrayGastoT[0]['email'];
+                    me.tipo_comprobante=arrayGastoT[0]['tipo_comprobante'];
+                    me.serie_comprobante=arrayGastoT[0]['serie_comprobante'];
+                    me.num_comprobante=arrayGastoT[0]['num_comprobante'];
+                    me.fecha_hora=arrayGastoT[0]['fecha_hora'];
+                    me.impuesto=arrayGastoT[0]['impuesto'];
+                    me.total=arrayGastoT[0]['total'];
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
 
                 //Obtener los datos de los detalles 
-                var urld= '/venta/obtenerDetalles?id=' + id;
+                var urld= '/gasto/obtenerDetalles?id=' + id;
                 
                 axios.get(urld).then(function (response) {
                     console.log(response);
@@ -896,28 +812,28 @@
                 this.tituloModal='';
             },
             abrirModal(){
-                this.arrayArticulo=[];
+                this.arrayServicio=[];
                 this.modal = 1;
-                this.tituloModal = 'Seleccione uno o varios artículos';
+                this.tituloModal = 'Seleccione uno o varios servicios';
             },
-            desactivarVenta(id){
+            desactivarGasto(id){
                Swal.fire({
-                title: 'Anular la venta?',
+                title: 'Anular el gasto?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, anular'
+                confirmButtonText: 'Si, desactivarla'
                 }).then((result) => {
                 if (result.value) {
                     let me = this;
-                    axios.put('/venta/desactivar',{
+                    axios.put('/gasto/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarVenta(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
+                        me.listarGasto(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
                         'Desactivado!',
-                        'El registro ha sido anulado con éxito.',
+                        'El registro ha sido desactivado con éxito.',
                         'success'
                         )
                     }).catch(function (error) {
@@ -928,12 +844,12 @@
             },
         },
         mounted() {
-            this.listarVenta(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
+            this.listarGasto(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
         }
     }
 </script>
 <style>    
-    .div-error{
+  .div-error{
         display: flex;
         justify-content: center;
     }

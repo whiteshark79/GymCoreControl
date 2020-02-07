@@ -114,7 +114,7 @@
                                                         <a class="btn btn-sm btn-default" @click="desactivarIngreso(ingreso.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
-                                            </tr>
+                                            </tr> 
                                         </tbody>
                                         <tbody v-else>
                                             <tr>
