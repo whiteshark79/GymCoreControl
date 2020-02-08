@@ -26,7 +26,7 @@ class VentaController extends Controller
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
             'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-            'ventas.estado','personas.nombres','personas.apellidos','users.usuario')
+            'ventas.estado','personas.nombre','users.usuario')
             ->orderBy('ventas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
@@ -34,7 +34,7 @@ class VentaController extends Controller
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
             'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-            'ventas.estado','personas.nombres','personas.apellidos','users.usuario')
+            'ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('ventas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -60,8 +60,8 @@ class VentaController extends Controller
         ->join('users','ventas.idusuario','=','users.id')
         ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
         'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-        'ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombres',
-        'personas.apellidos','personas.direccion','personas.celular','personas.email','users.usuario')
+        'ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'personas.direccion','personas.celular','personas.email','users.usuario')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id', 'desc')->take(1)->get();
          
@@ -87,8 +87,8 @@ class VentaController extends Controller
         ->join('users','ventas.idusuario','=','users.id')
         ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
         'ventas.num_comprobante','ventas.created_at','ventas.impuesto','ventas.total',
-        'ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombres',
-        'personas.apellidos','personas.direccion','personas.celular','personas.email','users.usuario')
+        'ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'personas.direccion','personas.celular','personas.email','users.usuario')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id', 'desc')->take(1)->get();
 

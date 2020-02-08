@@ -25,7 +25,7 @@
                                                 <v-select
                                                     id="buscar"
                                                     @search="selectProveedor"
-                                                    label="nombres"
+                                                    label="nombre"
                                                     :options="arrayProveedor"
                                                     placeholder="Buscar Proveedores..."
                                                     @input="getDatosProveedor2"                                    
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
 
-                                <div class="table-responsive-sm">
+                                <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
@@ -94,7 +94,7 @@
                                         <tbody v-if="arrayIngreso.length">
                                             <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
                                                 <td v-text="ingreso.fecha_hora"></td>
-                                                <td>{{ingreso.nombres}} {{ingreso.apellidos}}</td>                        
+                                                <td>{{ingreso.nombre}}</td>                        
                                                 <td>{{ingreso.tipo_comprobante}} : {{ingreso.serie_comprobante}}-{{ingreso.num_comprobante}}</td>
                                                 <td align="right">$ {{ (ingreso.total-ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
@@ -554,7 +554,7 @@
                     arrayIngresoT = respuesta.ingreso;
 
                     me.id = arrayIngresoT[0]['id'];
-                    me.proveedor = arrayIngresoT[0]['nombres'];
+                    me.proveedor = arrayIngresoT[0]['nombre'];
                     me.direccion = arrayIngresoT[0]['direccion'];
                     me.celular = arrayIngresoT[0]['celular'];
                     me.email = arrayIngresoT[0]['email'];

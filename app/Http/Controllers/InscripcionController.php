@@ -26,7 +26,7 @@ class InscripcionController extends Controller
             ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin','inscripciones.idalumno',
             'inscripciones.idusuario','inscripciones.idmodalidad','inscripciones.abono','inscripciones.saldo',
             'inscripciones.impuesto','inscripciones.total','inscripciones.observaciones','inscripciones.estado',
-            'personas.nombres','personas.apellidos','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
+            'personas.nombre','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
             'users.usuario')
             ->orderBy('inscripciones.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -37,7 +37,7 @@ class InscripcionController extends Controller
             ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin','inscripciones.idalumno',
             'inscripciones.idusuario','inscripciones.idmodalidad','inscripciones.abono','inscripciones.saldo',
             'inscripciones.impuesto','inscripciones.total','inscripciones.observaciones','inscripciones.estado',
-            'personas.nombres','personas.apellidos','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
+            'personas.nombre','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
             'users.usuario')
             ->where('inscripciones.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('inscripciones.'.$ordenado, $ascdesc)->paginate($paginado);
@@ -54,6 +54,18 @@ class InscripcionController extends Controller
             ],
             'inscripciones' => $inscripciones
         ];
+    }
+
+    public function listarAlumnoMes(Request $request){
+        if (!$request->ajax()) return redirect('/');        
+        
+        $inscripcionesM = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+        ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin','inscripciones.idalumno','personas.nombre as alumno')
+        ->orderBy('inscripciones.fecha_fin', 'asc')
+        ->take(10)
+        ->get();  
+ 
+        return ['inscripcionesM' => $inscripcionesM];
     }
       
     public function store(Request $request)

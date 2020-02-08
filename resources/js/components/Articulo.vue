@@ -49,7 +49,7 @@
                                     </select>
                                 </div>
                             </div>  
-                            <div class="table-responsive-sm">
+                            <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead  class="thead-table"> 
                                         <tr align="center">

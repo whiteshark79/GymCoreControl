@@ -18,9 +18,8 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::group(['middleware' => ['Administrador']], function () {
 
-        Route::get('/dashboard/grafIngVenIns','DashboardController@grafIngVenIns');
-        Route::get('/dashboard/widgetIngresosVentas','DashboardController@widgetIngresosVentas');
-        Route::get('/dashboard/widgetInscripciones','DashboardController@widgetInscripciones');
+        Route::get('/dashboard/grafInOuts','DashboardController@grafInOuts');
+        Route::get('/dashboard/widgetInOuts','DashboardController@widgetInOuts');
         Route::get('/dashboard/widgetAlumnos','DashboardController@widgetAlumnos'); 
 
         Route::get('/user', 'UserController@index');
@@ -80,7 +79,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/inscripcion/registrar', 'InscripcionController@store');
         Route::put('/inscripcion/actualizar', 'InscripcionController@update');        
         Route::put('/inscripcion/activar', 'InscripcionController@activar');         
-        Route::put('/inscripcion/desactivar', 'InscripcionController@desactivar'); 
+        Route::put('/inscripcion/desactivar', 'InscripcionController@desactivar');
+        Route::get('/inscripcion/listarAlumnoMes', 'InscripcionController@listarAlumnoMes');
 
         Route::get('/servicio', 'ServicioController@index');
         Route::post('/servicio/registrar', 'ServicioController@store');

@@ -16,8 +16,7 @@
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
                                     <select class="form-control col-2 " v-model="criterio">
-                                        <option value="nombres">Nombres</option>
-                                        <option value="apellidos">Apellidos</option>
+                                        <option value="nombre">Nombre</option>
                                         <option value="num_documento">Documento</option>
                                         <option value="fec_nacimiento">Cumpleaños</option>
                                     </select>
@@ -41,7 +40,7 @@
                                     </select>
                                 </div>
                             </div>  
-                            <div class="table-responsive-sm">
+                            <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">
@@ -53,22 +52,14 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="25%">NOMBRES
-                                                <template v-if="(ordenado !== 'nombres' && ascdesc === 'asc') || (ordenado === 'nombres' && ascdesc === 'desc')">
-                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombres','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                            <th width="40%">NOMBRE
+                                                <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
+                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
-                                                <template v-if="(ordenado !== 'nombres' && ascdesc === 'desc') || (ordenado === 'nombres' && ascdesc === 'asc')">
-                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombres','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                <template v-if="(ordenado !== 'nombre' && ascdesc === 'desc') || (ordenado === 'nombre' && ascdesc === 'asc')">
+                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
-                                            </th>
-                                            <th width="25%">APELLIDOS
-                                                <template v-if="(ordenado !== 'apellidos' && ascdesc === 'asc') || (ordenado === 'apellidos' && ascdesc === 'desc')">
-                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'apellidos','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
-                                                </template>
-                                                <template v-if="(ordenado !== 'apellidos' && ascdesc === 'desc') || (ordenado === 'apellidos' && ascdesc === 'asc')">
-                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'apellidos','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
-                                                </template>
-                                            </th>                                           
+                                            </th>                                         
                                             <th width="10%">CUMPLEAÑOS
                                                 <template v-if="(ordenado !== 'fec_nacimiento' && ascdesc === 'asc') || (ordenado === 'fec_nacimiento' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'fec_nacimiento','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -77,15 +68,14 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'fec_nacimiento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="18%">EMAIL</th>              
+                                            <th width="28%">EMAIL</th>              
                                             <th width="12%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayPersona.length">
                                         <tr v-for="persona in arrayPersona" :key="persona.id">
                                             <td align="center" v-text="persona.num_documento"></td>
-                                            <td v-text="persona.nombres"></td>
-                                            <td v-text="persona.apellidos"></td>
+                                            <td v-text="persona.nombre"></td>
                                             <td align="center" v-text="persona.fec_nacimiento"></td>
                                             <td v-text="persona.email"></td>
                                             <td align="center">
@@ -163,8 +153,7 @@
                                 <div class="form-group col-md-12">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                        <input type="text" maxlength="30" v-model="nombres" class="form-control form-control-sm" placeholder="Nombres">
-                                        <input type="text" maxlength="30" v-model="apellidos" class="form-control form-control-sm" placeholder="Apellidos">
+                                        <input type="text" maxlength="60" v-model="nombre" class="form-control form-control-sm" placeholder="Nombre">
                                     </div>                                        
                                 </div>                                                                                                        
                             </div>                                                
@@ -249,8 +238,7 @@
                 idespecialidad: 0,
                 tipo_documento : 'C',
                 num_documento : '',                
-                nombres : '',
-                apellidos : '',
+                nombre : '',
                 fec_nacimiento : '',                
                 direccion : '',
                 celular : '',
@@ -273,7 +261,7 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'nombres',
+                criterio : 'nombre',
                 buscar : '',
                 paginado : 10,
                 ordenado : 'id',
@@ -350,8 +338,7 @@
                 axios.post('/profesor/registrar',{
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
-                    'nombres' : this.nombres,
-                    'apellidos' : this.apellidos,
+                    'nombre' : this.nombre,
                     'fec_nacimiento' : this.fec_nacimiento,                    
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
@@ -361,7 +348,7 @@
                     'sueldo_hora' : this.sueldo_hora
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarPersona(me.pagination.current_page,'','nombres',me.paginado,me.ordenado,me.ascdesc);
+                    me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -373,8 +360,7 @@
                 axios.put('/profesor/actualizar',{
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
-                    'nombres' : this.nombres,
-                    'apellidos' : this.apellidos,
+                    'nombre' : this.nombre,
                     'fec_nacimiento' : this.fec_nacimiento,                    
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
@@ -385,7 +371,7 @@
                     'id': this.persona_id
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarPersona(me.pagination.current_page,'','nombres',me.paginado,me.ordenado,me.ascdesc);
+                    me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
                 }); 
@@ -394,7 +380,7 @@
                 this.errorPersona=0;
                 this.errorMostrarMsjPersona =[];
 
-                if (!this.nombres) this.errorMostrarMsjPersona.push("El nombre del profesor no puede estar vacío.");
+                if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del profesor no puede estar vacío.");
 
                 if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
 
@@ -406,8 +392,7 @@
                 
                 this.tipo_documento = 'C';
                 this.num_documento = '';
-                this.nombres = '';
-                this.apellidos = '';
+                this.nombre = '';
                 this.fec_nacimiento = '';
                 this.direccion = '';                
                 this.celular = '';
@@ -431,8 +416,7 @@
                                 
                                 this.tipo_documento = 'C';
                                 this.num_documento = '';
-                                this.nombres = '';
-                                this.apellidos = '';
+                                this.nombre = '';
                                 this.fec_nacimiento = '';
                                 this.direccion = '';                
                                 this.celular = '';
@@ -451,8 +435,7 @@
                                 this.persona_id=data['id'];
                                 this.tipo_documento=data['tipo_documento'];
                                 this.num_documento=data['num_documento'];                                
-                                this.nombres = data['nombres'];
-                                this.apellidos= data['apellidos'];
+                                this.nombre = data['nombre'];
                                 this.fec_nacimiento = data['fec_nacimiento'];                               
                                 this.direccion= data['direccion'];
                                 this.celular= data['celular'];
@@ -478,7 +461,6 @@
     .div-error{
         display: flex;
         justify-content: center;
-    }
-   
+    }   
 
 </style>

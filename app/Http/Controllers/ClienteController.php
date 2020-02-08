@@ -43,11 +43,10 @@ class ClienteController extends Controller
         $filtro = $request->filtro;
         $clientes = Persona::where('perfil', '<>', 'Proveedor')
         ->where(function ($query)  use ($filtro){
-            $query->where('nombres', 'like', '%'. $filtro . '%')
-            ->orWhere('apellidos', 'like', '%'. $filtro . '%')
+            $query->where('nombre', 'like', '%'. $filtro . '%')
             ->orWhere('num_documento', 'like', '%'. $filtro . '%')
-            ->select('id','nombres','apellidos','num_documento')
-            ->orderBy('nombres', 'asc');                
+            ->select('id','nombre','num_documento')
+            ->orderBy('nombre', 'asc');                
         })
         ->get();
  
@@ -61,8 +60,7 @@ class ClienteController extends Controller
         $persona = new Persona();
         $persona->tipo_documento = $request->tipo_documento;
         $persona->num_documento = $request->num_documento;
-        $persona->nombres = $request->nombres;
-        $persona->apellidos = $request->apellidos;
+        $persona->nombre = $request->nombre;
         $persona->fec_nacimiento = $request->fec_nacimiento;
         $persona->direccion = $request->direccion;
         $persona->celular = $request->celular;
@@ -77,8 +75,7 @@ class ClienteController extends Controller
         $persona = Persona::findOrFail($request->id);
         $persona->tipo_documento = $request->tipo_documento;
         $persona->num_documento = $request->num_documento;
-        $persona->nombres = $request->nombres;
-        $persona->apellidos = $request->apellidos;
+        $persona->nombre = $request->nombre;
         $persona->fec_nacimiento = $request->fec_nacimiento;
         $persona->direccion = $request->direccion;
         $persona->celular = $request->celular;

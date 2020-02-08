@@ -30,7 +30,7 @@
                                                 <v-select
                                                     id="buscar"
                                                     @search="selectProveedor"
-                                                    label="nombres"
+                                                    label="nombre"
                                                     :options="arrayProveedor"
                                                     placeholder="Buscar Proveedores..."
                                                     @input="getDatosProveedor2"                                    
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <div class="table-responsive-sm">
+                                <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
@@ -99,7 +99,7 @@
                                         <tbody v-if="arrayIngreso.length">
                                             <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
                                                 <td v-text="ingreso.fecha_hora"></td>
-                                                <td>{{ingreso.nombres}} {{ingreso.apellidos}}</td>                        
+                                                <td>{{ingreso.nombre}}</td>                        
                                                 <td>{{ingreso.tipo_comprobante}} : {{ingreso.serie_comprobante}}-{{ingreso.num_comprobante}}</td>
                                                 <td align="right">$ {{ (ingreso.total-ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
@@ -162,7 +162,7 @@
                                                         <label for="">Proveedor<span class="text-error" v-show="idproveedor==''">(*)</span></label>
                                                         <v-select
                                                             @search="selectProveedor"
-                                                            label="nombres"
+                                                            label="nombre"
                                                             :options="arrayProveedor"
                                                             placeholder="Buscar Proveedores..."
                                                             @input="getDatosProveedor"                                    
@@ -299,7 +299,7 @@
                                         <div class="col-12">
                                             <h4>
                                                 <i class="fas fa-shopping-basket"></i> Orden de compra
-                                                <small class="float-right">Fecha: {{  }} </small>
+                                                <small class="float-right">Fecha: {{  hoyFecha() }} </small>
                                             </h4>
                                         </div>
                                     </div>
@@ -560,6 +560,17 @@
             }
         },
         methods : {
+            hoyFecha(){
+                var hoy = new Date();
+                var dd = hoy.getDate();
+                var mm = hoy.getMonth()+1;
+                var yyyy = hoy.getFullYear();
+
+                if(dd < 10) dd = '0'+dd;
+                if(mm < 10) mm = '0'+mm;
+        
+                return dd+'/'+mm+'/'+yyyy;      
+            },
             listarIngreso (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
                 var url= '/ingreso?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
@@ -779,7 +790,7 @@
                     arrayIngresoT = respuesta.ingreso;
 
                     me.id = arrayIngresoT[0]['id'];
-                    me.proveedor = arrayIngresoT[0]['nombres'];
+                    me.proveedor = arrayIngresoT[0]['nombre'];
                     me.direccion = arrayIngresoT[0]['direccion'];
                     me.celular = arrayIngresoT[0]['celular'];
                     me.email = arrayIngresoT[0]['email'];

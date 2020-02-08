@@ -25,8 +25,8 @@ class AlumnoController extends Controller
             $personas = Alumno::join('personas','alumnos.id','=','personas.id')
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres',
-            'personas.apellidos', 'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
+            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
             'alumnos.cod_socio', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
             'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
             'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')
@@ -36,8 +36,8 @@ class AlumnoController extends Controller
             $personas = Alumno::join('personas','alumnos.id','=','personas.id')
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres',
-            'personas.apellidos', 'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
+            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
             'alumnos.cod_socio', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
             'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
             'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')           
@@ -57,17 +57,16 @@ class AlumnoController extends Controller
             'personas' => $personas
         ];
     }
-
+    
     public function selectAlumno(Request $request){
         if (!$request->ajax()) return redirect('/');
  
         $filtro = $request->filtro;
         $alumnos = Alumno::join('personas','alumnos.id','=','personas.id')
-        ->where('personas.nombres', 'like', '%'. $filtro . '%')
-        ->orWhere('personas.apellidos', 'like', '%'. $filtro . '%')
+        ->where('personas.nombre', 'like', '%'. $filtro . '%')
         ->orWhere('personas.num_documento', 'like', '%'. $filtro . '%')
-        ->select('personas.id','personas.nombres','personas.apellidos','personas.num_documento')
-        ->orderBy('personas.nombres', 'asc')->get();
+        ->select('personas.id','personas.nombre','personas.num_documento')
+        ->orderBy('personas.nombre', 'asc')->get();
  
         return ['alumnos' => $alumnos];
     } 
@@ -81,8 +80,7 @@ class AlumnoController extends Controller
             $persona = new Persona();            
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombre = $request->nombre;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;
@@ -129,8 +127,7 @@ class AlumnoController extends Controller
 
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombre = $request->nombre;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;

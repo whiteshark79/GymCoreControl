@@ -30,7 +30,7 @@
                                                 <v-select
                                                     id="buscar"
                                                     @search="selectProveedor"
-                                                    label="nombres"
+                                                    label="nombre"
                                                     :options="arrayProveedor"
                                                     placeholder="Buscar Proveedores..."
                                                     @input="getDatosProveedor2"                                    
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <div class="table-responsive-sm">
+                                <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
@@ -99,7 +99,7 @@
                                         <tbody v-if="arrayGasto.length">
                                             <tr v-for="gasto in arrayGasto" :key="gasto.id">
                                                 <td>{{ gasto.fecha_hora }}</td>
-                                                <td>{{gasto.nombres}} {{gasto.apellidos}}</td>                        
+                                                <td>{{gasto.nombre}}</td>                        
                                                 <td>{{gasto.tipo_comprobante}} : {{gasto.serie_comprobante}}-{{gasto.num_comprobante}}</td>
                                                 <td align="right">$ {{ (gasto.total-gasto.impuesto*gasto.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (gasto.impuesto*gasto.total).toFixed(2) }}</td>
@@ -162,7 +162,7 @@
                                                         <label for="">Proveedor<span class="text-error" v-show="idproveedor==''">(*)</span></label>
                                                         <v-select
                                                             @search="selectProveedor"
-                                                            label="nombres"
+                                                            label="nombre"
                                                             :options="arrayProveedor"
                                                             placeholder="Buscar Proveedores..."
                                                             @input="getDatosProveedor"                                    
@@ -780,7 +780,7 @@
                     arrayGastoT = respuesta.gasto;
 
                     me.id = arrayGastoT[0]['id'];
-                    me.proveedor = arrayGastoT[0]['nombres'];
+                    me.proveedor = arrayGastoT[0]['nombre'];
                     me.direccion = arrayGastoT[0]['direccion'];
                     me.celular = arrayGastoT[0]['celular'];
                     me.email = arrayGastoT[0]['email'];

@@ -138,7 +138,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th><p id="cliente">Sr(a). {{$v->nombres}} {{$v->apellidos}}<br>
+                            <th><p id="cliente">Sr(a). {{$v->nombre}}<br>
                             {{$v->tipo_documento}}: {{$v->num_documento}}<br>
                             Dirección: {{$v->direccion}}<br>
                             Teléfono: {{$v->celular}}<br>

@@ -16,7 +16,7 @@
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
                                     <select class="form-control col-2 " v-model="criterio">
-                                    <option value="nombres">Nombres</option>
+                                    <option value="nombre">Nombre</option>
                                     <option value="num_documento">Documento</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
@@ -31,7 +31,7 @@
                                     </select>
                                 </div>
                             </div>  
-                            <div class="table-responsive-sm">
+                            <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">
@@ -44,11 +44,11 @@
                                                 </template>
                                             </th>
                                             <th width="25%">RAZÓN SOCIAL
-                                                <template v-if="(ordenado !== 'nombres' && ascdesc === 'asc') || (ordenado === 'nombres' && ascdesc === 'desc')">
-                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombres','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
+                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
-                                                <template v-if="(ordenado !== 'nombres' && ascdesc === 'desc') || (ordenado === 'nombres' && ascdesc === 'asc')">
-                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombres','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                <template v-if="(ordenado !== 'nombre' && ascdesc === 'desc') || (ordenado === 'nombre' && ascdesc === 'asc')">
+                                                    <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                            
                                             <th width="25%">DIRECCIÓN
@@ -67,7 +67,7 @@
                                     <tbody v-if="arrayPersona.length">
                                         <tr v-for="persona in arrayPersona" :key="persona.id">
                                             <td align="center" v-text="persona.num_documento"></td>
-                                            <td v-text="persona.nombres"></td>
+                                            <td v-text="persona.nombre"></td>
                                             <td v-text="persona.direccion"></td>
                                             <td v-text="persona.email"></td>
                                             <td v-text="persona.nombre_contacto"></td>
@@ -133,7 +133,7 @@
                                             <option value="P">Pasaporte</option>                                            
                                         </select>
                                         <input type="number" v-model="num_documento" class="form-control form-control-sm col-3" placeholder="No. de documento">
-                                        <input type="text" maxlength="50" v-model="nombres" class="form-control form-control-sm col-7" placeholder="Razón Social">
+                                        <input type="text" maxlength="60" v-model="nombre" class="form-control form-control-sm col-7" placeholder="Razón Social">
                                     </div>
                                 </div>                                                                                
                             </div>
@@ -212,7 +212,7 @@
                 persona_id: 0,
                 tipo_documento : 'R',
                 num_documento : '',                
-                nombres : '',               
+                nombre : '',               
                 direccion : '',
                 celular : '',
                 email : '',
@@ -234,7 +234,7 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'nombres',
+                criterio : 'nombre',
                 buscar : '',
                 paginado : 10,
                 ordenado : 'id',
@@ -299,7 +299,7 @@
                 axios.post('/proveedor/registrar',{
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
-                    'nombres' : this.nombres,                   
+                    'nombre' : this.nombre,                   
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
                     'email' : this.email,
@@ -308,7 +308,7 @@
                     'email_contacto' : this.email_contacto
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarPersona(me.pagination.current_page,'','nombres',me.paginado,me.ordenado,me.ascdesc);
+                    me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -320,7 +320,7 @@
                 axios.put('/proveedor/actualizar',{
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
-                    'nombres' : this.nombres,                   
+                    'nombre' : this.nombre,                   
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
                     'email' : this.email,
@@ -330,7 +330,7 @@
                     'id': this.persona_id
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarPersona(me.pagination.current_page,'','nombres',me.paginado,me.ordenado,me.ascdesc);
+                    me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
                 }); 
@@ -339,7 +339,7 @@
                 this.errorPersona=0;
                 this.errorMostrarMsjPersona =[];
 
-                if (!this.nombres) this.errorMostrarMsjPersona.push("El nombre del proveedor no puede estar vacío.");
+                if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del proveedor no puede estar vacío.");
 
                 if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
 
@@ -351,7 +351,7 @@
                 
                 this.tipo_documento = 'R';
                 this.num_documento = '';
-                this.nombres = '';
+                this.nombre = '';
                 this.direccion = '';                
                 this.celular = '';
                 this.email = '';
@@ -374,7 +374,7 @@
                                 
                                 this.tipo_documento = 'R';
                                 this.num_documento = '';
-                                this.nombres = '';
+                                this.nombre = '';
                                 this.direccion = '';                
                                 this.celular = '';
                                 this.email = '';
@@ -392,7 +392,7 @@
                                 this.persona_id=data['id'];
                                 this.tipo_documento=data['tipo_documento'];
                                 this.num_documento=data['num_documento'];                                
-                                this.nombres = data['nombres'];                            
+                                this.nombre = data['nombre'];                            
                                 this.direccion= data['direccion'];
                                 this.celular= data['celular'];
                                 this.email= data['email'];

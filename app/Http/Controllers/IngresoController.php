@@ -28,7 +28,7 @@ class IngresoController extends Controller
             ->join('users','ingresos.idusuario','=','users.id')
             ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
             'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
-            'ingresos.estado','personas.nombres','personas.apellidos','users.usuario')
+            'ingresos.estado','personas.nombre','users.usuario')
             ->orderBy('ingresos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
@@ -36,7 +36,7 @@ class IngresoController extends Controller
             ->join('users','ingresos.idusuario','=','users.id')
             ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
             'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
-            'ingresos.estado','personas.nombres','personas.apellidos','users.usuario')
+            'ingresos.estado','personas.nombre','users.usuario')
             ->where('ingresos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('ingresos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -62,8 +62,8 @@ class IngresoController extends Controller
         ->join('users','ingresos.idusuario','=','users.id')
         ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
         'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
-        'ingresos.estado','personas.tipo_documento','personas.num_documento','personas.nombres',
-        'personas.apellidos', 'personas.direccion','personas.celular','personas.email','users.usuario')
+        'ingresos.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'personas.direccion','personas.celular','personas.email','users.usuario')
         ->where('ingresos.id','=',$id)
         ->orderBy('ingresos.id', 'desc')->take(1)->get();
          

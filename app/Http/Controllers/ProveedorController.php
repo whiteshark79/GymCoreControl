@@ -23,14 +23,14 @@ class ProveedorController extends Controller
          
         if ($buscar==''){
             $personas = Proveedor::join('personas','proveedores.id','=','personas.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.direccion','personas.celular','personas.email','personas.perfil',
             'proveedores.nombre_contacto','proveedores.celular_contacto','proveedores.email_contacto')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
             $personas = Proveedor::join('personas','proveedores.id','=','personas.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.direccion','personas.celular','personas.email','personas.perfil',
             'proveedores.nombre_contacto','proveedores.celular_contacto','proveedores.email_contacto')           
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
@@ -56,10 +56,10 @@ class ProveedorController extends Controller
  
         $filtro = $request->filtro;
         $proveedores = Proveedor::join('personas','proveedores.id','=','personas.id')
-        ->where('personas.nombres', 'like', '%'. $filtro . '%')
+        ->where('personas.nombre', 'like', '%'. $filtro . '%')
         ->orWhere('personas.num_documento', 'like', '%'. $filtro . '%')
-        ->select('personas.id','personas.nombres','personas.num_documento')
-        ->orderBy('personas.nombres', 'asc')->get();
+        ->select('personas.id','personas.nombre','personas.num_documento')
+        ->orderBy('personas.nombre', 'asc')->get();
  
         return ['proveedores' => $proveedores];
     }
@@ -73,7 +73,7 @@ class ProveedorController extends Controller
             $persona = new Persona();
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
+            $persona->nombre = $request->nombre;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;
             $persona->email = $request->email;
@@ -105,7 +105,7 @@ class ProveedorController extends Controller
  
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
+            $persona->nombre = $request->nombre;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;
             $persona->email = $request->email;

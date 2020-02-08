@@ -24,7 +24,7 @@ class ProfesorController extends Controller
         if ($buscar==''){
             $personas = Profesor::join('personas','profesores.id','=','personas.id')
             ->join('especialidades','profesores.idespecialidad','=','especialidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres','personas.apellidos',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
             'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
@@ -32,7 +32,7 @@ class ProfesorController extends Controller
         else{
             $personas = Profesor::join('personas','profesores.id','=','personas.id')
             ->join('especialidades','profesores.idespecialidad','=','especialidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres','personas.apellidos',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
             'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre')           
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
@@ -58,11 +58,10 @@ class ProfesorController extends Controller
  
         $filtro = $request->filtro;
         $profesores = Profesor::join('personas','profesores.id','=','personas.id')
-        ->where('personas.nombres', 'like', '%'. $filtro . '%')
-        ->orWhere('personas.apellidos', 'like', '%'. $filtro . '%')
+        ->where('personas.nombre', 'like', '%'. $filtro . '%')
         ->orWhere('personas.num_documento', 'like', '%'. $filtro . '%')
-        ->select('personas.id','personas.nombres','personas.apellidos','personas.num_documento')
-        ->orderBy('personas.nombres', 'asc')->get();
+        ->select('personas.id','personas.nombre','personas.num_documento')
+        ->orderBy('personas.nombre', 'asc')->get();
  
         return ['profesores' => $profesores];
     } 
@@ -76,8 +75,7 @@ class ProfesorController extends Controller
             $persona = new Persona();
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombre = $request->nombre;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;
@@ -110,8 +108,7 @@ class ProfesorController extends Controller
  
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombre = $request->nombre;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;

@@ -90,9 +90,9 @@ table td {
 }
 
 .num-col {
-  -ms-flex: 0 0 76.6%;
-  flex: 0 0 76.6%;
-  max-width: 76.6%;
+  -ms-flex: 0 0 70%;
+  flex: 0 0 70%;
+  max-width: 70%;
 }
 
 /**************************************/
@@ -102,6 +102,17 @@ table td {
   position: absolute !important;
   background-color: #504e4e7a !important;
 }
+
+/******tabla con scroll***********/
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 415px;
+  overflow: auto;
+  }
+  .table-wrapper-scroll-y {
+  display: block;
+  }
 /*!
  * Font Awesome Free 5.11.2 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -6110,7 +6121,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
 @media (min-width: 992px) {
   .modal-lg,
   .modal-xl {
-    max-width: 780px;
+    max-width: 760px;
   }
 }
 

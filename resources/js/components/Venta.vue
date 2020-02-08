@@ -30,7 +30,7 @@
                                                 <v-select
                                                     id="buscar"
                                                     @search="selectCliente"
-                                                    label="nombres"
+                                                    label="nombre"
                                                     :options="arrayCliente"
                                                     placeholder="Buscar Cliente..."
                                                     @input="getDatosCliente2"                                    
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <div class="table-responsive-sm"> 
+                                <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
@@ -99,7 +99,7 @@
                                         <tbody v-if="arrayVenta.length">
                                             <tr v-for="venta in arrayVenta" :key="venta.id">
                                                 <td v-text="venta.fecha_hora"></td>
-                                                <td>{{venta.nombres}} {{venta.apellidos}}</td> 
+                                                <td>{{venta.nombre}}</td> 
                                                 <td>{{venta.tipo_comprobante}} : {{venta.serie_comprobante}}-{{venta.num_comprobante}}</td>
                                                 <td align="right">$ {{ (venta.total-venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (venta.impuesto*venta.total).toFixed(2) }}</td>
@@ -163,7 +163,7 @@
                                                         <label for="">Cliente<span class="text-error" v-show="idcliente==''">(*)</span></label>
                                                         <v-select
                                                             @search="selectCliente"
-                                                            label="nombres"
+                                                            label="nombre"
                                                             :options="arrayCliente"
                                                             placeholder="Buscar Clientes..."
                                                             @input="getDatosCliente"                                    
@@ -321,7 +321,7 @@
                                         <div class="col-12">
                                             <h4>
                                                 <i class="fas fa-cash-register"></i> Factura de venta
-                                                <small class="float-right">Fecha: {{  }} </small>
+                                                <small class="float-right">Fecha: {{ hoyFecha() }} </small>
                                             </h4>
                                         </div>
                                     </div>
@@ -601,6 +601,17 @@
             }
         },
         methods : {
+            hoyFecha(){
+                var hoy = new Date();
+                var dd = hoy.getDate();
+                var mm = hoy.getMonth()+1;
+                var yyyy = hoy.getFullYear();
+
+                if(dd < 10) dd = '0'+dd;
+                if(mm < 10) mm = '0'+mm;
+        
+                return dd+'/'+mm+'/'+yyyy;      
+            },
             listarVenta (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
                 var url= '/venta?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
@@ -864,7 +875,7 @@
                     arrayVentaT = respuesta.venta;
 
                     me.id = arrayVentaT[0]['id'];
-                    me.cliente = arrayVentaT[0]['nombres'];
+                    me.cliente = arrayVentaT[0]['nombre'];
                     me.direccion = arrayVentaT[0]['direccion'];
                     me.celular = arrayVentaT[0]['celular'];
                     me.email = arrayVentaT[0]['email'];

@@ -2092,25 +2092,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       persona_id: 0,
       tipo_documento: 'C',
       num_documento: '',
-      nombres: '',
-      apellidos: '',
+      nombre: '',
       fec_nacimiento: '',
       direccion: '',
       celular: '',
@@ -2149,7 +2137,7 @@ __webpack_require__.r(__webpack_exports__);
         'to': 0
       },
       offset: 3,
-      criterio: 'nombres',
+      criterio: 'nombre',
       buscar: '',
       paginado: 10,
       ordenado: 'id',
@@ -2240,8 +2228,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/alumno/registrar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
@@ -2265,7 +2252,7 @@ __webpack_require__.r(__webpack_exports__);
         'objetivo': this.objetivo
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2279,8 +2266,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/alumno/actualizar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
@@ -2305,7 +2291,7 @@ __webpack_require__.r(__webpack_exports__);
         'id': this.persona_id
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2313,7 +2299,7 @@ __webpack_require__.r(__webpack_exports__);
     validarPersona: function validarPersona() {
       this.errorPersona = 0;
       this.errorMostrarMsjPersona = [];
-      if (!this.nombres) this.errorMostrarMsjPersona.push("El nombre del alumno no puede estar vacío.");
+      if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del alumno no puede estar vacío.");
       if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
       return this.errorPersona;
     },
@@ -2322,8 +2308,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tituloModal = '';
       this.tipo_documento = 'C';
       this.num_documento = '';
-      this.nombres = '';
-      this.apellidos = '';
+      this.nombre = '';
       this.fec_nacimiento = '';
       this.direccion = '';
       this.celular = '';
@@ -2361,8 +2346,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.tipoAccion = 1;
                   this.tipo_documento = 'C';
                   this.num_documento = '';
-                  this.nombres = '';
-                  this.apellidos = '';
+                  this.nombre = '';
                   this.fec_nacimiento = '';
                   this.direccion = '';
                   this.celular = '';
@@ -2395,8 +2379,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.persona_id = data['id'];
                   this.tipo_documento = data['tipo_documento'];
                   this.num_documento = data['num_documento'];
-                  this.nombres = data['nombres'];
-                  this.apellidos = data['apellidos'];
+                  this.nombre = data['nombre'];
                   this.fec_nacimiento = data['fec_nacimiento'];
                   this.direccion = data['direccion'];
                   this.celular = data['celular'];
@@ -4448,25 +4431,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       persona_id: 0,
       tipo_documento: 0,
       num_documento: '',
-      nombres: '',
-      apellidos: '',
+      nombre: '',
       fec_nacimiento: '',
       direccion: '',
       celular: '',
@@ -4486,7 +4457,7 @@ __webpack_require__.r(__webpack_exports__);
         'to': 0
       },
       offset: 3,
-      criterio: 'nombres',
+      criterio: 'nombre',
       buscar: '',
       paginado: 10,
       ordenado: 'id',
@@ -4555,15 +4526,14 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/cliente/registrar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
         'email': this.email
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4577,8 +4547,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/cliente/actualizar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
@@ -4586,7 +4555,7 @@ __webpack_require__.r(__webpack_exports__);
         'id': this.persona_id
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4594,7 +4563,7 @@ __webpack_require__.r(__webpack_exports__);
     validarPersona: function validarPersona() {
       this.errorPersona = 0;
       this.errorMostrarMsjPersona = [];
-      if (!this.nombres) this.errorMostrarMsjPersona.push("El nombre del cliente no puede estar vacío.");
+      if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del cliente no puede estar vacío.");
       if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
       return this.errorPersona;
     },
@@ -4603,8 +4572,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tituloModal = '';
       this.tipo_documento = 0;
       this.num_documento = '';
-      this.nombres = '';
-      this.apellidos = '';
+      this.nombre = '';
       this.fec_nacimiento = '';
       this.direccion = '';
       this.celular = '';
@@ -4625,8 +4593,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.tipoAccion = 1;
                   this.tipo_documento = 0;
                   this.num_documento = '';
-                  this.nombres = '';
-                  this.apellidos = '';
+                  this.nombre = '';
                   this.fec_nacimiento = '';
                   this.direccion = '';
                   this.celular = '';
@@ -4642,8 +4609,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.persona_id = data['id'];
                   this.tipo_documento = data['tipo_documento'];
                   this.num_documento = data['num_documento'];
-                  this.nombres = data['nombres'];
-                  this.apellidos = data['apellidos'];
+                  this.nombre = data['nombre'];
                   this.fec_nacimiento = data['fec_nacimiento'];
                   this.direccion = data['direccion'];
                   this.celular = data['celular'];
@@ -5215,7 +5181,7 @@ __webpack_require__.r(__webpack_exports__);
         var respuesta = response.data;
         arrayIngresoT = respuesta.ingreso;
         me.id = arrayIngresoT[0]['id'];
-        me.proveedor = arrayIngresoT[0]['nombres'];
+        me.proveedor = arrayIngresoT[0]['nombre'];
         me.direccion = arrayIngresoT[0]['direccion'];
         me.celular = arrayIngresoT[0]['celular'];
         me.email = arrayIngresoT[0]['email'];
@@ -5386,12 +5352,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      arrayInscripcionAlumno: [],
+      //fecha_hoy: new Date().getDate(),
       ArrayWIngresos: [],
       ArrayWVentas: [],
       ArrayWInscripciones: [],
+      ArrayWGastos: [],
       ArrayWAlumnos: [],
       i_val_total: 0,
       i_val_mes: '0',
@@ -5403,11 +5419,16 @@ __webpack_require__.r(__webpack_exports__);
       v_qtx_total: 0,
       v_qtx_mes: 0,
       v_msj: '',
-      is_val_total: 0,
-      is_val_mes: 0,
-      is_qtx_total: 0,
-      is_qtx_mes: 0,
-      is_msj: '',
+      in_val_total: 0,
+      in_val_mes: 0,
+      in_qtx_total: 0,
+      in_qtx_mes: 0,
+      in_msj: '',
+      g_val_total: 0,
+      g_val_mes: 0,
+      g_qtx_total: 0,
+      g_qtx_mes: 0,
+      g_msj: '',
       alumnosM: 0,
       alumnosH: 0,
       a_msj: '',
@@ -5416,64 +5437,60 @@ __webpack_require__.r(__webpack_exports__);
       charIngVen: null,
       //crea el graf alimentado por valores vinculados al id del canvas        
       ingresos: [],
-      varTotalIngreso: [],
-      varMesIngreso: [],
       ventas: [],
+      varTotalIngreso: [],
       varTotalVenta: [],
+      varMesIngreso: [],
       varMesVenta: [],
-      varInscripciones: null,
-      charInscripciones: null,
+      varInsGas: null,
+      charInsGas: null,
       inscripciones: [],
+      gastos: [],
       varTotalInscripcion: [],
-      varMesInscripcion: []
+      varTotalGasto: [],
+      varMesInscripcion: [],
+      varMesGasto: []
     };
   },
   methods: {
-    widgetIngresos: function widgetIngresos() {
+    hoyFecha: function hoyFecha() {
+      var hoy = new Date();
+      var dd = hoy.getDate();
+      var mm = hoy.getMonth() + 1;
+      var yyyy = hoy.getFullYear();
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+      return yyyy + '-' + mm + '-' + dd;
+    },
+    listarAlumnoMes: function listarAlumnoMes() {
       var me = this;
-      var url = '/dashboard/widgetIngresosVentas';
+      var url = '/inscripcion/listarAlumnoMes';
       axios.get(url).then(function (response) {
+        //console.log(response);
         var respuesta = response.data;
-        me.ArrayWIngresos = respuesta.wingresos;
-        me.loadWidgetIngresos();
+        me.arrayInscripcionAlumno = respuesta.inscripcionesM;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    widgetVentas: function widgetVentas() {
+    widgetInOuts: function widgetInOuts() {
       var me = this;
-      var url = '/dashboard/widgetIngresosVentas';
+      var url = '/dashboard/widgetInOuts';
       axios.get(url).then(function (response) {
-        var respuesta = response.data;
-        me.ArrayWVentas = respuesta.wventas;
-        me.loadWidgetVentas();
+        var respuesta_wi = response.data;
+        var respuesta_wv = response.data;
+        var respuesta_win = response.data;
+        var respuesta_wg = response.data;
+        me.ArrayWIngresos = respuesta_wi.wingresos;
+        me.ArrayWVentas = respuesta_wv.wventas;
+        me.ArrayWInscripciones = respuesta_win.winscripciones;
+        me.ArrayWGastos = respuesta_wg.wgastos;
+        me.loadWidgetInOuts();
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    widgetInscripciones: function widgetInscripciones() {
-      var me = this;
-      var url = '/dashboard/widgetInscripciones';
-      axios.get(url).then(function (response) {
-        var respuesta = response.data;
-        me.ArrayWInscripciones = respuesta.winscripciones;
-        me.loadWidgetInscripciones();
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    widgetAlumnos: function widgetAlumnos() {
-      var me = this;
-      var url = '/dashboard/widgetAlumnos';
-      axios.get(url).then(function (response) {
-        var respuesta = response.data;
-        me.ArrayWAlumnos = respuesta.alumnos;
-        me.loadWidgetAlumnos();
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    loadWidgetIngresos: function loadWidgetIngresos() {
+    loadWidgetInOuts: function loadWidgetInOuts() {
       var me = this;
       me.ArrayWIngresos.map(function (x) {
         me.i_val_total = x.i_val_total;
@@ -5482,9 +5499,6 @@ __webpack_require__.r(__webpack_exports__);
         me.i_qtx_mes = x.i_qtx_mes;
         me.i_msj = x.i_msj;
       });
-    },
-    loadWidgetVentas: function loadWidgetVentas() {
-      var me = this;
       me.ArrayWVentas.map(function (x) {
         me.v_val_total = x.v_val_total;
         me.v_val_mes = x.v_val_mes;
@@ -5492,28 +5506,24 @@ __webpack_require__.r(__webpack_exports__);
         me.v_qtx_mes = x.v_qtx_mes;
         me.v_msj = x.v_msj;
       });
-    },
-    loadWidgetInscripciones: function loadWidgetInscripciones() {
-      var me = this;
       me.ArrayWInscripciones.map(function (x) {
-        me.is_val_total = x.is_val_total;
-        me.is_val_mes = x.is_val_mes;
-        me.is_qtx_total = x.is_qtx_total;
-        me.is_qtx_mes = x.is_qtx_mes;
-        me.is_msj = x.is_msj;
+        me.in_val_total = x.in_val_total;
+        me.in_val_mes = x.in_val_mes;
+        me.in_qtx_total = x.in_qtx_total;
+        me.in_qtx_mes = x.in_qtx_mes;
+        me.in_msj = x.in_msj;
       });
-    },
-    loadWidgetAlumnos: function loadWidgetAlumnos() {
-      var me = this;
-      me.ArrayWAlumnos.map(function (x) {
-        me.alumnosM = x.alumnosM;
-        me.alumnosH = x.alumnosH;
-        me.a_msj = x.a_msj;
+      me.ArrayWGastos.map(function (x) {
+        me.g_val_total = x.g_val_total;
+        me.g_val_mes = x.g_val_mes;
+        me.g_qtx_total = x.g_qtx_total;
+        me.g_qtx_mes = x.g_qtx_mes;
+        me.g_msj = x.g_msj;
       });
     },
     getIngVen: function getIngVen() {
       var me = this;
-      var url = '/dashboard/grafIngVenIns';
+      var url = '/dashboard/grafInOuts';
       axios.get(url).then(function (response) {
         var respuesta_i = response.data;
         var respuesta_v = response.data;
@@ -5535,12 +5545,14 @@ __webpack_require__.r(__webpack_exports__);
         me.varMesVenta.push(x.mes);
         me.varTotalVenta.push(x.total);
       });
+      var mesIngVen = me.varMesVenta > me.varMesIngreso ? me.varMesVenta : me.varMesIngreso; //console.log(mes);
+
       me.varIngVen = document.getElementById('chart_ingven').getContext('2d'); //id canvas donde se mostrará el graf
 
       me.charIngVen = new Chart(me.varIngVen, {
-        type: 'bar',
+        type: 'line',
         data: {
-          labels: me.varMesIngreso,
+          labels: mesIngVen,
           datasets: [{
             label: 'Compras',
             data: me.varTotalIngreso,
@@ -5570,34 +5582,53 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    getInscripciones: function getInscripciones() {
+    getInsGas: function getInsGas() {
       var me = this;
-      var url = '/dashboard/grafIngVenIns';
+      var url = '/dashboard/grafInOuts';
       axios.get(url).then(function (response) {
-        var respuesta = response.data;
-        me.inscripciones = respuesta.inscripciones; //cargamos los datos del chart
+        var respuesta_in = response.data;
+        var respuesta_g = response.data;
+        me.inscripciones = respuesta_in.inscripciones;
+        me.gastos = respuesta_g.gastos; //cargamos los datos del chart
 
-        me.loadIncripciones();
+        me.loadInsGas();
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    loadIncripciones: function loadIncripciones() {
+    loadInsGas: function loadInsGas() {
       var me = this;
       me.inscripciones.map(function (x) {
         me.varMesInscripcion.push(x.mes);
         me.varTotalInscripcion.push(x.total);
       });
-      me.varInscripcion = document.getElementById('chart_ins').getContext('2d');
-      me.charInscripcion = new Chart(me.varInscripcion, {
+      me.gastos.map(function (x) {
+        me.varMesGasto.push(x.mes);
+        me.varTotalGasto.push(x.total);
+      });
+      var mesInsGas = me.varMesGasto > me.varMesInscripcion ? me.varMesGasto : me.varMesInscripcion; //console.log(mesInsGas);
+
+      me.varInsGas = document.getElementById('chart_insgas').getContext('2d'); //id canvas donde se mostrará el graf
+
+      me.charInsGas = new Chart(me.varInsGas, {
         type: 'bar',
         data: {
-          labels: me.varMesInscripcion,
+          labels: mesInsGas,
           datasets: [{
             label: 'Inscripciones',
             data: me.varTotalInscripcion,
             backgroundColor: 'rgba(40, 167, 69, 0.2)',
             borderColor: 'rgba(26, 111, 46, 0.5)',
+            hoverBackgroundColor: "rgba(26, 111, 46, 0.5)",
+            hoverBorderColor: "rgba(40, 167, 69, 0.2)",
+            borderWidth: 1
+          }, {
+            label: 'Gastos',
+            data: me.varTotalGasto,
+            backgroundColor: 'rgba(108, 117, 125, 0.2)',
+            borderColor: 'rgba(72, 78, 83, 0.5)',
+            hoverBackgroundColor: "rgba(72, 78, 83, 0.5)",
+            hoverBorderColor: "rgba(108, 117, 125, 0.2)",
             borderWidth: 1
           }]
         },
@@ -5614,12 +5645,10 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.widgetIngresos();
-    this.widgetVentas();
-    this.widgetInscripciones();
-    this.widgetAlumnos();
+    this.listarAlumnoMes();
+    this.widgetInOuts();
     this.getIngVen();
-    this.getInscripciones();
+    this.getInsGas();
   }
 });
 
@@ -6795,7 +6824,7 @@ __webpack_require__.r(__webpack_exports__);
         var respuesta = response.data;
         arrayGastoT = respuesta.gasto;
         me.id = arrayGastoT[0]['id'];
-        me.proveedor = arrayGastoT[0]['nombres'];
+        me.proveedor = arrayGastoT[0]['nombre'];
         me.direccion = arrayGastoT[0]['direccion'];
         me.celular = arrayGastoT[0]['celular'];
         me.email = arrayGastoT[0]['email'];
@@ -7433,6 +7462,15 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    hoyFecha: function hoyFecha() {
+      var hoy = new Date();
+      var dd = hoy.getDate();
+      var mm = hoy.getMonth() + 1;
+      var yyyy = hoy.getFullYear();
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+      return dd + '/' + mm + '/' + yyyy;
+    },
     listarIngreso: function listarIngreso(page, buscar, criterio, paginado, ordenado, ascdesc) {
       var me = this;
       var url = '/ingreso?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&paginado=' + paginado + '&ordenado=' + ordenado + '&ascdesc=' + ascdesc;
@@ -7637,7 +7675,7 @@ __webpack_require__.r(__webpack_exports__);
         var respuesta = response.data;
         arrayIngresoT = respuesta.ingreso;
         me.id = arrayIngresoT[0]['id'];
-        me.proveedor = arrayIngresoT[0]['nombres'];
+        me.proveedor = arrayIngresoT[0]['nombre'];
         me.direccion = arrayIngresoT[0]['direccion'];
         me.celular = arrayIngresoT[0]['celular'];
         me.email = arrayIngresoT[0]['email'];
@@ -8298,7 +8336,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.inscripcion_id = data['id'];
                   this.fecha_ini = data['fecha_ini'];
                   this.idalumno = data['idalumno'];
-                  this.nombres = data['nombres'] + ' ' + data['apellidos'];
+                  this.nombre = data['nombre'];
                   this.idmodalidad = data['idmodalidad'];
 
                   if (this.duracion == 0) {
@@ -9524,17 +9562,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -9542,8 +9569,7 @@ __webpack_require__.r(__webpack_exports__);
       idespecialidad: 0,
       tipo_documento: 'C',
       num_documento: '',
-      nombres: '',
-      apellidos: '',
+      nombre: '',
       fec_nacimiento: '',
       direccion: '',
       celular: '',
@@ -9566,7 +9592,7 @@ __webpack_require__.r(__webpack_exports__);
         'to': 0
       },
       offset: 3,
-      criterio: 'nombres',
+      criterio: 'nombre',
       buscar: '',
       paginado: 10,
       ordenado: 'id',
@@ -9646,8 +9672,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/profesor/registrar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
@@ -9657,7 +9682,7 @@ __webpack_require__.r(__webpack_exports__);
         'sueldo_hora': this.sueldo_hora
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -9671,8 +9696,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/profesor/actualizar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
@@ -9683,7 +9707,7 @@ __webpack_require__.r(__webpack_exports__);
         'id': this.persona_id
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -9691,7 +9715,7 @@ __webpack_require__.r(__webpack_exports__);
     validarPersona: function validarPersona() {
       this.errorPersona = 0;
       this.errorMostrarMsjPersona = [];
-      if (!this.nombres) this.errorMostrarMsjPersona.push("El nombre del profesor no puede estar vacío.");
+      if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del profesor no puede estar vacío.");
       if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
       return this.errorPersona;
     },
@@ -9700,8 +9724,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tituloModal = '';
       this.tipo_documento = 'C';
       this.num_documento = '';
-      this.nombres = '';
-      this.apellidos = '';
+      this.nombre = '';
       this.fec_nacimiento = '';
       this.direccion = '';
       this.celular = '';
@@ -9725,8 +9748,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.tipoAccion = 1;
                   this.tipo_documento = 'C';
                   this.num_documento = '';
-                  this.nombres = '';
-                  this.apellidos = '';
+                  this.nombre = '';
                   this.fec_nacimiento = '';
                   this.direccion = '';
                   this.celular = '';
@@ -9745,8 +9767,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.persona_id = data['id'];
                   this.tipo_documento = data['tipo_documento'];
                   this.num_documento = data['num_documento'];
-                  this.nombres = data['nombres'];
-                  this.apellidos = data['apellidos'];
+                  this.nombre = data['nombre'];
                   this.fec_nacimiento = data['fec_nacimiento'];
                   this.direccion = data['direccion'];
                   this.celular = data['celular'];
@@ -9992,7 +10013,7 @@ __webpack_require__.r(__webpack_exports__);
       persona_id: 0,
       tipo_documento: 'R',
       num_documento: '',
-      nombres: '',
+      nombre: '',
       direccion: '',
       celular: '',
       email: '',
@@ -10014,7 +10035,7 @@ __webpack_require__.r(__webpack_exports__);
         'to': 0
       },
       offset: 3,
-      criterio: 'nombres',
+      criterio: 'nombre',
       buscar: '',
       paginado: 10,
       ordenado: 'id',
@@ -10083,7 +10104,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/proveedor/registrar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
+        'nombre': this.nombre,
         'direccion': this.direccion,
         'celular': this.celular,
         'email': this.email,
@@ -10092,7 +10113,7 @@ __webpack_require__.r(__webpack_exports__);
         'email_contacto': this.email_contacto
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -10106,7 +10127,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/proveedor/actualizar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
+        'nombre': this.nombre,
         'direccion': this.direccion,
         'celular': this.celular,
         'email': this.email,
@@ -10116,7 +10137,7 @@ __webpack_require__.r(__webpack_exports__);
         'id': this.persona_id
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -10124,7 +10145,7 @@ __webpack_require__.r(__webpack_exports__);
     validarPersona: function validarPersona() {
       this.errorPersona = 0;
       this.errorMostrarMsjPersona = [];
-      if (!this.nombres) this.errorMostrarMsjPersona.push("El nombre del proveedor no puede estar vacío.");
+      if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del proveedor no puede estar vacío.");
       if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
       return this.errorPersona;
     },
@@ -10133,7 +10154,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tituloModal = '';
       this.tipo_documento = 'R';
       this.num_documento = '';
-      this.nombres = '';
+      this.nombre = '';
       this.direccion = '';
       this.celular = '';
       this.email = '';
@@ -10156,7 +10177,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.tipoAccion = 1;
                   this.tipo_documento = 'R';
                   this.num_documento = '';
-                  this.nombres = '';
+                  this.nombre = '';
                   this.direccion = '';
                   this.celular = '';
                   this.email = '';
@@ -10174,7 +10195,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.persona_id = data['id'];
                   this.tipo_documento = data['tipo_documento'];
                   this.num_documento = data['num_documento'];
-                  this.nombres = data['nombres'];
+                  this.nombre = data['nombre'];
                   this.direccion = data['direccion'];
                   this.celular = data['celular'];
                   this.email = data['email'];
@@ -12214,25 +12235,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       persona_id: 0,
       tipo_documento: 'C',
       num_documento: '',
-      nombres: '',
-      apellidos: '',
+      nombre: '',
       fec_nacimiento: '',
       direccion: '',
       celular: '',
@@ -12256,7 +12265,7 @@ __webpack_require__.r(__webpack_exports__);
         'to': 0
       },
       offset: 3,
-      criterio: 'nombres',
+      criterio: 'nombre',
       buscar: '',
       paginado: 10,
       ordenado: 'id',
@@ -12336,8 +12345,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/user/registrar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
@@ -12347,7 +12355,7 @@ __webpack_require__.r(__webpack_exports__);
         'idrol': this.idrol
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -12361,8 +12369,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.put('/user/actualizar', {
         'tipo_documento': this.tipo_documento,
         'num_documento': this.num_documento,
-        'nombres': this.nombres,
-        'apellidos': this.apellidos,
+        'nombre': this.nombre,
         'fec_nacimiento': this.fec_nacimiento,
         'direccion': this.direccion,
         'celular': this.celular,
@@ -12373,7 +12380,7 @@ __webpack_require__.r(__webpack_exports__);
         'id': this.persona_id
       }).then(function (response) {
         me.cerrarModal();
-        me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+        me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -12395,7 +12402,7 @@ __webpack_require__.r(__webpack_exports__);
           axios.put('/user/desactivar', {
             'id': id
           }).then(function (response) {
-            me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+            me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
             Swal.fire('Desactivado!', 'El registro ha sido desactivado con éxito.', 'success');
           })["catch"](function (error) {
             console.log(error);
@@ -12420,7 +12427,7 @@ __webpack_require__.r(__webpack_exports__);
           axios.put('/user/activar', {
             'id': id
           }).then(function (response) {
-            me.listarPersona(me.pagination.current_page, '', 'nombres', me.paginado, me.ordenado, me.ascdesc);
+            me.listarPersona(me.pagination.current_page, '', 'nombre', me.paginado, me.ordenado, me.ascdesc);
             Swal.fire('Desactivado!', 'El registro ha sido activado con éxito.', 'success');
           })["catch"](function (error) {
             console.log(error);
@@ -12431,7 +12438,7 @@ __webpack_require__.r(__webpack_exports__);
     validarPersona: function validarPersona() {
       this.errorPersona = 0;
       this.errorMostrarMsjPersona = [];
-      if (!this.nombres) this.errorMostrarMsjPersona.push("El nombre del usuario no puede estar vacío.");
+      if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del usuario no puede estar vacío.");
       if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
       return this.errorPersona;
     },
@@ -12440,8 +12447,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tituloModal = '';
       this.tipo_documento = 'C';
       this.num_documento = '';
-      this.nombres = '';
-      this.apellidos = '';
+      this.nombre = '';
       this.fec_nacimiento = '';
       this.direccion = '';
       this.celular = '';
@@ -12465,8 +12471,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.tipoAccion = 1;
                   this.tipo_documento = 'C';
                   this.num_documento = '';
-                  this.nombres = '';
-                  this.apellidos = '';
+                  this.nombre = '';
                   this.fec_nacimiento = '';
                   this.direccion = '';
                   this.celular = '';
@@ -12485,8 +12490,7 @@ __webpack_require__.r(__webpack_exports__);
                   this.persona_id = data['id'];
                   this.tipo_documento = data['tipo_documento'];
                   this.num_documento = data['num_documento'];
-                  this.nombres = data['nombres'];
-                  this.apellidos = data['apellidos'];
+                  this.nombre = data['nombre'];
                   this.fec_nacimiento = data['fec_nacimiento'];
                   this.direccion = data['direccion'];
                   this.celular = data['celular'];
@@ -13125,6 +13129,15 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    hoyFecha: function hoyFecha() {
+      var hoy = new Date();
+      var dd = hoy.getDate();
+      var mm = hoy.getMonth() + 1;
+      var yyyy = hoy.getFullYear();
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+      return dd + '/' + mm + '/' + yyyy;
+    },
     listarVenta: function listarVenta(page, buscar, criterio, paginado, ordenado, ascdesc) {
       var me = this;
       var url = '/venta?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&paginado=' + paginado + '&ordenado=' + ordenado + '&ascdesc=' + ascdesc;
@@ -13368,7 +13381,7 @@ __webpack_require__.r(__webpack_exports__);
         var respuesta = response.data;
         arrayVentaT = respuesta.venta;
         me.id = arrayVentaT[0]['id'];
-        me.cliente = arrayVentaT[0]['nombres'];
+        me.cliente = arrayVentaT[0]['nombre'];
         me.direccion = arrayVentaT[0]['direccion'];
         me.celular = arrayVentaT[0]['celular'];
         me.email = arrayVentaT[0]['email'];
@@ -20207,7 +20220,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.div-error{\n    display: flex;\n    justify-content: center;\n}\n\n\n", ""]);
+exports.push([module.i, "\n.div-error{\n    display: flex;\n    justify-content: center;\n}   \n\n", ""]);
 
 // exports
 
@@ -64330,12 +64343,8 @@ var render = function() {
                           }
                         },
                         [
-                          _c("option", { attrs: { value: "nombres" } }, [
-                            _vm._v("Nombres")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "apellidos" } }, [
-                            _vm._v("Apellidos")
+                          _c("option", { attrs: { value: "nombre" } }, [
+                            _vm._v("Nombre")
                           ]),
                           _vm._v(" "),
                           _c("option", { attrs: { value: "num_documento" } }, [
@@ -64584,348 +64593,287 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "DOC\n                                            "
-                            ),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "DOC\n                                            "
+                              ),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "NOMBRES\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "APELLIDOS\n                                            "
-                            ),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "CUMPLEAÑOS\n                                            "
-                            ),
-                            (_vm.ordenado !== "fec_nacimiento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "fec_nacimiento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fec_nacimiento",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "fec_nacimiento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "fec_nacimiento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fec_nacimiento",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "18%" } }, [
-                          _vm._v("EMAIL")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayPersona.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayPersona, function(persona) {
-                            return _c("tr", { key: persona.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(persona.num_documento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.nombres)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.apellidos)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(persona.fec_nacimiento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: { textContent: _vm._s(persona.email) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-sm btn-default",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "persona",
-                                          "actualizar",
-                                          persona
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-edit",
-                                      attrs: { title: "Editar" }
-                                    })
+                                      },
+                                      [_vm._m(1)]
+                                    )
                                   ]
-                                )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "40%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "CUMPLEAÑOS\n                                            "
+                              ),
+                              (_vm.ordenado !== "fec_nacimiento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "fec_nacimiento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fec_nacimiento",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "fec_nacimiento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "fec_nacimiento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fec_nacimiento",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "28%" } }, [
+                            _vm._v("EMAIL")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayPersona.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayPersona, function(persona) {
+                              return _c("tr", { key: persona.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(persona.num_documento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(persona.fec_nacimiento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.email)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-sm btn-default",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.abrirModal(
+                                            "persona",
+                                            "actualizar",
+                                            persona
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-edit",
+                                        attrs: { title: "Editar" }
+                                      })
+                                    ]
+                                  )
+                                ])
                               ])
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(9)])
-                  ]
-                )
-              ]),
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -65092,7 +65040,7 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "card" }, [
-                          _vm._m(10),
+                          _vm._m(8),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -65115,7 +65063,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(11),
+                                          _vm._m(9),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -65226,7 +65174,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(12),
+                                          _vm._m(10),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -65270,60 +65218,31 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(13),
+                                          _vm._m(11),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
                                               {
                                                 name: "model",
                                                 rawName: "v-model",
-                                                value: _vm.nombres,
-                                                expression: "nombres"
+                                                value: _vm.nombre,
+                                                expression: "nombre"
                                               }
                                             ],
                                             staticClass:
                                               "form-control form-control-sm",
                                             attrs: {
                                               type: "text",
-                                              maxlength: "30",
-                                              placeholder: "Nombres"
+                                              maxlength: "60",
+                                              placeholder: "Nombre"
                                             },
-                                            domProps: { value: _vm.nombres },
+                                            domProps: { value: _vm.nombre },
                                             on: {
                                               input: function($event) {
                                                 if ($event.target.composing) {
                                                   return
                                                 }
-                                                _vm.nombres =
-                                                  $event.target.value
-                                              }
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            directives: [
-                                              {
-                                                name: "model",
-                                                rawName: "v-model",
-                                                value: _vm.apellidos,
-                                                expression: "apellidos"
-                                              }
-                                            ],
-                                            staticClass:
-                                              "form-control form-control-sm",
-                                            attrs: {
-                                              type: "text",
-                                              maxlength: "30",
-                                              placeholder: "Apellidos"
-                                            },
-                                            domProps: { value: _vm.apellidos },
-                                            on: {
-                                              input: function($event) {
-                                                if ($event.target.composing) {
-                                                  return
-                                                }
-                                                _vm.apellidos =
-                                                  $event.target.value
+                                                _vm.nombre = $event.target.value
                                               }
                                             }
                                           })
@@ -65340,7 +65259,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(14),
+                                          _vm._m(12),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -65412,13 +65331,13 @@ var render = function() {
                                 _c("div", { staticClass: "form-row" }, [
                                   _c(
                                     "div",
-                                    { staticClass: "form-group col-md-4" },
+                                    { staticClass: "form-group col-md-5" },
                                     [
                                       _c(
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(15),
+                                          _vm._m(13),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -65452,13 +65371,13 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "div",
-                                    { staticClass: "form-group col-md-5" },
+                                    { staticClass: "form-group col-md-4" },
                                     [
                                       _c(
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(16),
+                                          _vm._m(14),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -65552,7 +65471,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(17),
+                                          _vm._m(15),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -65630,7 +65549,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(18),
+                                          _vm._m(16),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -65671,7 +65590,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(19),
+                                          _vm._m(17),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -65713,7 +65632,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(20),
+                                          _vm._m(18),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -65821,7 +65740,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "card" }, [
-                          _vm._m(21),
+                          _vm._m(19),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -65844,7 +65763,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(22),
+                                          _vm._m(20),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -65986,7 +65905,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(23),
+                                          _vm._m(21),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -66057,7 +65976,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(24),
+                                          _vm._m(22),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -66133,7 +66052,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(25),
+                                          _vm._m(23),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -66198,7 +66117,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "card" }, [
-                          _vm._m(26),
+                          _vm._m(24),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -66221,7 +66140,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(27),
+                                          _vm._m(25),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -66263,7 +66182,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(28),
+                                          _vm._m(26),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -66305,7 +66224,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(29),
+                                          _vm._m(27),
                                           _vm._v(" "),
                                           _c("input", {
                                             directives: [
@@ -66350,7 +66269,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(30),
+                                          _vm._m(28),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -66442,7 +66361,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(31),
+                                          _vm._m(29),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -66540,7 +66459,7 @@ var render = function() {
                                         "div",
                                         { staticClass: "input-group" },
                                         [
-                                          _vm._m(32),
+                                          _vm._m(30),
                                           _vm._v(" "),
                                           _c(
                                             "select",
@@ -66731,22 +66650,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-title" }, [
       _c("h3", [_vm._v("Alumnos")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-down fa-xs" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-up fa-xs" })
     ])
   },
   function() {
@@ -67344,507 +67247,522 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "6%" } },
-                          [
-                            _vm._v(
-                              "CÓD\n                                            "
-                            ),
-                            (_vm.ordenado !== "codigo" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "codigo" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "codigo",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "6%" } },
+                            [
+                              _vm._v(
+                                "CÓD\n                                            "
+                              ),
+                              (_vm.ordenado !== "codigo" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "codigo" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "codigo",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "codigo" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "codigo" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "codigo",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "codigo" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "codigo" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "codigo",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "20%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "20%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "12%" } },
-                          [
-                            _vm._v(
-                              "CATEGORÍA\n                                            "
-                            ),
-                            (_vm.ordenado !== "idcategoria" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "idcategoria" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idcategoria",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "12%" } },
+                            [
+                              _vm._v(
+                                "CATEGORÍA\n                                            "
+                              ),
+                              (_vm.ordenado !== "idcategoria" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "idcategoria" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idcategoria",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "idcategoria" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "idcategoria" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idcategoria",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "idcategoria" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "idcategoria" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idcategoria",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "5%" } }, [_vm._v("PVP")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "6%" } },
-                          [
-                            _vm._v(
-                              "STOCK\n                                            "
-                            ),
-                            (_vm.ordenado !== "stock" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "stock" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "stock",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "5%" } }, [_vm._v("PVP")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "6%" } },
+                            [
+                              _vm._v(
+                                "STOCK\n                                            "
+                              ),
+                              (_vm.ordenado !== "stock" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "stock" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "stock",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "stock" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "stock" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "stock",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(7)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "stock" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "stock" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "stock",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(8)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(9)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarArticulo(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(9)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarArticulo(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(10)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(10)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayArticulo.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayArticulo, function(articulo) {
-                            return _c("tr", { key: articulo.id }, [
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(articulo.codigo)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(articulo.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(articulo.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(articulo.nombre_categoria)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "right" } }, [
-                                _vm._v("$ " + _vm._s(articulo.precio_venta))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                attrs: { align: "right" },
-                                domProps: {
-                                  textContent: _vm._s(articulo.stock)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                articulo.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "articulo",
-                                            "actualizar",
-                                            articulo
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "articulo",
-                                            "eliminar",
-                                            articulo
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt",
-                                        attrs: { title: "Eliminar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayArticulo.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayArticulo, function(articulo) {
+                              return _c("tr", { key: articulo.id }, [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.codigo)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.descripcion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      articulo.nombre_categoria
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "right" } }, [
+                                  _vm._v("$ " + _vm._s(articulo.precio_venta))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", {
+                                  attrs: { align: "right" },
+                                  domProps: {
+                                    textContent: _vm._s(articulo.stock)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   articulo.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarArticulo(
-                                                  articulo.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarArticulo(
-                                                  articulo.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "articulo",
+                                              "actualizar",
+                                              articulo
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(11)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "articulo",
+                                              "eliminar",
+                                              articulo
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "far fa-trash-alt",
+                                          attrs: { title: "Eliminar" }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    articulo.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarArticulo(
+                                                    articulo.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarArticulo(
+                                                    articulo.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(11)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -68734,395 +68652,409 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "37%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "37%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "36%" } },
-                          [
-                            _vm._v(
-                              "PROVINCIA\n                                            "
-                            ),
-                            (_vm.ordenado !== "idprovincia" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "idprovincia" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idprovincia",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "36%" } },
+                            [
+                              _vm._v(
+                                "PROVINCIA\n                                            "
+                              ),
+                              (_vm.ordenado !== "idprovincia" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "idprovincia" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idprovincia",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "idprovincia" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "idprovincia" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idprovincia",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "idprovincia" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "idprovincia" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idprovincia",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCanton(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(7)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCanton(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(8)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayCanton.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayCanton, function(canton) {
-                            return _c("tr", { key: canton.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: { textContent: _vm._s(canton.id) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: { textContent: _vm._s(canton.nombre) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(canton.nombre_provincia)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                canton.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "canton",
-                                            "actualizar",
-                                            canton
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayCanton.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayCanton, function(canton) {
+                              return _c("tr", { key: canton.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: { textContent: _vm._s(canton.id) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(canton.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(canton.nombre_provincia)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   canton.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarCanton(
-                                                  canton.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarCanton(
-                                                  canton.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "canton",
+                                              "actualizar",
+                                              canton
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(9)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    canton.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarCanton(
+                                                    canton.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarCanton(
+                                                    canton.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(9)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -69796,357 +69728,371 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCategoria(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCategoria(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCategoria(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCategoria(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "20%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCategoria(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "20%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCategoria(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCategoria(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCategoria(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCategoria(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCategoria(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarCategoria(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarCategoria(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayCategoria.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayCategoria, function(categoria) {
-                            return _c("tr", { key: categoria.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: { textContent: _vm._s(categoria.id) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(categoria.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(categoria.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                categoria.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "categoria",
-                                            "actualizar",
-                                            categoria
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "categoria",
-                                            "eliminar",
-                                            categoria
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt",
-                                        attrs: { title: "Eliminar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayCategoria.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayCategoria, function(categoria) {
+                              return _c("tr", { key: categoria.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(categoria.id)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(categoria.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(categoria.descripcion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   categoria.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarCategoria(
-                                                  categoria.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarCategoria(
-                                                  categoria.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "categoria",
+                                              "actualizar",
+                                              categoria
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(7)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "categoria",
+                                              "eliminar",
+                                              categoria
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "far fa-trash-alt",
+                                          attrs: { title: "Eliminar" }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    categoria.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarCategoria(
+                                                    categoria.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarCategoria(
+                                                    categoria.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -70791,361 +70737,375 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarClasificacion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarClasificacion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarClasificacion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarClasificacion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "20%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarClasificacion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "20%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarClasificacion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarClasificacion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarClasificacion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarClasificacion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarClasificacion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarClasificacion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarClasificacion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayClasificacion.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayClasificacion, function(
-                            clasificacion
-                          ) {
-                            return _c("tr", { key: clasificacion.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(clasificacion.id)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(clasificacion.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(clasificacion.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                clasificacion.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "clasificacion",
-                                            "actualizar",
-                                            clasificacion
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "clasificacion",
-                                            "eliminar",
-                                            clasificacion
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt",
-                                        attrs: { title: "Eliminar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayClasificacion.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayClasificacion, function(
+                              clasificacion
+                            ) {
+                              return _c("tr", { key: clasificacion.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(clasificacion.id)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(clasificacion.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      clasificacion.descripcion
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   clasificacion.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarClasificacion(
-                                                  clasificacion.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarClasificacion(
-                                                  clasificacion.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "clasificacion",
+                                              "actualizar",
+                                              clasificacion
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(7)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "clasificacion",
+                                              "eliminar",
+                                              clasificacion
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "far fa-trash-alt",
+                                          attrs: { title: "Eliminar" }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    clasificacion.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarClasificacion(
+                                                    clasificacion.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarClasificacion(
+                                                    clasificacion.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -71647,12 +71607,8 @@ var render = function() {
                           }
                         },
                         [
-                          _c("option", { attrs: { value: "nombres" } }, [
-                            _vm._v("Nombres")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "apellidos" } }, [
-                            _vm._v("Apellidos")
+                          _c("option", { attrs: { value: "nombre" } }, [
+                            _vm._v("Nombre")
                           ]),
                           _vm._v(" "),
                           _c("option", { attrs: { value: "num_documento" } }, [
@@ -71796,348 +71752,287 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "DOC\n                                            "
-                            ),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "DOC\n                                            "
+                              ),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "NOMBRES\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "APELLIDOS\n                                            "
-                            ),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "CUMPLEAÑOS\n                                            "
-                            ),
-                            (_vm.ordenado !== "fec_nacimiento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "fec_nacimiento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fec_nacimiento",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "fec_nacimiento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "fec_nacimiento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fec_nacimiento",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "18%" } }, [
-                          _vm._v("EMAIL")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayPersona.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayPersona, function(persona) {
-                            return _c("tr", { key: persona.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(persona.num_documento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.nombres)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.apellidos)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(persona.fec_nacimiento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: { textContent: _vm._s(persona.email) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-sm btn-default",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "persona",
-                                          "actualizar",
-                                          persona
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-edit",
-                                      attrs: { title: "Editar" }
-                                    })
+                                      },
+                                      [_vm._m(1)]
+                                    )
                                   ]
-                                )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "40%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "CUMPLEAÑOS\n                                            "
+                              ),
+                              (_vm.ordenado !== "fec_nacimiento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "fec_nacimiento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fec_nacimiento",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "fec_nacimiento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "fec_nacimiento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fec_nacimiento",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "28%" } }, [
+                            _vm._v("EMAIL")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayPersona.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayPersona, function(persona) {
+                              return _c("tr", { key: persona.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(persona.num_documento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(persona.fec_nacimiento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.email)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-sm btn-default",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.abrirModal(
+                                            "persona",
+                                            "actualizar",
+                                            persona
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-edit",
+                                        attrs: { title: "Editar" }
+                                      })
+                                    ]
+                                  )
+                                ])
                               ])
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(9)])
-                  ]
-                )
-              ]),
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -72299,7 +72194,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-7" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(10),
+                          _vm._m(8),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -72380,7 +72275,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-5" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(11),
+                          _vm._m(9),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -72410,56 +72305,30 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-12" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(12),
+                          _vm._m(10),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.nombres,
-                                expression: "nombres"
+                                value: _vm.nombre,
+                                expression: "nombre"
                               }
                             ],
                             staticClass: "form-control form-control-sm",
                             attrs: {
                               type: "text",
-                              maxlength: "30",
-                              placeholder: "Nombres"
+                              maxlength: "60",
+                              placeholder: "Nombre"
                             },
-                            domProps: { value: _vm.nombres },
+                            domProps: { value: _vm.nombre },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.nombres = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.apellidos,
-                                expression: "apellidos"
-                              }
-                            ],
-                            staticClass: "form-control form-control-sm",
-                            attrs: {
-                              type: "text",
-                              maxlength: "30",
-                              placeholder: "Apellidos"
-                            },
-                            domProps: { value: _vm.apellidos },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.apellidos = $event.target.value
+                                _vm.nombre = $event.target.value
                               }
                             }
                           })
@@ -72470,7 +72339,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-5" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(13),
+                          _vm._m(11),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -72498,7 +72367,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-7" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(14),
+                          _vm._m(12),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -72528,7 +72397,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-12" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(15),
+                          _vm._m(13),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -72667,22 +72536,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-title" }, [
       _c("h3", [_vm._v("Clientes")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-down fa-xs" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-up fa-xs" })
     ])
   },
   function() {
@@ -72905,7 +72758,7 @@ var render = function() {
                                         _c("v-select", {
                                           attrs: {
                                             id: "buscar",
-                                            label: "nombres",
+                                            label: "nombre",
                                             options: _vm.arrayProveedor,
                                             placeholder: "Buscar Proveedores..."
                                           },
@@ -73143,374 +72996,398 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "table-responsive-sm" }, [
-                        _c(
-                          "table",
-                          {
-                            staticClass:
-                              "table table-bordered table-sm table-hover",
-                            attrs: { id: "dtTable" }
-                          },
-                          [
-                            _c("thead", { staticClass: "thead-table" }, [
-                              _c("tr", { attrs: { align: "center" } }, [
-                                _c(
-                                  "th",
-                                  { attrs: { width: "16%" } },
-                                  [
-                                    _vm._v(
-                                      "FECHA\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "asc"
-                                                  )
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                        },
+                        [
+                          _c(
+                            "table",
+                            {
+                              staticClass:
+                                "table table-bordered table-sm table-hover",
+                              attrs: { id: "dtTable" }
+                            },
+                            [
+                              _c("thead", { staticClass: "thead-table" }, [
+                                _c("tr", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "16%" } },
+                                    [
+                                      _vm._v(
+                                        "FECHA\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(1)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(1)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(2)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "25%" } },
-                                  [
-                                    _vm._v(
-                                      "PROVEEDOR\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "idproveedor" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "idproveedor" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idproveedor",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(2)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "25%" } },
+                                    [
+                                      _vm._v(
+                                        "PROVEEDOR\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "idproveedor" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "idproveedor" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idproveedor",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(3)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "idproveedor" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "idproveedor" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idproveedor",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(3)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "idproveedor" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "idproveedor" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idproveedor",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(4)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "20%" } }, [
-                                  _vm._v("DOCUMENTO")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("SUBTOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("IVA")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("TOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "9%" } },
-                                  [
-                                    _vm._v(
-                                      "ESTADO\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(4)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "20%" } }, [
+                                    _vm._v("DOCUMENTO")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("SUBTOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("IVA")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("TOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "9%" } },
+                                    [
+                                      _vm._v(
+                                        "ESTADO\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(5)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(5)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(6)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "12%" } }, [
-                                  _vm._v("ACCIONES")
+                                              },
+                                              [_vm._m(6)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "12%" } }, [
+                                    _vm._v("ACCIONES")
+                                  ])
                                 ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _vm.arrayIngreso.length
-                              ? _c(
-                                  "tbody",
-                                  _vm._l(_vm.arrayIngreso, function(ingreso) {
-                                    return _c("tr", { key: ingreso.id }, [
-                                      _c("td", {
-                                        domProps: {
-                                          textContent: _vm._s(
-                                            ingreso.fecha_hora
+                              ]),
+                              _vm._v(" "),
+                              _vm.arrayIngreso.length
+                                ? _c(
+                                    "tbody",
+                                    _vm._l(_vm.arrayIngreso, function(ingreso) {
+                                      return _c("tr", { key: ingreso.id }, [
+                                        _c("td", {
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              ingreso.fecha_hora
+                                            )
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(ingreso.nombre))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            _vm._s(ingreso.tipo_comprobante) +
+                                              " : " +
+                                              _vm._s(
+                                                ingreso.serie_comprobante
+                                              ) +
+                                              "-" +
+                                              _vm._s(ingreso.num_comprobante)
                                           )
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(ingreso.nombres) +
-                                            " " +
-                                            _vm._s(ingreso.apellidos)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(ingreso.tipo_comprobante) +
-                                            " : " +
-                                            _vm._s(ingreso.serie_comprobante) +
-                                            "-" +
-                                            _vm._s(ingreso.num_comprobante)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                ingreso.total -
-                                                ingreso.impuesto * ingreso.total
-                                              ).toFixed(2)
-                                            )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                ingreso.impuesto * ingreso.total
-                                              ).toFixed(2)
-                                            )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v("$ " + _vm._s(ingreso.total))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "center" } }, [
-                                        ingreso.estado == "Registrado"
-                                          ? _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-success"
-                                                },
-                                                [_vm._v("Registrado")]
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-danger"
-                                                },
-                                                [_vm._v("Anulado")]
-                                              )
-                                            ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { attrs: { align: "center" } },
-                                        [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-default",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.verIngreso(
-                                                    ingreso.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "far fa-eye"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          ingreso.estado == "Registrado"
-                                            ? [
-                                                _c(
-                                                  "a",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-sm btn-default",
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.desactivarIngreso(
-                                                          ingreso.id
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass: "fas fa-ban",
-                                                      attrs: {
-                                                        title: "Desactivar"
-                                                      }
-                                                    })
-                                                  ]
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    ingreso.total -
+                                                    ingreso.impuesto *
+                                                      ingreso.total
+                                                  ).toFixed(2)
                                                 )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    ingreso.impuesto *
+                                                    ingreso.total
+                                                  ).toFixed(2)
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [_vm._v("$ " + _vm._s(ingreso.total))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            ingreso.estado == "Registrado"
+                                              ? _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-success"
+                                                    },
+                                                    [_vm._v("Registrado")]
+                                                  )
+                                                ])
+                                              : _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-danger"
+                                                    },
+                                                    [_vm._v("Anulado")]
+                                                  )
+                                                ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-default",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.verIngreso(
+                                                      ingreso.id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "far fa-eye"
+                                                })
                                               ]
-                                            : _vm._e()
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  }),
-                                  0
-                                )
-                              : _c("tbody", [_vm._m(7)])
-                          ]
-                        )
-                      ]),
+                                            ),
+                                            _vm._v(" "),
+                                            ingreso.estado == "Registrado"
+                                              ? [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-sm btn-default",
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.desactivarIngreso(
+                                                            ingreso.id
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-ban",
+                                                        attrs: {
+                                                          title: "Desactivar"
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              : _vm._e()
+                                          ],
+                                          2
+                                        )
+                                      ])
+                                    }),
+                                    0
+                                  )
+                                : _c("tbody", [_vm._m(7)])
+                            ]
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("nav", [
                         _c(
@@ -74051,8 +73928,62 @@ var render = function() {
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-                  _c("div", { staticClass: "info-box" }, [
+                  _c("div", { staticClass: "info-box mb-3" }, [
                     _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "info-box-content" }, [
+                      _c("span", { staticClass: "info-box-text" }, [
+                        _vm._v(_vm._s(_vm.in_msj))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "info-box-number" }, [
+                        _vm._v("Mes: $" + _vm._s(_vm.in_val_mes) + " "),
+                        _c("small", [
+                          _vm._v("( " + _vm._s(_vm.in_qtx_mes) + " )")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "info-box-number" }, [
+                        _vm._v("Total: $" + _vm._s(_vm.in_val_total) + "  "),
+                        _c("small", [
+                          _vm._v("( " + _vm._s(_vm.in_qtx_total) + " )")
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+                  _c("div", { staticClass: "info-box mb-3" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "info-box-content" }, [
+                      _c("span", { staticClass: "info-box-text" }, [
+                        _vm._v(_vm._s(_vm.g_msj))
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "info-box-number" }, [
+                        _vm._v("Mes: $" + _vm._s(_vm.g_val_mes) + " "),
+                        _c("small", [
+                          _vm._v("( " + _vm._s(_vm.g_qtx_mes) + " )")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "info-box-number" }, [
+                        _vm._v("Total: $" + _vm._s(_vm.g_val_total) + "  "),
+                        _c("small", [
+                          _vm._v("( " + _vm._s(_vm.g_qtx_total) + " )")
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "clearfix hidden-md-up" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+                  _c("div", { staticClass: "info-box" }, [
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("div", { staticClass: "info-box-content" }, [
                       _c("span", { staticClass: "info-box-text" }, [
@@ -74078,7 +74009,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
                   _c("div", { staticClass: "info-box" }, [
-                    _vm._m(2),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("div", { staticClass: "info-box-content" }, [
                       _c("span", { staticClass: "info-box-text" }, [
@@ -74100,58 +74031,105 @@ var render = function() {
                       ])
                     ])
                   ])
-                ]),
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _vm._m(5),
                 _vm._v(" "),
-                _c("div", { staticClass: "clearfix hidden-md-up" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-                  _c("div", { staticClass: "info-box mb-3" }, [
-                    _vm._m(3),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _vm._m(6),
                     _vm._v(" "),
-                    _c("div", { staticClass: "info-box-content" }, [
-                      _c("span", { staticClass: "info-box-text" }, [
-                        _vm._v(_vm._s(_vm.is_msj))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "info-box-number" }, [
-                        _vm._v("Mes: $" + _vm._s(_vm.is_val_mes) + " "),
-                        _c("small", [
-                          _vm._v("( " + _vm._s(_vm.is_qtx_mes) + " )")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "info-box-number" }, [
-                        _vm._v("Total: $" + _vm._s(_vm.is_val_total) + "  "),
-                        _c("small", [
-                          _vm._v("( " + _vm._s(_vm.is_qtx_total) + " )")
-                        ])
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-                  _c("div", { staticClass: "info-box mb-3" }, [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "info-box-content" }, [
-                      _c("span", { staticClass: "info-box-text" }, [
-                        _vm._v(_vm._s(_vm.a_msj))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "info-box-number" }, [
-                        _vm._v("Mujeres: " + _vm._s(_vm.alumnosM))
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "info-box-number" }, [
-                        _vm._v("Hombres: " + _vm._s(_vm.alumnosH))
+                    _c("div", { staticClass: "card-content" }, [
+                      _c("div", { staticClass: "table-responsive-sm" }, [
+                        _c(
+                          "table",
+                          {
+                            staticClass:
+                              "table table-bordered table-sm table-hover",
+                            attrs: { id: "dtTable" }
+                          },
+                          [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _vm.arrayInscripcionAlumno.length
+                              ? _c(
+                                  "tbody",
+                                  _vm._l(_vm.arrayInscripcionAlumno, function(
+                                    inscripcion
+                                  ) {
+                                    return _c("tr", { key: inscripcion.id }, [
+                                      _c("td", {
+                                        attrs: { align: "center" },
+                                        domProps: {
+                                          textContent: _vm._s(inscripcion.id)
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            inscripcion.alumno
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        attrs: { align: "center" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            inscripcion.fecha_ini
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", {
+                                        attrs: { align: "center" },
+                                        domProps: {
+                                          textContent: _vm._s(
+                                            inscripcion.fecha_fin
+                                          )
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("td", { attrs: { align: "center" } }, [
+                                        inscripcion.fecha_fin <= _vm.hoyFecha()
+                                          ? _c("div", [
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "badge badge-danger"
+                                                },
+                                                [_vm._v("Caducado")]
+                                              )
+                                            ])
+                                          : _c("div", [
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "badge badge-success"
+                                                },
+                                                [_vm._v("Activo")]
+                                              )
+                                            ])
+                                      ])
+                                    ])
+                                  }),
+                                  0
+                                )
+                              : _c("tbody", [_vm._m(8)])
+                          ]
+                        )
                       ])
                     ])
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(5)
+              _vm._m(9)
             ])
           ])
         ])
@@ -74174,22 +74152,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon bg-warning elevation-1" }, [
-      _c("i", { staticClass: "fas fa-shopping-cart" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "info-box-icon bg-info elevation-1" }, [
-      _c("i", { staticClass: "fas fa-hand-holding-usd" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("span", { staticClass: "info-box-icon bg-success elevation-1" }, [
       _c("i", { staticClass: "fas fa-users" })
     ])
@@ -74201,8 +74163,80 @@ var staticRenderFns = [
     return _c(
       "span",
       { staticClass: "info-box-icon bg-secondary elevation-1" },
-      [_c("i", { staticClass: "fas fa-restroom" })]
+      [_c("i", { staticClass: "fas fa-hand-holding-usd" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "info-box-icon bg-warning elevation-1" }, [
+      _c("i", { staticClass: "fas fa-shopping-cart" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "info-box-icon bg-info elevation-1" }, [
+      _c("i", { staticClass: "fas fa-cash-register" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "card card-chart" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h4", [_vm._v("Inscripciones vs Gastos")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-content" }, [
+          _c("div", { staticClass: "ct-chart" }, [
+            _c("canvas", { attrs: { id: "chart_insgas" } })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h4", [_vm._v("Registro de Alumnos")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-table" }, [
+      _c("tr", { attrs: { align: "center" } }, [
+        _c("th", { attrs: { width: "5%" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "37%" } }, [_vm._v("NOMBRE")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "22%" } }, [_vm._v("FECHA REGISTRO")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "20%" } }, [_vm._v("FECHA FIN")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "10%" } }, [_vm._v("ESTADO")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "5" } }, [
+        _c("span", { staticClass: "badge badge-pill badge-secondary" }, [
+          _vm._v("-- NO existen registros --")
+        ])
+      ])
+    ])
   },
   function() {
     var _vm = this
@@ -74212,26 +74246,12 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-md-6" }, [
         _c("div", { staticClass: "card card-chart" }, [
           _c("div", { staticClass: "card-header" }, [
-            _c("h4", [_vm._v("Compras")])
+            _c("h4", [_vm._v("Compras vs Ventas")])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-content" }, [
             _c("div", { staticClass: "ct-chart" }, [
               _c("canvas", { attrs: { id: "chart_ingven" } })
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "card card-chart" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h4", [_vm._v("Inscripciones")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-content" }, [
-            _c("div", { staticClass: "ct-chart" }, [
-              _c("canvas", { attrs: { id: "chart_ins" } })
             ])
           ])
         ])
@@ -74472,337 +74492,353 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarEspecialidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarEspecialidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarEspecialidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarEspecialidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "30%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarEspecialidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "30%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarEspecialidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarEspecialidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarEspecialidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarEspecialidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarEspecialidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarEspecialidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarEspecialidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayEspecialidad.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayEspecialidad, function(especialidad) {
-                            return _c("tr", { key: especialidad.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(especialidad.id)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(especialidad.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(especialidad.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                especialidad.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "especialidad",
-                                            "actualizar",
-                                            especialidad
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayEspecialidad.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayEspecialidad, function(
+                              especialidad
+                            ) {
+                              return _c("tr", { key: especialidad.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(especialidad.id)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(especialidad.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      especialidad.descripcion
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   especialidad.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarEspecialidad(
-                                                  especialidad.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarEspecialidad(
-                                                  especialidad.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "especialidad",
+                                              "actualizar",
+                                              especialidad
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(7)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    especialidad.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarEspecialidad(
+                                                    especialidad.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarEspecialidad(
+                                                    especialidad.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -75346,7 +75382,7 @@ var render = function() {
                                         _c("v-select", {
                                           attrs: {
                                             id: "buscar",
-                                            label: "nombres",
+                                            label: "nombre",
                                             options: _vm.arrayProveedor,
                                             placeholder: "Buscar Proveedores..."
                                           },
@@ -75584,368 +75620,390 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "table-responsive-sm" }, [
-                        _c(
-                          "table",
-                          {
-                            staticClass:
-                              "table table-bordered table-sm table-hover",
-                            attrs: { id: "dtTable" }
-                          },
-                          [
-                            _c("thead", { staticClass: "thead-table" }, [
-                              _c("tr", { attrs: { align: "center" } }, [
-                                _c(
-                                  "th",
-                                  { attrs: { width: "16%" } },
-                                  [
-                                    _vm._v(
-                                      "FECHA\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarGasto(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "asc"
-                                                  )
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                        },
+                        [
+                          _c(
+                            "table",
+                            {
+                              staticClass:
+                                "table table-bordered table-sm table-hover",
+                              attrs: { id: "dtTable" }
+                            },
+                            [
+                              _c("thead", { staticClass: "thead-table" }, [
+                                _c("tr", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "16%" } },
+                                    [
+                                      _vm._v(
+                                        "FECHA\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarGasto(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(1)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarGasto(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(1)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarGasto(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(2)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "25%" } },
-                                  [
-                                    _vm._v(
-                                      "PROVEEDOR\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "idproveedor" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "idproveedor" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarGasto(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idproveedor",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(2)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "25%" } },
+                                    [
+                                      _vm._v(
+                                        "PROVEEDOR\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "idproveedor" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "idproveedor" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarGasto(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idproveedor",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(3)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "idproveedor" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "idproveedor" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarGasto(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idproveedor",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(3)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "idproveedor" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "idproveedor" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarGasto(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idproveedor",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(4)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "20%" } }, [
-                                  _vm._v("DOCUMENTO")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("SUBTOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("IVA")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("TOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "9%" } },
-                                  [
-                                    _vm._v(
-                                      "ESTADO\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarGasto(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(4)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "20%" } }, [
+                                    _vm._v("DOCUMENTO")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("SUBTOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("IVA")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("TOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "9%" } },
+                                    [
+                                      _vm._v(
+                                        "ESTADO\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarGasto(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(5)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarGasto(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(5)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarGasto(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(6)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "12%" } }, [
-                                  _vm._v("ACCIONES")
+                                              },
+                                              [_vm._m(6)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "12%" } }, [
+                                    _vm._v("ACCIONES")
+                                  ])
                                 ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _vm.arrayGasto.length
-                              ? _c(
-                                  "tbody",
-                                  _vm._l(_vm.arrayGasto, function(gasto) {
-                                    return _c("tr", { key: gasto.id }, [
-                                      _c("td", [
-                                        _vm._v(_vm._s(gasto.fecha_hora))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(gasto.nombres) +
-                                            " " +
-                                            _vm._s(gasto.apellidos)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(gasto.tipo_comprobante) +
-                                            " : " +
-                                            _vm._s(gasto.serie_comprobante) +
-                                            "-" +
-                                            _vm._s(gasto.num_comprobante)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                gasto.total -
-                                                gasto.impuesto * gasto.total
-                                              ).toFixed(2)
-                                            )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                gasto.impuesto * gasto.total
-                                              ).toFixed(2)
-                                            )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v("$ " + _vm._s(gasto.total))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "center" } }, [
-                                        gasto.estado == "Registrado"
-                                          ? _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-success"
-                                                },
-                                                [_vm._v("Registrado")]
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-danger"
-                                                },
-                                                [_vm._v("Anulado")]
-                                              )
-                                            ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { attrs: { align: "center" } },
-                                        [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-default",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.verGasto(gasto.id)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "far fa-eye"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          gasto.estado == "Registrado"
-                                            ? [
-                                                _c(
-                                                  "a",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-sm btn-default",
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.desactivarGasto(
-                                                          gasto.id
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass: "fas fa-ban",
-                                                      attrs: {
-                                                        title: "Desactivar"
-                                                      }
-                                                    })
-                                                  ]
+                              ]),
+                              _vm._v(" "),
+                              _vm.arrayGasto.length
+                                ? _c(
+                                    "tbody",
+                                    _vm._l(_vm.arrayGasto, function(gasto) {
+                                      return _c("tr", { key: gasto.id }, [
+                                        _c("td", [
+                                          _vm._v(_vm._s(gasto.fecha_hora))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(gasto.nombre))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            _vm._s(gasto.tipo_comprobante) +
+                                              " : " +
+                                              _vm._s(gasto.serie_comprobante) +
+                                              "-" +
+                                              _vm._s(gasto.num_comprobante)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    gasto.total -
+                                                    gasto.impuesto * gasto.total
+                                                  ).toFixed(2)
                                                 )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    gasto.impuesto * gasto.total
+                                                  ).toFixed(2)
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [_vm._v("$ " + _vm._s(gasto.total))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            gasto.estado == "Registrado"
+                                              ? _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-success"
+                                                    },
+                                                    [_vm._v("Registrado")]
+                                                  )
+                                                ])
+                                              : _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-danger"
+                                                    },
+                                                    [_vm._v("Anulado")]
+                                                  )
+                                                ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-default",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.verGasto(
+                                                      gasto.id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "far fa-eye"
+                                                })
                                               ]
-                                            : _vm._e()
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  }),
-                                  0
-                                )
-                              : _c("tbody", [_vm._m(7)])
-                          ]
-                        )
-                      ]),
+                                            ),
+                                            _vm._v(" "),
+                                            gasto.estado == "Registrado"
+                                              ? [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-sm btn-default",
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.desactivarGasto(
+                                                            gasto.id
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-ban",
+                                                        attrs: {
+                                                          title: "Desactivar"
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              : _vm._e()
+                                          ],
+                                          2
+                                        )
+                                      ])
+                                    }),
+                                    0
+                                  )
+                                : _c("tbody", [_vm._m(7)])
+                            ]
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("nav", [
                         _c(
@@ -76081,7 +76139,7 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("v-select", {
                                         attrs: {
-                                          label: "nombres",
+                                          label: "nombre",
                                           options: _vm.arrayProveedor,
                                           placeholder: "Buscar Proveedores..."
                                         },
@@ -77811,7 +77869,7 @@ var render = function() {
                                         _c("v-select", {
                                           attrs: {
                                             id: "buscar",
-                                            label: "nombres",
+                                            label: "nombre",
                                             options: _vm.arrayProveedor,
                                             placeholder: "Buscar Proveedores..."
                                           },
@@ -78049,374 +78107,398 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "table-responsive-sm" }, [
-                        _c(
-                          "table",
-                          {
-                            staticClass:
-                              "table table-bordered table-sm table-hover",
-                            attrs: { id: "dtTable" }
-                          },
-                          [
-                            _c("thead", { staticClass: "thead-table" }, [
-                              _c("tr", { attrs: { align: "center" } }, [
-                                _c(
-                                  "th",
-                                  { attrs: { width: "16%" } },
-                                  [
-                                    _vm._v(
-                                      "FECHA\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "asc"
-                                                  )
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                        },
+                        [
+                          _c(
+                            "table",
+                            {
+                              staticClass:
+                                "table table-bordered table-sm table-hover",
+                              attrs: { id: "dtTable" }
+                            },
+                            [
+                              _c("thead", { staticClass: "thead-table" }, [
+                                _c("tr", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "16%" } },
+                                    [
+                                      _vm._v(
+                                        "FECHA\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(1)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(1)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(2)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "25%" } },
-                                  [
-                                    _vm._v(
-                                      "PROVEEDOR\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "idproveedor" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "idproveedor" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idproveedor",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(2)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "25%" } },
+                                    [
+                                      _vm._v(
+                                        "PROVEEDOR\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "idproveedor" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "idproveedor" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idproveedor",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(3)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "idproveedor" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "idproveedor" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idproveedor",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(3)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "idproveedor" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "idproveedor" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idproveedor",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(4)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "20%" } }, [
-                                  _vm._v("DOCUMENTO")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("SUBTOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("IVA")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("TOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "9%" } },
-                                  [
-                                    _vm._v(
-                                      "ESTADO\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(4)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "20%" } }, [
+                                    _vm._v("DOCUMENTO")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("SUBTOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("IVA")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("TOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "9%" } },
+                                    [
+                                      _vm._v(
+                                        "ESTADO\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(5)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarIngreso(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(5)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarIngreso(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(6)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "12%" } }, [
-                                  _vm._v("ACCIONES")
+                                              },
+                                              [_vm._m(6)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "12%" } }, [
+                                    _vm._v("ACCIONES")
+                                  ])
                                 ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _vm.arrayIngreso.length
-                              ? _c(
-                                  "tbody",
-                                  _vm._l(_vm.arrayIngreso, function(ingreso) {
-                                    return _c("tr", { key: ingreso.id }, [
-                                      _c("td", {
-                                        domProps: {
-                                          textContent: _vm._s(
-                                            ingreso.fecha_hora
+                              ]),
+                              _vm._v(" "),
+                              _vm.arrayIngreso.length
+                                ? _c(
+                                    "tbody",
+                                    _vm._l(_vm.arrayIngreso, function(ingreso) {
+                                      return _c("tr", { key: ingreso.id }, [
+                                        _c("td", {
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              ingreso.fecha_hora
+                                            )
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(ingreso.nombre))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            _vm._s(ingreso.tipo_comprobante) +
+                                              " : " +
+                                              _vm._s(
+                                                ingreso.serie_comprobante
+                                              ) +
+                                              "-" +
+                                              _vm._s(ingreso.num_comprobante)
                                           )
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(ingreso.nombres) +
-                                            " " +
-                                            _vm._s(ingreso.apellidos)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(ingreso.tipo_comprobante) +
-                                            " : " +
-                                            _vm._s(ingreso.serie_comprobante) +
-                                            "-" +
-                                            _vm._s(ingreso.num_comprobante)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                ingreso.total -
-                                                ingreso.impuesto * ingreso.total
-                                              ).toFixed(2)
-                                            )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                ingreso.impuesto * ingreso.total
-                                              ).toFixed(2)
-                                            )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v("$ " + _vm._s(ingreso.total))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "center" } }, [
-                                        ingreso.estado == "Registrado"
-                                          ? _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-success"
-                                                },
-                                                [_vm._v("Registrado")]
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-danger"
-                                                },
-                                                [_vm._v("Anulado")]
-                                              )
-                                            ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { attrs: { align: "center" } },
-                                        [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-default",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.verIngreso(
-                                                    ingreso.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "far fa-eye"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          ingreso.estado == "Registrado"
-                                            ? [
-                                                _c(
-                                                  "a",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-sm btn-default",
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.desactivarIngreso(
-                                                          ingreso.id
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass: "fas fa-ban",
-                                                      attrs: {
-                                                        title: "Desactivar"
-                                                      }
-                                                    })
-                                                  ]
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    ingreso.total -
+                                                    ingreso.impuesto *
+                                                      ingreso.total
+                                                  ).toFixed(2)
                                                 )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    ingreso.impuesto *
+                                                    ingreso.total
+                                                  ).toFixed(2)
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [_vm._v("$ " + _vm._s(ingreso.total))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            ingreso.estado == "Registrado"
+                                              ? _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-success"
+                                                    },
+                                                    [_vm._v("Registrado")]
+                                                  )
+                                                ])
+                                              : _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-danger"
+                                                    },
+                                                    [_vm._v("Anulado")]
+                                                  )
+                                                ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-default",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.verIngreso(
+                                                      ingreso.id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "far fa-eye"
+                                                })
                                               ]
-                                            : _vm._e()
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  }),
-                                  0
-                                )
-                              : _c("tbody", [_vm._m(7)])
-                          ]
-                        )
-                      ]),
+                                            ),
+                                            _vm._v(" "),
+                                            ingreso.estado == "Registrado"
+                                              ? [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-sm btn-default",
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.desactivarIngreso(
+                                                            ingreso.id
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-ban",
+                                                        attrs: {
+                                                          title: "Desactivar"
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              : _vm._e()
+                                          ],
+                                          2
+                                        )
+                                      ])
+                                    }),
+                                    0
+                                  )
+                                : _c("tbody", [_vm._m(7)])
+                            ]
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("nav", [
                         _c(
@@ -78552,7 +78634,7 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("v-select", {
                                         attrs: {
-                                          label: "nombres",
+                                          label: "nombre",
                                           options: _vm.arrayProveedor,
                                           placeholder: "Buscar Proveedores..."
                                         },
@@ -79390,7 +79472,7 @@ var render = function() {
                                 " Orden de compra\n                                            "
                               ),
                               _c("small", { staticClass: "float-right" }, [
-                                _vm._v("Fecha: " + _vm._s() + " ")
+                                _vm._v("Fecha: " + _vm._s(_vm.hoyFecha()) + " ")
                               ])
                             ])
                           ])
@@ -80258,7 +80340,7 @@ var render = function() {
                                 _c("v-select", {
                                   attrs: {
                                     id: "buscar",
-                                    label: "nombres apellidos",
+                                    label: "nombre",
                                     options: _vm.arrayAlumno,
                                     placeholder: "Buscar Alumnos..."
                                   },
@@ -80440,573 +80522,585 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "FECHA\n                                            "
-                            ),
-                            (_vm.ordenado !== "fecha_ini" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "fecha_ini" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fecha_ini",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "FECHA\n                                            "
+                              ),
+                              (_vm.ordenado !== "fecha_ini" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "fecha_ini" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fecha_ini",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "fecha_ini" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "fecha_ini" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fecha_ini",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "fecha_ini" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "fecha_ini" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fecha_ini",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "30%" } },
-                          [
-                            _vm._v(
-                              "ALUMNO\n                                            "
-                            ),
-                            (_vm.ordenado !== "idalumno" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "idalumno" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idalumno",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "30%" } },
+                            [
+                              _vm._v(
+                                "ALUMNO\n                                            "
+                              ),
+                              (_vm.ordenado !== "idalumno" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "idalumno" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idalumno",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "idalumno" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "idalumno" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idalumno",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "idalumno" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "idalumno" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idalumno",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "MODALIDAD\n                                            "
-                            ),
-                            (_vm.ordenado !== "idmodalidad" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "idmodalidad" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idmodalidad",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "MODALIDAD\n                                            "
+                              ),
+                              (_vm.ordenado !== "idmodalidad" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "idmodalidad" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idmodalidad",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "idmodalidad" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "idmodalidad" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idmodalidad",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "idmodalidad" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "idmodalidad" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idmodalidad",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "8%" } },
-                          [
-                            _vm._v(
-                              "ABONO\n                                            "
-                            ),
-                            (_vm.ordenado !== "abono" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "abono" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "abono",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "8%" } },
+                            [
+                              _vm._v(
+                                "ABONO\n                                            "
+                              ),
+                              (_vm.ordenado !== "abono" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "abono" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "abono",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "abono" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "abono" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "abono",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(7)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "abono" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "abono" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "abono",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "8%" } },
-                          [
-                            _vm._v(
-                              "SALDO\n                                            "
-                            ),
-                            (_vm.ordenado !== "saldo" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "saldo" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "saldo",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(8)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "8%" } },
+                            [
+                              _vm._v(
+                                "SALDO\n                                            "
+                              ),
+                              (_vm.ordenado !== "saldo" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "saldo" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "saldo",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(9)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "saldo" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "saldo" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "saldo",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(9)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "saldo" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "saldo" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "saldo",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(10)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "5%" } }, [_vm._v("IVA")]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "8%" } }, [_vm._v("TOTAL")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "9%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "estado" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "estado" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "estado",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(10)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "5%" } }, [_vm._v("IVA")]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "8%" } }, [
+                            _vm._v("TOTAL")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "9%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "estado" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "estado" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "estado",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(11)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "estado" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "estado" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarInscripcion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "estado",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(11)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "estado" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "estado" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarInscripcion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "estado",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(12)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(12)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayInscripcion.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayInscripcion, function(inscripcion) {
-                            return _c("tr", { key: inscripcion.id }, [
-                              _c("td", [_vm._v(_vm._s(inscripcion.fecha_ini))]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  _vm._s(inscripcion.nombres) +
-                                    " " +
-                                    _vm._s(inscripcion.apellidos)
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(
-                                    inscripcion.modalidad_nombre
-                                  )
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(inscripcion.abono)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(inscripcion.saldo)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(inscripcion.impuesto)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "right" } }, [
-                                _vm._v("$ " + _vm._s(inscripcion.total))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                inscripcion.estado == "Registrado"
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Registrado")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-danger" },
-                                        [_vm._v("Anulado")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "inscripcion",
-                                            "eliminar",
-                                            inscripcion
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt",
-                                        attrs: { title: "Eliminar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayInscripcion.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayInscripcion, function(inscripcion) {
+                              return _c("tr", { key: inscripcion.id }, [
+                                _c("td", [
+                                  _vm._v(_vm._s(inscripcion.fecha_ini))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(inscripcion.nombre))]),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      inscripcion.modalidad_nombre
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(inscripcion.abono)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(inscripcion.saldo)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(inscripcion.impuesto)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "right" } }, [
+                                  _vm._v("$ " + _vm._s(inscripcion.total))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   inscripcion.estado == "Registrado"
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.abrirModal(
-                                                  "inscripcion",
-                                                  "actualizar",
-                                                  inscripcion
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-edit",
-                                              attrs: { title: "Editar" }
-                                            })
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "a",
-                                          {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarInscripcion(
-                                                  inscripcion.id
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Registrado")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
-                                          {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarInscripcion(
-                                                  inscripcion.id
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          "span",
+                                          { staticClass: "badge badge-danger" },
+                                          [_vm._v("Anulado")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "inscripcion",
+                                              "eliminar",
+                                              inscripcion
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "far fa-trash-alt",
+                                          attrs: { title: "Eliminar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(13)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    inscripcion.estado == "Registrado"
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.abrirModal(
+                                                    "inscripcion",
+                                                    "actualizar",
+                                                    inscripcion
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-edit",
+                                                attrs: { title: "Editar" }
+                                              })
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarInscripcion(
+                                                    inscripcion.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarInscripcion(
+                                                    inscripcion.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(13)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -81221,19 +81315,19 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.nombres,
-                                      expression: "nombres"
+                                      value: _vm.nombre,
+                                      expression: "nombre"
                                     }
                                   ],
                                   staticClass: "form-control form-control-sm",
                                   attrs: { readonly: "" },
-                                  domProps: { value: _vm.nombres },
+                                  domProps: { value: _vm.nombre },
                                   on: {
                                     input: function($event) {
                                       if ($event.target.composing) {
                                         return
                                       }
-                                      _vm.nombres = $event.target.value
+                                      _vm.nombre = $event.target.value
                                     }
                                   }
                                 })
@@ -81242,7 +81336,7 @@ var render = function() {
                                 _c("v-select", {
                                   staticClass: "num-col",
                                   attrs: {
-                                    label: "nombres",
+                                    label: "nombre",
                                     options: _vm.arrayAlumno,
                                     placeholder: "Buscar Alumnos..."
                                   },
@@ -82087,435 +82181,449 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "30%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "30%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "DURACIÓN\n                                            "
-                            ),
-                            (_vm.ordenado !== "duracion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "duracion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "duracion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "DURACIÓN\n                                            "
+                              ),
+                              (_vm.ordenado !== "duracion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "duracion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "duracion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "duracion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "duracion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "duracion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "duracion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "duracion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "duracion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "8%" } }, [
-                          _vm._v("PRECIO")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "8%" } }, [
+                            _vm._v("PRECIO")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarModalidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(7)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarModalidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(8)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayModalidad.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayModalidad, function(modalidad) {
-                            return _c("tr", { key: modalidad.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: { textContent: _vm._s(modalidad.id) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(modalidad.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(modalidad.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "right" } }, [
-                                _vm._v(_vm._s(modalidad.duracion) + " "),
-                                _c("small", [_vm._v("días")])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "right" } }, [
-                                _c("small", [_vm._v("$")]),
-                                _vm._v(" " + _vm._s(modalidad.precio))
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                modalidad.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "modalidad",
-                                            "actualizar",
-                                            modalidad
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "modalidad",
-                                            "eliminar",
-                                            modalidad
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt",
-                                        attrs: { title: "Eliminar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayModalidad.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayModalidad, function(modalidad) {
+                              return _c("tr", { key: modalidad.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(modalidad.id)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(modalidad.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(modalidad.descripcion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "right" } }, [
+                                  _vm._v(_vm._s(modalidad.duracion) + " "),
+                                  _c("small", [_vm._v("días")])
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "right" } }, [
+                                  _c("small", [_vm._v("$")]),
+                                  _vm._v(" " + _vm._s(modalidad.precio))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   modalidad.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarModalidad(
-                                                  modalidad.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarModalidad(
-                                                  modalidad.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "modalidad",
+                                              "actualizar",
+                                              modalidad
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(9)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "modalidad",
+                                              "eliminar",
+                                              modalidad
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "far fa-trash-alt",
+                                          attrs: { title: "Eliminar" }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    modalidad.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarModalidad(
+                                                    modalidad.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarModalidad(
+                                                    modalidad.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(9)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -83178,30 +83286,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Persona.vue?vue&type=template&id=83a579de&":
-/*!**********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Persona.vue?vue&type=template&id=83a579de& ***!
-  \**********************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("main", { staticClass: "main" }, [_vm._v("\n    PERSONA\n")])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profesion.vue?vue&type=template&id=77cb0286&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profesion.vue?vue&type=template&id=77cb0286& ***!
@@ -83429,357 +83513,371 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProfesion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProfesion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProfesion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProfesion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "20%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProfesion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "20%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProfesion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProfesion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProfesion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProfesion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProfesion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProfesion(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProfesion(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayProfesion.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayProfesion, function(profesion) {
-                            return _c("tr", { key: profesion.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: { textContent: _vm._s(profesion.id) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(profesion.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(profesion.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                profesion.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "profesion",
-                                            "actualizar",
-                                            profesion
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "profesion",
-                                            "eliminar",
-                                            profesion
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt",
-                                        attrs: { title: "Eliminar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayProfesion.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayProfesion, function(profesion) {
+                              return _c("tr", { key: profesion.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(profesion.id)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(profesion.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(profesion.descripcion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   profesion.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarProfesion(
-                                                  profesion.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarProfesion(
-                                                  profesion.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "profesion",
+                                              "actualizar",
+                                              profesion
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(7)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "profesion",
+                                              "eliminar",
+                                              profesion
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "far fa-trash-alt",
+                                          attrs: { title: "Eliminar" }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    profesion.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarProfesion(
+                                                    profesion.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarProfesion(
+                                                    profesion.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -84279,12 +84377,8 @@ var render = function() {
                           }
                         },
                         [
-                          _c("option", { attrs: { value: "nombres" } }, [
-                            _vm._v("Nombres")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "apellidos" } }, [
-                            _vm._v("Apellidos")
+                          _c("option", { attrs: { value: "nombre" } }, [
+                            _vm._v("Nombre")
                           ]),
                           _vm._v(" "),
                           _c("option", { attrs: { value: "num_documento" } }, [
@@ -84533,348 +84627,287 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "DOC\n                                            "
-                            ),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "DOC\n                                            "
+                              ),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "NOMBRES\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "APELLIDOS\n                                            "
-                            ),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "CUMPLEAÑOS\n                                            "
-                            ),
-                            (_vm.ordenado !== "fec_nacimiento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "fec_nacimiento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fec_nacimiento",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "fec_nacimiento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "fec_nacimiento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "fec_nacimiento",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "18%" } }, [
-                          _vm._v("EMAIL")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayPersona.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayPersona, function(persona) {
-                            return _c("tr", { key: persona.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(persona.num_documento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.nombres)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.apellidos)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(persona.fec_nacimiento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: { textContent: _vm._s(persona.email) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-sm btn-default",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "persona",
-                                          "actualizar",
-                                          persona
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-edit",
-                                      attrs: { title: "Editar" }
-                                    })
+                                      },
+                                      [_vm._m(1)]
+                                    )
                                   ]
-                                )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "40%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "CUMPLEAÑOS\n                                            "
+                              ),
+                              (_vm.ordenado !== "fec_nacimiento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "fec_nacimiento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fec_nacimiento",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "fec_nacimiento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "fec_nacimiento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "fec_nacimiento",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "28%" } }, [
+                            _vm._v("EMAIL")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayPersona.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayPersona, function(persona) {
+                              return _c("tr", { key: persona.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(persona.num_documento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(persona.fec_nacimiento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.email)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-sm btn-default",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.abrirModal(
+                                            "persona",
+                                            "actualizar",
+                                            persona
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-edit",
+                                        attrs: { title: "Editar" }
+                                      })
+                                    ]
+                                  )
+                                ])
                               ])
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(9)])
-                  ]
-                )
-              ]),
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -85036,7 +85069,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-7" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(10),
+                          _vm._m(8),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -85117,7 +85150,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-5" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(11),
+                          _vm._m(9),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -85147,56 +85180,30 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-12" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(12),
+                          _vm._m(10),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.nombres,
-                                expression: "nombres"
+                                value: _vm.nombre,
+                                expression: "nombre"
                               }
                             ],
                             staticClass: "form-control form-control-sm",
                             attrs: {
                               type: "text",
-                              maxlength: "30",
-                              placeholder: "Nombres"
+                              maxlength: "60",
+                              placeholder: "Nombre"
                             },
-                            domProps: { value: _vm.nombres },
+                            domProps: { value: _vm.nombre },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.nombres = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.apellidos,
-                                expression: "apellidos"
-                              }
-                            ],
-                            staticClass: "form-control form-control-sm",
-                            attrs: {
-                              type: "text",
-                              maxlength: "30",
-                              placeholder: "Apellidos"
-                            },
-                            domProps: { value: _vm.apellidos },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.apellidos = $event.target.value
+                                _vm.nombre = $event.target.value
                               }
                             }
                           })
@@ -85207,7 +85214,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-5" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(13),
+                          _vm._m(11),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -85238,7 +85245,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-7" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(14),
+                          _vm._m(12),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -85268,7 +85275,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-12" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(15),
+                          _vm._m(13),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -85302,7 +85309,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-5" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(16),
+                          _vm._m(14),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -85359,7 +85366,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-4" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(17),
+                          _vm._m(15),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -85415,7 +85422,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-3" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(18),
+                          _vm._m(16),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -85534,22 +85541,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-title" }, [
       _c("h3", [_vm._v("Profesores")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-down fa-xs" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-up fa-xs" })
     ])
   },
   function() {
@@ -85773,8 +85764,8 @@ var render = function() {
                           }
                         },
                         [
-                          _c("option", { attrs: { value: "nombres" } }, [
-                            _vm._v("Nombres")
+                          _c("option", { attrs: { value: "nombre" } }, [
+                            _vm._v("Nombre")
                           ]),
                           _vm._v(" "),
                           _c("option", { attrs: { value: "num_documento" } }, [
@@ -85918,287 +85909,296 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "DOC\n                                            "
-                            ),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "DOC\n                                            "
+                              ),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "RAZÓN SOCIAL\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "DIRECCIÓN\n                                            "
-                            ),
-                            (_vm.ordenado !== "direccion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "direccion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "direccion",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "direccion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "direccion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "direccion",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "18%" } }, [
-                          _vm._v("EMAIL")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "10%" } }, [
-                          _vm._v("CONTACTO")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayPersona.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayPersona, function(persona) {
-                            return _c("tr", { key: persona.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(persona.num_documento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.nombres)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.direccion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: { textContent: _vm._s(persona.email) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.nombre_contacto)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-sm btn-default",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "persona",
-                                          "actualizar",
-                                          persona
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-edit",
-                                      attrs: { title: "Editar" }
-                                    })
+                                      },
+                                      [_vm._m(1)]
+                                    )
                                   ]
-                                )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "25%" } },
+                            [
+                              _vm._v(
+                                "RAZÓN SOCIAL\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "25%" } },
+                            [
+                              _vm._v(
+                                "DIRECCIÓN\n                                            "
+                              ),
+                              (_vm.ordenado !== "direccion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "direccion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "direccion",
+                                              "asc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "direccion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "direccion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "direccion",
+                                              "desc"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "18%" } }, [
+                            _vm._v("EMAIL")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "10%" } }, [
+                            _vm._v("CONTACTO")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayPersona.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayPersona, function(persona) {
+                              return _c("tr", { key: persona.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(persona.num_documento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.direccion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.email)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.nombre_contacto)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "btn btn-sm btn-default",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.abrirModal(
+                                            "persona",
+                                            "actualizar",
+                                            persona
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fas fa-edit",
+                                        attrs: { title: "Editar" }
+                                      })
+                                    ]
+                                  )
+                                ])
                               ])
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(7)])
-                  ]
-                )
-              ]),
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -86442,23 +86442,23 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.nombres,
-                                expression: "nombres"
+                                value: _vm.nombre,
+                                expression: "nombre"
                               }
                             ],
                             staticClass: "form-control form-control-sm col-7",
                             attrs: {
                               type: "text",
-                              maxlength: "50",
+                              maxlength: "60",
                               placeholder: "Razón Social"
                             },
-                            domProps: { value: _vm.nombres },
+                            domProps: { value: _vm.nombre },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.nombres = $event.target.value
+                                _vm.nombre = $event.target.value
                               }
                             }
                           })
@@ -87091,326 +87091,340 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProvincia(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProvincia(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProvincia(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProvincia(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProvincia(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProvincia(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProvincia(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProvincia(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProvincia(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProvincia(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarProvincia(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarProvincia(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayProvincia.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayProvincia, function(provincia) {
-                            return _c("tr", { key: provincia.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: { textContent: _vm._s(provincia.id) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(provincia.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                provincia.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "provincia",
-                                            "actualizar",
-                                            provincia
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayProvincia.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayProvincia, function(provincia) {
+                              return _c("tr", { key: provincia.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(provincia.id)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(provincia.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   provincia.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarProvincia(
-                                                  provincia.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarProvincia(
-                                                  provincia.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "provincia",
+                                              "actualizar",
+                                              provincia
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(7)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    provincia.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarProvincia(
+                                                    provincia.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarProvincia(
+                                                    provincia.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -87990,329 +88004,343 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarRol(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarRol(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarRol(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarRol(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "20%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarRol(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "20%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarRol(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarRol(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarRol(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarRol(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarRol(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarRol(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarRol(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayRol.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayRol, function(rol) {
-                            return _c("tr", { key: rol.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: { textContent: _vm._s(rol.id) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: { textContent: _vm._s(rol.nombre) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(rol.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                rol.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "rol",
-                                            "actualizar",
-                                            rol
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayRol.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayRol, function(rol) {
+                              return _c("tr", { key: rol.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: { textContent: _vm._s(rol.id) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: { textContent: _vm._s(rol.nombre) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(rol.descripcion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   rol.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarRol(rol.id)
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarRol(rol.id)
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "rol",
+                                              "actualizar",
+                                              rol
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(7)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    rol.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarRol(
+                                                    rol.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarRol(rol.id)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -89006,434 +89034,445 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "6%" } },
-                          [
-                            _vm._v(
-                              "CÓD\n                                            "
-                            ),
-                            (_vm.ordenado !== "codigo" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "codigo" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "codigo",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "6%" } },
+                            [
+                              _vm._v(
+                                "CÓD\n                                            "
+                              ),
+                              (_vm.ordenado !== "codigo" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "codigo" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "codigo",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "codigo" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "codigo" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "codigo",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "codigo" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "codigo" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "codigo",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "20%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "20%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", [_vm._v("DESCRIPCIÓN")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "15%" } },
-                          [
-                            _vm._v(
-                              "CLASIFICACIÓN\n                                            "
-                            ),
-                            (_vm.ordenado !== "idclasificacion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "idclasificacion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idclasificacion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("DESCRIPCIÓN")]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "15%" } },
+                            [
+                              _vm._v(
+                                "CLASIFICACIÓN\n                                            "
+                              ),
+                              (_vm.ordenado !== "idclasificacion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "idclasificacion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idclasificacion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "idclasificacion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "idclasificacion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idclasificacion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "idclasificacion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "idclasificacion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idclasificacion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarServicio(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(7)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarServicio(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(8)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayServicio.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayServicio, function(servicio) {
-                            return _c("tr", { key: servicio.id }, [
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(servicio.codigo)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(servicio.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(servicio.descripcion)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(
-                                    servicio.nombre_clasificacion
-                                  )
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                servicio.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "servicio",
-                                            "actualizar",
-                                            servicio
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "servicio",
-                                            "eliminar",
-                                            servicio
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "far fa-trash-alt",
-                                        attrs: { title: "Eliminar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayServicio.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayServicio, function(servicio) {
+                              return _c("tr", { key: servicio.id }, [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(servicio.codigo)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(servicio.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(servicio.descripcion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      servicio.nombre_clasificacion
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   servicio.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarServicio(
-                                                  servicio.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarServicio(
-                                                  servicio.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "servicio",
+                                              "actualizar",
+                                              servicio
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(9)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "servicio",
+                                              "eliminar",
+                                              servicio
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "far fa-trash-alt",
+                                          attrs: { title: "Eliminar" }
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    servicio.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarServicio(
+                                                    servicio.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarServicio(
+                                                    servicio.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(9)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -90225,471 +90264,485 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "5%" } },
-                          [
-                            _vm._v(
-                              "#\n                                            "
-                            ),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "5%" } },
+                            [
+                              _vm._v(
+                                "#\n                                            "
+                              ),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "id" && _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "id" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "id",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "id" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "id" && _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "id",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "37%" } },
-                          [
-                            _vm._v(
-                              "NOMBRE\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombre" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "37%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombre" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombre" && _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombre",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "18%" } },
-                          [
-                            _vm._v(
-                              "PROVINCIA\n                                            "
-                            ),
-                            (_vm.ordenado !== "idprovincia" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "idprovincia" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idprovincia",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "18%" } },
+                            [
+                              _vm._v(
+                                "PROVINCIA\n                                            "
+                              ),
+                              (_vm.ordenado !== "idprovincia" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "idprovincia" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idprovincia",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "idprovincia" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "idprovincia" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idprovincia",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "idprovincia" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "idprovincia" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idprovincia",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "18%" } },
-                          [
-                            _vm._v(
-                              "CANTÓN\n                                            "
-                            ),
-                            (_vm.ordenado !== "idcanton" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "idcanton" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idcanton",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "18%" } },
+                            [
+                              _vm._v(
+                                "CANTÓN\n                                            "
+                              ),
+                              (_vm.ordenado !== "idcanton" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "idcanton" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idcanton",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "idcanton" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "idcanton" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "idcanton",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(7)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "idcanton" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "idcanton" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "idcanton",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(8)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(9)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarUniversidad(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(9)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarUniversidad(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(10)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(10)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayUniversidad.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayUniversidad, function(universidad) {
-                            return _c("tr", { key: universidad.id }, [
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: {
-                                  textContent: _vm._s(universidad.id)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(universidad.nombre)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(
-                                    universidad.nombre_provincia
-                                  )
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(universidad.nombre_canton)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                universidad.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        {
-                                          staticClass: "badge badge-secondary"
-                                        },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "universidad",
-                                            "actualizar",
-                                            universidad
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayUniversidad.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayUniversidad, function(universidad) {
+                              return _c("tr", { key: universidad.id }, [
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: {
+                                    textContent: _vm._s(universidad.id)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(universidad.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      universidad.nombre_provincia
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      universidad.nombre_canton
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   universidad.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarUniversidad(
-                                                  universidad.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarUniversidad(
-                                                  universidad.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-secondary"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "universidad",
+                                              "actualizar",
+                                              universidad
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(11)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    universidad.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarUniversidad(
+                                                    universidad.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarUniversidad(
+                                                    universidad.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(11)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -91303,12 +91356,8 @@ var render = function() {
                           }
                         },
                         [
-                          _c("option", { attrs: { value: "nombres" } }, [
-                            _vm._v("Nombres")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "apellidos" } }, [
-                            _vm._v("Apellidos")
+                          _c("option", { attrs: { value: "nombre" } }, [
+                            _vm._v("Nombre")
                           ]),
                           _vm._v(" "),
                           _c("option", { attrs: { value: "num_documento" } }, [
@@ -91452,418 +91501,359 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "table-responsive-sm" }, [
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-sm table-hover",
-                    attrs: { id: "dtTable" }
-                  },
-                  [
-                    _c("thead", { staticClass: "thead-table" }, [
-                      _c("tr", { attrs: { align: "center" } }, [
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "DOC\n                                            "
-                            ),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "asc"
-                                          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                },
+                [
+                  _c(
+                    "table",
+                    {
+                      staticClass: "table table-bordered table-sm table-hover",
+                      attrs: { id: "dtTable" }
+                    },
+                    [
+                      _c("thead", { staticClass: "thead-table" }, [
+                        _c("tr", { attrs: { align: "center" } }, [
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "DOC\n                                            "
+                              ),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(1)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "num_documento" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "num_documento" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "num_documento",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(1)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "num_documento" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "num_documento" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "num_documento",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(2)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "NOMBRES\n                                            "
-                            ),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(2)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "50%" } },
+                            [
+                              _vm._v(
+                                "NOMBRE\n                                            "
+                              ),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(3)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "nombres" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "nombres" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "nombres",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(3)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "nombre" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "nombre" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "nombre",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(4)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "25%" } },
-                          [
-                            _vm._v(
-                              "APELLIDOS\n                                            "
-                            ),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "asc"
-                                          )
+                                      },
+                                      [_vm._m(4)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "8%" } }, [
+                            _vm._v("USUARIO")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "10%" } }, [
+                            _vm._v("ROL")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "th",
+                            { attrs: { width: "10%" } },
+                            [
+                              _vm._v(
+                                "ESTADO\n                                            "
+                              ),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "asc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "desc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "asc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(5)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "apellidos" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "apellidos" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "apellidos",
-                                            "desc"
-                                          )
+                                      },
+                                      [_vm._m(5)]
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
+                              (_vm.ordenado !== "condicion" &&
+                                _vm.ascdesc === "desc") ||
+                              (_vm.ordenado === "condicion" &&
+                                _vm.ascdesc === "asc")
+                                ? [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: { href: "#" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.listarPersona(
+                                              1,
+                                              _vm.buscar,
+                                              _vm.criterio,
+                                              _vm.paginado,
+                                              "condicion",
+                                              "desc"
+                                            )
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._m(6)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "8%" } }, [
-                          _vm._v("USUARIO")
-                        ]),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "10%" } }, [_vm._v("ROL")]),
-                        _vm._v(" "),
-                        _c(
-                          "th",
-                          { attrs: { width: "10%" } },
-                          [
-                            _vm._v(
-                              "ESTADO\n                                            "
-                            ),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "asc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "desc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "asc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(7)]
-                                  )
-                                ]
-                              : _vm._e(),
-                            _vm._v(" "),
-                            (_vm.ordenado !== "condicion" &&
-                              _vm.ascdesc === "desc") ||
-                            (_vm.ordenado === "condicion" &&
-                              _vm.ascdesc === "asc")
-                              ? [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.listarPersona(
-                                            1,
-                                            _vm.buscar,
-                                            _vm.criterio,
-                                            _vm.paginado,
-                                            "condicion",
-                                            "desc"
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [_vm._m(8)]
-                                  )
-                                ]
-                              : _vm._e()
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c("th", { attrs: { width: "12%" } }, [
-                          _vm._v("ACCIONES")
+                                      },
+                                      [_vm._m(6)]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("th", { attrs: { width: "12%" } }, [
+                            _vm._v("ACCIONES")
+                          ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm.arrayPersona.length
-                      ? _c(
-                          "tbody",
-                          _vm._l(_vm.arrayPersona, function(persona) {
-                            return _c("tr", { key: persona.id }, [
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.num_documento)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.nombres)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.apellidos)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                domProps: {
-                                  textContent: _vm._s(persona.usuario)
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("td", {
-                                attrs: { align: "center" },
-                                domProps: { textContent: _vm._s(persona.rol) }
-                              }),
-                              _vm._v(" "),
-                              _c("td", { attrs: { align: "center" } }, [
-                                persona.condicion
-                                  ? _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-success" },
-                                        [_vm._v("Activo")]
-                                      )
-                                    ])
-                                  : _c("div", [
-                                      _c(
-                                        "span",
-                                        { staticClass: "badge badge-danger" },
-                                        [_vm._v("Inactivo")]
-                                      )
-                                    ])
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                { attrs: { align: "center" } },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "btn btn-sm btn-default",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.abrirModal(
-                                            "persona",
-                                            "actualizar",
-                                            persona
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fas fa-edit",
-                                        attrs: { title: "Editar" }
-                                      })
-                                    ]
-                                  ),
-                                  _vm._v(" "),
+                      ]),
+                      _vm._v(" "),
+                      _vm.arrayPersona.length
+                        ? _c(
+                            "tbody",
+                            _vm._l(_vm.arrayPersona, function(persona) {
+                              return _c("tr", { key: persona.id }, [
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.num_documento)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(persona.usuario)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  attrs: { align: "center" },
+                                  domProps: { textContent: _vm._s(persona.rol) }
+                                }),
+                                _vm._v(" "),
+                                _c("td", { attrs: { align: "center" } }, [
                                   persona.condicion
-                                    ? [
+                                    ? _c("div", [
                                         _c(
-                                          "a",
+                                          "span",
                                           {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.desactivarUsuario(
-                                                  persona.id
-                                                )
-                                              }
-                                            }
+                                            staticClass: "badge badge-success"
                                           },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-ban",
-                                              attrs: { title: "Desactivar" }
-                                            })
-                                          ]
+                                          [_vm._v("Activo")]
                                         )
-                                      ]
-                                    : [
+                                      ])
+                                    : _c("div", [
                                         _c(
-                                          "a",
-                                          {
-                                            staticClass:
-                                              "btn btn-sm btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.activarUsuario(
-                                                  persona.id
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _c("i", {
-                                              staticClass: "fas fa-sync",
-                                              attrs: { title: "Actualizar" }
-                                            })
-                                          ]
+                                          "span",
+                                          { staticClass: "badge badge-danger" },
+                                          [_vm._v("Inactivo")]
                                         )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { align: "center" } },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "btn btn-sm btn-default",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.abrirModal(
+                                              "persona",
+                                              "actualizar",
+                                              persona
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-edit",
+                                          attrs: { title: "Editar" }
+                                        })
                                       ]
-                                ],
-                                2
-                              )
-                            ])
-                          }),
-                          0
-                        )
-                      : _c("tbody", [_vm._m(9)])
-                  ]
-                )
-              ]),
+                                    ),
+                                    _vm._v(" "),
+                                    persona.condicion
+                                      ? [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.desactivarUsuario(
+                                                    persona.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-ban",
+                                                attrs: { title: "Desactivar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      : [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-default",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.activarUsuario(
+                                                    persona.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "fas fa-sync",
+                                                attrs: { title: "Actualizar" }
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        : _c("tbody", [_vm._m(7)])
+                    ]
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("nav", [
                 _c(
@@ -92025,7 +92015,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-7" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(10),
+                          _vm._m(8),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -92106,7 +92096,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-5" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(11),
+                          _vm._m(9),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -92136,56 +92126,30 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-12" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(12),
+                          _vm._m(10),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.nombres,
-                                expression: "nombres"
+                                value: _vm.nombre,
+                                expression: "nombre"
                               }
                             ],
                             staticClass: "form-control form-control-sm",
                             attrs: {
                               type: "text",
-                              maxlength: "30",
-                              placeholder: "Nombres"
+                              maxlength: "60",
+                              placeholder: "Nombre"
                             },
-                            domProps: { value: _vm.nombres },
+                            domProps: { value: _vm.nombre },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.nombres = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.apellidos,
-                                expression: "apellidos"
-                              }
-                            ],
-                            staticClass: "form-control form-control-sm",
-                            attrs: {
-                              type: "text",
-                              maxlength: "30",
-                              placeholder: "Apellidos"
-                            },
-                            domProps: { value: _vm.apellidos },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.apellidos = $event.target.value
+                                _vm.nombre = $event.target.value
                               }
                             }
                           })
@@ -92196,7 +92160,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-5" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(13),
+                          _vm._m(11),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -92224,7 +92188,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-7" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(14),
+                          _vm._m(12),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -92254,7 +92218,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-12" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(15),
+                          _vm._m(13),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -92288,7 +92252,7 @@ var render = function() {
                     _c("div", { staticClass: "form-row" }, [
                       _c("div", { staticClass: "form-group col-md-4" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(16),
+                          _vm._m(14),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -92316,7 +92280,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-4" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(17),
+                          _vm._m(15),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -92344,7 +92308,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group col-md-4" }, [
                         _c("div", { staticClass: "input-group" }, [
-                          _vm._m(18),
+                          _vm._m(16),
                           _vm._v(" "),
                           _c(
                             "select",
@@ -92490,22 +92454,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-title" }, [
       _c("h3", [_vm._v("Usuarios")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-down fa-xs" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticStyle: { float: "right" } }, [
-      _c("i", { staticClass: "fas fa-arrow-up fa-xs" })
     ])
   },
   function() {
@@ -92783,7 +92731,7 @@ var render = function() {
                                         _c("v-select", {
                                           attrs: {
                                             id: "buscar",
-                                            label: "nombres",
+                                            label: "nombre",
                                             options: _vm.arrayCliente,
                                             placeholder: "Buscar Cliente..."
                                           },
@@ -93021,388 +92969,414 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "table-responsive-sm" }, [
-                        _c(
-                          "table",
-                          {
-                            staticClass:
-                              "table table-bordered table-sm table-hover",
-                            attrs: { id: "dtTable" }
-                          },
-                          [
-                            _c("thead", { staticClass: "thead-table" }, [
-                              _c("tr", { attrs: { align: "center" } }, [
-                                _c(
-                                  "th",
-                                  { attrs: { width: "16%" } },
-                                  [
-                                    _vm._v(
-                                      "FECHA\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarVenta(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "asc"
-                                                  )
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar"
+                        },
+                        [
+                          _c(
+                            "table",
+                            {
+                              staticClass:
+                                "table table-bordered table-sm table-hover",
+                              attrs: { id: "dtTable" }
+                            },
+                            [
+                              _c("thead", { staticClass: "thead-table" }, [
+                                _c("tr", { attrs: { align: "center" } }, [
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "16%" } },
+                                    [
+                                      _vm._v(
+                                        "FECHA\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarVenta(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(1)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "fecha_hora" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "fecha_hora" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarVenta(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "fecha_hora",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(1)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "fecha_hora" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "fecha_hora" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarVenta(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "fecha_hora",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(2)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "25%" } },
-                                  [
-                                    _vm._v(
-                                      "CLIENTE\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "idcliente" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "idcliente" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarPersona(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idcliente",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(2)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "25%" } },
+                                    [
+                                      _vm._v(
+                                        "CLIENTE\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "idcliente" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "idcliente" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarPersona(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idcliente",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(3)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "idcliente" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "idcliente" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarPersona(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "idcliente",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(3)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "idcliente" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "idcliente" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarPersona(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "idcliente",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(4)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "20%" } }, [
-                                  _vm._v("DOCUMENTO")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("SUBTOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("IVA")
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "6%" } }, [
-                                  _vm._v("TOTAL")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "th",
-                                  { attrs: { width: "9%" } },
-                                  [
-                                    _vm._v(
-                                      "ESTADO\n                                                "
-                                    ),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "asc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "desc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarVenta(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "asc"
-                                                  )
+                                              },
+                                              [_vm._m(4)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "20%" } }, [
+                                    _vm._v("DOCUMENTO")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("SUBTOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("IVA")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "6%" } }, [
+                                    _vm._v("TOTAL")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    { attrs: { width: "9%" } },
+                                    [
+                                      _vm._v(
+                                        "ESTADO\n                                                "
+                                      ),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "asc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "desc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarVenta(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "asc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(5)]
-                                          )
-                                        ]
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    (_vm.ordenado !== "estado" &&
-                                      _vm.ascdesc === "desc") ||
-                                    (_vm.ordenado === "estado" &&
-                                      _vm.ascdesc === "asc")
-                                      ? [
-                                          _c(
-                                            "a",
-                                            {
-                                              attrs: { href: "#" },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.listarVenta(
-                                                    1,
-                                                    _vm.buscar,
-                                                    _vm.criterio,
-                                                    _vm.paginado,
-                                                    "estado",
-                                                    "desc"
-                                                  )
+                                              },
+                                              [_vm._m(5)]
+                                            )
+                                          ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      (_vm.ordenado !== "estado" &&
+                                        _vm.ascdesc === "desc") ||
+                                      (_vm.ordenado === "estado" &&
+                                        _vm.ascdesc === "asc")
+                                        ? [
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.listarVenta(
+                                                      1,
+                                                      _vm.buscar,
+                                                      _vm.criterio,
+                                                      _vm.paginado,
+                                                      "estado",
+                                                      "desc"
+                                                    )
+                                                  }
                                                 }
-                                              }
-                                            },
-                                            [_vm._m(6)]
-                                          )
-                                        ]
-                                      : _vm._e()
-                                  ],
-                                  2
-                                ),
-                                _vm._v(" "),
-                                _c("th", { attrs: { width: "12%" } }, [
-                                  _vm._v("ACCIONES")
+                                              },
+                                              [_vm._m(6)]
+                                            )
+                                          ]
+                                        : _vm._e()
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("th", { attrs: { width: "12%" } }, [
+                                    _vm._v("ACCIONES")
+                                  ])
                                 ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _vm.arrayVenta.length
-                              ? _c(
-                                  "tbody",
-                                  _vm._l(_vm.arrayVenta, function(venta) {
-                                    return _c("tr", { key: venta.id }, [
-                                      _c("td", {
-                                        domProps: {
-                                          textContent: _vm._s(venta.fecha_hora)
-                                        }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(venta.nombres) +
-                                            " " +
-                                            _vm._s(venta.apellidos)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(
-                                          _vm._s(venta.tipo_comprobante) +
-                                            " : " +
-                                            _vm._s(venta.serie_comprobante) +
-                                            "-" +
-                                            _vm._s(venta.num_comprobante)
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                venta.total -
-                                                venta.impuesto * venta.total
-                                              ).toFixed(2)
+                              ]),
+                              _vm._v(" "),
+                              _vm.arrayVenta.length
+                                ? _c(
+                                    "tbody",
+                                    _vm._l(_vm.arrayVenta, function(venta) {
+                                      return _c("tr", { key: venta.id }, [
+                                        _c("td", {
+                                          domProps: {
+                                            textContent: _vm._s(
+                                              venta.fecha_hora
                                             )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v(
-                                          "$ " +
-                                            _vm._s(
-                                              (
-                                                venta.impuesto * venta.total
-                                              ).toFixed(2)
-                                            )
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "right" } }, [
-                                        _vm._v("$ " + _vm._s(venta.total))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", { attrs: { align: "center" } }, [
-                                        venta.estado == "Registrado"
-                                          ? _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-success"
-                                                },
-                                                [_vm._v("Registrado")]
-                                              )
-                                            ])
-                                          : _c("div", [
-                                              _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "badge badge-danger"
-                                                },
-                                                [_vm._v("Anulado")]
-                                              )
-                                            ])
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        { attrs: { align: "center" } },
-                                        [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-default",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.verVenta(venta.id)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "far fa-eye"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "btn btn-sm btn-default",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.pdfVenta(venta.id)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass: "fas fa-print"
-                                              })
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          venta.estado == "Registrado"
-                                            ? [
-                                                _c(
-                                                  "a",
-                                                  {
-                                                    staticClass:
-                                                      "btn btn-sm btn-default",
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.desactivarVenta(
-                                                          venta.id
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("i", {
-                                                      staticClass: "fas fa-ban",
-                                                      attrs: {
-                                                        title: "Desactivar"
-                                                      }
-                                                    })
-                                                  ]
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(_vm._s(venta.nombre))
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _vm._v(
+                                            _vm._s(venta.tipo_comprobante) +
+                                              " : " +
+                                              _vm._s(venta.serie_comprobante) +
+                                              "-" +
+                                              _vm._s(venta.num_comprobante)
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    venta.total -
+                                                    venta.impuesto * venta.total
+                                                  ).toFixed(2)
                                                 )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [
+                                            _vm._v(
+                                              "$ " +
+                                                _vm._s(
+                                                  (
+                                                    venta.impuesto * venta.total
+                                                  ).toFixed(2)
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "right" } },
+                                          [_vm._v("$ " + _vm._s(venta.total))]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            venta.estado == "Registrado"
+                                              ? _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-success"
+                                                    },
+                                                    [_vm._v("Registrado")]
+                                                  )
+                                                ])
+                                              : _c("div", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "badge badge-danger"
+                                                    },
+                                                    [_vm._v("Anulado")]
+                                                  )
+                                                ])
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "td",
+                                          { attrs: { align: "center" } },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-default",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.verVenta(
+                                                      venta.id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "far fa-eye"
+                                                })
                                               ]
-                                            : _vm._e()
-                                        ],
-                                        2
-                                      )
-                                    ])
-                                  }),
-                                  0
-                                )
-                              : _c("tbody", [_vm._m(7)])
-                          ]
-                        )
-                      ]),
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn btn-sm btn-default",
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.pdfVenta(
+                                                      venta.id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _c("i", {
+                                                  staticClass: "fas fa-print"
+                                                })
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            venta.estado == "Registrado"
+                                              ? [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn btn-sm btn-default",
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.desactivarVenta(
+                                                            venta.id
+                                                          )
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fas fa-ban",
+                                                        attrs: {
+                                                          title: "Desactivar"
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              : _vm._e()
+                                          ],
+                                          2
+                                        )
+                                      ])
+                                    }),
+                                    0
+                                  )
+                                : _c("tbody", [_vm._m(7)])
+                            ]
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("nav", [
                         _c(
@@ -93538,7 +93512,7 @@ var render = function() {
                                       _vm._v(" "),
                                       _c("v-select", {
                                         attrs: {
-                                          label: "nombres",
+                                          label: "nombre",
                                           options: _vm.arrayCliente,
                                           placeholder: "Buscar Clientes..."
                                         },
@@ -94638,7 +94612,7 @@ var render = function() {
                                 " Factura de venta\n                                            "
                               ),
                               _c("small", { staticClass: "float-right" }, [
-                                _vm._v("Fecha: " + _vm._s() + " ")
+                                _vm._v("Fecha: " + _vm._s(_vm.hoyFecha()) + " ")
                               ])
                             ])
                           ])
@@ -107668,7 +107642,6 @@ Vue.component('dashboard', __webpack_require__(/*! ./components/Dashboard.vue */
 Vue.component('notification', __webpack_require__(/*! ./components/Notification.vue */ "./resources/js/components/Notification.vue")["default"]);
 Vue.component('user', __webpack_require__(/*! ./components/User.vue */ "./resources/js/components/User.vue")["default"]);
 Vue.component('rol', __webpack_require__(/*! ./components/Rol.vue */ "./resources/js/components/Rol.vue")["default"]);
-Vue.component('persona', __webpack_require__(/*! ./components/Persona.vue */ "./resources/js/components/Persona.vue")["default"]);
 Vue.component('cliente', __webpack_require__(/*! ./components/Cliente.vue */ "./resources/js/components/Cliente.vue")["default"]);
 Vue.component('proveedor', __webpack_require__(/*! ./components/Proveedor.vue */ "./resources/js/components/Proveedor.vue")["default"]);
 Vue.component('alumno', __webpack_require__(/*! ./components/Alumno.vue */ "./resources/js/components/Alumno.vue")["default"]);
@@ -109010,59 +108983,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Notification_vue_vue_type_template_id_6a4ce154___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Persona.vue":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Persona.vue ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Persona_vue_vue_type_template_id_83a579de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Persona.vue?vue&type=template&id=83a579de& */ "./resources/js/components/Persona.vue?vue&type=template&id=83a579de&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _Persona_vue_vue_type_template_id_83a579de___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Persona_vue_vue_type_template_id_83a579de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Persona.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Persona.vue?vue&type=template&id=83a579de&":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/Persona.vue?vue&type=template&id=83a579de& ***!
-  \****************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Persona_vue_vue_type_template_id_83a579de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Persona.vue?vue&type=template&id=83a579de& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Persona.vue?vue&type=template&id=83a579de&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Persona_vue_vue_type_template_id_83a579de___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Persona_vue_vue_type_template_id_83a579de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

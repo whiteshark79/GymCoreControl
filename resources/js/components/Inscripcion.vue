@@ -25,7 +25,7 @@
                                             <v-select
                                                 id="buscar"
                                                 @search="selectAlumno"
-                                                label="nombres apellidos"
+                                                label="nombre"
                                                 :options="arrayAlumno"
                                                 placeholder="Buscar Alumnos..."
                                                 @input="getDatosAlumnos2"                                    
@@ -52,7 +52,7 @@
                                     </select>
                                 </div> 
                             </div>  
-                            <div class="table-responsive-sm">
+                            <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead  class="thead-table">
                                         <tr align="center"> 
@@ -112,7 +112,7 @@
                                     <tbody v-if="arrayInscripcion.length">
                                         <tr v-for="inscripcion in arrayInscripcion" :key="inscripcion.id">
                                             <td>{{ inscripcion.fecha_ini }}</td>
-                                            <td>{{inscripcion.nombres}} {{inscripcion.apellidos}}</td>
+                                            <td>{{inscripcion.nombre}}</td>
                                             <td v-text="inscripcion.modalidad_nombre"></td>                                     
                                             <td v-text="inscripcion.abono"></td>
                                             <td v-text="inscripcion.saldo"></td>
@@ -191,13 +191,13 @@
                                         <span class="input-group-text" id="alumno">Alumno: </span>
                                     </div>
                                     <template v-if="this.tipoAccion == 2">
-                                        <input class="form-control form-control-sm" v-model="nombres" readonly>
+                                        <input class="form-control form-control-sm" v-model="nombre" readonly>
                                     </template>
                                     <template v-else>
                                         <v-select
                                             class="num-col"
                                             @search="selectAlumno"
-                                            label="nombres"
+                                            label="nombre"
                                             :options="arrayAlumno"
                                             placeholder="Buscar Alumnos..."
                                             @input="getDatosAlumno"                                    
@@ -590,7 +590,7 @@
                                 this.inscripcion_id=data['id'];
                                 this.fecha_ini = data['fecha_ini'];
                                 this.idalumno = data['idalumno'];
-                                this.nombres = data['nombres'] +' '+ data['apellidos'];
+                                this.nombre = data['nombre'];
                                 this.idmodalidad= data['idmodalidad'];
                                 if(this.duracion==0){this.duracion = data['modalidad_duracion'];}else{this.duracion = this.duracion;}
                                 if(data['impuesto']>0){this.iva = 'S';}else{this.iva = 'N';}                                

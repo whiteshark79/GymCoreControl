@@ -22,7 +22,7 @@ class UserController extends Controller
         if ($buscar==''){
             $personas = User::join('personas','users.id','=','personas.id')
             ->join('roles','users.idrol','=','roles.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres', 'personas.apellidos',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.fec_nacimiento','personas.direccion','personas.celular', 'personas.email',
             'users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
@@ -30,7 +30,7 @@ class UserController extends Controller
         else{
             $personas = User::join('personas','users.id','=','personas.id')
             ->join('roles','users.idrol','=','roles.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombres', 'personas.apellidos',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.fec_nacimiento','personas.direccion','personas.celular', 'personas.email',
             'users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol')           
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
@@ -60,8 +60,7 @@ class UserController extends Controller
             $persona = new Persona();
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombre = $request->nombre;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;
@@ -95,8 +94,7 @@ class UserController extends Controller
  
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombre = $request->nombre;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;

@@ -28,7 +28,6 @@ Vue.component('notification', require('./components/Notification.vue').default);
 Vue.component('user', require('./components/User.vue').default);
 Vue.component('rol', require('./components/Rol.vue').default);
 
-Vue.component('persona', require('./components/Persona.vue').default);
 Vue.component('cliente', require('./components/Cliente.vue').default);
 Vue.component('proveedor', require('./components/Proveedor.vue').default);
 Vue.component('alumno', require('./components/Alumno.vue').default);
