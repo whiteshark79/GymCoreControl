@@ -1,7 +1,7 @@
 @extends('auth.contenido')
 
 @section('login')
-
+ 
     <div class="container">
         <div class="row justify-content-md-center vertical-center">
             <div class="card-group">

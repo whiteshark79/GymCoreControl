@@ -15,6 +15,7 @@ class Venta extends Model
         'fecha_hora',
         'impuesto',
         'total',
+        'abono',
         'estado'
     ];
     public function usuario(){

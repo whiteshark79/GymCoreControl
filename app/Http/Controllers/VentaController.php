@@ -19,14 +19,14 @@ class VentaController extends Controller
         $criterio = $request->criterio;
         $paginado = $request->paginado;
         $ordenado = $request->ordenado;
-        $ascdesc = $request->ascdesc;
+        $ascdesc = $request->ascdesc; 
          
         if ($buscar==''){
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
             'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-            'ventas.estado','personas.nombre','users.usuario')
+            'ventas.abono','ventas.estado','personas.nombre','users.usuario')
             ->orderBy('ventas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
@@ -34,7 +34,7 @@ class VentaController extends Controller
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
             'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-            'ventas.estado','personas.nombre','users.usuario')
+            'ventas.abono','ventas.estado','personas.nombre','users.usuario')
             ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('ventas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -60,7 +60,7 @@ class VentaController extends Controller
         ->join('users','ventas.idusuario','=','users.id')
         ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
         'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
-        'ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'ventas.abono','ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
         'personas.direccion','personas.celular','personas.email','users.usuario')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id', 'desc')->take(1)->get();
@@ -87,7 +87,7 @@ class VentaController extends Controller
         ->join('users','ventas.idusuario','=','users.id')
         ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
         'ventas.num_comprobante','ventas.created_at','ventas.impuesto','ventas.total',
-        'ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'ventas.abono','ventas.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
         'personas.direccion','personas.celular','personas.email','users.usuario')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id', 'desc')->take(1)->get();
@@ -123,6 +123,7 @@ class VentaController extends Controller
             $venta->fecha_hora = $mytime;
             $venta->impuesto = $request->impuesto;
             $venta->total = $request->total;
+            $venta->abono = $request->abono;
             $venta->estado = 'Registrado';
             $venta->save();
  

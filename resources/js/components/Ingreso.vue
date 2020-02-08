@@ -6,10 +6,10 @@
                 <div class="col-md-12">
                     <div class="card card-outline card-primary">
                         <div class="card-header">
-                            <div class="card-title"><h3>Ingresos</h3></div>
+                            <div class="card-title"><h3>Compras</h3></div>
                             <div class="card-tools">
                                 <template v-if="listado!=0">
-                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="fas fa-plus-circle">  Nuevo Ingreso</i></button>
+                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="fas fa-plus-circle">  Nueva Compra</i></button>
                                 </template>
                             </div>
                         </div>                      
@@ -147,7 +147,7 @@
                             <div class="card-body">
                                 <div class="table-title">
                                     <div class="row">
-                                        <div class="col-sm-6" ><h5>Nuevo <b>Ingreso</b></h5></div>                                    
+                                        <div class="col-sm-6" ><h5>Nueva <b>Compra</b></h5></div>                                    
                                     </div>
                                 </div>
                                 <div class="row">
@@ -170,27 +170,29 @@
                                                     </div> 
                                                     <div class="col-md-4">
                                                         <label>Comprobante<span class="text-error" v-show="tipo_comprobante==0">(*)</span></label>
-                                                        <select class="form-control form-control-sm" v-model="tipo_comprobante">
+                                                        <select class="form-control form-control-sm" v-model="tipo_comprobante" @change="cambioImpuesto()">
                                                             <option value="0" disabled>--Elegir tipo--</option>
                                                             <option value="NOTA">Nota</option>
                                                             <option value="FACTURA">Factura</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <label>Serie<span class="text-error" v-show="serie_comprobante==''">(*)</span></label>
-                                                        <input type="number" class="form-control form-control-sm" v-model="serie_comprobante" placeholder="000x">
+                                                <!-- <template v-if="tipo_comprobante=='FACTURA'"> -->
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Serie<span class="text-error" v-show="serie_comprobante==''">(*)</span></label>
+                                                            <input type="number" class="form-control form-control-sm" v-model="serie_comprobante" placeholder="000x">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label>Número<span class="text-error" v-show="num_comprobante==''">(*)</span></label>
+                                                            <input type="number" class="form-control form-control-sm" v-model="num_comprobante" placeholder="000xx">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label>IVA<span class="text-error" v-show="impuesto==''">(*)</span></label>
+                                                            <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-model="impuesto">
+                                                        </div>                                            
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <label>Número<span class="text-error" v-show="num_comprobante==''">(*)</span></label>
-                                                        <input type="number" class="form-control form-control-sm" v-model="num_comprobante" placeholder="000xx">
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>IVA<span class="text-error" v-show="impuesto==''">(*)</span></label>
-                                                        <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-model="impuesto">
-                                                    </div>                                            
-                                                </div>
+                                                <!-- </template> -->
                                                 <div class="row">                                                
                                                     <div v-show="errorIngreso" class="col-md-12 form-group row div-error">                                                    
                                                         <div class="alert alert-danger" role="alert">
@@ -210,25 +212,29 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-md-7">
+                                                    <div class="col-md-5">
                                                         <label>Artículo <span class="text-error" v-show="idarticulo==0">(*)</span></label>
                                                         <div class="form-inline">
                                                             <input type="text" class="form-control form-control-sm" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Cód. artículo" size="10">
                                                             <button @click="abrirModal()" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
                                                             <input type="text" readonly class="form-control form-control-sm" v-model="articulo" size="13">
+                                                            <span class="text-info">{{descripcion}}</span>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label>Precio <span class="text-error" v-show="precio==0">(*)</span></label>
-                                                        <input type="number" value="0" step="0.1" min="0" max="100" class="form-control form-control-sm" v-model="precio">
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label>Cantidad <span class="text-error" v-show="cantidad==0">(*)</span></label>
-                                                        <input type="number" value="0" step="1" min="0" max="100" class="form-control form-control-sm" v-model="cantidad">
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="fas fa-plus-circle"></i></button>
-                                                    </div>
+                                                    <template v-if="articulo">
+                                                        <div class="col-md-2 offset-2">
+                                                            <label>Precio <span class="text-error" v-show="precio==0">(*)</span></label>
+                                                            <input type="number" value="0" step="0.1" min="0" max="100" class="form-control form-control-sm" v-model="precio">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label>Cantidad <span class="text-error" v-show="cantidad==0">(*)</span></label>
+                                                            <input type="number" value="0" step="1" min="0" max="100" class="form-control form-control-sm" v-model="cantidad">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="fas fa-plus-circle"></i></button>
+                                                        </div>
+                                                    </template>
+
                                                 </div>
                                                 <hr>       
                                                 <div class="row">
@@ -401,8 +407,7 @@
                                     <select class="form-control form-control-sm col-md-6" v-model="criterioA">
                                         <option value="codigo">Código</option>
                                         <option value="nombre">Nombre</option>
-                                        <option value="descripcion">Descripción</option>
-                                        
+                                        <option value="descripcion">Descripción</option>                                        
                                     </select>
                                     <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control form-control-sm" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
@@ -493,6 +498,7 @@
                 idarticulo: 0,
                 codigo: '',
                 articulo: '',
+                descripcion: '',
                 precio: 0,
                 cantidad:0,          
                 
@@ -571,6 +577,13 @@
         
                 return dd+'/'+mm+'/'+yyyy;      
             },
+            cambioImpuesto() { 
+                let me = this;
+
+                if(me.tipo_comprobante == 'NOTA'){ me.impuesto = 0.0
+                }else{ me.impuesto = 0.12
+                } 
+            },
             listarIngreso (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
                 var url= '/ingreso?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
@@ -622,6 +635,8 @@
                         me.articulo=me.arrayArticulo[0]['nombre'];
                         me.idarticulo=me.arrayArticulo[0]['id'];
                         me.precio=me.arrayArticulo[0]['precio_venta'];
+                        me.cantidad=1;
+                        me.descripcion=me.arrayArticulo[0]['descripcion'];
                     }
                     else{
                         me.articulo='No existe artículo';
@@ -674,6 +689,7 @@
                         me.codigo="";
                         me.idarticulo=0;
                         me.articulo="";
+                        me.descripcion="";
                         me.cantidad=0;
                         me.precio=0; 
                     }                    

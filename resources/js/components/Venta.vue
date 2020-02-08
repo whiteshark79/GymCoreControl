@@ -65,7 +65,7 @@
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
-                                                <th width="16%">FECHA
+                                                <th width="14%">FECHA
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'asc') || (ordenado === 'fecha_hora' && ascdesc === 'desc') ">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -81,10 +81,18 @@
                                                         <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'idcliente','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>                                                                                                                                        
-                                                <th width="20%">DOCUMENTO</th>
+                                                <th width="16%">DOCUMENTO</th>
                                                 <th width="6%">SUBTOTAL</th>
                                                 <th width="6%">IVA</th>
-                                                <th width="6%">TOTAL</th>                                           
+                                                <th width="6%">TOTAL</th>
+                                                <th width="6%">ABONO
+                                                    <template v-if="(ordenado !== 'abono' && ascdesc === 'asc') || (ordenado === 'abono' && ascdesc === 'desc')">
+                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                    </template>
+                                                    <template v-if="(ordenado !== 'abono' && ascdesc === 'desc') || (ordenado === 'abono' && ascdesc === 'asc')">
+                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                    </template>
+                                                </th>                                            
                                                 <th width="9%">ESTADO
                                                     <template v-if="(ordenado !== 'estado' && ascdesc === 'asc') || (ordenado === 'estado' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -104,9 +112,10 @@
                                                 <td align="right">$ {{ (venta.total-venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ venta.total  }}</td>
+                                                <td align="right">$ {{ venta.abono  }}<template v-if="venta.abono < venta.total"><span class="badge badge-warning">D</span></template></td>
                                                 <td align="center"> 
                                                     <div v-if="venta.estado=='Registrado'"><span class="badge badge-success">Registrado</span></div>
-                                                    <div v-else><span class="badge badge-danger">Anulado</span></div>                                    
+                                                    <div v-else><span class="badge badge-danger">Anulado</span></div>      
                                                 </td>
                                                 <td align="center">
                                                     <a class="btn btn-sm btn-default" @click="verVenta(venta.id)"><i class="far fa-eye"></i></a>
@@ -171,27 +180,30 @@
                                                     </div> 
                                                     <div class="col-md-4">
                                                         <label>Comprobante<span class="text-error" v-show="tipo_comprobante==0">(*)</span></label>
-                                                        <select class="form-control form-control-sm" v-model="tipo_comprobante">
+                                                        <select class="form-control form-control-sm" v-model="tipo_comprobante" @change="cambioImpuesto()">
                                                             <option value="0" disabled>--Elegir tipo--</option>
                                                             <option value="NOTA">Nota</option>
                                                             <option value="FACTURA">Factura</option>
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <label>Serie<span class="text-error" v-show="serie_comprobante==''">(*)</span></label>
-                                                        <input type="number" class="form-control form-control-sm" v-model="serie_comprobante" placeholder="000x">
+                                                <template v-if="tipo_comprobante=='FACTURA'">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Serie<span class="text-error" v-show="serie_comprobante==''">(*)</span></label>
+                                                            <input type="number" class="form-control form-control-sm" v-model="serie_comprobante" placeholder="000x">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label>Número<span class="text-error" v-show="num_comprobante==''">(*)</span></label>
+                                                            <input type="number" class="form-control form-control-sm" v-model="num_comprobante" placeholder="000xx">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label>IVA<span class="text-error" v-show="impuesto==''">(*)</span></label>
+                                                            <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-model="impuesto">
+                                                        </div>                                            
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <label>Número<span class="text-error" v-show="num_comprobante==''">(*)</span></label>
-                                                        <input type="number" class="form-control form-control-sm" v-model="num_comprobante" placeholder="000xx">
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>IVA<span class="text-error" v-show="impuesto==''">(*)</span></label>
-                                                        <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-model="impuesto">
-                                                    </div>                                            
-                                                </div>
+                                                </template>
+
                                                 <div class="row">                                                
                                                     <div v-show="errorVenta" class="col-md-12 form-group row div-error">                                                    
                                                         <div class="alert alert-danger" role="alert">
@@ -220,24 +232,21 @@
                                                             <span class="text-info">{{descripcion}}</span>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <label>Precio <span class="text-error" v-show="precio==0">(*)</span></label>
-                                                        <input type="number" value="0" step="0.1" min="0.1" max="100" class="form-control form-control-sm" v-model="precio">                                                        
-                                                        <span class="text-info" v-show="precio<=precioB">Precio: ${{precioB}}</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label>Cantidad <span class="text-error" v-show="cantidad==0">(*)</span></label>                                                        
-                                                        <input type="number" value="0" step="1" min="0" :max="stock" class="form-control form-control-sm" v-model="cantidad">
-                                                        <span class="text-error" v-show="cantidad>=stock">Stock: {{stock}}</span>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label>Descuento</label>
-                                                        <input type="number" value="0" step="0.1" min="0.1" :max="precio*cantidad" class="form-control form-control-sm" v-model="descuento">
-                                                        <span class="text-error" v-show="descuento>=(precio*cantidad)">Desc. inválido</span>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="fas fa-plus-circle"></i></button>
-                                                    </div>
+                                                    <template v-if="articulo">
+                                                        <div class="col-md-2 offset-2">
+                                                            <label>Precio <span class="text-error" v-show="precio==0">(*)</span></label>
+                                                            <input type="number" value="0" step="0.1" min="0.1" max="100" class="form-control form-control-sm" v-model="precio">                                                        
+                                                            <span class="text-info" v-show="precio<=precioB">Precio: ${{precioB}}</span>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label>Cantidad <span class="text-error" v-show="cantidad==0">(*)</span></label>                                                        
+                                                            <input type="number" value="0" step="1" min="0" :max="stock" class="form-control form-control-sm" v-model="cantidad">
+                                                            <span class="text-error" v-show="cantidad>=stock">Stock: {{stock}}</span>
+                                                        </div>                                                    
+                                                        <div class="col-md-1">
+                                                            <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="fas fa-plus-circle"></i></button>
+                                                        </div>
+                                                    </template>
                                                 </div>
                                                 <hr>       
                                                 <div class="row">
@@ -245,12 +254,12 @@
                                                         <table class="table table-bordered table-sm table-hover" id="dtTable">
                                                             <thead class="thead-light">
                                                                 <tr align="center">                                            
-                                                                    <th class="w-5">Opc.</th>
-                                                                    <th class="w-50">Artículo</th>
-                                                                    <th>Precio</th>
-                                                                    <th>Cantidad</th>
-                                                                    <th>Descuento</th>
-                                                                    <th>Subtotal</th>
+                                                                    <th width="5%">Opc.</th>
+                                                                    <th width="45%">Artículo</th>
+                                                                    <th width="10%">Precio</th>
+                                                                    <th width="10%">Cantidad</th>
+                                                                    <th width="10%">Descuento</th>
+                                                                    <th width="10%">Subtotal</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody v-if="arrayDetalle.length">
@@ -263,35 +272,38 @@
                                                                         <span class="text-error" v-show="detalle.cantidad>=detalle.stock">Stock: {{detalle.stock}}</span>
                                                                     </td>
                                                                     <td align="right">                                                                        
-                                                                        <input v-model="detalle.descuento" type="number" step="0.1" min="0.1" :max="precio*cantidad" class="form-control form-control-sm">
-                                                                        <span class="text-error" v-show="detalle.descuento>(detalle.precio*detalle.cantidad)">Desc. inválido</span>
+                                                                        <input v-model="detalle.descuento" type="number" step="0.1" min="0" :max="detalle.precio*detalle.cantidad" class="form-control form-control-sm">
+                                                                        <span class="text-error" v-show="detalle.descuento>=(detalle.precio*detalle.cantidad)">Desc. máx.</span>
                                                                     </td>
-                                                                    <td align="right">$ {{ (detalle.precio*detalle.cantidad-detalle.descuento).toFixed(2) }}</td>
+                                                                    <td align="right">$ {{ (detalle.precio*detalle.cantidad-detalle.descuento).toFixed(2) }}</td>                                                                    
                                                                 </tr>                                                                
                                                             </tbody>
                                                             <tbody v-else>
                                                                 <tr>
-                                                                    <td colspan="6" class="text-center">
+                                                                    <td colspan="7" class="text-center">
                                                                         <span class="badge badge-pill badge-secondary">-- Sin registros --</span>                                       
                                                                     </td>
                                                                 </tr>
                                                             </tbody>                                    
                                                         </table>
-                                                        <table align="right" border="1" bordercolor="white" v-if="arrayDetalle.length">
+                                                        <table width="250" align="right" v-if="arrayDetalle.length">
+                                                            <tr width="65%">
+                                                                <td align="left"><strong>Abono:</strong></td>
+                                                                <td align="right">                                                                        
+                                                                    <input v-model="abono" type="number" step="0.1" min="0" :max="(total)" class="form-control form-control-sm"> 
+                                                                </td>
+                                                            </tr>
                                                             <tr>
                                                                 <td align="left"><strong>Total Parcial:</strong></td>
                                                                 <td align="right" class="w-25">$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
-                                                                <td class="w-5"></td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="left"><strong>Total Impuesto:</strong></td>
-                                                                <td align="right">$ {{totalImpuesto=((total*impuesto)/(1+impuesto)).toFixed(2)}}</td>
-                                                                <td></td>
+                                                                <td align="right">$ {{ totalImpuesto=(total*impuesto).toFixed(2) }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="left"><strong>Total Neto:</strong></td>
                                                                 <td align="right"><strong>$ {{total=(calcularTotal).toFixed(2)}} </strong> </td>
-                                                                <td></td>
                                                             </tr>                                                       
                                                         </table>
                                                     </div>
@@ -385,24 +397,25 @@
                                                                 <td align="right">$ {{detalle.precio*detalle.cantidad-detalle.descuento}}</td>
                                                             </tr>                                                            
                                                         </tbody>                                                                                            
-                                                    </table>
-                                                    <table align="right" border="1" bordercolor="white" v-if="arrayDetalle.length">
-                                                        <tr>
-                                                            <td align="left"><strong>Total Parcial:</strong></td>
-                                                            <td align="right">$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
-                                                            <td class="w-5"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="left"><strong>Total Impuesto:</strong></td>
-                                                            <td align="right">$ {{totalImpuesto=(total*impuesto).toFixed(2)}}</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td align="left"><strong>Total Neto:</strong></td>
-                                                            <td align="right">$ {{ total }}</td>
-                                                            <td></td>
-                                                        </tr>                                                       
-                                                    </table>
+                                                    </table>                                                    
+                                                    <table width="250" align="right" v-if="arrayDetalle.length">
+                                                            <tr>
+                                                                <td align="left"><strong>Abono:</strong></td>
+                                                                <td align="right" class="w-25">$ {{abono}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left"><strong>Total Parcial:</strong></td>
+                                                                <td align="right" class="w-25">$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left"><strong>Total Impuesto:</strong></td>
+                                                                <td align="right">$ {{totalImpuesto=(total*impuesto).toFixed(2) }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left"><strong>Total Neto:</strong></td>
+                                                                <td align="right"><strong>$ {{total}} </strong> </td>
+                                                            </tr>                                                       
+                                                        </table>
                                                 </div>                                                                                                                                
                                             </div>
                                             <div class="card-footer">
@@ -511,13 +524,16 @@
                 email:'',
                 nombre : '',
                 fecha_hora : '',
-                tipo_comprobante : 'FACTURA',
+                tipo_comprobante : 'NOTA',
                 serie_comprobante : '',
                 num_comprobante : '',
                 impuesto: 0.12,
                 total:0.0,
-                totalImpuesto: 0.0,
+                abono:0.0,
+                totalSaldo: 0.0,
                 totalParcial: 0.0,
+                totalImpuesto: 0.0,
+                
 
                 arrayVenta : [],
                 arrayCliente: [],
@@ -593,10 +609,12 @@
 
             },
             calcularTotal: function(){
+                let me=this;
                 var resultado=0.0;
                 for(var i=0;i<this.arrayDetalle.length;i++){
                     resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad-this.arrayDetalle[i].descuento)
                 }
+                me.abono= resultado;
                 return resultado;
             }
         },
@@ -611,6 +629,13 @@
                 if(mm < 10) mm = '0'+mm;
         
                 return dd+'/'+mm+'/'+yyyy;      
+            },            
+            cambioImpuesto() { 
+                let me = this;
+
+                if(me.tipo_comprobante == 'NOTA'){ me.impuesto = 0.0
+                }else{ me.impuesto = 0.12
+                } 
             },
             listarVenta (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
@@ -663,7 +688,8 @@
                         me.articulo=me.arrayArticulo[0]['nombre'];
                         me.idarticulo=me.arrayArticulo[0]['id'];
                         me.precio=me.arrayArticulo[0]['precio_venta'];
-                        me.precioB=me.arrayArticulo[0]['precio_venta'];                        
+                        me.precioB=me.arrayArticulo[0]['precio_venta']; 
+                        me.cantidad=1;                       
                         me.stock=me.arrayArticulo[0]['stock'];
                         me.descripcion=me.arrayArticulo[0]['descripcion'];
                     }
@@ -727,7 +753,7 @@
                                 descripcion: me.descripcion,
                                 cantidad: me.cantidad,
                                 precio: me.precio,
-                                descuento: me.descuento,
+                                descuento: 0,
                                 stock: me.stock
                             });
                         me.codigo="";
@@ -736,8 +762,8 @@
                         me.descripcion="";
                         me.cantidad=0;
                         me.precio=0;
-                        me.precioB=0;
                         me.descuento=0;
+                        me.precioB=0;
                         me.stock=0
                         }                    
                     }
@@ -789,17 +815,19 @@
                     'num_comprobante' : this.num_comprobante,
                     'impuesto' : this.impuesto,
                     'total' : this.total,
+                    'abono' : this.abono,
                     'data': this.arrayDetalle
 
                 }).then(function (response) {
                     me.listado=1;
                     me.listarVenta(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc); 
                     me.idcliente=0;
-                    me.tipo_comprobante='FACTURA';
+                    me.tipo_comprobante='NOTA';
                     me.serie_comprobante='';
                     me.num_comprobante='';
                     me.impuesto=0.12;
                     me.total=0.0;
+                    me.abono=0.0;
                     me.idarticulo=0;
                     me.articulo='';
                     me.cantidad=0;
@@ -811,10 +839,7 @@
 
                     if(me.cbPdf) { 
                         window.open('venta/pdf/'+response.data.id);
-                        }
-
-                   
-                    
+                        }  
 
                 }).catch(function (error) {
                     console.log(error);
@@ -848,11 +873,12 @@
                 me.listado=0;
 
                 me.idproveedor=0;
-                me.tipo_comprobante='FACTURA';
+                me.tipo_comprobante='NOTA';
                 me.serie_comprobante='';
-                me.num_comprobante='';
+                me.num_comprobante='';               
                 me.impuesto=0.12;
                 me.total=0.0;
+                me.abono=0.0;
                 me.idarticulo=0;
                 me.articulo='';
                 me.cantidad=0;
@@ -885,6 +911,7 @@
                     me.fecha_hora=arrayVentaT[0]['fecha_hora'];
                     me.impuesto=arrayVentaT[0]['impuesto'];
                     me.total=arrayVentaT[0]['total'];
+                    me.abono=arrayVentaT[0]['abono'];
                 })
                 .catch(function (error) {
                     console.log(error);

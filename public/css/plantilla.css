@@ -31,7 +31,7 @@ table td {
 .text-error{
     color: red !important;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .text-info{
@@ -1655,7 +1655,7 @@ pre code {
 .table th,
 .table td {
   padding: 0.75rem;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #dee2e6;
 }
 
