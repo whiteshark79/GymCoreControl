@@ -149,7 +149,7 @@
                                                             <option value="R">RUC</option>
                                                             <option value="P">Pasaporte</option>                                            
                                                         </select>
-                                                        <input type="number" v-model="num_documento" class="form-control form-control-sm col-8" placeholder="Número de documento">
+                                                        <input type="number" v-model="num_documento" class="form-control form-control-sm col-8" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento">                                                        
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
@@ -160,16 +160,16 @@
                                                 </div>                                                
                                             </div>
                                             <div class="form-row">
-                                                <div class="form-group col-md-9">
+                                                <div class="form-group col-md-8">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                        <input type="text" maxlength="60" v-model="nombre" class="form-control form-control-sm" placeholder="Nombre">
+                                                        <input type="text" maxlength="60" v-model="nombre" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
                                                     </div>                                        
                                                 </div>
-                                                <div class="form-group col-md-3">
+                                                <div class="form-group col-md-4">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fas fa-restroom"></i></span>
-                                                        <select v-model="sexo" class="form-control form-control-sm">
+                                                        <select v-model="sexo" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_sexo }">
                                                             <option value="0" disabled>--Sexo--</option>
                                                             <option value="H">Hombre</option>
                                                             <option value="M">Mujer</option>                                       
@@ -181,7 +181,7 @@
                                                 <div class="form-group col-md-5">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
-                                                        <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm">
+                                                        <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_fec_nacimiento }">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-4">
@@ -212,13 +212,13 @@
                                                 <div class="form-group col-md-6">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-mobile-alt"></i></span>
-                                                        <input type="number" v-model="celular" class="form-control form-control-sm" placeholder="Celular">
+                                                        <input type="number" v-model="celular" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <div class="input-group">
                                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                                        <input type="email" v-model="email" class="form-control form-control-sm" placeholder="Email">                                                    
+                                                        <input type="email" v-model="email" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email">                                                    
                                                     </div>                                        
                                                 </div>                                                                                                         
                                             </div>
@@ -368,14 +368,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>   
-                                                       
-                            <div v-show="errorPersona" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjPersona" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                                                   
+                            
 
                         </form>
                     </div>
@@ -396,7 +390,7 @@
 <script>
     export default {
         data (){
-            return {
+            return {                
                 persona_id: 0,
                 tipo_documento : 'C',
                 num_documento : '',                
@@ -431,8 +425,17 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
-                errorPersona : 0,
-                errorMostrarMsjPersona : [],
+
+                 errorPersona : 0,
+                 errorMostrarMsjPersona : [],
+                
+                e_num_documento : false,
+                e_nombre : false,
+                e_sexo : false,
+                e_fec_nacimiento : false,
+                e_celular : false,
+                e_email : false,
+                
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -600,14 +603,18 @@
                 }); 
             },
             validarPersona(){
-                this.errorPersona=0;
-                this.errorMostrarMsjPersona =[];
+                 this.errorPersona=0;
+                 this.errorMostrarMsjPersona =[];
 
-                if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del alumno no puede estar vacío.");
+                if (!this.num_documento) {this.e_num_documento = true; this.errorMostrarMsjPersona.push('num_documento');}else{this.e_num_documento = false}
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjPersona.push('nombre');}else{this.e_nombre = false}
+                if (!this.sexo) {this.e_sexo = true; this.errorMostrarMsjPersona.push('num_dosexocumento');}else{this.e_sexo = false}
+                if (!this.fec_nacimiento) {this.e_fec_nacimiento = true; this.errorMostrarMsjPersona.push('fec_nacimiento');}else{this.e_fec_nacimiento = false}
+                if (!this.celular) {this.e_celular = true; this.errorMostrarMsjPersona.push('celular');}else{this.e_celular = false}
+                if (!this.email) {this.e_email = true; this.errorMostrarMsjPersona.push('email');}else{this.e_email = false}
 
-                if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
-
-                return this.errorPersona;
+                 if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
+                 return this.errorPersona;
             },
             cerrarModal(){
                 this.modal=0;
@@ -637,9 +644,7 @@
                 this.estatura = '';
                 this.nivel_actividad = 0;
                 this.tipo_actividad = 0;
-                this.objetivo = 0;
-
-                this.errorPersona=0;
+                this.objetivo = 0;                
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){

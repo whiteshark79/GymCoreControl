@@ -26,7 +26,7 @@
                                 @error('usuario')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
-                            </div>
+                            </div> 
                             <div class="input-group input-group-sm mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>

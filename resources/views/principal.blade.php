@@ -8,12 +8,9 @@
   <meta name="keyword" content="Sistema de Control de Gimnasios">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
   <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}"> 
-
   <link rel="shortcut icon" href="img/favicon.png">
-  <title>GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</title>
-  
+  <title>GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</title>  
   <link rel="stylesheet" href="css/plantilla.css">
   
 </head>
@@ -50,6 +47,6 @@
     </div>
     <script src="js/app.js"></script>
     <script src="js/plantilla.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>    
 </body>
 </html>

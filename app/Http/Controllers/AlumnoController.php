@@ -73,7 +73,7 @@ class AlumnoController extends Controller
 
     public function store(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');      
         
         try{
             DB::beginTransaction();
@@ -116,6 +116,7 @@ class AlumnoController extends Controller
         }
                 
     }
+
     public function update(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
@@ -160,5 +161,6 @@ class AlumnoController extends Controller
             DB::rollBack();
         }
     }
-    
+
+        
 }

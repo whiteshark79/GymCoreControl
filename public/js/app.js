@@ -2086,12 +2086,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2128,6 +2122,12 @@ __webpack_require__.r(__webpack_exports__);
       tipoAccion: 0,
       errorPersona: 0,
       errorMostrarMsjPersona: [],
+      e_num_documento: false,
+      e_nombre: false,
+      e_sexo: false,
+      e_fec_nacimiento: false,
+      e_celular: false,
+      e_email: false,
       pagination: {
         'total': 0,
         'current_page': 0,
@@ -2299,7 +2299,49 @@ __webpack_require__.r(__webpack_exports__);
     validarPersona: function validarPersona() {
       this.errorPersona = 0;
       this.errorMostrarMsjPersona = [];
-      if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del alumno no puede estar vacío.");
+
+      if (!this.num_documento) {
+        this.e_num_documento = true;
+        this.errorMostrarMsjPersona.push('num_documento');
+      } else {
+        this.e_num_documento = false;
+      }
+
+      if (!this.nombre) {
+        this.e_nombre = true;
+        this.errorMostrarMsjPersona.push('nombre');
+      } else {
+        this.e_nombre = false;
+      }
+
+      if (!this.sexo) {
+        this.e_sexo = true;
+        this.errorMostrarMsjPersona.push('num_dosexocumento');
+      } else {
+        this.e_sexo = false;
+      }
+
+      if (!this.fec_nacimiento) {
+        this.e_fec_nacimiento = true;
+        this.errorMostrarMsjPersona.push('fec_nacimiento');
+      } else {
+        this.e_fec_nacimiento = false;
+      }
+
+      if (!this.celular) {
+        this.e_celular = true;
+        this.errorMostrarMsjPersona.push('celular');
+      } else {
+        this.e_celular = false;
+      }
+
+      if (!this.email) {
+        this.e_email = true;
+        this.errorMostrarMsjPersona.push('email');
+      } else {
+        this.e_email = false;
+      }
+
       if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
       return this.errorPersona;
     },
@@ -2330,7 +2372,6 @@ __webpack_require__.r(__webpack_exports__);
       this.nivel_actividad = 0;
       this.tipo_actividad = 0;
       this.objetivo = 0;
-      this.errorPersona = 0;
     },
     abrirModal: function abrirModal(modelo, accion) {
       var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
@@ -5254,6 +5295,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -13394,7 +13436,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       if (me.idcliente == 0) me.errorMostrarMsjVenta.push("Seleccione un Cliente");
       if (me.tipo_comprobante == 0) me.errorMostrarMsjVenta.push("Seleccione el comprobante");
-      if (!me.num_comprobante) me.errorMostrarMsjVenta.push("Ingrese el número de comprobante");
       if (!me.impuesto) me.errorMostrarMsjVenta.push("Ingrese el impuesto de compra");
       if (me.arrayDetalle.length <= 0) me.errorMostrarMsjVenta.push("Ingrese detalles");
       if (me.errorMostrarMsjVenta.length) me.errorVenta = 1;
@@ -65193,6 +65234,9 @@ var render = function() {
                                             ],
                                             staticClass:
                                               "form-control form-control-sm col-8",
+                                            class: {
+                                              "is-invalid": _vm.e_num_documento
+                                            },
                                             attrs: {
                                               type: "number",
                                               placeholder: "Número de documento"
@@ -65261,7 +65305,7 @@ var render = function() {
                                 _c("div", { staticClass: "form-row" }, [
                                   _c(
                                     "div",
-                                    { staticClass: "form-group col-md-9" },
+                                    { staticClass: "form-group col-md-8" },
                                     [
                                       _c(
                                         "div",
@@ -65280,6 +65324,9 @@ var render = function() {
                                             ],
                                             staticClass:
                                               "form-control form-control-sm",
+                                            class: {
+                                              "is-invalid": _vm.e_nombre
+                                            },
                                             attrs: {
                                               type: "text",
                                               maxlength: "60",
@@ -65302,7 +65349,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c(
                                     "div",
-                                    { staticClass: "form-group col-md-3" },
+                                    { staticClass: "form-group col-md-4" },
                                     [
                                       _c(
                                         "div",
@@ -65323,6 +65370,9 @@ var render = function() {
                                               ],
                                               staticClass:
                                                 "form-control form-control-sm",
+                                              class: {
+                                                "is-invalid": _vm.e_sexo
+                                              },
                                               on: {
                                                 change: function($event) {
                                                   var $$selectedVal = Array.prototype.filter
@@ -65399,6 +65449,9 @@ var render = function() {
                                             ],
                                             staticClass:
                                               "form-control form-control-sm",
+                                            class: {
+                                              "is-invalid": _vm.e_fec_nacimiento
+                                            },
                                             attrs: { type: "date" },
                                             domProps: {
                                               value: _vm.fec_nacimiento
@@ -65611,6 +65664,9 @@ var render = function() {
                                             ],
                                             staticClass:
                                               "form-control form-control-sm",
+                                            class: {
+                                              "is-invalid": _vm.e_celular
+                                            },
                                             attrs: {
                                               type: "number",
                                               placeholder: "Celular"
@@ -65652,6 +65708,9 @@ var render = function() {
                                             ],
                                             staticClass:
                                               "form-control form-control-sm",
+                                            class: {
+                                              "is-invalid": _vm.e_email
+                                            },
                                             attrs: {
                                               type: "email",
                                               placeholder: "Email"
@@ -66604,34 +66663,6 @@ var render = function() {
                             ]
                           )
                         ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errorPersona,
-                            expression: "errorPersona"
-                          }
-                        ],
-                        staticClass: "form-group row div-error"
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "text-center text-error" },
-                          _vm._l(_vm.errorMostrarMsjPersona, function(error) {
-                            return _c("div", {
-                              key: error,
-                              domProps: { textContent: _vm._s(error) }
-                            })
-                          }),
-                          0
-                        )
                       ]
                     )
                   ]

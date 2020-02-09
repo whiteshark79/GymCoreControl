@@ -10,6 +10,7 @@
               </div>
               <div class="card-body">              
                 <div class="row">
+                  
 
                   <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
@@ -53,15 +54,15 @@
                           <span class="info-box-number">Total: ${{v_val_total}}  <small>( {{v_qtx_total}} )</small></span>      
                       </div>
                     </div>
-                  </div>
-                  
-                </div>
+                  </div>                  
+                </div>              
 
                 <div class="row">
                   <div class="col-md-6">
                     <div class="card card-chart">
                       <div class="card-header">
-                          <h4>Inscripciones vs Gastos</h4>
+                          <h4>Inscripciones vs Gastos</h4>                      
+     
                       </div>
                       <div class="card-content">
                         <div class="ct-chart">

@@ -860,7 +860,6 @@
 
                 if (me.idcliente==0) me.errorMostrarMsjVenta.push("Seleccione un Cliente");
                 if (me.tipo_comprobante==0) me.errorMostrarMsjVenta.push("Seleccione el comprobante");
-                if (!me.num_comprobante) me.errorMostrarMsjVenta.push("Ingrese el número de comprobante");
                 if (!me.impuesto) me.errorMostrarMsjVenta.push("Ingrese el impuesto de compra");
                 if (me.arrayDetalle.length<=0) me.errorMostrarMsjVenta.push("Ingrese detalles");
 
