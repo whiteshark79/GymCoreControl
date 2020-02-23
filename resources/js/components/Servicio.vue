@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                         <option value="codigo">Código</option>
                                         <option value="nombre">Nombre</option>
                                         <option value="descripcion">Descripción</option>
@@ -155,7 +155,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="clasificacion">Clasificacion: </span>
                                     </div>
-                                    <select class="form-control" v-model="idclasificacion">
+                                    <select class="form-control" v-bind:class="{ 'is-invalid': e_idclasificacion }" v-model="idclasificacion">
                                         <option value="0" disabled>--Seleccione--</option>
                                         <option v-for="clasificacion in arrayClasificacion" :key="clasificacion.id" :value="clasificacion.id" v-text="clasificacion.nombre"></option>
                                     </select>
@@ -164,7 +164,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="codigo">Cód.: </span>
                                     </div>
-                                    <input type="text" v-model="codigo" class="form-control input-sm"> 
+                                    <input type="text" v-model="codigo" class="form-control" v-bind:class="{ 'is-invalid': e_codigo }"> 
                                 </div>                                
                             </div>
                             <div class="form-row">
@@ -172,7 +172,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="precio">Nombre: </span>
                                     </div>
-                                    <input type="text" v-model="nombre" class="form-control input-sm"> 
+                                    <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }"> 
                                 </div>
                             </div>                             
                             <div class="form-row">
@@ -180,14 +180,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="descripcion">Descripción: </span>
                                     </div>                                    
-                                    <textarea  v-model="descripcion" class="form-control form-control-sm" rows="2"></textarea>
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
                                 </div>
-                                <div v-show="errorServicio" class="form-group row div-error">
-                                    <div class="text-center text-error">
-                                        <div v-for="error in errorMostrarMsjServicio" :key="error" v-text="error">
-                                        </div>
-                                    </div>
-                                </div>                            
+                                                          
                             </div>                                                
                         </form>
                     </div>
@@ -225,8 +220,14 @@ import vSelect from 'vue-select';
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorServicio : 0,
                 errorMostrarMsjServicio : [],
+                e_idclasificacion : false,
+                e_codigo : false,
+                e_nombre : false,
+                e_descripcion : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -433,8 +434,10 @@ import vSelect from 'vue-select';
                 this.errorServicio=0;
                 this.errorMostrarMsjServicio =[];
 
-                if (this.idclasificacion==0) this.errorMostrarMsjServicio.push("Seleccione una clasificación.");
-                if (!this.nombre) this.errorMostrarMsjServicio.push("El nombre del artículo no puede estar vacío.");
+                if (this.idclasificacion == 0) {this.e_idclasificacion = true; this.errorMostrarMsjServicio.push('idclasificacion');}else{this.e_idclasificacion = false}
+                if (!this.codigo) {this.e_codigo = true; this.errorMostrarMsjServicio.push('codigo');}else{this.e_codigo = false}
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjServicio.push('nombre');}else{this.e_nombre = false}
+                if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjServicio.push('descripcion');}else{this.e_descripcion = false}
 
                 if (this.errorMostrarMsjServicio.length) this.errorServicio = 1;
                 return this.errorServicio;
@@ -442,14 +445,19 @@ import vSelect from 'vue-select';
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorServicio=0;
+                this.errorMostrarMsjServicio = [];
+                this.e_idclasificacion = false;
+                this.e_codigo = false;
+                this.e_nombre = false;
+                this.e_descripcion = false;
                 
                 this.idclasificacion= 0;
                 this.nombre_clasificacion = '';
                 this.codigo = '';
                 this.nombre = '';
                 this.descripcion = '';
-
-                this.errorServicio=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -496,6 +504,9 @@ import vSelect from 'vue-select';
                     }
                 }
                 this.selectClasificacion();
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -503,11 +514,3 @@ import vSelect from 'vue-select';
         }
     }
 </script>
-<style>    
-       
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }    
-
-</style>

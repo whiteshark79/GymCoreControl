@@ -15,13 +15,13 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                         <option value="idalumno">Alumno</option>
-                                        <option value="fecha_hora">Fecha</option>
+                                        <option value="fecha_ini">Fecha</option>
                                         <option value="idmodalidad">Modalidad</option>                                      
                                     </select>
                                     <template v-if="criterio=='idalumno'">
-                                        <div class="col-md-4">                                                        
+                                        <div class="col-md-4">                                                         
                                             <v-select
                                                 id="buscar"
                                                 @search="selectAlumno"
@@ -32,11 +32,11 @@
                                             ></v-select>
                                         </div>
                                     </template>
-                                    <template v-else-if="criterio=='fecha_hora'">
+                                    <template v-else-if="criterio=='fecha_ini'">
                                         <input type="date" v-model="buscar" class="form-control col-4">
                                     </template>
                                     <template v-else-if="criterio=='idmodalidad'">
-                                        <select class="form-control col-4" v-model="idmodalidad">
+                                        <select class="form-control col-4" v-model="buscar">
                                             <option value="0" disabled>--Seleccione--</option>
                                             <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
                                         </select>
@@ -164,7 +164,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -186,12 +186,12 @@
                             </template>
                             
                             <div class="row">
-                                <div class="input-group input-group-sm mb-3 col-md-6">
+                                <div class="input-group input-group-sm mb-3 col-md-8">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="alumno">Alumno: </span>
                                     </div>
                                     <template v-if="this.tipoAccion == 2">
-                                        <input class="form-control form-control-sm" v-model="nombre" readonly>
+                                        <input class="form-control" v-model="nombre" readonly>
                                     </template>
                                     <template v-else>
                                         <v-select
@@ -202,66 +202,71 @@
                                             placeholder="Buscar Alumnos..."
                                             @input="getDatosAlumno"                                    
                                         ></v-select>
+                                        <span class="text-error" v-show="e_idalumno">Eligir alumno</span>
                                     </template>                                    
                                 </div>
-                                <div class="input-group input-group-sm mb-3 col-md-6">
+                                                               
+                            </div>
+                            <div class="row">
+                                <div class="input-group input-group-sm mb-3 col-md-8">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Modalidad: </span>
+                                        <span class="input-group-text">Tipo: </span>
                                     </div>
-                                    <select class="form-control form-control-sm" v-model="idmodalidad" @change="getDatosModalidad">
+                                    <select class="form-control col-6" v-bind:class="{ 'is-invalid': e_idmodalidad }" v-model="idmodalidad" @change="getDatosModalidad">
                                         <option value="0" disabled>--Seleccione--</option>
                                         <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre" :data-precio="modalidad.precio" :data-duracion="modalidad.duracion"></option>
                                     </select>
-                                     <input type="hidden" v-model="duracion">                                                                                               
-                                </div>                                
+                                     <input type="hidden" v-model="duracion">  
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                                    </div>                                    
+                                    <input type="number" class="form-control col-3" v-model="total" readonly>
+                                    <input type="hidden" v-model="subtotal"> 
+                                </div>
+                                <div class="input-group input-group-sm mb-3 col-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                    </div>
+                                    <select class="form-control" v-bind:class="{ 'is-invalid': e_idhorario }" v-model="idhorario">
+                                        <option value="0" disabled>--Seleccione--</option>
+                                        <option v-for="horario in arrayHorario" :key="horario.id" :value="horario.id" v-text="horario.horas+' '+horario.periodo"></option>
+                                    </select>
+                                </div> 
                             </div>
                             <div class="row">                                
-                                <div class="input-group input-group-sm mb-3 col-md-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Abono: </span>
-                                    </div>
-                                    <input type="number" class="form-control form-control-sm" v-model="abono" min="1" :max="total" @change="calcularSaldo">
-                                </div>
-                                <div class="input-group input-group-sm mb-3 col-md-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Saldo: </span>
-                                    </div>
-                                    <input class="form-control form-control-sm" v-model="saldo" readonly>
-                                </div>
-                                <div class="input-group input-group-sm mb-3 col-3">
+                                <div class="input-group input-group-sm mb-3 col-4">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">IVA: </span>
                                     </div>
-                                    <select v-model="iva" class="form-control form-control-sm" @change="calcularTotal">                                        
+                                    <select v-model="iva" class="form-control" @change="calcularTotal">                                        
                                         <option value="S">Si</option>
                                         <option value="N">No</option>                                       
                                     </select>
                                     <input type="hidden" v-model="impuesto">                               
                                 </div>
-                                <div class="input-group input-group-sm mb-3 col-md-3">
+                                <div class="input-group input-group-sm mb-3 col-md-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Total: </span>
-                                    </div>                                    
-                                    <input type="number" class="form-control form-control-sm" v-model="total">
-                                    <input type="hidden" v-model="subtotal"> 
-                                </div>                                                        
+                                        <span class="input-group-text">Abono: </span>
+                                    </div>
+                                    <input type="number" class="form-control" v-bind:class="{ 'is-invalid': e_abono }" v-model="abono" min="1" :max="total" @change="calcularSaldo">
+                                </div>
+                                <div class="input-group input-group-sm mb-3 col-md-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Saldo: </span>
+                                    </div>
+                                    <input class="form-control" v-model="saldo" readonly>
+                                </div>                              
+                                                                                       
                             </div>
                             <div class="row">
-                                <div class="input-group input-group-sm mb-3 col-8">
+                                <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="observaciones">Observaciones: </span>
                                     </div>
-                                    <textarea  v-model="observaciones" class="form-control form-control-sm" rows="2"></textarea>
-                                </div>                              
+                                    <textarea  v-model="observaciones" class="form-control form-control" rows="2"></textarea>
+                                </div>                                                             
                                                                
-                            </div>                 
-                            <div v-show="errorInscripcion" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjInscripcion" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
-
+                            </div> 
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -296,17 +301,25 @@
                 impuesto : 0.0,
                 subtotal : 0.0,
                 total : 0.0,
-                observaciones : '',            
+                observaciones : '',
+                idhorario : 0,         
 
                 arrayInscripcion : [],
                 arrayAlumno : [],
                 arrayModalidad : [],
+                arrayHorario : [],
 
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorInscripcion : 0,
                 errorMostrarMsjInscripcion : [],
+                e_idalumno : false,
+                e_idmodalidad : false,
+                e_abono : false,
+                e_idhorario : false,      
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -316,7 +329,7 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'id',
+                criterio : 'idalumno',
                 buscar : '',
                 paginado : 10,
                 ordenado : 'id',
@@ -355,7 +368,18 @@
 
             }            
         },
-        methods : {            
+        methods : {
+            hoyFecha(){
+                var hoy = new Date();
+                var dd = hoy.getDate();
+                var mm = hoy.getMonth()+1;
+                var yyyy = hoy.getFullYear();
+
+                if(dd < 10) dd = '0'+dd;
+                if(mm < 10) mm = '0'+mm;
+        
+                return dd+'/'+mm+'/'+yyyy;      
+            },          
             listarInscripcion (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
                 var url= '/inscripcion?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
@@ -427,6 +451,18 @@
                     me.iva = 'N';
                 } 
             },
+            selectHorario(){
+                let me=this;
+                var url= '/horario/selectHorario';
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.arrayHorario = respuesta.horarios;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             calcularSaldo(){
                 let me = this;
                 me.saldo = (this.total-this.abono).toFixed(2);
@@ -446,7 +482,8 @@
                 me.abono = this.total;
                 me.saldo = 0;                 
             },
-            registrarInscripcion(){               
+            registrarInscripcion(){
+                if (this.validarInscripcion()){ return; }            
                 let me = this;
 
                 axios.post('/inscripcion/registrar',{
@@ -465,7 +502,8 @@
                     console.log(error);
                 });
             },
-            actualizarInscripcion(){              
+            actualizarInscripcion(){
+                if (this.validarInscripcion()){ return; }              
                 let me = this;
 
                 axios.put('/inscripcion/actualizar',{
@@ -539,7 +577,20 @@
                     });
                 } 
                 }) 
-            },            
+            },
+            validarInscripcion(){
+                this.errorInscripcion=0;
+                this.errorMostrarMsjInscripcion =[];
+
+                if (this.idalumno == 0) {this.e_idalumno = true; this.errorMostrarMsjInscripcion.push('ide_idalumno');}else{this.e_idalumno = false}
+                if (this.idmodalidad == 0) {this.e_idmodalidad = true; this.errorMostrarMsjInscripcion.push('idme_idmodalidad');}else{this.e_idmodalidad = false}
+                if (!this.abono) {this.e_abono = true; this.errorMostrarMsjInscripcion.push('idme_abono');}else{this.e_abono = false}
+                //if (this.idhorario == 0) {this.e_idhorario = true; this.errorMostrarMsjInscripcion.push('idme_idhorario');}else{this.e_idhorario = false}
+
+
+                if (this.errorMostrarMsjInscripcion.length) this.errorInscripcion = 1;
+                return this.errorInscripcion;
+            },          
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
@@ -606,20 +657,15 @@
                     }
                 }
                 this.selectModalidad();
+                this.selectHorario();
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
+            this.selectModalidad(); 
             this.listarInscripcion(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
         }
     }
 </script>
-<style>       
-    .modal-content{
-        width: 88% !important;
-        position: absolute !important;
-    }
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }  
-</style>

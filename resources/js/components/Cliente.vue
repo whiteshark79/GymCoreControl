@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="nombre">Nombre</option>
                                     <option value="num_documento">Documento</option>
                                     </select>
@@ -103,7 +103,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -115,60 +115,54 @@
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="form-row">
                                 <div class="form-group col-md-7">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="far fa-id-card"></i></span>
-                                        <select v-model="tipo_documento" class="form-control form-control-sm col-4">
+                                        <select v-model="tipo_documento" class="form-control col-4">
                                             <option value="0" disabled>--Doc--</option>
                                             <option value="C">Cédula</option>
                                             <option value="R">RUC</option>
                                             <option value="P">Pasaporte</option>                                            
                                         </select>
-                                        <input type="number" v-model="num_documento" class="form-control form-control-sm col-8" placeholder="No. de documento">
+                                        <input type="number" v-model="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="No. de documento">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
-                                        <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm">
+                                        <input type="date" v-model="fec_nacimiento" class="form-control" v-bind:class="{ 'is-invalid': e_fec_nacimiento }">
                                     </div>                                        
                                 </div>                                                
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                        <input type="text" maxlength="60" v-model="nombre" class="form-control form-control-sm" placeholder="Nombre">
+                                        <input type="text" maxlength="60" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
                                     </div>
                                 </div>                                                                                                        
                             </div>                                                
                             <div class="form-row">
                                 <div class="form-group col-md-5">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-mobile-alt"></i></span>
-                                        <input type="number" v-model="celular" class="form-control form-control-sm" placeholder="Celular">
+                                        <input type="number" v-model="celular" class="form-control" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular">
                                     </div>                                        
                                 </div> 
                                 <div class="form-group col-md-7">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                        <input type="email" v-model="email" class="form-control form-control-sm" placeholder="Email">
+                                        <input type="email" v-model="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email">
                                     </div>
                                 </div>                                           
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-map-marker-alt"></i></span>
-                                        <input type="text" maxlength="60" v-model="direccion" class="form-control form-control-sm" placeholder="Dirección">                                                            
+                                        <input type="text" maxlength="60" v-model="direccion" class="form-control" v-bind:class="{ 'is-invalid': e_direccion }" placeholder="Dirección">                                                            
                                     </div>
                                 </div> 
-                            </div>
-                            <div v-show="errorPersona" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjPersona" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                            
 
                         </form>
                     </div>
@@ -193,7 +187,7 @@
         data (){
             return {
                 persona_id: 0,
-                tipo_documento : 0,
+                tipo_documento : 'C',
                 num_documento : '',                
                 nombre : '',
                 fec_nacimiento : '',                
@@ -204,8 +198,16 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorPersona : 0,
                 errorMostrarMsjPersona : [],
+                e_num_documento : false,
+                e_fec_nacimiento : false,
+                e_nombre : false,
+                e_celular : false,
+                e_email : false,
+                e_direccion : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -316,8 +318,13 @@
                 this.errorPersona=0;
                 this.errorMostrarMsjPersona =[];
 
-                if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del cliente no puede estar vacío.");
-
+               if (!this.num_documento) {this.e_num_documento = true; this.errorMostrarMsjPersona.push('num_documento');}else{this.e_num_documento = false}
+               if (!this.fec_nacimiento) {this.e_fec_nacimiento = true; this.errorMostrarMsjPersona.push('fec_nacimiento');}else{this.e_fec_nacimiento = false}
+               if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjPersona.push('nombre');}else{this.e_nombre = false}
+               if (!this.celular) {this.e_celular = true; this.errorMostrarMsjPersona.push('celular');}else{this.e_celular = false}
+               if (!this.email) {this.e_email = true; this.errorMostrarMsjPersona.push('email');}else{this.e_email = false}
+               if (!this.direccion) {this.e_direccion = true; this.errorMostrarMsjPersona.push('direccion');}else{this.e_direccion = false}
+               
                 if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
 
                 return this.errorPersona;
@@ -325,8 +332,17 @@
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorPersona = 0;
+                this.errorMostrarMsjPersona = [];
+                this.e_num_documento = false;
+                this.e_fec_nacimiento = false;
+                this.e_nombre = false;
+                this.e_celular = false;
+                this.e_email = false;
+                this.e_direccion = false;
                 
-                this.tipo_documento = 0;
+                this.tipo_documento = 'C';
                 this.num_documento = '';
                 this.nombre = '';
                 this.fec_nacimiento = '';
@@ -334,7 +350,6 @@
                 this.celular = '';
                 this.email = '';
 
-                this.errorPersona=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -347,7 +362,7 @@
                                 this.tituloModal = 'Registrar Cliente';
                                 this.tipoAccion = 1;
                                 
-                                this.tipo_documento = 0;
+                                this.tipo_documento = 'C';
                                 this.num_documento = '';
                                 this.nombre = '';
                                 this.fec_nacimiento = '';
@@ -375,6 +390,9 @@
                         }
                     }
                 }
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -382,11 +400,3 @@
         }
     }
 </script>
-<style>    
-
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-
-</style>

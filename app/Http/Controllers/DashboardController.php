@@ -11,6 +11,7 @@ class DashboardController extends Controller
         if (!$request->ajax()) return redirect('/');
 
         $anio=date('Y');
+        
         $ingresos=DB::table('ingresos as i')
         ->select(DB::raw('DATE_FORMAT(i.fecha_hora, "%b") as mes'),
             DB::raw('YEAR(i.fecha_hora) as anio'),
@@ -48,7 +49,27 @@ class DashboardController extends Controller
         ->get();
  
         return ['ingresos'=>$ingresos,'ventas'=>$ventas, 'inscripciones'=>$inscripciones, 'gastos'=>$gastos, 'anio'=>$anio];     
-    }   
+    }
+    
+    public function grafArticulo(Request $request){
+        //if (!$request->ajax()) return redirect('/');
+
+        $anio=date('Y');
+
+        $articulos=DB::table('detalle_ventas')
+        ->join('ventas','detalle_ventas.idventa','=','ventas.id')
+        ->join('articulos','detalle_ventas.idarticulo','=','articulos.id')
+        ->select(DB::raw('articulos.nombre as articulo'),
+                DB::raw('SUM(detalle_ventas.subtotal) as subtotal'))
+        ->whereYear('ventas.fecha_hora',$anio)
+        ->groupBy(DB::raw('articulos.nombre'))
+        ->orderBy(DB::raw('ventas.fecha_hora'), 'asc')
+        ->take(5)
+        ->get();
+
+        return ['articulos'=>$articulos];   
+
+    }
 
     public function widgetInOuts(Request $request){
         if (!$request->ajax()) return redirect('/');

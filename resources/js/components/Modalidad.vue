@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="nombre">Nombre</option>
                                     <option value="descripcion">Descripción</option>
                                     </select>
@@ -124,7 +124,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -139,7 +139,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="nombre">Nombre: </span>
                                     </div>
-                                    <input type="text" v-model="nombre" class="form-control">
+                                    <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -147,16 +147,16 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="descripcion">Descripción: </span>
                                     </div>
-                                    <input type="text" v-model="descripcion" class="form-control">
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>                                    
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="input-group input-group-sm mb-3 col-6">
+                                <div class="input-group input-group-sm mb-3 col-8">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="duracion">Duración: </span>
                                     </div>
-                                    <select v-model="duracion" class="form-control form-control-sm">
-                                        <option value="0" disabled>--Dias--</option>
+                                    <select v-model="duracion" class="form-control" v-bind:class="{ 'is-invalid': e_duracion }">
+                                        <option value="0" disabled>--Seleccione--</option>
                                         <option value="1">Día</option>
                                         <option value="30">Mensual</option>
                                         <option value="60">Bimensual</option>
@@ -165,21 +165,13 @@
                                         <option value="360">Anual</option>                                          
                                     </select>
                                 </div>
-                                <div class="input-group input-group-sm mb-3 col-6">
+                                <div class="input-group input-group-sm mb-3 col-4">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="precio">Precio: </span>
+                                        <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                     </div>
-                                    <input type="text" v-model="precio" class="form-control" placeholder="Valor de la modalidad">
+                                    <input type="number" min="0.0" v-model="precio" class="form-control" v-bind:class="{ 'is-invalid': e_precio }">
                                 </div>
-                            </div>                         
-                            
-                            
-                            <div v-show="errorModalidad" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjModalidad" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
+                            </div>  
 
                         </form>
                     </div>
@@ -207,13 +199,19 @@
                 nombre : '',
                 descripcion : '',
                 duracion : 0,
-                precio : 0,
+                precio : 0.0,
                 arrayModalidad : [],
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorModalidad : 0,
                 errorMostrarMsjModalidad : [],
+                e_nombre : false,
+                e_descripcion : false,
+                e_duracion : false,
+                e_precio : false, 
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -384,20 +382,32 @@
             validarModalidad(){
                 this.errorModalidad=0;
                 this.errorMostrarMsjModalidad =[];
-                if (!this.nombre) this.errorMostrarMsjModalidad.push("El nombre de la modalidad no puede estar vacío.");
+
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjModalidad.push('nombre');}else{this.e_nombre = false}
+                if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjModalidad.push('descripcion');}else{this.e_descripcion = false}
+                if (this.duracion == 0) {this.e_duracion = true; this.errorMostrarMsjModalidad.push('duracion');}else{this.e_duracion = false}
+                if (!this.precio) {this.e_precio = true; this.errorMostrarMsjModalidad.push('precio');}else{this.e_precio = false}
+
                 if (this.errorMostrarMsjModalidad.length) this.errorModalidad = 1;
                 return this.errorModalidad;
-            },
+            }, 
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorModalidad=0;
+                this.errorMostrarMsjModalidad = [];
+                this.e_nombre = false;
+                this.e_descripcion = false;
+                this.e_duracion = false;
+                this.e_precio = false;
                 
                 this.nombre='';
                 this.descripcion='';
                 this.duracion=0;
-                this.precio=0;                
+                this.precio=0.0;                
 
-                this.errorModalidad=0;
+                
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -411,8 +421,9 @@
                                 this.nombre= '';
                                 this.descripcion = '';
                                 this.duracion = 0;
-                                this.precio = 0;
+                                this.precio = 0.0;
                                 this.tipoAccion = 1;
+
                                 break;
                             }
                             case 'actualizar':
@@ -442,6 +453,9 @@
                         }
                     }
                 }
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -449,10 +463,3 @@
         }
     }
 </script>
-<style>    
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-    
-</style>

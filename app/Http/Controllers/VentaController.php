@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Venta;
 use App\DetalleVenta;
+use App\Persona;
+use App\Articulo;
 use App\User;
 use App\Notifications\NotifyAdmin;
 
@@ -51,6 +53,111 @@ class VentaController extends Controller
             'ventas' => $ventas
         ];
     }
+
+    public function listarVentaCliente(Request $request){
+        if (!$request->ajax()) return redirect('/');        
+        
+        $ventasM = Venta::join('personas','ventas.idcliente','=','personas.id')
+        ->select('ventas.id','ventas.idcliente','ventas.fecha_hora','ventas.total','ventas.abono','personas.nombre as cliente')
+        ->whereColumn('ventas.total','>','ventas.abono')
+        ->orderBy('ventas.fecha_hora', 'asc')
+        //->take(10)
+        ->get();  
+ 
+        return ['ventasM' => $ventasM];
+    }
+
+    public function listarVentasCabeceraAlumno(Request $request){
+        //if (!$request->ajax()) return redirect('/');        
+        
+        $id = \Auth::user()->id;
+
+        $buscar = $request->buscar_;
+        $criterio = $request->criterio_;
+        $paginado = $request->paginado_;
+
+        if ($buscar==''){
+            $ventasCA = Venta::join('personas','ventas.idcliente','=','personas.id')
+            ->select('ventas.id','ventas.fecha_hora','ventas.abono','ventas.total','ventas.estado')
+            ->where('personas.id',$id)
+            ->orderBy('ventas.fecha_hora', 'desc')->paginate($paginado);
+         }else{
+            $ventasCA = Venta::join('personas','ventas.idcliente','=','personas.id')
+            ->select('ventas.id','ventas.fecha_hora','ventas.abono','ventas.total','ventas.estado')
+            ->where('personas.id',$id)
+            ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('ventas.fecha_hora', 'desc')->paginate($paginado);
+         }
+ 
+         return [
+            'pagination_' => [
+                'total_'        => $ventasCA->total(),
+                'current_page_' => $ventasCA->currentPage(),
+                'per_page_'     => $ventasCA->perPage(),
+                'last_page_'    => $ventasCA->lastPage(),
+                'from_'         => $ventasCA->firstItem(),
+                'to_'           => $ventasCA->lastItem(),
+            ],
+            'ventasCA' => $ventasCA
+        ];
+    }
+
+    public function listarVentasDetallesAlumno(Request $request){
+        //if (!$request->ajax()) return redirect('/');        
+        
+        $id = $request->id;
+
+        $ventasDA = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
+        ->select('detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
+        'detalle_ventas.subtotal','articulos.nombre as articulo', 'articulos.descripcion as articulo_descripcion')
+        ->where('detalle_ventas.idventa','=',$id)
+        ->orderBy('detalle_ventas.id', 'desc')
+        ->get(); 
+ 
+        return ['ventasDA' => $ventasDA];
+    }
+
+    public function listarArticuloVenta(Request $request){
+        //if (!$request->ajax()) return redirect('/');
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        $paginado = $request->paginado;
+        
+        $anio=date('Y');
+        
+        if ($buscar==''){
+            $detallesA = DetalleVenta::join('ventas','ventas.id','=','detalle_ventas.idventa')
+            ->join('articulos','articulos.id','=','detalle_ventas.idarticulo')
+            ->select(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M") as mes'),
+            DB::raw('SUM(detalle_ventas.subtotal) as subtotal'),'articulos.nombre as nombre_articulo')          
+            ->whereYear('ventas.fecha_hora',$anio)
+            ->groupBy(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M")'), 'articulos.nombre')
+            ->orderBy('ventas.fecha_hora', 'asc')->paginate($paginado);
+        }
+        else{
+            $detallesA = DetalleVenta::join('ventas','ventas.id','=','detalle_ventas.idventa')
+            ->join('articulos','articulos.id','=','detalle_ventas.idarticulo')
+            ->select(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M") as mes'),
+            DB::raw('SUM(detalle_ventas.subtotal) as subtotal'),'articulos.nombre as nombre_articulo')
+            ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')         
+            ->whereYear('ventas.fecha_hora',$anio)
+            ->groupBy(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M")'), 'articulos.nombre')            
+            ->orderBy('ventas.fecha_hora', 'asc')->paginate($paginado);
+        }  
+ 
+        return [
+            'pagination' => [
+                'total'        => $detallesA->total(),
+                'current_page' => $detallesA->currentPage(),
+                'per_page'     => $detallesA->perPage(),
+                'last_page'    => $detallesA->lastPage(),
+                'from'         => $detallesA->firstItem(),
+                'to'           => $detallesA->lastItem(),
+            ],
+            'detallesA' => $detallesA
+        ];
+    }
  
     public function obtenerCabecera(Request $request){
         if (!$request->ajax()) return redirect('/');
@@ -74,7 +181,7 @@ class VentaController extends Controller
         $id = $request->id;
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
         ->select('detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
-        'articulos.nombre as articulo', 'articulos.descripcion as articulo_descripcion')
+        'detalle_ventas.subtotal','articulos.nombre as articulo', 'articulos.descripcion as articulo_descripcion')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id', 'desc')->get();
          
@@ -94,7 +201,7 @@ class VentaController extends Controller
 
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
         ->select('detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
-        'articulos.nombre as articulo', 'articulos.descripcion as articulo_descripcion')
+        'detalle_ventas.subtotal', 'articulos.nombre as articulo', 'articulos.descripcion as articulo_descripcion')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id', 'desc')->get();
 
@@ -105,7 +212,7 @@ class VentaController extends Controller
         
 
     }
- 
+     
     public function store(Request $request){
         if (!$request->ajax()) return redirect('/');
  
@@ -113,6 +220,7 @@ class VentaController extends Controller
             DB::beginTransaction();
  
             $mytime= Carbon::now();
+            if($request->abono<$request->total){$estado = 'Debe';} else{$estado = 'Cancelado';}
  
             $venta = new Venta();
             $venta->idcliente = $request->idcliente;
@@ -124,7 +232,7 @@ class VentaController extends Controller
             $venta->impuesto = $request->impuesto;
             $venta->total = $request->total;
             $venta->abono = $request->abono;
-            $venta->estado = 'Registrado';
+            $venta->estado = $estado;
             $venta->save();
  
             $detalles = $request->data;//Array de detalles
@@ -137,7 +245,8 @@ class VentaController extends Controller
                 $detalle->idarticulo = $det['idarticulo'];
                 $detalle->cantidad = $det['cantidad'];
                 $detalle->precio = $det['precio'];
-                $detalle->descuento = $det['descuento'];         
+                $detalle->descuento = $det['descuento'];
+                $detalle->subtotal = ($det['cantidad']*$det['precio'])-$det['descuento'];       
                 $detalle->save();
             }
             

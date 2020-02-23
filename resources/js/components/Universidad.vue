@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="universidades">Nombre</option>
                                     <option value="provincias">Provincia</option>
                                     <option value="cantones">Canton</option>
@@ -129,14 +129,14 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
                         <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                    </div>
+                    </div> 
                     <div class="modal-body">
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="form-row">
@@ -144,34 +144,30 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Nombre: </span>
                                     </div>
-                                    <input type="text" v-model="nombre" class="form-control">
+                                    <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                                 </div>                                
                             </div>
                             <div class="form-row">
-                                <div class="input-group input-group-sm mb-3 col-6">
+                                <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Provincia: </span>
                                     </div>
-                                    <select class="form-control form-control-sm" v-model="idprovincia">
+                                    <select class="form-control" v-bind:class="{ 'is-invalid': e_idprovincia }" v-model="idprovincia">
                                         <option value="0" disabled>--Provincia--</option>
                                         <option v-for="provincia in arrayProvincia" :key="provincia.id" :value="provincia.id" v-text="provincia.nombre"></option>
                                     </select>
                                 </div>
-                                <div class="input-group input-group-sm mb-3 col-6">
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Canton: </span>
                                     </div>
-                                    <select class="form-control form-control-sm" v-model="idcanton">
+                                    <select class="form-control" v-bind:class="{ 'is-invalid': e_idcanton }" v-model="idcanton">
                                         <option value="0" disabled>--Canton--</option>
                                         <option v-for="canton in arrayCanton" :key="canton.id" :value="canton.id" v-text="canton.nombre"></option>
                                     </select>
                                 </div>                               
-                            </div>
-                            <div v-show="errorUniversidad" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjUniversidad" :key="error" v-text="error">
-                                    </div>
-                                </div>
                             </div>
 
                         </form>
@@ -203,8 +199,13 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorUniversidad : 0,
                 errorMostrarMsjUniversidad : [],
+                e_nombre : false,
+                e_idprovincia : false,
+                e_idcanton : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -386,19 +387,27 @@
             validarUniversidad(){
                 this.errorUniversidad=0;
                 this.errorMostrarMsjUniversidad =[];
-                if (!this.nombre) this.errorMostrarMsjUniversidad.push("El nombre de la Universidad no puede estar vacío.");
+
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjUniversidad.push('nombre');}else{this.e_nombre = false}
+                if (this.idprovincia == 0) {this.e_idprovincia = true; this.errorMostrarMsjUniversidad.push('idprovincia');}else{this.e_idprovincia = false}
+                if (this.idcanton == 0) {this.e_idcanton = true; this.errorMostrarMsjUniversidad.push('idcanton');}else{this.e_idcanton = false}
+
                 if (this.errorMostrarMsjUniversidad.length) this.errorUniversidad = 1;
                 return this.errorUniversidad;
             },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorUniversidad=0;
+                this.errorMostrarMsjUniversidad = [];
+                this.e_nombre = false;
+                this.e_idprovincia = false;
+                this.e_idcanton = false;
                 
                 this.nombre='';
                 this.idprovincia=0;
                 this.idcanton=0;
-
-                this.errorUniversidad=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -431,6 +440,9 @@
                 }
                 this.selectProvincia();
                 this.selectCanton();
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -438,11 +450,3 @@
         }
     }
 </script>
-<style>    
-
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-  
-</style>

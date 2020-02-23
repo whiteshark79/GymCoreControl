@@ -16,7 +16,7 @@
                             
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();"> @change="ceroBusqueda();">
                                         <option value="nombre">Nombre</option>
                                         <option value="num_documento">Documento</option>
                                         <option value="fec_nacimiento">Cumpleaños</option>
@@ -39,7 +39,7 @@
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     </select>
-                                </div>
+                                </div> 
                             </div>  
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
@@ -141,35 +141,35 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="far fa-id-card"></i></span>
-                                                        <select v-model="tipo_documento" class="form-control form-control-sm col-4">
+                                                        <select v-model="tipo_documento" class="form-control col-4">
                                                             <option value="0" disabled>--Doc--</option>
                                                             <option value="C">Cédula</option>
                                                             <option value="R">RUC</option>
                                                             <option value="P">Pasaporte</option>                                            
                                                         </select>
-                                                        <input type="number" v-model="num_documento" class="form-control form-control-sm col-8" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento">                                                        
+                                                        <input type="number" v-model="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento">                                                        
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
-                                                        <input type="text" maxlength="10" v-model="cod_socio" class="form-control form-control-sm" placeholder="Código Socio">
+                                                        <input type="text" maxlength="10" v-model="cod_socio" class="form-control" placeholder="Código Socio">
                                                     </div>                                        
                                                 </div>                                                
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-8">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                        <input type="text" maxlength="60" v-model="nombre" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
+                                                        <input type="text" maxlength="60" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-restroom"></i></span>
-                                                        <select v-model="sexo" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_sexo }">
+                                                        <select v-model="sexo" class="form-control" v-bind:class="{ 'is-invalid': e_sexo }">
                                                             <option value="0" disabled>--Sexo--</option>
                                                             <option value="H">Hombre</option>
                                                             <option value="M">Mujer</option>                                       
@@ -179,15 +179,15 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-5">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-calendar-alt"></i></span>
-                                                        <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_fec_nacimiento }">
+                                                        <input type="date" v-model="fec_nacimiento" class="form-control" v-bind:class="{ 'is-invalid': e_fec_nacimiento }">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-tag"></i></span>
-                                                        <select v-model="estado_civil" class="form-control form-control-sm col-9">
+                                                        <select v-model="estado_civil" class="form-control col-9">
                                                             <option value="0" disabled>--Estado Civil--</option>
                                                             <option value="S">Soltero/a</option>
                                                             <option value="U">Unión de Hecho</option>
@@ -198,9 +198,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-3">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-baby"></i></span>
-                                                        <select v-model="hijos" class="form-control form-control-sm">
+                                                        <select v-model="hijos" class="form-control">
                                                             <option value="0" disabled>--Hijos--</option>
                                                             <option value="S">Si</option>
                                                             <option value="N">No</option>                                       
@@ -210,24 +210,24 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-mobile-alt"></i></span>
-                                                        <input type="number" v-model="celular" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular">
+                                                        <input type="number" v-model="celular" class="form-control" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                                        <input type="email" v-model="email" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email">                                                    
+                                                        <input type="email" v-model="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email">                                                    
                                                     </div>                                        
                                                 </div>                                                                                                         
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-map-marker-alt"></i></span>
-                                                        <input type="text" maxlength="60" v-model="direccion" class="form-control form-control-sm col-9" placeholder="Dirección">
-                                                        <select v-model="sector" class="form-control form-control-sm col-3">
+                                                        <input type="text" maxlength="60" v-model="direccion" class="form-control col-9" placeholder="Dirección">
+                                                        <select v-model="sector" class="form-control col-3">
                                                             <option value="0" disabled>--Sector--</option>
                                                             <option value="N">Norte</option>
                                                             <option value="C">Centro</option>
@@ -249,12 +249,12 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
-                                                        <select class="form-control form-control-sm col-8" v-model="idprofesion">                                                                
+                                                        <select class="form-control col-8" v-model="idprofesion">                                                                
                                                                 <option v-for="profesion in arrayProfesion" :key="profesion.id" :value="profesion.id" v-text="profesion.nombre"></option>
                                                         </select>
-                                                        <select v-model="sit_laboral" class="form-control form-control-sm">
+                                                        <select v-model="sit_laboral" class="form-control">
                                                             <option value="0" disabled>--Sit. Laboral--</option>
                                                             <option value="E">Empresario</option>
                                                             <option value="D">Dependiente</option>
@@ -266,18 +266,18 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-building"></i></span>
-                                                        <input type="text" maxlength="60" v-model="empresa" class="form-control form-control-sm" placeholder="Nombre Empresa">
-                                                        <input type="text" maxlength="30" v-model="cargo" class="form-control form-control-sm" placeholder="Cargo">
+                                                        <input type="text" maxlength="60" v-model="empresa" class="form-control" placeholder="Nombre Empresa">
+                                                        <input type="text" maxlength="30" v-model="cargo" class="form-control" placeholder="Cargo">
                                                     </div>
                                                 </div>                                                                                               
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-user-graduate"></i></span>
-                                                        <select v-model="estudiante" class="form-control form-control-sm">
+                                                        <select v-model="estudiante" class="form-control">
                                                             <option value="0" disabled>--Estudiante--</option>
                                                             <option value="S">Si</option>
                                                             <option value="N">No</option>                                       
@@ -285,9 +285,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-8">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-university"></i></span>
-                                                        <select class="form-control form-control-sm" v-model="iduniversidad">
+                                                        <select class="form-control" v-model="iduniversidad">
                                                             <option v-for="universidad in arrayUniversidad" :key="universidad.id" :value="universidad.id" v-text="universidad.nombre"></option>
                                                         </select>
                                                     </div>
@@ -306,29 +306,29 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
-                                                        <input type="number" min="8" max="80" v-model="edad" class="form-control form-control-sm" placeholder="Edad">                                                        
+                                                        <input type="number" min="8" max="80" v-model="edad" class="form-control" placeholder="Edad">                                                        
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-weight fa-lg"></i></span>
-                                                        <input type="number" min="60" max="300" v-model="peso" class="form-control form-control-sm"  placeholder="Peso (lbs.)">
+                                                        <input type="number" min="60" max="300" v-model="peso" class="form-control"  placeholder="Peso (lbs.)">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-arrows-alt-v"></i></span>
-                                                        <input type="number" min="100" max="200" v-model="estatura" class="form-control form-control-sm"  placeholder="Estatura (cms.)">                                                      
+                                                        <input type="number" min="100" max="200" v-model="estatura" class="form-control"  placeholder="Estatura (cms.)">                                                      
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-heartbeat"></i></span>
-                                                        <select v-model="nivel_actividad" class="form-control form-control-sm">
+                                                        <select v-model="nivel_actividad" class="form-control">
                                                             <option value="0" disabled>--Nivel de Actividad--</option>
                                                             <option value="S">Sedentarismo/a</option>
                                                             <option value="PA">Poco activo</option>
@@ -338,9 +338,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-walking"></i></span>
-                                                        <select v-model="tipo_actividad" class="form-control form-control-sm">
+                                                        <select v-model="tipo_actividad" class="form-control">
                                                             <option value="0" disabled>--Tipo de Actividad--</option>
                                                             <option value="NA">No aplica</option>
                                                             <option value="C">Caminar</option>
@@ -351,9 +351,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <div class="input-group">
+                                                    <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-bullseye"></i></span>
-                                                        <select v-model="objetivo" class="form-control form-control-sm">
+                                                        <select v-model="objetivo" class="form-control">
                                                             <option value="0" disabled>--Objetivo--</option>
                                                             <option value="BP">Bajar de peso</option>
                                                             <option value="FR">Fuerza-Resistencia</option>
@@ -426,9 +426,8 @@
                 tituloModal : '',
                 tipoAccion : 0,
 
-                 errorPersona : 0,
-                 errorMostrarMsjPersona : [],
-                
+                errorPersona : 0,
+                errorMostrarMsjPersona : [],                
                 e_num_documento : false,
                 e_nombre : false,
                 e_sexo : false,
@@ -492,7 +491,7 @@
                 })
                 .catch(function (error) {
                     console.log(error);
-                });
+                });                
                 me.ordenado=ordenado;
                 me.ascdesc=ascdesc;
             },
@@ -531,7 +530,7 @@
                if (this.validarPersona()){ return; }
                 let me = this;
 
-                axios.post('/alumno/registrar',{
+                axios.post('/alumno/registrar',{ 
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
                     'nombre' : this.nombre,
@@ -608,7 +607,7 @@
 
                 if (!this.num_documento) {this.e_num_documento = true; this.errorMostrarMsjPersona.push('num_documento');}else{this.e_num_documento = false}
                 if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjPersona.push('nombre');}else{this.e_nombre = false}
-                if (!this.sexo) {this.e_sexo = true; this.errorMostrarMsjPersona.push('num_dosexocumento');}else{this.e_sexo = false}
+                if (!this.sexo) {this.e_sexo = true; this.errorMostrarMsjPersona.push('sexo');}else{this.e_sexo = false}
                 if (!this.fec_nacimiento) {this.e_fec_nacimiento = true; this.errorMostrarMsjPersona.push('fec_nacimiento');}else{this.e_fec_nacimiento = false}
                 if (!this.celular) {this.e_celular = true; this.errorMostrarMsjPersona.push('celular');}else{this.e_celular = false}
                 if (!this.email) {this.e_email = true; this.errorMostrarMsjPersona.push('email');}else{this.e_email = false}
@@ -619,6 +618,15 @@
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorPersona = 0;
+                this.errorMostrarMsjPersona = [];                
+                this.e_num_documento = false;
+                this.e_nombre = false;
+                this.e_sexo = false;
+                this.e_fec_nacimiento = false;
+                this.e_celular = false;
+                this.e_email = false;
                 
                 this.tipo_documento = 'C';
                 this.num_documento = '';
@@ -723,6 +731,9 @@
                 }
                 this.selectProfesion();
                 this.selectUniversidad();
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -730,11 +741,3 @@
         }
     }
 </script>
-<style>        
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-   
-
-</style>

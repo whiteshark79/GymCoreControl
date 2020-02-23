@@ -19,7 +19,7 @@
                             <div class="card-body">
                                 <div class="form-group row justify-content-between">
                                     <div class="input-group input-group-sm col-7">                                
-                                        <select class="form-control col-2 " v-model="criterio">
+                                        <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                             <option value="idproveedor">Proveedor</option>
                                             <option value="fecha_hora">Fecha</option>
                                             <option value="tipo_comprobante">Tipo Doc.</option>
@@ -100,7 +100,7 @@
                                             <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
                                                 <td v-text="ingreso.fecha_hora"></td>
                                                 <td>{{ingreso.nombre}}</td>                        
-                                                <td>{{ingreso.tipo_comprobante}} : {{ingreso.serie_comprobante}}-{{ingreso.num_comprobante}}</td>
+                                                <td><span class="text-mini">{{ingreso.tipo_comprobante}} </span> {{ ingreso.serie_comprobante ? ingreso.serie_comprobante+'-'+ingreso.num_comprobante : '000-000' }}</td>
                                                 <td align="right">$ {{ (ingreso.total-ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ ingreso.total  }}</td>
@@ -167,6 +167,7 @@
                                                             placeholder="Buscar Proveedores..."
                                                             @input="getDatosProveedor"                                    
                                                         ></v-select>
+                                                        <span class="text-error" v-show="e_idproveedor">Eligir proveedor</span>
                                                     </div> 
                                                     <div class="col-md-4">
                                                         <label>Comprobante<span class="text-error" v-show="tipo_comprobante==0">(*)</span></label>
@@ -177,31 +178,22 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <!-- <template v-if="tipo_comprobante=='FACTURA'"> -->
+                                                <template v-if="tipo_comprobante=='FACTURA'">
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <label>Serie<span class="text-error" v-show="serie_comprobante==''">(*)</span></label>
-                                                            <input type="number" class="form-control form-control-sm" v-model="serie_comprobante" placeholder="000x">
+                                                            <input type="number" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_serie_comprobante }" v-model="serie_comprobante" placeholder="000x">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>Número<span class="text-error" v-show="num_comprobante==''">(*)</span></label>
-                                                            <input type="number" class="form-control form-control-sm" v-model="num_comprobante" placeholder="000xx">
+                                                            <input type="number" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_num_comprobante }" v-model="num_comprobante" placeholder="000xx">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>IVA<span class="text-error" v-show="impuesto==''">(*)</span></label>
-                                                            <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-model="impuesto">
+                                                            <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_impuesto }" v-model="impuesto">
                                                         </div>                                            
                                                     </div>
-                                                <!-- </template> -->
-                                                <div class="row">                                                
-                                                    <div v-show="errorIngreso" class="col-md-12 form-group row div-error">                                                    
-                                                        <div class="alert alert-danger" role="alert">
-                                                            <div v-for="error in errorMostrarMsjIngreso" :key="error" v-text="error">                                                                
-                                                            </div>
-                                                            
-                                                        </div>
-                                                    </div>                                               
-                                                </div>                                      
+                                                </template>                                                                                     
                                             </div><!-- /.card -->
                                         </div>
                                     </div><!-- /.col-md-5 -->
@@ -261,7 +253,7 @@
                                                             <tbody v-else>
                                                                 <tr>
                                                                     <td colspan="5" class="text-center">
-                                                                        <span class="badge badge-pill badge-secondary">-- Sin registros --</span>                                       
+                                                                        <span class="badge badge-pill" v-bind:class="[ e_detalle ? 'badge-danger' : 'badge-secondary']">-- Sin registros --</span>                                       
                                                                     </td>
                                                                 </tr>
                                                             </tbody>                                    
@@ -508,8 +500,15 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorIngreso : 0,
                 errorMostrarMsjIngreso : [],
+                e_idproveedor : false,
+                e_serie_comprobante : false,
+                e_num_comprobante : false,
+                e_impuesto : false,
+                e_detalle : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -764,12 +763,17 @@
                 this.errorIngreso=0;
                 this.errorMostrarMsjIngreso =[];
 
-                if (this.idproveedor==0) this.errorMostrarMsjIngreso.push("Seleccione un Proveedor");
-                if (this.tipo_comprobante==0) this.errorMostrarMsjIngreso.push("Seleccione el comprobante");
-                if (!this.num_comprobante) this.errorMostrarMsjIngreso.push("Ingrese el número de comprobante");
-                if (!this.impuesto) this.errorMostrarMsjIngreso.push("Ingrese el impuesto de compra");
-                if (this.arrayDetalle.length<=0) this.errorMostrarMsjIngreso.push("Ingrese detalles");
+                if (this.idproveedor==0) {this.e_idproveedor = true; this.errorMostrarMsjIngreso.push('idproveedor');}else{this.e_idproveedor = false}
 
+                if(this.tipo_comprobante == 'FACTURA')
+                {
+                    if (this.serie_comprobante==0) {this.e_serie_comprobante = true; this.errorMostrarMsjIngreso.push('serie_comprobante');}else{this.e_serie_comprobante = false}
+                    if (this.num_comprobante==0) {this.e_num_comprobante = true; this.errorMostrarMsjIngreso.push('num_comprobante');}else{this.e_num_comprobante = false}
+                    if (!this.impuesto) {this.e_impuesto = true; this.errorMostrarMsjIngreso.push('impuesto');}else{this.e_impuesto = false}
+                }
+
+                if (this.arrayDetalle.length<=0) {this.e_detalle = true; this.errorMostrarMsjIngreso.push('detalle');}else{this.e_detalle = false} 
+                
                 if (this.errorMostrarMsjIngreso.length) this.errorIngreso = 1;
 
                 return this.errorIngreso;
@@ -778,6 +782,12 @@
                 let me=this;
                 me.listado=0;
 
+                this.e_idproveedor = false;
+                this.e_serie_comprobante = false;
+                this.e_num_comprobante = false;
+                this.e_impuesto = false;
+                this.e_detalle = false;
+                
                 me.idproveedor=0;
                 me.tipo_comprobante='FACTURA';
                 me.serie_comprobante='';
@@ -785,13 +795,15 @@
                 me.impuesto=0.12;
                 me.total=0.0;
                 me.idarticulo=0;
+                me.codigo='';
                 me.articulo='';
+                me.descripcion='';
                 me.cantidad=0;
                 me.precio=0;
                 me.arrayDetalle=[];
             },
             ocultarDetalle(){
-                this.listado=1;
+                this.listado=1;                
             },
             verIngreso(id){
                 let me=this;
@@ -868,16 +880,12 @@
                 } 
                 }) 
             },
+            ceroBusqueda(){
+                this.buscar='';
+            }
         },
         mounted() {
             this.listarIngreso(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
         }
     }
 </script>
-<style>    
-  .div-error{
-        display: flex;
-        justify-content: center;
-    }
-
-</style>

@@ -67,6 +67,45 @@ class InscripcionController extends Controller
  
         return ['inscripcionesM' => $inscripcionesM];
     }
+
+    public function listarInscripcionesAlumno(Request $request){
+        if (!$request->ajax()) return redirect('/');        
+        
+        $id = \Auth::user()->id;
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        $paginado = $request->paginado;
+
+        if ($buscar==''){
+            $inscripcionesA = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+            ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
+            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 'modalidades.nombre as modalidad',
+            'inscripciones.abono','inscripciones.saldo','inscripciones.total','inscripciones.estado')
+            ->where('personas.id',$id)
+            ->orderBy('inscripciones.fecha_fin', 'desc')->paginate($paginado);
+        }else{
+            $inscripcionesA = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+            ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
+            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 'modalidades.nombre as modalidad',
+            'inscripciones.abono','inscripciones.saldo','inscripciones.total','inscripciones.estado')
+            ->where('personas.id',$id)
+            ->where('inscripciones.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('inscripciones.fecha_fin', 'desc')->paginate($paginado);
+        }
+ 
+        return [
+            'pagination' => [
+                'total'        => $inscripcionesA->total(),
+                'current_page' => $inscripcionesA->currentPage(),
+                'per_page'     => $inscripcionesA->perPage(),
+                'last_page'    => $inscripcionesA->lastPage(),
+                'from'         => $inscripcionesA->firstItem(),
+                'to'           => $inscripcionesA->lastItem(),
+            ],
+            'inscripcionesA' => $inscripcionesA
+        ];
+    }
       
     public function store(Request $request)
     {

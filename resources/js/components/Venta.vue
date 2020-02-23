@@ -19,7 +19,7 @@
                             <div class="card-body">
                                 <div class="form-group row justify-content-between">
                                     <div class="input-group input-group-sm col-7">                                
-                                        <select class="form-control col-2 " v-model="criterio">
+                                        <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                             <option value="idcliente">Cliente</option>
                                             <option value="fecha_hora">Fecha</option>
                                             <option value="tipo_comprobante">Tipo Doc.</option>
@@ -108,19 +108,20 @@
                                             <tr v-for="venta in arrayVenta" :key="venta.id">
                                                 <td v-text="venta.fecha_hora"></td>
                                                 <td>{{venta.nombre}}</td> 
-                                                <td>{{venta.tipo_comprobante}} : {{venta.serie_comprobante}}-{{venta.num_comprobante}}</td>
+                                                <td><span class="text-mini">{{venta.tipo_comprobante}}</span> : {{ venta.serie_comprobante ? venta.serie_comprobante+'-'+venta.num_comprobante : '000-000' }} </td>
                                                 <td align="right">$ {{ (venta.total-venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ venta.total  }}</td>
                                                 <td align="right">$ {{ venta.abono  }}<template v-if="venta.abono < venta.total"><span class="badge badge-warning">D</span></template></td>
                                                 <td align="center"> 
-                                                    <div v-if="venta.estado=='Registrado'"><span class="badge badge-success">Registrado</span></div>
-                                                    <div v-else><span class="badge badge-danger">Anulado</span></div>      
+                                                    <div v-if="venta.estado=='Cancelado'"><span class="badge badge-success">{{venta.estado}}</span></div>
+                                                    <div v-else-if="venta.estado=='Debe'"><span class="badge badge-warning">{{venta.estado}}</span></div>  
+                                                    <div v-else><span class="badge badge-danger">{{venta.estado}}</span></div>      
                                                 </td>
                                                 <td align="center">
                                                     <a class="btn btn-sm btn-default" @click="verVenta(venta.id)"><i class="far fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-default" @click="pdfVenta(venta.id)"><i class="fas fa-print"></i></a>                                   
-                                                    <template v-if="venta.estado=='Registrado'">
+                                                    <template v-if="venta.estado=='Cancelado'">
                                                         <a class="btn btn-sm btn-default" @click="desactivarVenta(venta.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
@@ -175,8 +176,9 @@
                                                             label="nombre"
                                                             :options="arrayCliente"
                                                             placeholder="Buscar Clientes..."
-                                                            @input="getDatosCliente"                                    
+                                                            @input="getDatosCliente"
                                                         ></v-select>
+                                                        <span class="text-error" v-show="e_idcliente">Elegir cliente</span>
                                                     </div> 
                                                     <div class="col-md-4">
                                                         <label>Comprobante<span class="text-error" v-show="tipo_comprobante==0">(*)</span></label>
@@ -191,28 +193,18 @@
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <label>Serie<span class="text-error" v-show="serie_comprobante==''">(*)</span></label>
-                                                            <input type="number" class="form-control form-control-sm" v-model="serie_comprobante" placeholder="000x">
+                                                            <input type="number" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_serie_comprobante }" v-model="serie_comprobante" placeholder="000x">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>Número<span class="text-error" v-show="num_comprobante==''">(*)</span></label>
-                                                            <input type="number" class="form-control form-control-sm" v-model="num_comprobante" placeholder="000xx">
+                                                            <input type="number" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_num_comprobante }" v-model="num_comprobante" placeholder="000xx">
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>IVA<span class="text-error" v-show="impuesto==''">(*)</span></label>
-                                                            <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-model="impuesto">
+                                                            <input type="number" step="0.01" min="0" max="0.20" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_impuesto }" v-model="impuesto">
                                                         </div>                                            
                                                     </div>
-                                                </template>
-
-                                                <div class="row">                                                
-                                                    <div v-show="errorVenta" class="col-md-12 form-group row div-error">                                                    
-                                                        <div class="alert alert-danger" role="alert">
-                                                            <div v-for="error in errorMostrarMsjVenta" :key="error" v-text="error">                                                                
-                                                            </div>
-                                                            
-                                                        </div>
-                                                    </div>                                               
-                                                </div>                                      
+                                                </template>                                                                                    
                                             </div><!-- /.card -->
                                         </div>
                                     </div><!-- /.col-md-5 -->
@@ -281,11 +273,12 @@
                                                             <tbody v-else>
                                                                 <tr>
                                                                     <td colspan="7" class="text-center">
-                                                                        <span class="badge badge-pill badge-secondary">-- Sin registros --</span>                                       
+                                                                        <span class="badge badge-pill" v-bind:class="[ e_detalle ? 'badge-danger' : 'badge-secondary']">-- Sin registros --</span>                                       
                                                                     </td>
                                                                 </tr>
                                                             </tbody>                                    
-                                                        </table>
+                                                        </table>                                                       
+
                                                         <table width="250" align="right" v-if="arrayDetalle.length">
                                                             <tr width="65%">
                                                                 <td align="left"><strong>Abono:</strong></td>
@@ -558,8 +551,16 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorVenta : 0,
                 errorMostrarMsjVenta : [],
+                errorStock : [],
+                e_idcliente : false,
+                e_serie_comprobante : false,
+                e_num_comprobante : false,
+                e_impuesto : false,
+                e_detalle : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -851,25 +852,37 @@
                 me.errorMostrarMsjVenta =[];
                 var art;
                 
-                me.arrayDetalle.map(function(x){
-                    if (x.cantidad>x.stock){
-                        art=x.articulo + " sin stock";
-                        me.errorMostrarMsjVenta.push(art);
-                    }
-                });
+                // me.arrayDetalle.map(function(x){
+                //     if (x.cantidad>x.stock){
+                //         art=x.articulo + " sin stock";
+                //         me.errorStock.push(art);
+                //     }
+                // });
 
-                if (me.idcliente==0) me.errorMostrarMsjVenta.push("Seleccione un Cliente");
-                if (me.tipo_comprobante==0) me.errorMostrarMsjVenta.push("Seleccione el comprobante");
-                if (!me.impuesto) me.errorMostrarMsjVenta.push("Ingrese el impuesto de compra");
-                if (me.arrayDetalle.length<=0) me.errorMostrarMsjVenta.push("Ingrese detalles");
+                if (this.idcliente==0) {this.e_idcliente = true; this.errorMostrarMsjVenta.push('idcliente');}else{this.e_idcliente = false}
 
-                if (me.errorMostrarMsjVenta.length) me.errorVenta = 1;
+                if(this.tipo_comprobante == 'FACTURA')
+                {
+                    if (this.serie_comprobante==0) {this.e_serie_comprobante = true; this.errorMostrarMsjVenta.push('serie_comprobante');}else{this.e_serie_comprobante = false}
+                    if (this.num_comprobante==0) {this.e_num_comprobante = true; this.errorMostrarMsjVenta.push('num_comprobante');}else{this.e_num_comprobante = false}
+                    if (!this.impuesto) {this.e_impuesto = true; this.errorMostrarMsjVenta.push('impuesto');}else{this.e_impuesto = false}
+                }
 
-                return me.errorVenta;
+                if (this.arrayDetalle.length<=0) {this.e_detalle = true; this.errorMostrarMsjVenta.push('detalle');}else{this.e_detalle = false}              
+
+                if (this.errorMostrarMsjVenta.length) this.errorVenta = 1;
+
+                return this.errorVenta;
             },
             mostrarDetalle(){
                 let me=this;
                 me.listado=0;
+
+                this.e_idproveedor = false;
+                this.e_serie_comprobante = false;
+                this.e_num_comprobante = false;
+                this.e_impuesto = false;
+                this.e_detalle = false;
 
                 me.idproveedor=0;
                 me.tipo_comprobante='NOTA';
@@ -879,7 +892,9 @@
                 me.total=0.0;
                 me.abono=0.0;
                 me.idarticulo=0;
+                me.codigo='';
                 me.articulo='';
+                me.descripcion='';
                 me.cantidad=0;
                 me.precio=0;
                 me.arrayDetalle=[];
@@ -963,16 +978,12 @@
                 } 
                 }) 
             },
+            ceroBusqueda(){
+                this.buscar='';
+            }
         },
         mounted() {
             this.listarVenta(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
         }
     }
 </script>
-<style>    
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-
-</style>

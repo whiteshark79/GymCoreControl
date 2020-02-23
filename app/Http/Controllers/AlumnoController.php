@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Alumno;
 use App\Persona;
+use App\User;
+use App\Rol;
 
 class AlumnoController extends Controller
 {
@@ -59,7 +61,7 @@ class AlumnoController extends Controller
     }
     
     public function selectAlumno(Request $request){
-        if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');   
  
         $filtro = $request->filtro;
         $alumnos = Alumno::join('personas','alumnos.id','=','personas.id')
@@ -69,6 +71,25 @@ class AlumnoController extends Controller
         ->orderBy('personas.nombre', 'asc')->get();
  
         return ['alumnos' => $alumnos];
+    } 
+
+    public function selectAlumnoId(Request $request){ 
+        if (!$request->ajax()) return redirect('/');
+
+        $id = \Auth::user()->id;
+
+        $personas = Alumno::join('personas','alumnos.id','=','personas.id')
+        ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
+        ->join('universidades','alumnos.iduniversidad','=','universidades.id')
+        ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
+        'alumnos.cod_socio', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
+        'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
+        'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')           
+        ->where('personas.id',$id)->get();
+ 
+        return ['personas' => $personas];
+        //return $id;
     } 
 
     public function store(Request $request)
@@ -108,6 +129,16 @@ class AlumnoController extends Controller
             $alumno->objetivo = $request->objetivo;            
             $alumno->id = $persona->id;
             $alumno->save();
+
+            $rol = DB::table('roles')->where('nombre', 'like', '%Alumno%')->first();
+
+            $user = new User();
+            $user->usuario = $request->cod_socio;
+            $user->password = bcrypt( $request->num_documento);
+            $user->condicion = '1';
+            $user->idrol = $rol->id;
+            $user->id = $persona->id;
+            $user->save();
  
             DB::commit();
  

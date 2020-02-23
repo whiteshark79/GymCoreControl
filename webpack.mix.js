@@ -18,7 +18,7 @@ mix.styles([
    'resources/assets/css/adminlte.css'
 ], 'public/css/plantilla.css')
 .scripts([
-   'resources/assets/js/jquery.min.js',
+   'resources/assets/js/jquery.min.js',   
    'resources/assets/js/Chart.min.js',
    'resources/assets/js/adminlte.min.js',
    'resources/assets/js/jquery.pace.min.js',

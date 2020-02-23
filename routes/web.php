@@ -14,12 +14,14 @@ Route::group(['middleware'=>['auth']],function(){
      
     Route::get('/main', function () {
         return view('contenido/contenido');
+       //return view('tooltip');
     })->name('main');
 
     Route::group(['middleware' => ['Administrador']], function () {
 
         Route::get('/dashboard/grafInOuts','DashboardController@grafInOuts');
         Route::get('/dashboard/widgetInOuts','DashboardController@widgetInOuts');
+        Route::get('/dashboard/grafArticulo','DashboardController@grafArticulo');
         Route::get('/dashboard/widgetAlumnos','DashboardController@widgetAlumnos'); 
 
         Route::get('/user', 'UserController@index');
@@ -40,11 +42,15 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/alumno/registrar', 'AlumnoController@store');
         Route::put('/alumno/actualizar', 'AlumnoController@update');
         Route::get('/alumno/selectAlumno', 'AlumnoController@selectAlumno');
+        Route::get('/alumno/selectAlumnoId', 'AlumnoController@selectAlumnoId');
 
-        Route::get('/cliente', 'ClienteController@index');
-        Route::post('/cliente/registrar', 'ClienteController@store');
-        Route::put('/cliente/actualizar', 'ClienteController@update');                
-        Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
+        Route::get('/horario', 'HorarioController@index');
+        Route::post('/horario/registrar', 'HorarioController@store');
+        Route::put('/horario/actualizar', 'HorarioController@update');
+        Route::put('/horario/eliminar', 'HorarioController@destroy');
+        Route::put('/horario/desactivar', 'HorarioController@desactivar');
+        Route::put('/horario/activar', 'HorarioController@activar');
+        Route::get('/horario/selectRol', 'HorarioController@selectRol');
 
         Route::get('/proveedor', 'ProveedorController@index');
         Route::post('/proveedor/registrar', 'ProveedorController@store');
@@ -74,6 +80,10 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/venta/obtenerCabecera', 'VentaController@obtenerCabecera');
         Route::get('/venta/obtenerDetalles', 'VentaController@obtenerDetalles');
         Route::get('/venta/pdf/{id}', 'VentaController@pdf')->name('venta_pdf');
+        Route::get('/venta/listarVentaCliente', 'VentaController@listarVentaCliente');
+        Route::get('/venta/listarArticuloVenta', 'VentaController@listarArticuloVenta');
+        Route::get('/venta/listarVentasCabeceraAlumno', 'VentaController@listarVentasCabeceraAlumno');
+        Route::get('/venta/listarVentasDetallesAlumno', 'VentaController@listarVentasDetallesAlumno');
 
         Route::get('/inscripcion', 'InscripcionController@index');
         Route::post('/inscripcion/registrar', 'InscripcionController@store');
@@ -81,7 +91,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/inscripcion/activar', 'InscripcionController@activar');         
         Route::put('/inscripcion/desactivar', 'InscripcionController@desactivar');
         Route::get('/inscripcion/listarAlumnoMes', 'InscripcionController@listarAlumnoMes');
+        Route::get('/inscripcion/listarInscripcionesAlumno', 'InscripcionController@listarInscripcionesAlumno');        
 
+        Route::get('/cliente', 'ClienteController@index');
+        Route::post('/cliente/registrar', 'ClienteController@store');
+        Route::put('/cliente/actualizar', 'ClienteController@update');                
+        Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
+        Route::get('/cliente/selectPersonaId', 'ClienteController@selectPersonaId');
+        
         Route::get('/servicio', 'ServicioController@index');
         Route::post('/servicio/registrar', 'ServicioController@store');
         Route::put('/servicio/actualizar', 'ServicioController@update');
@@ -174,6 +191,8 @@ Route::group(['middleware'=>['auth']],function(){
     });
 
     Route::group(['middleware' => ['Alumno']], function () {
+
+        Route::put('/alumno/actualizar', 'AlumnoController@update');
         
     });
 
@@ -185,6 +204,3 @@ Route::group(['middleware'=>['auth']],function(){
 
 
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

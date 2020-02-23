@@ -8,7 +8,7 @@ class ClienteController extends Controller
 {
     public function index(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
@@ -36,8 +36,23 @@ class ClienteController extends Controller
             'personas' => $personas
         ];
     }
+ 
+    public function selectPersonaId(Request $request){ 
+        //if (!$request->ajax()) return redirect('/');
 
-    public function selectCliente(Request $request){
+        $id = \Auth::user()->id;
+
+        $personas = Persona::join('users','personas.id','=','users.id')
+        ->select('personas.id','personas.nombre','personas.email','personas.perfil')           
+        ->where('personas.id',$id)->get();
+ 
+        //return ['personas' => $personas];       
+         
+        return view("plantilla.sbalumno",compact('personas'));
+        
+    }
+
+    public function selectCliente(Request $request){ 
         if (!$request->ajax()) return redirect('/');
  
         $filtro = $request->filtro;

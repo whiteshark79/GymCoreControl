@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="nombre">Nombre</option>
                                     <option value="num_documento">Documento</option>
                                     </select>
@@ -112,7 +112,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -124,70 +124,64 @@
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-industry"></i></span>
-                                        <select v-model="tipo_documento" class="form-control form-control-sm col-2">
+                                        <select v-model="tipo_documento" class="form-control col-2">
                                             <option value="0" disabled>--Doc.--</option>
                                             <option value="C">Cédula</option>
                                             <option value="R">RUC</option>
                                             <option value="P">Pasaporte</option>                                            
                                         </select>
-                                        <input type="number" v-model="num_documento" class="form-control form-control-sm col-3" placeholder="No. de documento">
-                                        <input type="text" maxlength="60" v-model="nombre" class="form-control form-control-sm col-7" placeholder="Razón Social">
+                                        <input type="number" v-model="num_documento" class="form-control col-4" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="No. de documento">
+                                        <input type="text" maxlength="60" v-model="nombre" class="form-control col-6" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Razón Social">
                                     </div>
                                 </div>                                                                                
                             </div>
                             
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
-                                        <input type="text" v-model="direccion" class="form-control form-control-sm" placeholder="Dirección">
+                                        <input type="text" v-model="direccion" class="form-control" v-bind:class="{ 'is-invalid': e_direccion }" placeholder="Dirección">
                                     </div>                                        
                                 </div>                                                                                                        
                             </div>                                                
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
-                                        <input type="number" v-model="celular" class="form-control form-control-sm" placeholder="Teléfono">
+                                        <input type="number" v-model="celular" class="form-control" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Teléfono">
                                     </div>                                        
                                 </div> 
                                 <div class="form-group col-md-6">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" v-model="email" class="form-control form-control-sm" placeholder="Email">
+                                        <input type="email" v-model="email" class="form-control" placeholder="Email">
                                     </div>
                                 </div>                                           
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                        <input type="text" v-model="nombre_contacto" class="form-control form-control-sm" placeholder="Nombre contacto">                                                            
+                                        <input type="text" v-model="nombre_contacto" class="form-control" placeholder="Nombre contacto">                                                            
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
-                                        <input type="number" v-model="celular_contacto" class="form-control form-control-sm" placeholder="Celular contacto">                                                            
+                                        <input type="number" v-model="celular_contacto" class="form-control" placeholder="Celular contacto">                                                            
                                     </div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <div class="input-group">
+                                    <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" v-model="email_contacto" class="form-control form-control-sm" placeholder="Email contacto">                                                            
+                                        <input type="email" v-model="email_contacto" class="form-control" placeholder="Email contacto">                                                            
                                     </div>
                                 </div>
-                            </div>
-                            <div v-show="errorPersona" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjPersona" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
+                            </div>                           
 
                         </form>
                     </div>
@@ -223,8 +217,14 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorPersona : 0,
                 errorMostrarMsjPersona : [],
+                e_num_documento : false,
+                e_nombre : false,
+                e_direccion : false,
+                e_celular : false, 
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -339,7 +339,11 @@
                 this.errorPersona=0;
                 this.errorMostrarMsjPersona =[];
 
-                if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre del proveedor no puede estar vacío.");
+                if (!this.num_documento) {this.e_num_documento = true; this.errorMostrarMsjPersona.push('num_documento');}else{this.e_num_documento = false}
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjPersona.push('nombre');}else{this.e_nombre = false}
+                if (!this.direccion) {this.e_direccion = true; this.errorMostrarMsjPersona.push('direccion');}else{this.e_direccion = false}
+                if (!this.celular) {this.e_celular = true; this.errorMostrarMsjPersona.push('celular');}else{this.e_celular = false}
+                
 
                 if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
 
@@ -348,6 +352,13 @@
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorPersona=0;
+                this.errorMostrarMsjPersona = [];
+                this.e_num_documento = false;
+                this.e_nombre = false;
+                this.e_direccion = false;
+                this.e_celular = false;
                 
                 this.tipo_documento = 'R';
                 this.num_documento = '';
@@ -358,8 +369,6 @@
                 this.nombre_contacto = '';
                 this.celular_contacto = '';
                 this.email_contacto = '';
-
-                this.errorPersona=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -404,6 +413,9 @@
                         }
                     }
                 }
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -411,12 +423,3 @@
         }
     }
 </script>
-<style>  
-
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-   
-
-</style>

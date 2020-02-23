@@ -1,17 +1,17 @@
 <template>
 
     <main class="main">
+
+      
       <div class="row mt-3">
         <div class="container-fluid">
           <div class="col-md-12">
             <div class="card card-outline card-primary">
               <div class="card-header">
                 <div class="card-title"><h3>Dashboard</h3></div>                
-              </div>
+              </div>              
               <div class="card-body">              
                 <div class="row">
-                  
-
                   <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
                       <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
@@ -37,6 +37,16 @@
 
                   <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
+                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cash-register"></i></span>
+                        <div class="info-box-content">                        
+                          <span class="info-box-text">{{v_msj}}</span>
+                          <span class="info-box-number">Mes: ${{v_val_mes}} <small>( {{v_qtx_mes}} )</small></span>
+                          <span class="info-box-number">Total: ${{v_val_total}}  <small>( {{v_qtx_total}} )</small></span>      
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
                       <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart"></i></span>
                       <div class="info-box-content">
                           <span class="info-box-text">{{i_msj}}</span>
@@ -45,25 +55,15 @@
                       </div>
                     </div>
                   </div>                  
-                  <div class="col-12 col-sm-6 col-md-3">
-                    <div class="info-box">
-                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cash-register"></i></span>
-                        <div class="info-box-content">                        
-                          <span class="info-box-text">{{v_msj}}</span>
-                          <span class="info-box-number">Mes: ${{v_val_mes}} <small>( {{v_qtx_mes}} )</small></span>
-                          <span class="info-box-number">Total: ${{v_val_total}}  <small>( {{v_qtx_total}} )</small></span>      
-                      </div>
-                    </div>
-                  </div>                  
+                                   
                 </div>              
 
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="card card-chart">
+                    <div class="card callout callout-success">
                       <div class="card-header">
-                          <h4>Inscripciones vs Gastos</h4>                      
-     
-                      </div>
+                        <h4>Inscripciones vs Gastos</h4>                 
+                      </div>                      
                       <div class="card-content">
                         <div class="ct-chart">
                             <canvas id="chart_insgas">                                                
@@ -76,10 +76,10 @@
                   <div class="col-md-6">
                     <div class="card">
                       <div class="card-header">
-                          <h4>Registro de Alumnos</h4>
+                          <h4>Registro de Inscripciones</h4>
                       </div>
                       <div class="card-content">
-                        <div class="table-responsive-sm">
+                        <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar">
                           <table class="table table-bordered table-sm table-hover" id="dtTable">
                               <thead class="thead-table">
                                   <tr align="center">                                  
@@ -118,9 +118,9 @@
                 
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="card card-chart">
+                    <div class="card callout callout-info">
                       <div class="card-header">
-                          <h4>Compras vs Ventas</h4>
+                          <h4>Ventas vs Compras</h4>
                       </div>
                       <div class="card-content">
                         <div class="ct-chart">
@@ -129,9 +129,47 @@
                         </div>
                       </div>                          
                     </div>
-                  </div>                
-
-                  
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-header">
+                          <h4>Registro de Ventas</h4>
+                      </div>
+                      <div class="card-content">
+                        <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar">
+                          <table class="table table-bordered table-sm table-hover" id="dtTable">
+                              <thead class="thead-table">
+                                  <tr align="center">                                  
+                                    <th width="5%">#</th> 
+                                    <th width="34%">NOMBRE</th>                                                                                       
+                                    <th width="25%">FECHA VENTA</th>
+                                    <th width="12%">TOTAL</th>
+                                    <th width="12%">ABONO</th>
+                                    <th width="12%">SALDO</th>
+                                  </tr>
+                              </thead>
+                              <tbody v-if="arrayVentaCliente.length">
+                                  <tr v-for="venta in arrayVentaCliente" :key="venta.id">
+                                      <td align="center" v-text="venta.id"></td>
+                                      <td v-text="venta.cliente"></td>
+                                      <td align="center"> {{venta.fecha_hora}}</td>                                  
+                                      <td align="center">$ {{venta.total}}</td>
+                                      <td align="center">$ {{venta.abono}}</td>
+                                      <td align="center">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>                                                                      
+                                  </tr>
+                              </tbody>
+                              <tbody v-else>
+                                <tr>
+                                  <td colspan="6" class="text-center">
+                                    <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
+                                  </td>
+                                </tr>
+                              </tbody>
+                          </table>
+                        </div>
+                      </div>                      
+                    </div>                    
+                  </div>  
                 </div>
                 
               </div>
@@ -149,7 +187,7 @@
     data (){
       return {
         arrayInscripcionAlumno:[],
-        //fecha_hoy: new Date().getDate(),
+        arrayVentaCliente:[],
 
         ArrayWIngresos:[],
         ArrayWVentas:[],
@@ -181,7 +219,7 @@
         a_msj:'',
 
         varIngVen:null,//id donde se muestra graf
-        charIngVen:null,//crea el graf alimentado por valores vinculados al id del canvas        
+        charIngVen:null,//crea el graf alimentado por valores vinculados al id del canvas            
         ingresos:[],
         ventas:[],
         varTotalIngreso:[],
@@ -219,6 +257,19 @@
             //console.log(response);
             var respuesta= response.data;
             me.arrayInscripcionAlumno = respuesta.inscripcionesM;            
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+      },
+
+      listarVentaCliente(){
+        let me=this;
+        var url= '/venta/listarVentaCliente';
+        axios.get(url).then(function (response) {
+            //console.log(response);
+            var respuesta= response.data;
+            me.arrayVentaCliente = respuesta.ventasM;            
         })
         .catch(function (error) {
             console.log(error);
@@ -274,7 +325,6 @@
           me.g_msj = x.g_msj;
         });
       },
-
       getIngVen(){
         let me=this;
         var url= '/dashboard/grafInOuts';
@@ -406,6 +456,7 @@
     },
     mounted() {        
       this.listarAlumnoMes();
+      this.listarVentaCliente();
       this.widgetInOuts();
       this.getIngVen();
       this.getInsGas();        

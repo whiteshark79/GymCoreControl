@@ -22,7 +22,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('dashboard', require('./components/Dashboard.vue').default);
+Vue.component('dashboardmix', require('./components/DashboardMix.vue').default);
+Vue.component('dbinscripciones', require('./components/DBInscripciones.vue').default);
+Vue.component('dbventas', require('./components/DBVentas.vue').default);
+Vue.component('dbinventario', require('./components/DBInventario.vue').default);
 Vue.component('notification', require('./components/Notification.vue').default);
 
 Vue.component('user', require('./components/User.vue').default);
@@ -33,14 +36,18 @@ Vue.component('proveedor', require('./components/Proveedor.vue').default);
 Vue.component('alumno', require('./components/Alumno.vue').default);
 Vue.component('profesor', require('./components/Profesor.vue').default);
 
+Vue.component('perfilalumno', require('./components/PerfilAlumno.vue').default);
+Vue.component('reportealumno', require('./components/ReporteAlumno.vue').default);
+
 Vue.component('categoria', require('./components/Categoria.vue').default);
 Vue.component('articulo', require('./components/Articulo.vue').default);
 
 Vue.component('servicio', require('./components/Servicio.vue').default);
 Vue.component('clasificacion', require('./components/Clasificacion.vue').default);
 
-Vue.component('especialidad', require('./components/Especialidad.vue').default);
 Vue.component('modalidad', require('./components/Modalidad.vue').default);
+Vue.component('horario', require('./components/Horario.vue').default);
+Vue.component('especialidad', require('./components/Especialidad.vue').default);
 Vue.component('profesion', require('./components/Profesion.vue').default);
 
 Vue.component('universidad', require('./components/Universidad.vue').default);

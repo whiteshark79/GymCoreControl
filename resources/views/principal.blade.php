@@ -15,6 +15,7 @@
   
 </head>
 <body class="hold-transition sidebar-mini">    
+    
     <div id="app">
         <!-- Site wrapper -->
         <div class="wrapper">
@@ -46,7 +47,7 @@
         </div>
     </div>
     <script src="js/app.js"></script>
-    <script src="js/plantilla.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>    
+    <script src="js/plantilla.js"></script>   
+       
 </body>
 </html>

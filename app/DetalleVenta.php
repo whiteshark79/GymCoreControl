@@ -12,7 +12,8 @@ class DetalleVenta extends Model
         'idarticulo',
         'cantidad',
         'precio',
-        'descuento'
+        'descuento',
+        'subtotal'
     ];
     public $timestamps = false;
 }

@@ -16,7 +16,7 @@
     </head>
     <body class="hold-transition login-page">
     
-        @yield('login')     
+        @yield('login')        
 
         <script src="js/plantilla.js"></script>
         
@@ -29,6 +29,6 @@
             align-items: center;
             }
         </style>
-        
+        @stack('scripts')
     </body>
 </html>

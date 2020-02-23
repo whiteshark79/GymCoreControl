@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="nombre">Nombre</option>
                                     <option value="descripcion">Descripción</option>
                                     </select>
@@ -112,7 +112,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -127,7 +127,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="nombre">Nombre: </span>
                                     </div>
-                                    <input type="text" v-model="nombre" class="form-control">
+                                    <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -135,17 +135,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="descripcion">Descripción: </span>
                                     </div>
-                                    <textarea  v-model="descripcion" class="form-control form-control-sm" rows="2"></textarea>
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
                                 </div>
-                            </div>                                                
-                            
-                            <div v-show="errorEspecialidad" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjEspecialidad" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
-
+                            </div>    
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -174,8 +166,12 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorEspecialidad : 0,
                 errorMostrarMsjEspecialidad : [],
+                e_nombre : false,
+                e_descripcion : false,  
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -329,18 +325,24 @@
             validarEspecialidad(){
                 this.errorEspecialidad=0;
                 this.errorMostrarMsjEspecialidad =[];
-                if (!this.nombre) this.errorMostrarMsjEspecialidad.push("El nombre de la especialidad no puede estar vacío.");
+
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjEspecialidad.push('nombre');}else{this.e_nombre = false}
+                if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjEspecialidad.push('descripcion');}else{this.e_descripcion = false}
+
                 if (this.errorMostrarMsjEspecialidad.length) this.errorEspecialidad = 1;
                 return this.errorEspecialidad;
             },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorEspecialidad = 0;
+                this.errorMostrarMsjEspecialidad = [];
+                this.e_nombre = false;
+                this.e_descripcion = false; 
                 
                 this.nombre= '';
-                this.descripcion = '';                
-
-                this.errorEspecialidad=0;
+                this.descripcion = '';   
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -369,6 +371,9 @@
                         }
                     }
                 }
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -376,10 +381,3 @@
         }
     }
 </script>
-<style>    
-  .div-error{
-        display: flex;
-        justify-content: center;
-    }
-    
-</style>

@@ -1,7 +1,7 @@
 @extends('auth.contenido')
 
 @section('login')
- 
+
     <div class="container">
         <div class="row justify-content-md-center vertical-center">
             <div class="card-group">
@@ -38,8 +38,8 @@
                             </div>                  
                         </div>               
                         <div class="row float-right">
-                            <div class="col-6">      
-                                <button type="submit" class="btn btn-primary btn-sm px-4">Ingresar</button>
+                            <div class="col-10">      
+                                <button type="submit" id="btn_login" class="btn btn-primary btn-sm px-4">Ingresar</button>
                             </div>
                         </div>
                     </form>
@@ -47,5 +47,12 @@
             </div>
         </div>    
     </div>
-
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+	$('#btn_login').click(function() {
+        $('#btn_login').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>').addClass('disabled');
+    });
+    </script>
+@endpush

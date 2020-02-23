@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="nombre">Nombre</option>
                                     <option value="descripcion">Descripción</option>
                                     </select>
@@ -127,20 +127,14 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="nombre">Nombre: </span>
                                 </div>
-                                <input type="text" v-model="nombre" class="form-control">
+                                <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="descripcion">Descripción: </span>
                                 </div>
-                                <textarea  v-model="descripcion" class="form-control form-control-sm" rows="2"></textarea>
-                            </div>
-                            <div v-show="errorCategoria" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjCategoria" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
+                                <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                            </div>                           
 
                         </form>
                     </div>
@@ -171,8 +165,12 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorCategoria : 0,
                 errorMostrarMsjCategoria : [],
+                e_nombre : false,
+                e_descripcion : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -339,18 +337,24 @@
             validarCategoria(){
                 this.errorCategoria=0;
                 this.errorMostrarMsjCategoria =[];
-                if (!this.nombre) this.errorMostrarMsjCategoria.push("El nombre de la categoría no puede estar vacío.");
+
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjCategoria.push('nombre');}else{this.e_nombre = false}
+                if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjCategoria.push('descripcion');}else{this.e_descripcion = false}
+
                 if (this.errorMostrarMsjCategoria.length) this.errorCategoria = 1;
                 return this.errorCategoria;
             },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorCategoria = 0;
+                this.errorMostrarMsjCategoria = [];
+                this.e_nombre = false;
+                this.e_descripcion = false;
                 
                 this.nombre='';
-                this.descripcion='';
-
-                this.errorCategoria=0;
+                this.descripcion='';                
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -389,6 +393,9 @@
                         }
                     }
                 }
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -396,11 +403,3 @@
         }
     }
 </script>
-<style>    
-   
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-  
-</style>

@@ -10,7 +10,8 @@
 }
 
 .thead-table {
-  border-bottom: 3px solid #B6B6B6; 
+  border-bottom: 3px solid #B6B6B6;
+  background-color: #EDEFF1;
 }
 
 table td {
@@ -37,6 +38,18 @@ table td {
   .text-info{
     color: #3C8DBC !important;
     font-size: 12px;
+  }
+
+  .text-mini{
+    color: #000000 !important;
+    font-size: 12px;
+    font-weight: bolder;
+  }
+
+  .text-label{
+    color: #4C4C4C !important;
+    font-size: 15px;
+    font-weight: bolder;
   }
 
   a:link    {color: white; }
@@ -110,9 +123,55 @@ table td {
   height: 415px;
   overflow: auto;
   }
+
+.my-custom-mini-scrollbar {
+  position: relative;
+  height: 340px;
+  overflow: auto;
+  }
+  
   .table-wrapper-scroll-y {
   display: block;
   }
 
 
-  
+/*********Profile***********/
+.profile_pic { 
+  width: 35%;
+  float: left; }
+
+.img-circle.profile_img {
+  width: 30%;
+  margin-left: 15%;
+  z-index: 1000;
+  position: inherit;
+  border: 3px solid rgba(253, 254, 255, 0.822);}
+
+.profile_info {
+  padding: 25px 10px 10px;
+  width: 65%;
+  float: left; }
+
+.profile_info span {
+  font-size: 13px;
+  line-height: 30px;
+  color: #BAB8B8; }
+
+.profile_info h2 {
+  font-size: 14px;
+  color: #ECF0F1;
+  margin: 0;
+  font-weight: 300; }
+
+
+  .menu_section h3 {
+    padding-left: 23px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 10;
+    margin-top: 10;
+    text-shadow: 1px 1px #000;}
+

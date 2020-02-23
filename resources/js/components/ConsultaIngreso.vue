@@ -14,7 +14,7 @@
                             <div class="card-body">
                                 <div class="form-group row justify-content-between">
                                     <div class="input-group input-group-sm col-7">                                
-                                        <select class="form-control col-2 " v-model="criterio">
+                                        <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                             <option value="idproveedor">Proveedor</option>
                                             <option value="fecha_hora">Fecha</option>
                                             <option value="tipo_comprobante">Tipo Doc.</option>
@@ -616,16 +616,12 @@
                 } 
                 }) 
             },
+            ceroBusqueda(){
+                this.buscar='';
+            }
         },
         mounted() {
             this.listarIngreso(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
         }
     }
 </script>
-<style>    
-  .div-error{
-        display: flex;
-        justify-content: center;
-    }
-
-</style>

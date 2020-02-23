@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="nombre">Nombre</option>
                                     <option value="descripcion">Descripción</option>
                                     </select>
@@ -113,7 +113,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -125,22 +125,16 @@
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="nombre">Nombre: </span>
+                                    <span class="input-group-text">Nombre: </span>
                                 </div>
-                                <input type="text" v-model="nombre" class="form-control">
+                                <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="descripcion">Descripción: </span>
                                 </div>                                
-                                <textarea  v-model="descripcion" class="form-control form-control-sm" rows="2"></textarea>
-                            </div> 
-                            <div v-show="errorProfesion" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjProfesion" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
+                                <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                            </div>                            
 
                         </form>
                     </div>
@@ -171,8 +165,12 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorProfesion : 0,
                 errorMostrarMsjProfesion : [],
+                e_nombre : false,
+                e_descripcion : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -339,18 +337,25 @@
             validarProfesion(){
                 this.errorProfesion=0;
                 this.errorMostrarMsjProfesion =[];
-                if (!this.nombre) this.errorMostrarMsjProfesion.push("El nombre de la categoría no puede estar vacío.");
+
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjProfesion.push('nombre');}else{this.e_nombre = false}
+                if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjProfesion.push('descripcion');}else{this.e_descripcion = false}
+
                 if (this.errorMostrarMsjProfesion.length) this.errorProfesion = 1;
                 return this.errorProfesion;
             },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorProfesion = 0;
+                this.errorMostrarMsjProfesion = [];
+                this.e_nombre = false;
+                this.e_descripcion = false;
                 
                 this.nombre='';
                 this.descripcion='';
 
-                this.errorProfesion=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -389,6 +394,9 @@
                         }
                     }
                 }
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -396,11 +404,3 @@
         }
     }
 </script>
-<style>    
-
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-  
-</style>

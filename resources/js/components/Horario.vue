@@ -6,9 +6,9 @@
                 <div class="col-md-12">
                     <div class="card card-outline card-primary">
                         <div class="card-header">
-                            <div class="card-title"><h3>Clasificaciones</h3></div>
+                            <div class="card-title"><h3>Horarios</h3></div>
                             <div class="card-tools">
-                                <button type="button" class="btn btn-sm btn-primary btn-sm" @click="abrirModal('clasificacion','registrar')"><i class="fas fa-plus-circle">  Nueva Clasificacion</i></button>
+                                <button type="button" class="btn btn-sm btn-primary btn-sm" @click="abrirModal('horario','registrar')"><i class="fas fa-plus-circle">  Nuevo Horario</i></button>
                             </div>
                         </div>                      
 
@@ -16,20 +16,26 @@
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
                                     <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
-                                    <option value="nombre">Nombre</option>
-                                    <option value="descripcion">Descripción</option>
+                                    <option value="periodo">Periodo</option>
                                     </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarClasificacion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarClasificacion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                    <template v-if="criterio=='periodo'">
+                                        <select class="form-control col-4" v-model="buscar">
+                                            <option value="0" disabled>--Turno--</option>
+                                            <option value="Mañana">Mañana</option>
+                                            <option value="Tarde">Tarde</option>
+                                            <option value="Noche">Noche</option>                                            
+                                        </select>
+                                    </template>
+                                    <button type="submit" @click="listarHorario(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="input-group input-group-sm col-1">                                     
-                                    <select class="form-control" v-model="paginado" @change="listarClasificacion(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                    <select class="form-control" v-model="paginado" @change="listarHorario(1,buscar,criterio,paginado,ordenado,ascdesc)">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     </select>
-                                </div> 
+                                </div>
                             </div>  
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
@@ -37,56 +43,64 @@
                                         <tr align="center">
                                             <th width="5%">#
                                                 <template v-if="(ordenado !== 'id' && ascdesc === 'asc') || (ordenado === 'id' && ascdesc === 'desc') ">
-                                                    <a href="#" @click="listarClasificacion(1,buscar,criterio,paginado,'id','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'id','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
                                                 <template v-if="(ordenado !== 'id' && ascdesc === 'desc') || (ordenado === 'id' && ascdesc === 'asc')">
-                                                    <a href="#" @click="listarClasificacion(1,buscar,criterio,paginado,'id','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'id','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="20%">NOMBRE
-                                                <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
-                                                    <a href="#" @click="listarClasificacion(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                            <th width="20%">HORARIO
+                                                <template v-if="(ordenado !== 'hora_ini' && ascdesc === 'asc') || (ordenado === 'hora_ini' && ascdesc === 'desc')">
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'hora_ini','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
-                                                <template v-if="(ordenado !== 'nombre' && ascdesc === 'desc') || (ordenado === 'nombre' && ascdesc === 'asc')">
-                                                    <a href="#" @click="listarClasificacion(1,buscar,criterio,paginado,'nombre','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                <template v-if="(ordenado !== 'hora_ini' && ascdesc === 'desc') || (ordenado === 'hora_ini' && ascdesc === 'asc')">
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'hora_ini','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th>DESCRIPCIÓN</th>
+                                            <th width="23%">PERIODO
+                                                <template v-if="(ordenado !== 'periodo' && ascdesc === 'asc') || (ordenado === 'periodo' && ascdesc === 'desc')">
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'periodo','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                </template>
+                                                <template v-if="(ordenado !== 'periodo' && ascdesc === 'desc') || (ordenado === 'periodo' && ascdesc === 'asc')">
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'periodo','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                </template>
+                                            </th>
+                                            <th width="30%">DESCRIPCION</th>
                                             <th width="10%">ESTADO
                                                 <template v-if="(ordenado !== 'condicion' && ascdesc === 'asc') || (ordenado === 'condicion' && ascdesc === 'desc')">
-                                                    <a href="#" @click="listarClasificacion(1,buscar,criterio,paginado,'condicion','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'condicion','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
                                                 <template v-if="(ordenado !== 'condicion' && ascdesc === 'desc') || (ordenado === 'condicion' && ascdesc === 'asc')">
-                                                    <a href="#" @click="listarClasificacion(1,buscar,criterio,paginado,'condicion','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'condicion','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
                                             <th width="12%">ACCIONES</th>
                                         </tr>
                                     </thead>
-                                    <tbody v-if="arrayClasificacion.length">
-                                        <tr v-for="clasificacion in arrayClasificacion" :key="clasificacion.id">
-                                            <td v-text="clasificacion.id" align="center"></td>
-                                            <td v-text="clasificacion.nombre"></td>
-                                            <td v-text="clasificacion.descripcion"></td>
+                                    <tbody v-if="arrayHorario.length">
+                                        <tr v-for="horario in arrayHorario" :key="horario.id">
+                                            <td v-text="horario.id" align="center"></td>
+                                            <td align="center">{{horario.hora_ini}} - {{horario.hora_fin}}</td>
+                                            <td v-text="horario.periodo" align="center"></td>
+                                            <td v-text="horario.descripcion"></td>
                                             <td align="center">
-                                                <div v-if="clasificacion.condicion"><span class="badge badge-success">Activo</span></div>
+                                                <div v-if="horario.condicion"><span class="badge badge-success">Activo</span></div>
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('clasificacion','actualizar',clasificacion)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('clasificacion','eliminar',clasificacion)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
-                                                <template v-if="clasificacion.condicion">
-                                                    <a class="btn btn-sm btn-default" @click="desactivarClasificacion(clasificacion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('horario','actualizar',horario)"><i class="fas fa-edit" title="Editar"></i></a>                                   
+                                                <template v-if="horario.condicion">
+                                                    <a class="btn btn-sm btn-default" @click="desactivarHorario(horario.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
                                                 </template>
                                                 <template v-else>
-                                                    <a class="btn btn-sm btn-default" @click="activarClasificacion(clasificacion.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="activarHorario(horario.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
                                                 </template>
                                             </td>
                                         </tr>
                                     </tbody>
                                     <tbody v-else>
                                         <tr>
-                                            <td colspan="5" class="text-center">
+                                            <td colspan="6" class="text-center">
                                                 <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                             </td>
                                         </tr>
@@ -113,7 +127,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -125,25 +139,31 @@
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="nombre">Nombre: </span>
+                                    <span class="input-group-text">Horas: </span>
                                 </div>
-                                <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
+                                <input type="time" v-model="hora_ini" class="form-control" v-bind:class="{ 'is-invalid': e_hora_ini }">
+                                <input type="time" v-model="hora_fin" class="form-control" v-bind:class="{ 'is-invalid': e_hora_fin }">
+                                <select v-model="periodo" class="form-control col-4" v-bind:class="{ 'is-invalid': e_periodo }">
+                                    <option value="0" disabled>--Turno--</option>
+                                    <option value="Mañana">Mañana</option>
+                                    <option value="Tarde">Tarde</option>
+                                    <option value="Noche">Noche</option>                                            
+                                </select>
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="descripcion">Descripción: </span>
+                                    <span class="input-group-text">Descripción: </span>
                                 </div>
-                                <textarea  v-model="descripcion" class="form-control form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                                <textarea  v-model="descripcion" class="form-control" rows="2"></textarea>
                             </div>                           
 
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
-                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarClasificacion()">Guardar</button>                        
-                        <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarClasificacion()">Actualizar</button>
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarClasificacion()">Eliminar</button>
-
+                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarHorario()">Guardar</button>                        
+                        <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarHorario()">Actualizar</button>                        
+                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarHorario()">Eliminar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -158,18 +178,21 @@
     export default {
         data (){
             return {
-                clasificacion_id: 0,
-                nombre : '',
+                horario_id: 0,
+                hora_ini : '00:00',
+                hora_fin : '00:00',
+                periodo : 0,
                 descripcion : '',
-                arrayClasificacion : [],
+                arrayHorario : [],
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
 
-                errorClasificacion : 0,
-                errorMostrarMsjClasificacion : [],
-                e_nombre : false,
-                e_descripcion : false,                
+                errorHorario : 0,
+                errorMostrarMsjHorario : [],
+                e_hora_ini : false,
+                e_hora_fin : false,
+                e_periodo : false,
 
                 pagination : {
                     'total' : 0,
@@ -180,13 +203,13 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'nombre',
+                criterio : 'periodo',
                 buscar : '',
                 paginado : 10,
                 ordenado : 'id',
                 ascdesc : 'desc'
             }
-        },
+        }, 
         computed:{
             isActived: function(){
                 return this.pagination.current_page;
@@ -217,12 +240,12 @@
             }
         },
         methods : {
-            listarClasificacion (page,buscar,criterio,paginado,ordenado,ascdesc){
+            listarHorario (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
-                var url= '/clasificacion?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
+                var url= '/horario?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
-                    me.arrayClasificacion = respuesta.clasificaciones.data;
+                    me.arrayHorario = respuesta.horarios.data;
                     me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
@@ -236,66 +259,70 @@
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarClasificacion(page,buscar,criterio,paginado,ordenado,ascdesc);
+                me.listarHorario(page,buscar,criterio,paginado,ordenado,ascdesc);
             },
-            registrarClasificacion(){
-               if (this.validarClasificacion()){ return; }
+            registrarHorario(){
+               if (this.validarHorario()){ return; }
                 let me = this;
 
-                axios.post('/clasificacion/registrar',{
-                    'nombre': this.nombre,
+                axios.post('/horario/registrar',{
+                    'hora_ini': this.hora_ini,
+                    'hora_fin': this.hora_fin,
+                    'periodo': this.periodo,
                     'descripcion': this.descripcion
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarClasificacion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
+                    me.listarHorario(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
-            actualizarClasificacion(){
-               if (this.validarClasificacion()){ return; }
+            actualizarHorario(){
+               if (this.validarHorario()){ return; }
                 let me = this;
 
-                axios.put('/clasificacion/actualizar',{
-                    'nombre': this.nombre,
+                axios.put('/horario/actualizar',{
+                    'hora_ini': this.hora_ini,
+                    'hora_fin': this.hora_fin,
+                    'periodo': this.periodo,
                     'descripcion': this.descripcion,
-                    'id': this.clasificacion_id
+                    'id': this.horario_id
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarClasificacion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
+                    me.listarHorario(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
                 }); 
             },
-            eliminarClasificacion(){
-               if (this.validarClasificacion()){ return; }
+            eliminarHorario(){
+               if (this.validarHorario()){ return; }
                 let me = this;
 
-                axios.put('/clasificacion/eliminar',{
-                    'id': this.clasificacion_id
+                axios.put('/horario/eliminar',{
+                    'id': this.horario_id
                 }).then(function (response) {
                     me.cerrarModal();
-                    me.listarClasificacion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
+                    me.listarHorario(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
                 }); 
             },
-            desactivarClasificacion(id){
+            desactivarHorario(id){
                Swal.fire({
-                title: 'Desactivar la categoría?',
+                title: 'Desactivar el horario?',
                 text: "Puede activarla nuevamente.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, desactivarla'
+                confirmButtonText: 'Si, desactivarlo'
                 }).then((result) => {
                 if (result.value) {
                     let me = this;
-                    axios.put('/clasificacion/desactivar',{
+                    axios.put('/horario/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarClasificacion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
+                        me.listarHorario(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
                         'Desactivado!',
                         'El registro ha sido desactivado con éxito.',
@@ -307,22 +334,22 @@
                 } 
                 }) 
             },
-            activarClasificacion(id){
+            activarHorario(id){
                Swal.fire({
-                title: 'Activar la categoría?',
+                title: 'Activar el horario?',
                 text: "Puede desactivarla nuevamente.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, activarla'
+                confirmButtonText: 'Si, activarlo'
                 }).then((result) => {
                 if (result.value) {
                     let me = this;
-                    axios.put('/clasificacion/activar',{
+                    axios.put('/horario/activar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarClasificacion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
+                        me.listarHorario(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
                         'Desactivado!',
                         'El registro ha sido activado con éxito.',
@@ -334,60 +361,70 @@
                 } 
                 }) 
             },
-            validarClasificacion(){
-                this.errorClasificacion=0;
-                this.errorMostrarMsjClasificacion =[];
+            validarHorario(){
+                this.errorHorario=0;
+                this.errorMostrarMsjHorario =[];
 
-                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjClasificacion.push('nombre');}else{this.e_nombre = false}
-                if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjClasificacion.push('descripcion');}else{this.e_descripcion = false}
+                if (!this.hora_ini) {this.e_hora_ini = true; this.errorMostrarMsjHorario.push('hora_ini');}else{this.e_hora_ini = false}
+                if (!this.hora_fin) {this.e_hora_fin = true; this.errorMostrarMsjHorario.push('hora_fin');}else{this.e_hora_fin = false}
+                if (this.periodo == 0) {this.e_periodo = true; this.errorMostrarMsjHorario.push('periodo');}else{this.e_periodo = false}
 
-                if (this.errorMostrarMsjClasificacion.length) this.errorClasificacion = 1;
-                return this.errorClasificacion;
+                if (this.errorMostrarMsjHorario.length) this.errorHorario = 1;
+
+                return this.errorHorario;
             },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
 
-                this.errorClasificacion = 0;
-                this.errorMostrarMsjClasificacion = [];
-                this.e_nombre = false;
-                this.e_descripcion = false; 
+                this.errorHorario=0;
+                this.errorMostrarMsjHorario = [];
+                this.e_hora_ini = false;
+                this.e_hora_fin = false;
+                this.e_periodo = false;
                 
-                this.nombre='';
+                this.hora_ini= '00:00';
+                this.hora_fin='00:00';
+                this.periodo=0;
                 this.descripcion='';
-
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
-                    case "clasificacion":
+                    case "horario":
                     {
                         switch(accion){
                             case 'registrar':
                             {
                                 this.modal = 1;
-                                this.tituloModal = 'Registrar Clasificacion';
-                                this.nombre= '';
-                                this.descripcion = '';
+                                this.tituloModal = 'Registrar Horario';
+                                this.hora_ini= '00:00';
+                                this.hora_fin = '00:00';
+                                this.periodo = 0;
+                                this.descripcion='';
                                 this.tipoAccion = 1;
                                 break;
                             }
                             case 'actualizar':
                             {
                                 this.modal=1;
-                                this.tituloModal='Actualizar categoría';
+                                this.tituloModal='Actualizar Horario';
                                 this.tipoAccion=2;
-                                this.clasificacion_id=data['id'];
-                                this.nombre = data['nombre'];
+                                this.horario_id=data['id'];
+                                this.hora_ini = data['hora_ini'];
+                                this.hora_fin = data['hora_fin'];
+                                this.periodo = data['periodo'];
                                 this.descripcion= data['descripcion'];
                                 break;
                             }
                             case 'eliminar':
                             {
                                 this.modal=1;
-                                this.tituloModal='Eliminar categoría';
+                                this.tituloModal='Eliminar Horario';
                                 this.tipoAccion=3;
-                                this.clasificacion_id=data['id'];
-                                this.nombre = data['nombre'];
+                                this.horario_id=data['id'];
+                                this.hora_ini = data['hora_ini'];
+                                this.hora_fin = data['hora_fin'];
+                                this.periodo = data['periodo'];
                                 this.descripcion= data['descripcion'];
                                 break;
                             }
@@ -400,7 +437,7 @@
             }
         },
         mounted() {
-            this.listarClasificacion(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
+            this.listarHorario(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
         }
     }
 </script>

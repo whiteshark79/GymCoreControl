@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                     <option value="nombre">Nombre</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarProvincia(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
@@ -109,7 +109,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -123,15 +123,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Nombre: </span>
                                 </div>
-                                <input type="text" v-model="nombre" class="form-control">
-                            </div>                            
-                            <div v-show="errorProvincia" class="form-group row div-error">
-                                <div class="text-center text-error">
-                                    <div v-for="error in errorMostrarMsjProvincia" :key="error" v-text="error">
-                                    </div>
-                                </div>
-                            </div>
-
+                                <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
+                            </div>  
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -159,8 +152,11 @@
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorProvincia : 0,
                 errorMostrarMsjProvincia : [],
+                e_nombre : false,
+
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -327,18 +323,22 @@
             validarProvincia(){
                 this.errorProvincia=0;
                 this.errorMostrarMsjProvincia =[];
-                if (!this.nombre) this.errorMostrarMsjProvincia.push("El nombre de la categoría no puede estar vacío.");
+
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjProvincia.push('nombre');}else{this.e_nombre = false}
+
                 if (this.errorMostrarMsjProvincia.length) this.errorProvincia = 1;
                 return this.errorProvincia;
             },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorProvincia=0;
+                this.errorMostrarMsjProvincia = [];
+                this.e_nombre = false;
                 
                 this.nombre='';
                 this.descripcion='';
-
-                this.errorProvincia=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -377,6 +377,9 @@
                         }
                     }
                 }
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -384,11 +387,3 @@
         }
     }
 </script>
-<style>    
-
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }
-  
-</style>

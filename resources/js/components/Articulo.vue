@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
                                         <option value="codigo">Código</option>
                                         <option value="nombre">Nombre</option>
                                         <option value="descripcion">Descripción</option>
@@ -166,7 +166,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="categoria">Categoría: </span>
                                     </div>
-                                    <select class="form-control" v-model="idcategoria">
+                                    <select v-model="idcategoria" class="form-control" v-bind:class="{ 'is-invalid': e_idcategoria }">
                                         <option value="0" disabled>--Seleccione--</option>
                                         <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                     </select>
@@ -175,7 +175,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="codigo">Cód.: </span>
                                     </div>
-                                    <input type="text" v-model="codigo" class="form-control input-sm"> 
+                                    <input type="text" v-model="codigo" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_codigo }"> 
                                 </div>
                                 <!-- <barcode :value="codigo" :options="{ format: 'EAN-13' }">Generando código de barras.</barcode> -->
                             </div>
@@ -184,7 +184,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="precio">Nombre: </span>
                                     </div>
-                                    <input type="text" v-model="nombre" class="form-control input-sm"> 
+                                    <input type="text" v-model="nombre" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_nombre }"> 
                                 </div>
                             </div>                             
                             <div class="form-row">
@@ -192,7 +192,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="descripcion">Descripción: </span>
                                     </div>                                    
-                                    <textarea  v-model="descripcion" class="form-control form-control-sm" rows="2"></textarea>
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
                                 </div>                              
                             </div>
                             <div class="form-row">    
@@ -200,20 +200,15 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="precio_venta">PVP: </span>
                                     </div>
-                                    <input type="number" v-model="precio_venta" class="form-control input-sm"> 
+                                    <input type="number" v-model="precio_venta" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_precio_venta }"> 
                                 </div>
                                 <div class="input-group input-group-sm mb-3 col-6">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="strock">Stock: </span>
                                     </div>
-                                    <input type="number" v-model="stock" class="form-control input-sm"> 
+                                    <input type="number" v-model="stock" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_stock }"> 
                                 </div>
-                                <div v-show="errorArticulo" class="form-group row div-error">
-                                    <div class="text-center text-error">
-                                        <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>                     
                         </form>
                     </div>
@@ -254,8 +249,17 @@ import VueBarcode from 'vue-barcode';
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
                 errorArticulo : 0,
                 errorMostrarMsjArticulo : [],
+                e_idcategoria : false,
+                e_codigo : false,
+                e_nombre : false,
+                e_precio_venta : false,
+                e_stock : false,
+                e_descripcion : false,
+
+                
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -470,19 +474,31 @@ import VueBarcode from 'vue-barcode';
             },
             validarArticulo(){
                 this.errorArticulo=0;
-                this.errorMostrarMsjArticulo =[];
+                 this.errorMostrarMsjArticulo =[];
 
-                if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
-                if (!this.nombre) this.errorMostrarMsjArticulo.push("El nombre del artículo no puede estar vacío.");
-                if (!this.stock) this.errorMostrarMsjArticulo.push("El stock del artículo debe ser un número y no puede estar vacío.");
-                if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El precio venta del artículo debe ser un número y no puede estar vacío.");
+                if (this.idcategoria == 0) {this.e_idcategoria = true; this.errorMostrarMsjArticulo.push('idcategoria');}else{this.e_idcategoria = false}
+                if (!this.codigo) {this.e_codigo = true; this.errorMostrarMsjArticulo.push('codigo');}else{this.e_codigo = false}
+                if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjArticulo.push('nombre');}else{this.e_nombre = false}
+                if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjArticulo.push('descripcion');}else{this.e_descripcion = false}
+                if (!this.precio_venta) {this.e_precio_venta = true; this.errorMostrarMsjArticulo.push('precio_venta');}else{this.e_precio_venta = false}
+                if (!this.stock) {this.e_stock = true; this.errorMostrarMsjArticulo.push('stock');}else{this.e_stock = false}
+                
 
-                if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
-                return this.errorArticulo;
+                 if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
+                 return this.errorArticulo;
             },
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
+
+                this.errorArticulo = 0;
+                this.errorMostrarMsjArticulo = [];
+                this.e_idcategoria = false;
+                this.e_codigo = false;
+                this.e_nombre = false;
+                this.e_precio_venta = false;
+                this.e_stock = false;
+                this.e_descripcion = false;
                 
                 this.idcategoria= 0;
                 this.nombre_categoria = '';
@@ -491,8 +507,6 @@ import VueBarcode from 'vue-barcode';
                 this.precio_venta = 0;
                 this.stock = 0;
                 this.descripcion = '';
-
-                this.errorArticulo=0;
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
@@ -545,6 +559,9 @@ import VueBarcode from 'vue-barcode';
                     }
                 }
                 this.selectCategoria();
+            },
+            ceroBusqueda(){
+                this.buscar='';
             }
         },
         mounted() {
@@ -552,11 +569,3 @@ import VueBarcode from 'vue-barcode';
         }
     }
 </script>
-<style>    
-       
-    .div-error{
-        display: flex;
-        justify-content: center;
-    }    
-
-</style>
