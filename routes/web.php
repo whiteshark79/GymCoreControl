@@ -50,7 +50,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/horario/eliminar', 'HorarioController@destroy');
         Route::put('/horario/desactivar', 'HorarioController@desactivar');
         Route::put('/horario/activar', 'HorarioController@activar');
-        Route::get('/horario/selectRol', 'HorarioController@selectRol');
+        Route::get('/horario/selectHorario', 'HorarioController@selectHorario');
 
         Route::get('/proveedor', 'ProveedorController@index');
         Route::post('/proveedor/registrar', 'ProveedorController@store');
@@ -84,14 +84,19 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/venta/listarArticuloVenta', 'VentaController@listarArticuloVenta');
         Route::get('/venta/listarVentasCabeceraAlumno', 'VentaController@listarVentasCabeceraAlumno');
         Route::get('/venta/listarVentasDetallesAlumno', 'VentaController@listarVentasDetallesAlumno');
+        Route::put('/venta/pagarDeuda', 'VentaController@pagarDeuda'); 
+        Route::get('/venta/mesVenta', 'VentaController@mesVenta');
 
         Route::get('/inscripcion', 'InscripcionController@index');
         Route::post('/inscripcion/registrar', 'InscripcionController@store');
         Route::put('/inscripcion/actualizar', 'InscripcionController@update');        
         Route::put('/inscripcion/activar', 'InscripcionController@activar');         
         Route::put('/inscripcion/desactivar', 'InscripcionController@desactivar');
-        Route::get('/inscripcion/listarAlumnoMes', 'InscripcionController@listarAlumnoMes');
-        Route::get('/inscripcion/listarInscripcionesAlumno', 'InscripcionController@listarInscripcionesAlumno');        
+        Route::get('/inscripcion/listarInscripcionAlumno', 'InscripcionController@listarInscripcionAlumno');
+        Route::get('/inscripcion/listarInscripcionesAlumnoId', 'InscripcionController@listarInscripcionesAlumnoId');        
+
+        Route::get('/asistencia', 'AsistenciaController@index');
+        Route::post('/asistencia/registrar', 'AsistenciaController@store');
 
         Route::get('/cliente', 'ClienteController@index');
         Route::post('/cliente/registrar', 'ClienteController@store');

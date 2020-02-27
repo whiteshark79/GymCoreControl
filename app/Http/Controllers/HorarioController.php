@@ -48,13 +48,13 @@ class HorarioController extends Controller
  
     public function store(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+        //if (!$request->ajax()) return redirect('/');
         
         $horario = new Horario();
-        $horario->hora_ini = $request->hora_ini;
-        $horario->hora_fin = $request->hora_fin;
-        $horario->periodo = $request->periodo;
-        $horario->descripcion = $request->descripcion;
+        $horario->hora_ini = '01:00';
+        $horario->hora_fin = '02:00';
+        $horario->periodo = 'Mañana';
+        $horario->descripcion = 'Jab';
         $horario->condicion = '1';
         $horario->save();
     }

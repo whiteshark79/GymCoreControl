@@ -3,71 +3,106 @@
     <main class="main"> 
       <div class="container-fluid">
 
-        <div class="row mt-2">                  
-
-          <div class="col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cash-register"></i></span>
-                <div class="info-box-content">                        
-                  <span class="info-box-text">{{v_msj}}</span>
-                  <span class="info-box-number">Mes: ${{v_val_mes}} <small>( {{v_qtx_mes}} )</small></span>
-                  <span class="info-box-number">Total: ${{v_val_total}}  <small>( {{v_qtx_total}} )</small></span>      
-              </div>
-            </div>
-          </div> 
-          <div class="col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart"></i></span>
-              <div class="info-box-content">
-                  <span class="info-box-text">{{i_msj}}</span>
-                  <span class="info-box-number">Mes: ${{i_val_mes}} <small>( {{i_qtx_mes}} )</small></span>
-                  <span class="info-box-number">Total: ${{i_val_total}}  <small>( {{i_qtx_total}} )</small></span>           
-              </div>
-            </div>
-          </div>                  
-                            
-        </div>                      
-        
-        <div class="row">
-          <div class="col-md-6">
-            <div class="card callout callout-info">
-              <div class="card-header">
-                  <h4>Ventas vs Compras</h4>
-              </div>
-              <div class="card-content">
-                <div class="ct-chart">
-                    <canvas id="chart_ingven">                                                
-                    </canvas>
+        <div class="row mt-1">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="info-box col-6">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cash-register"></i></span>
+                      <div class="info-box-content">                        
+                        <span class="info-box-text">{{v_msj}}</span>
+                        <span class="info-box-number">Mes: ${{v_val_mes}} <small>( {{v_qtx_mes}} )</small></span>
+                        <span class="info-box-number">Total: ${{v_val_total}}  <small>( {{v_qtx_total}} )</small></span>      
+                    </div>
+                  </div> 
+                  <div class="info-box col-6">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">{{i_msj}}</span>
+                        <span class="info-box-number">Mes: ${{i_val_mes}} <small>( {{i_qtx_mes}} )</small></span>
+                        <span class="info-box-number">Total: ${{i_val_total}}  <small>( {{i_qtx_total}} )</small></span>           
+                    </div>
+                  </div>
                 </div>
-              </div>                          
+                <div class="row">
+                  <div class="card callout callout-info col-12">
+                    <div class="card-header">
+                        <h4>Ventas vs Compras</h4>
+                    </div>
+                    <div class="card-content">
+                      <div class="ct-chart">
+                          <canvas id="chart_ingven">                                                
+                          </canvas>
+                      </div>
+                    </div>                          
+                  </div>
+                </div> 
+              </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-sm-6">  
             <div class="card">
               <div class="card-header">
-                  <h4>Registro de Ventas</h4>
+                  <div class="card-title"><h3>Ventas</h3></div>
               </div>
-              <div class="card-content">
-                <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar">
+              <div class="card-body">
+                <div class="form-group row justify-content-between">
+                  <div class="input-group input-group-sm col-10">                                
+                      <select class="form-control col-3" v-model="criterio_" @onchange="ceroBusqueda();">
+                          <option value="fecha_hora">Fecha</option>
+                          <option value="idcliente">Alumno</option>                                      
+                      </select>                                    
+                      <template v-if="criterio_=='fecha_hora'">
+                          <input type="date" v-model="buscar_" class="form-control col-5">
+                      </template>
+                      <template v-if="criterio_=='idcliente'">
+                        <div class="col-md-7">                                                         
+                          <v-select
+                            id="buscar_"
+                            @search="selectCliente"
+                            label="nombre"
+                            :options="arrayCliente"
+                            placeholder="Buscar Cliente..."
+                            @input="getDatosCliente"                                    
+                          ></v-select>
+                        </div>
+                      </template>                                                                          
+                      <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
+                      <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
+                  </div>                      
+                  <div class="input-group input-group-sm col-2">                                     
+                      <select class="form-control" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      </select>
+                  </div> 
+                </div>
+                <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar_">
                   <table class="table table-bordered table-sm table-hover" id="dtTable">
                       <thead class="thead-table">
-                          <tr align="center">                                  
-                            <th width="5%">#</th> 
-                            <th width="34%">NOMBRE</th>                                                                                       
-                            <th width="25%">FECHA VENTA</th>
-                            <th width="12%">TOTAL</th>
-                            <th width="12%">ABONO</th>
-                            <th width="12%">SALDO</th>
+                          <tr align="center"> 
+                            <th width="3%">#</th>                               
+                            <th width="31%">NOMBRE</th>                                                                                       
+                            <th width="28%">FECHA VENTA</th>
+                            <th width="11%">TOTAL</th>
+                            <th width="11%">ABONO</th>
+                            <th width="11%">SALDO</th>
+                            <th width="5%">OPC</th>
                           </tr>
                       </thead>
                       <tbody v-if="arrayVentaCliente.length">
                           <tr v-for="venta in arrayVentaCliente" :key="venta.id">
-                              <td align="center" v-text="venta.id"></td>
-                              <td v-text="venta.cliente"></td>
-                              <td align="center"> {{venta.fecha_hora}}</td>                                  
-                              <td align="center">$ {{venta.total}}</td>
-                              <td align="center">$ {{venta.abono}}</td>
-                              <td align="center">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>                                                                      
+                            <td align="center" v-text="venta.id"></td>
+                            <td v-text="venta.cliente"></td>
+                            <td align="center"> {{venta.fecha_hora}}</td>                                  
+                            <td align="center">$ {{venta.total}}</td>
+                            <td align="center">$ {{venta.abono}}</td>
+                            <td align="center">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>
+                            <td align="center">
+                              <a class="btn btn-sm btn-default" @click="listarVentaDetalleCliente(venta.id, venta.total, venta.abono)"><i class="far fa-credit-card"></i></a>  
+                            </td>                                                                    
                           </tr>
                       </tbody>
                       <tbody v-else>
@@ -79,24 +114,86 @@
                       </tbody>
                   </table>
                 </div>
+                <nav>
+                  <ul class="pagination justify-content-end">
+                      <li class="page-item" v-if="pagination_.current_page_ > 1">
+                          <a class="page-link" href="#" @click.prevent="cambiarPagina_(pagination_.current_page_ - 1,buscar_,criterio_,paginado_)">« Ant</a>
+                      </li>
+                      <li class="page-item" v-for="page_ in pagesNumber_" :key="page_" :class="[page_ == isActived_ ? 'active' : '']">
+                          <a class="page-link" href="#" @click.prevent="cambiarPagina_(page_,buscar_,criterio_,paginado_)" v-text="page_"></a>
+                      </li>
+                      <li class="page-item" v-if="pagination_.current_page_ < pagination_.last_page_">
+                          <a class="page-link" href="#" @click.prevent="cambiarPagina_(pagination_.current_page_ + 1,buscar_,criterio_,paginado_)">Sig »</a>
+                      </li>
+                  </ul>
+                </nav>
               </div>                      
-            </div>                    
-          </div>  
+            </div>               
+          </div>
         </div>
-        
-      </div>      
-                
-                
-            
-            
+      </div> 
+<!--Inicio del modal agregar/actualizar-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <table class="table table-bordered table-sm table-hover" id="dtTable">
+                    <thead class="thead-table">
+                        <tr align="center">
+                            <th width="54%">Artículo</th>
+                            <th width="18%">Qtx</th>
+                            <th width="18%">Precio</th>   
+                            <th width="18%">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody v-if="arrayVentaDetalleCliente.length">
+                        <tr v-for="detalle in arrayVentaDetalleCliente" :key="detalle.id"> 
+                            <td align="left">{{detalle.articulo}}</td>
+                            <td align="right">{{detalle.cantidad}}</td>
+                            <td align="right">$ {{detalle.precio}}</td>
+                            <td align="right">$ {{detalle.subtotal}}</td>                                                                                                                 
+                        </tr>
+                    </tbody>                                    
+                  </table>
+                </div>
+                <div class="modal-footer">
+                  <input v-model="venta_id" type="hidden"> 
+                  <label for="abono" class="text-info">Saldo: </label>
+                  <input v-model="saldo" type="number" step="0.1" min="0" :max="(total-abono)" class="form-control form-control-sm col-3">
+                  <template v-if="modal<0"><input v-model="abono" type="number"><input v-model="total" type="number"></template>                    
+                  <button type="button" class="btn btn-primary btn-sm" @click="pagarDeuda()">Pagar</button>
+                  <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>     
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+<!--Fin del modal-->                 
     </main>
 </template>
 
 <script>
+  import 'vue-select/dist/vue-select.css';
+  import vSelect from 'vue-select';
   export default {
     data (){
       return {
-        arrayVentaCliente:[],
+        venta_id : 0,
+        saldo : 0,
+        abono : 0,
+        total : 0,
+        modal : 0,
+        tituloModal : '',
+
+        arrayVentaCliente:[],        
+        arrayVentaDetalleCliente:[],
 
         ArrayWIngresos:[],
         ArrayWVentas:[],
@@ -122,6 +219,61 @@
         varTotalVenta:[],
         varMesIngreso:[],       
         varMesVenta:[],
+
+        varBackgroundColorV:'',
+        backgroundcolorV:[],
+        hoverbackgroundcolorV:[],
+        varBackgroundColorIn:'',
+        backgroundcolorIn:[],
+        hoverbackgroundcolorIn:[],
+
+        arrayCliente:[],
+
+        pagination_ : {
+          'total_' : 0,
+          'current_page_' : 0,
+          'per_page_' : 0,
+          'last_page_' : 0,
+          'from_' : 0,
+          'to_' : 0,
+        },
+        offset_ : 3,
+        criterio_ : 'fecha_hora',
+        buscar_ : '',
+        paginado_ : 10
+      }
+    },
+    components: {
+      vSelect
+    },
+    computed:{
+      isActived_: function(){
+            return this.pagination_.current_page_;
+        },
+      //Calcula los elementos de la paginación
+      pagesNumber_: function() {
+        if(!this.pagination_.to_) { return []; }      
+    
+        var from_ = this.pagination_.current_page_ - this.offset_; 
+        if(from_ < 1) { from_ = 1; }
+
+        var to_ = from_ + (this.offset_ * 2); 
+        if(to_ >= this.pagination_.last_page_){ to_ = this.pagination_.last_page_; }  
+
+        var pagesArray_ = [];
+        while(from_ <= to_) { pagesArray_.push(from_); from_++; }
+
+        return pagesArray_;             
+
+      },
+      calcularTotal: function(){
+          let me=this;
+          var resultado=0.0;
+          for(var i=0;i<this.arrayDetalle.length;i++){
+              resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad-this.arrayDetalle[i].descuento)
+          }
+          me.abono= resultado;
+          return resultado;
       }
     },
     methods : {
@@ -135,18 +287,66 @@
         if(mm < 10) mm = '0'+mm;
  
         return yyyy+'-'+mm+'-'+dd;      
+      }, 
+      cambiarPagina_(page_,buscar_,criterio_,paginado_){
+        let me = this;
+        //Actualiza la página actual
+        me.pagination_.current_page_ = page_;
+        //Envia la petición para visualizar la data de esa página
+        me.listarVentaCliente(page_,buscar_,criterio_,paginado_);
       },
-      listarVentaCliente(){
+      listarVentaCliente(page_,buscar_,criterio_,paginado_){
         let me=this;
-        var url= '/venta/listarVentaCliente';
+        var url= '/venta/listarVentaCliente?page='+page_+'&buscar='+buscar_+'&criterio='+criterio_+'&paginado='+paginado_;
         axios.get(url).then(function (response) {
             //console.log(response);
-            var respuesta= response.data;
-            me.arrayVentaCliente = respuesta.ventasM;            
+            var respuesta= response.data; 
+            me.arrayVentaCliente = respuesta.ventasM.data;
+            me.pagination_= respuesta.pagination_;             
         })
         .catch(function (error) {
             console.log(error);
         });
+      },
+      listarVentaDetalleCliente(id, total, abono){
+        let me=this;
+
+        me.modal = 1;
+        me.tituloModal = 'Consultar detalle';        
+        me.abono = abono;
+        me.total = total;
+        me.saldo = (total-abono);
+        me.venta_id = id;
+
+
+        var url= '/venta/listarVentasDetallesAlumno?id=' + id;
+        axios.get(url).then(function (response) {
+            var respuesta= response.data;
+            me.arrayVentaDetalleCliente = respuesta.ventasDA;            
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+      },
+      selectCliente(search,loading){
+        let me=this;
+        loading(true)
+
+        var url= '/cliente/selectCliente?filtro='+search;
+        axios.get(url).then(function (response) {
+            let respuesta = response.data;
+            q: search
+            me.arrayCliente=respuesta.clientes;
+            loading(false)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+      },
+      getDatosCliente(val1){
+        let me = this;
+        me.loading = true;
+        me.buscar_ = val1.id;
       },
       widgetInOuts(){
         let me=this;
@@ -198,12 +398,18 @@
       loadIngVen(){
         let me=this;
         me.ingresos.map(function(x){
+          me.varBackgroundColorIn = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
           me.varMesIngreso.push(x.mes);
           me.varTotalIngreso.push(x.total);
+          me.backgroundcolorIn.push('rgba('+me.varBackgroundColorIn+',0.3)');
+          me.hoverbackgroundcolorIn.push('rgba('+me.varBackgroundColorIn+',0.5)'); 
         });
         me.ventas.map(function(x){
+          me.varBackgroundColorV = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
           me.varMesVenta.push(x.mes);
           me.varTotalVenta.push(x.total);
+          me.backgroundcolorV.push('rgba('+me.varBackgroundColorV+',0.3)');
+          me.hoverbackgroundcolorV.push('rgba('+me.varBackgroundColorV+',0.5)');
         });
 
         var mesIngVen =  (me.varMesVenta > me.varMesIngreso) ? me.varMesVenta : me.varMesIngreso;
@@ -218,18 +424,18 @@
             datasets: [{
               label: 'Compras',
               data: me.varTotalIngreso,
-              backgroundColor: 'rgba(250, 217, 85, 0.2)',
-              borderColor: 'rgba(166, 144, 56, 0.5)',
-              hoverBackgroundColor: "rgba(166, 144, 56, 0.5)",
-              hoverBorderColor: "rgba(250, 217, 85, 0.2)",
+              backgroundColor: me.backgroundcolorIn,
+              borderColor: me.hoverbackgroundcolorIn,
+              hoverBackgroundColor: me.hoverbackgroundcolorIn,
+              hoverBorderColor: me.backgroundcolorIn,
               borderWidth: 1
             },{
               label: 'Ventas',
               data: me.varTotalVenta,
-              backgroundColor: 'rgba(23, 162, 184, 0.2)',
-              borderColor: 'rgba(15, 108, 122, 0.5)',
-              hoverBackgroundColor: "rgba(15, 108, 122, 0.5)",
-              hoverBorderColor: "rgba(23, 162, 184, 0.2)",
+              backgroundColor: me.backgroundcolorV,
+              borderColor: me.hoverbackgroundcolorV,
+              hoverBackgroundColor: me.hoverbackgroundcolorV,
+              hoverBorderColor: me.backgroundcolorV,
               borderWidth: 1
           }]
           },
@@ -243,10 +449,37 @@
             }
           }
         });
-      }, 
+      },
+      cerrarModal(){
+        this.venta_id = 0,
+        this.saldo = 0,
+        this.abono = 0,
+        this.total = 0,
+        this.modal=0;
+        this.tituloModal='';
+      },
+      pagarDeuda(){        
+        let me = this;        
+
+        axios.put('/venta/pagarDeuda',{
+          'saldo': this.saldo,
+          'abono': this.abono,
+          'total': this.total,
+          'id': this.venta_id
+        }).then(function (response) {
+            me.cerrarModal();
+            me.listarVentaCliente(1,me.buscar_,me.criterio_,me.paginado_);
+        }).catch(function (error) {
+            console.log(error);
+        }); 
+      },
+      ceroBusqueda(){
+        this.buscar_='';
+        this.listarVentaCliente(1,this.buscar_,this.criterio_,this.paginado_);
+      }
     },
     mounted() {       
-      this.listarVentaCliente();
+      this.listarVentaCliente(1,this.buscar_,this.criterio_,this.paginado_);
       this.widgetInOuts();
       this.getIngVen();      
     }

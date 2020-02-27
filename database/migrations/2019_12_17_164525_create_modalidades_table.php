@@ -17,10 +17,11 @@ class CreateModalidadesTable extends Migration
             $table->increments('id');
             $table->string('nombre',50);
             $table->string('descripcion',100)->nullable();
-            $table->string('duracion',3)->nullable();
+            $table->string('duracion',3);
             $table->decimal('precio', 4, 2);
+            $table->integer('clases');
             $table->boolean('condicion')->default(1);
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

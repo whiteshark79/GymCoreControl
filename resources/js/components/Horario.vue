@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
                                     <option value="periodo">Periodo</option>
                                     </select>
                                     <template v-if="criterio=='periodo'">
@@ -26,7 +26,8 @@
                                             <option value="Noche">Noche</option>                                            
                                         </select>
                                     </template>
-                                    <button type="submit" @click="listarHorario(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                    <button type="submit" @click="listarHorario(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                               
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="input-group input-group-sm col-1">                                     
@@ -276,7 +277,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 });
-            },
+            }, 
             actualizarHorario(){
                if (this.validarHorario()){ return; }
                 let me = this;
@@ -306,7 +307,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
+            }, 
             desactivarHorario(id){
                Swal.fire({
                 title: 'Desactivar el horario?',
@@ -434,6 +435,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.listarHorario(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },
         mounted() {

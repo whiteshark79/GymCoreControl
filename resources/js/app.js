@@ -22,7 +22,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('dashboardmix', require('./components/DashboardMix.vue').default);
+Vue.component('dashboardadmin', require('./components/DashboardAdmin.vue').default);
+Vue.component('dashboardoper', require('./components/DashboardOper.vue').default);
+Vue.component('dashboardalumno', require('./components/dashboardAlumno.vue').default);
+
 Vue.component('dbinscripciones', require('./components/DBInscripciones.vue').default);
 Vue.component('dbventas', require('./components/DBVentas.vue').default);
 Vue.component('dbinventario', require('./components/DBInventario.vue').default);
@@ -37,7 +40,7 @@ Vue.component('alumno', require('./components/Alumno.vue').default);
 Vue.component('profesor', require('./components/Profesor.vue').default);
 
 Vue.component('perfilalumno', require('./components/PerfilAlumno.vue').default);
-Vue.component('reportealumno', require('./components/ReporteAlumno.vue').default);
+
 
 Vue.component('categoria', require('./components/Categoria.vue').default);
 Vue.component('articulo', require('./components/Articulo.vue').default);

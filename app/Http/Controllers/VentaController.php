@@ -13,7 +13,7 @@ use App\User;
 use App\Notifications\NotifyAdmin;
 
 class VentaController extends Controller
-{
+{ 
     public function index(Request $request){
         if (!$request->ajax()) return redirect('/');
  
@@ -21,7 +21,9 @@ class VentaController extends Controller
         $criterio = $request->criterio;
         $paginado = $request->paginado;
         $ordenado = $request->ordenado;
-        $ascdesc = $request->ascdesc; 
+        $ascdesc = $request->ascdesc;
+
+        if($criterio == 'idcliente' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
          
         if ($buscar==''){
             $ventas = Venta::join('personas','ventas.idcliente','=','personas.id')
@@ -37,7 +39,7 @@ class VentaController extends Controller
             ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
             'ventas.num_comprobante','ventas.fecha_hora','ventas.impuesto','ventas.total',
             'ventas.abono','ventas.estado','personas.nombre','users.usuario')
-            ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
+            ->where('ventas.'.$criterio, 'like', $filtro )     
             ->orderBy('ventas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
          
@@ -55,26 +57,50 @@ class VentaController extends Controller
     }
 
     public function listarVentaCliente(Request $request){
-        if (!$request->ajax()) return redirect('/');        
-        
-        $ventasM = Venta::join('personas','ventas.idcliente','=','personas.id')
-        ->select('ventas.id','ventas.idcliente','ventas.fecha_hora','ventas.total','ventas.abono','personas.nombre as cliente')
-        ->whereColumn('ventas.total','>','ventas.abono')
-        ->orderBy('ventas.fecha_hora', 'asc')
-        //->take(10)
-        ->get();  
+        if (!$request->ajax()) return redirect('/'); 
+         
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        $paginado = $request->paginado;
  
-        return ['ventasM' => $ventasM];
+        if($criterio == 'idcliente' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
+        
+        if ($buscar==''){ 
+            $ventasM = Venta::join('personas','ventas.idcliente','=','personas.id')
+            ->select('ventas.id','ventas.idcliente','ventas.fecha_hora','ventas.total','ventas.abono','personas.nombre as cliente')
+            ->whereColumn('ventas.total','>','ventas.abono')
+            ->orderBy('ventas.fecha_hora', 'desc')->paginate($paginado);
+        }else{
+            $ventasM = Venta::join('personas','ventas.idcliente','=','personas.id')
+            ->select('ventas.id','ventas.idcliente','ventas.fecha_hora','ventas.total','ventas.abono','personas.nombre as cliente')
+            ->whereColumn('ventas.total','>','ventas.abono')
+            ->where('ventas.'.$criterio, 'like', $filtro )
+            ->orderBy('ventas.fecha_hora', 'desc')->paginate($paginado);
+        } 
+ 
+        return [
+            'pagination_' => [
+                'total_'        => $ventasM->total(),
+                'current_page_' => $ventasM->currentPage(),
+                'per_page_'     => $ventasM->perPage(),
+                'last_page_'    => $ventasM->lastPage(),
+                'from_'         => $ventasM->firstItem(),
+                'to_'           => $ventasM->lastItem(),
+            ],
+            'ventasM' => $ventasM
+        ];
     }
 
     public function listarVentasCabeceraAlumno(Request $request){
         //if (!$request->ajax()) return redirect('/');        
         
         $id = \Auth::user()->id;
+ 
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        $paginado = $request->paginado;
 
-        $buscar = $request->buscar_;
-        $criterio = $request->criterio_;
-        $paginado = $request->paginado_;
+        if($criterio == 'idcliente' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
 
         if ($buscar==''){
             $ventasCA = Venta::join('personas','ventas.idcliente','=','personas.id')
@@ -85,7 +111,7 @@ class VentaController extends Controller
             $ventasCA = Venta::join('personas','ventas.idcliente','=','personas.id')
             ->select('ventas.id','ventas.fecha_hora','ventas.abono','ventas.total','ventas.estado')
             ->where('personas.id',$id)
-            ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
+            ->where('ventas.'.$criterio, 'like', $filtro )
             ->orderBy('ventas.fecha_hora', 'desc')->paginate($paginado);
          }
  
@@ -103,12 +129,12 @@ class VentaController extends Controller
     }
 
     public function listarVentasDetallesAlumno(Request $request){
-        //if (!$request->ajax()) return redirect('/');        
+        if (!$request->ajax()) return redirect('/');        
         
         $id = $request->id;
 
         $ventasDA = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
-        ->select('detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
+        ->select('detalle_ventas.idventa','detalle_ventas.cantidad','detalle_ventas.precio','detalle_ventas.descuento',
         'detalle_ventas.subtotal','articulos.nombre as articulo', 'articulos.descripcion as articulo_descripcion')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id', 'desc')
@@ -118,33 +144,44 @@ class VentaController extends Controller
     }
 
     public function listarArticuloVenta(Request $request){
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
-        $paginado = $request->paginado;
-        
-        $anio=date('Y');
+        $paginado = $request->paginado;        
+                
+        $anio=date('Y');         
         
         if ($buscar==''){
             $detallesA = DetalleVenta::join('ventas','ventas.id','=','detalle_ventas.idventa')
             ->join('articulos','articulos.id','=','detalle_ventas.idarticulo')
             ->select(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M") as mes'),
-            DB::raw('SUM(detalle_ventas.subtotal) as subtotal'),'articulos.nombre as nombre_articulo')          
+            DB::raw('SUM(detalle_ventas.subtotal) as subtotal'),'articulos.nombre as nombre_articulo') 
+            ->where('ventas.estado','=','Cancelado')        
             ->whereYear('ventas.fecha_hora',$anio)
             ->groupBy(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M")'), 'articulos.nombre')
             ->orderBy('ventas.fecha_hora', 'asc')->paginate($paginado);
         }
-        else{
+        elseif($buscar!='' && $criterio == 'nombre'){
             $detallesA = DetalleVenta::join('ventas','ventas.id','=','detalle_ventas.idventa')
             ->join('articulos','articulos.id','=','detalle_ventas.idarticulo')
             ->select(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M") as mes'),
             DB::raw('SUM(detalle_ventas.subtotal) as subtotal'),'articulos.nombre as nombre_articulo')
-            ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')         
+            ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->whereYear('ventas.fecha_hora',$anio)
             ->groupBy(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M")'), 'articulos.nombre')            
             ->orderBy('ventas.fecha_hora', 'asc')->paginate($paginado);
-        }  
+        }
+        elseif($buscar!='' && $criterio == 'fecha_hora') {
+            $detallesA = DetalleVenta::join('ventas','ventas.id','=','detalle_ventas.idventa')
+            ->join('articulos','articulos.id','=','detalle_ventas.idarticulo')
+            ->select(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M") as mes'),
+            DB::raw('SUM(detalle_ventas.subtotal) as subtotal'),'articulos.nombre as nombre_articulo')
+            ->whereMonth('ventas.fecha_hora',$buscar)
+            ->whereYear('ventas.fecha_hora',$anio)
+            ->groupBy(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M")'), 'articulos.nombre')            
+            ->orderBy('ventas.fecha_hora', 'asc')->paginate($paginado);
+        }    
  
         return [
             'pagination' => [
@@ -157,6 +194,19 @@ class VentaController extends Controller
             ],
             'detallesA' => $detallesA
         ];
+    }
+
+    public function mesVenta(Request $request){
+        //if (!$request->ajax()) return redirect('/');
+
+        $mesVentaArray = Venta::select(DB::raw('DATE_FORMAT(ventas.fecha_hora, "%c") as id'),
+        DB::raw('DATE_FORMAT(ventas.fecha_hora, "%M") as nombre'))
+        ->where('ventas.estado','=','Cancelado')
+        ->orderBy('ventas.fecha_hora', 'asc')
+        ->distinct()->get();
+
+        return ['mesVentaArray' => $mesVentaArray];
+
     }
  
     public function obtenerCabecera(Request $request){
@@ -285,6 +335,18 @@ class VentaController extends Controller
         $venta = Venta::findOrFail($request->id);
         $venta->estado = 'Anulado';
         $venta->save();
+    }
+
+    public function pagarDeuda(Request $request){
+        if (!$request->ajax()) return redirect('/');
+
+        $abono = ($request->abono + $request->saldo);
+        if($abono == $request->total){$estado = 'Cancelado';}else{$estado = 'Debe';}
+       
+        $venta = Venta::findOrFail($request->id);
+        $venta->abono = $abono;
+        $venta->estado = $estado;
+        $venta->save();        
     }
 }
 

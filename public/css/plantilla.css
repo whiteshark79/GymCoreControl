@@ -120,13 +120,19 @@ table td {
 
 .my-custom-scrollbar {
   position: relative;
-  height: 415px;
+  height: 400px;
   overflow: auto;
   }
 
 .my-custom-mini-scrollbar {
   position: relative;
-  height: 340px;
+  height: 360px;
+  overflow: auto;
+  }
+
+.my-custom-mini-scrollbar_ {
+  position: relative;
+  height: 260px;
   overflow: auto;
   }
   
@@ -135,45 +141,25 @@ table td {
   }
 
 
-/*********Profile***********/
-.profile_pic { 
-  width: 35%;
-  float: left; }
+/*********Menu***********/
 
-.img-circle.profile_img {
-  width: 30%;
-  margin-left: 15%;
-  z-index: 1000;
-  position: inherit;
-  border: 3px solid rgba(253, 254, 255, 0.822);}
+    .menu_title {
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      font-weight: bold;
+      font-size: 14px;
+      text-shadow: 1px 1px #000;}
 
-.profile_info {
-  padding: 25px 10px 10px;
-  width: 65%;
-  float: left; }
-
-.profile_info span {
-  font-size: 13px;
-  line-height: 30px;
-  color: #BAB8B8; }
-
-.profile_info h2 {
-  font-size: 14px;
-  color: #ECF0F1;
-  margin: 0;
-  font-weight: 300; }
-
-
-  .menu_section h3 {
-    padding-left: 23px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 10;
-    margin-top: 10;
-    text-shadow: 1px 1px #000;}
+    .icon_title {
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 1px 2px #000;}
+    
+    .icon_title:hover {
+      color: #017BA0;
+      font-weight: bold;
+      text-shadow: 1px 2px #000;}
 
 
 /*!
@@ -4825,7 +4811,7 @@ input[type="button"].btn-block {
 .card-body {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem;
+  padding: 1rem;
 }
 
 .card-title {
@@ -19045,7 +19031,7 @@ html.maximized-card {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 1rem;
-  min-height: 80px;
+  min-height: 90px;
   padding: .5rem;
   position: relative;
 }

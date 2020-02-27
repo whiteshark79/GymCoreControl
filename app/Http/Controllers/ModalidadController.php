@@ -43,7 +43,7 @@ class ModalidadController extends Controller
     public function selectModalidad(Request $request){
         if (!$request->ajax()) return redirect('/');
         $modalidades = Modalidad::where('condicion','=','1')
-        ->select('id','nombre','duracion','precio')
+        ->select('id','nombre','duracion','precio','clases')
         ->orderBy('nombre', 'asc')->get();
         return ['modalidades' => $modalidades];
     }    
@@ -56,6 +56,7 @@ class ModalidadController extends Controller
         $modalidad->descripcion = $request->descripcion;
         $modalidad->duracion = $request->duracion;
         $modalidad->precio = $request->precio;
+        $modalidad->clases = $request->clases;
         $modalidad->condicion = '1';
         $modalidad->save();
     }
@@ -68,6 +69,7 @@ class ModalidadController extends Controller
         $modalidad->descripcion = $request->descripcion;
         $modalidad->duracion = $request->duracion;
         $modalidad->precio = $request->precio;
+        $modalidad->clases = $request->clases;
         $modalidad->condicion = '1';
         $modalidad->save();
     }

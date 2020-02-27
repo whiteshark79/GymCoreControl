@@ -25,10 +25,10 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->           
-          <li class="nav-item has-treeview menu-open"><a href="#" class="nav-link active"><i class="nav-icon fas fa-cubes"></i><p>Paneles<i class="fas fa-angle-left right"></i></p></a>
+          <li class="nav-item has-treeview menu-open"><a href="#" class="nav-link active"><i class="nav-icon fas fa-user-cog"></i><p class="menu_title">Opciones<i class="fas fa-angle-left right"></i></p></a>
             <ul class="nav nav-treeview">              
-              <li @click="menu=0" class="nav-item"><a href="#" class="nav-link "><i class="fas fa-caret-right nav-icon"></i><p>Perfil</p></a></li>
-              <li @click="menu=1" class="nav-item"><a href="#" class="nav-link "><i class="fas fa-caret-right nav-icon"></i><p>Reportes</p></a></li>           
+              <li @click="menu=0" class="nav-item"><a href="#" class="nav-link "><i class="fas fa-caret-right nav-icon"></i><p>PERFIL</p></a></li>
+              <li @click="menu=1" class="nav-item"><a href="#" class="nav-link "><i class="fas fa-caret-right nav-icon"></i><p>REPORTES</p></a></li>           
             </ul>
           </li>         
             

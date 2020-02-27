@@ -19,11 +19,12 @@
                             <div class="card-body">
                                 <div class="form-group row justify-content-between">
                                     <div class="input-group input-group-sm col-7">                                
-                                        <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
+                                        <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
                                             <option value="idcliente">Cliente</option>
                                             <option value="fecha_hora">Fecha</option>
                                             <option value="tipo_comprobante">Tipo Doc.</option>
-                                            <option value="num_comprobante">Núm. Doc.</option>                                           
+                                            <option value="num_comprobante">Núm. Doc.</option>
+                                            <option value="estado">Estado</option>                                           
                                         </select>
                                         <template v-if="criterio=='idcliente'">
                                             <div class="col-md-4">                                                        
@@ -46,10 +47,17 @@
                                                 <option value="NOTA">Nota</option>                                                
                                             </select>
                                         </template>
+                                        <template v-else-if="criterio=='estado'">
+                                            <select class="form-control form-control-sm col-4" v-model="buscar">
+                                                <option value="Debe" selected>Debe</option>
+                                                <option value="Cancelado">Cancelado</option>                                                
+                                            </select>
+                                        </template>
                                         <template v-else>
                                             <input type="number" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="No del comprobante">
                                         </template>                                       
                                         <button type="submit" @click="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
                                     </div>
                                     <div class="col-4"></div>
                                     <div class="input-group input-group-sm col-1">                                     
@@ -65,7 +73,8 @@
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
-                                                <th width="14%">FECHA
+                                                <th width="3%">#</th>
+                                                <th width="12%">FECHA
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'asc') || (ordenado === 'fecha_hora' && ascdesc === 'desc') ">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -73,7 +82,7 @@
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'fecha_hora','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="25%">CLIENTE
+                                                <th width="22%">CLIENTE
                                                     <template v-if="(ordenado !== 'idcliente' && ascdesc === 'asc') || (ordenado === 'idcliente' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'idcliente','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -81,7 +90,7 @@
                                                         <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'idcliente','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>                                                                                                                                        
-                                                <th width="16%">DOCUMENTO</th>
+                                                <th width="13%">DOCUMENTO</th>
                                                 <th width="6%">SUBTOTAL</th>
                                                 <th width="6%">IVA</th>
                                                 <th width="6%">TOTAL</th>
@@ -92,8 +101,9 @@
                                                     <template v-if="(ordenado !== 'abono' && ascdesc === 'desc') || (ordenado === 'abono' && ascdesc === 'asc')">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
-                                                </th>                                            
-                                                <th width="9%">ESTADO
+                                                </th>
+                                                <th width="6%">SALDO</th>                                         
+                                                <th width="8%">ESTADO
                                                     <template v-if="(ordenado !== 'estado' && ascdesc === 'asc') || (ordenado === 'estado' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -106,13 +116,15 @@
                                         </thead>
                                         <tbody v-if="arrayVenta.length">
                                             <tr v-for="venta in arrayVenta" :key="venta.id">
+                                                <td v-text="venta.id"></td>
                                                 <td v-text="venta.fecha_hora"></td>
                                                 <td>{{venta.nombre}}</td> 
                                                 <td><span class="text-mini">{{venta.tipo_comprobante}}</span> : {{ venta.serie_comprobante ? venta.serie_comprobante+'-'+venta.num_comprobante : '000-000' }} </td>
                                                 <td align="right">$ {{ (venta.total-venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ venta.total  }}</td>
-                                                <td align="right">$ {{ venta.abono  }}<template v-if="venta.abono < venta.total"><span class="badge badge-warning">D</span></template></td>
+                                                <td align="right">$ {{ venta.abono  }}</td>
+                                                <td align="right">$ {{ (venta.total-venta.abono).toFixed(2)  }}</td>
                                                 <td align="center"> 
                                                     <div v-if="venta.estado=='Cancelado'"><span class="badge badge-success">{{venta.estado}}</span></div>
                                                     <div v-else-if="venta.estado=='Debe'"><span class="badge badge-warning">{{venta.estado}}</span></div>  
@@ -637,7 +649,7 @@
                 if(me.tipo_comprobante == 'NOTA'){ me.impuesto = 0.0
                 }else{ me.impuesto = 0.12
                 } 
-            },
+            }, 
             listarVenta (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
                 var url= '/venta?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
@@ -980,6 +992,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.listarVenta(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },
         mounted() {

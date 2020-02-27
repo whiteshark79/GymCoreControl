@@ -37,7 +37,7 @@ class CategoriaController extends Controller
             ],
             'categorias' => $categorias
         ];
-    }
+    } 
   
     public function selectCategoria(Request $request){
         if (!$request->ajax()) return redirect('/');

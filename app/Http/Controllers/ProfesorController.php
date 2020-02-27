@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
  
 use App\Profesor;
 use App\Persona;
+use App\User;
+use App\Rol;
   
  
 class ProfesorController extends Controller
@@ -89,6 +91,16 @@ class ProfesorController extends Controller
             $profesor->sueldo_hora = $request->sueldo_hora;
             $profesor->id = $persona->id;
             $profesor->save();
+
+            $rol = DB::table('roles')->where('nombre', 'like', '%Profesor%')->first();
+
+            $user = new User();
+            $user->usuario = $request->num_documento;
+            $user->password = bcrypt( $request->num_documento);
+            $user->condicion = '1';
+            $user->idrol = $rol->id;
+            $user->id = $persona->id;
+            $user->save();
  
             DB::commit();
  

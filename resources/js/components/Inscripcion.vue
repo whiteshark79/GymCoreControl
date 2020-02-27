@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
                                         <option value="idalumno">Alumno</option>
                                         <option value="fecha_ini">Fecha</option>
                                         <option value="idmodalidad">Modalidad</option>                                      
@@ -41,7 +41,8 @@
                                             <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
                                         </select>
                                     </template>                                                                          
-                                    <button type="submit" @click="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                    <button type="submit" @click="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="input-group input-group-sm col-1">                                     
@@ -122,9 +123,7 @@
                                                 <div v-if="inscripcion.estado=='Registrado'"><span class="badge badge-success">Registrado</span></div>
                                                 <div v-else><span class="badge badge-danger">Anulado</span></div>                                    
                                             </td>
-                                            <td align="center">
-                                                
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('inscripcion','eliminar',inscripcion)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
+                                            <td align="center">                   
                                                 <template v-if="inscripcion.estado=='Registrado'">
                                                     <a class="btn btn-sm btn-default" @click="abrirModal('inscripcion','actualizar',inscripcion)"><i class="fas fa-edit" title="Editar"></i></a>
                                                     <a class="btn btn-sm btn-default" @click="desactivarInscripcion(inscripcion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
@@ -137,7 +136,7 @@
                                     </tbody>
                                     <tbody v-else>
                                         <tr>
-                                            <td colspan="8" class="text-center">
+                                            <td colspan="9" class="text-center">
                                                 <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                             </td>
                                         </tr>
@@ -176,7 +175,7 @@
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">                           
                             <template v-if="tipoAccion==2">
                                 <div class="row">
-                                    <div class="input-group input-group-sm mb-3 col-md-5">
+                                    <div class="input-group input-group-sm mb-3 col-md-7">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Fecha Inicio: </span>
                                         </div>
@@ -214,14 +213,19 @@
                                     </div>
                                     <select class="form-control col-6" v-bind:class="{ 'is-invalid': e_idmodalidad }" v-model="idmodalidad" @change="getDatosModalidad">
                                         <option value="0" disabled>--Seleccione--</option>
-                                        <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre" :data-precio="modalidad.precio" :data-duracion="modalidad.duracion"></option>
+                                        <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre" 
+                                                :data-precio="modalidad.precio" 
+                                                :data-duracion="modalidad.duracion"
+                                                :data-clases="modalidad.clases"></option>
                                     </select>
-                                     <input type="hidden" v-model="duracion">  
+                                     <input type="hidden" v-model="duracion">
+                                     <input type="hidden" v-model="clases"> 
+                                     <input type="hidden" v-model="subtotal">  
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                     </div>                                    
                                     <input type="number" class="form-control col-3" v-model="total" readonly>
-                                    <input type="hidden" v-model="subtotal"> 
+                                    
                                 </div>
                                 <div class="input-group input-group-sm mb-3 col-4">
                                     <div class="input-group-prepend">
@@ -229,7 +233,7 @@
                                     </div>
                                     <select class="form-control" v-bind:class="{ 'is-invalid': e_idhorario }" v-model="idhorario">
                                         <option value="0" disabled>--Seleccione--</option>
-                                        <option v-for="horario in arrayHorario" :key="horario.id" :value="horario.id" v-text="horario.horas+' '+horario.periodo"></option>
+                                        <option v-for="horario in arrayHorario" :key="horario.id" :value="horario.id" v-text="horario.hora_ini+' '+horario.hora_fin"></option>
                                     </select>
                                 </div> 
                             </div>
@@ -294,7 +298,9 @@
                 fecha_ini : '',
                 idalumno : 0,
                 idmodalidad : 0,
-                duracion : 0,                           
+                idhorario : 0,
+                duracion : 0,  
+                clases : 0,                           
                 abono : 0,
                 saldo : 0,
                 iva : 'N',
@@ -444,6 +450,7 @@
                 {
                     me.total = (e.target.options[e.target.options.selectedIndex].dataset.precio);
                     me.duracion = (e.target.options[e.target.options.selectedIndex].dataset.duracion);
+                    me.clases = (e.target.options[e.target.options.selectedIndex].dataset.clases);
                     me.abono = this.total;
                     me.subtotal = this.total;
                     me.saldo = 0;                    
@@ -489,7 +496,9 @@
                 axios.post('/inscripcion/registrar',{
                     'idalumno': this.idalumno,                    
                     'idmodalidad': this.idmodalidad,
+                    'idhorario': this.idhorario,
                     'duracion': this.duracion,
+                    'clases': this.clases,
                     'abono': this.abono,
                     'saldo': this.saldo,
                     'impuesto': this.impuesto,
@@ -510,7 +519,9 @@
                     'fecha_ini': this.fecha_ini,
                     'idalumno': this.idalumno,                    
                     'idmodalidad': this.idmodalidad,
+                    'idhorario': this.idhorario,
                     'duracion': this.duracion,
+                    'clases': this.clases,
                     'abono': this.abono,
                     'saldo': this.saldo,
                     'impuesto': this.impuesto,
@@ -585,7 +596,7 @@
                 if (this.idalumno == 0) {this.e_idalumno = true; this.errorMostrarMsjInscripcion.push('ide_idalumno');}else{this.e_idalumno = false}
                 if (this.idmodalidad == 0) {this.e_idmodalidad = true; this.errorMostrarMsjInscripcion.push('idme_idmodalidad');}else{this.e_idmodalidad = false}
                 if (!this.abono) {this.e_abono = true; this.errorMostrarMsjInscripcion.push('idme_abono');}else{this.e_abono = false}
-                //if (this.idhorario == 0) {this.e_idhorario = true; this.errorMostrarMsjInscripcion.push('idme_idhorario');}else{this.e_idhorario = false}
+                if (this.idhorario == 0) {this.e_idhorario = true; this.errorMostrarMsjInscripcion.push('idme_idhorario');}else{this.e_idhorario = false}
 
 
                 if (this.errorMostrarMsjInscripcion.length) this.errorInscripcion = 1;
@@ -598,7 +609,10 @@
                 this.fecha_ini= '';
                 this.idalumno= '';
                 this.idmodalidad= 0;
+                this.idhorario= 0;
                 this.duracion = 0;
+                this.clases = 0;
+                this.idhorario= 0;
                 this.abono = 0.0;
                 this.saldo = 0.0;
                 this.iva = 'N';
@@ -623,7 +637,9 @@
                                 this.fecha_ini= '';
                                 this.idalumno= '';
                                 this.idmodalidad= 0;
-                                this.duracion = 0;
+                                this.idhorario= 0;
+                                this.duracion = 0;  
+                                this.clases = 0;                              
                                 this.abono = 0.0;
                                 this.saldo = 0.0;
                                 this.iva = 'N';
@@ -643,7 +659,9 @@
                                 this.idalumno = data['idalumno'];
                                 this.nombre = data['nombre'];
                                 this.idmodalidad= data['idmodalidad'];
-                                if(this.duracion==0){this.duracion = data['modalidad_duracion'];}else{this.duracion = this.duracion;}
+                                this.idhorario= data['idhorario'];
+                                if(this.duracion==0){this.duracion = data['modalidad_duracion'];}else{this.duracion = this.duracion;} 
+                                this.clases= data['clases'];                               
                                 if(data['impuesto']>0){this.iva = 'S';}else{this.iva = 'N';}                                
                                 this.abono= data['abono'];
                                 this.saldo= data['saldo'];
@@ -656,11 +674,11 @@
                         }
                     }
                 }
-                this.selectModalidad();
                 this.selectHorario();
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.listarInscripcion(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },
         mounted() {

@@ -1,6 +1,6 @@
 <template>
  
-    <main class="main">
+    <main class="main"> 
         <div class="row mt-3">
             <div class="container-fluid">
                 <div class="col-md-12">
@@ -10,7 +10,6 @@
                         </div>                     
 
                         <div class="card-body">
-
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="inscripcion-tab" data-toggle="tab" href="#inscripcion" role="tab" aria-controls="inscripcion" aria-selected="true"><h6>Inscripciones</h6></a>

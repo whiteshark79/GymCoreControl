@@ -13,13 +13,15 @@ class GastoController extends Controller
 {
     public function index(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
  
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         $paginado = $request->paginado;
         $ordenado = $request->ordenado;
         $ascdesc = $request->ascdesc;
+
+        if($criterio == 'idproveedor' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
            
         if ($buscar==''){
             $gastos = Gasto::join('personas','gastos.idproveedor','=','personas.id')
@@ -35,7 +37,7 @@ class GastoController extends Controller
             ->select('gastos.id','gastos.tipo_comprobante','gastos.serie_comprobante',
             'gastos.num_comprobante','gastos.fecha_hora','gastos.impuesto','gastos.total',
             'gastos.estado','personas.nombre','users.usuario')
-            ->where('gastos.'.$criterio, 'like', '%'. $buscar . '%')
+            ->where('gastos.'.$criterio, 'like', $filtro ) 
             ->orderBy('gastos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
          

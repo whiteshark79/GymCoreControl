@@ -4,7 +4,7 @@
 
 @if(Auth::check())
         @if (Auth::user()->idrol == 1)
-            <template v-if="menu==0"><dashboardmix></dashboardmix></template>
+            <template v-if="menu==0"><dashboardadmin></dashboardadmin></template>
             <template v-if="menu==1"><alumno></alumno></template>
             <template v-if="menu==2"><cliente></cliente></template>
             <template v-if="menu==3"><profesor></profesor></template>
@@ -31,10 +31,11 @@
             <template v-if="menu==25"><perfilalumno></perfilalumno></template>
         @elseif (Auth::user()->idrol == 2)
             <template v-if="menu==0"><perfilalumno></perfilalumno></template>
-            <template v-if="menu==1"><reportealumno></reportealumno></template>
+            <template v-if="menu==1"><dashboardalumno></dashboardalumno></template>
         @elseif (Auth::user()->idrol == 3)
             <template v-if="menu==0"><perfil></perfil></template>
         @elseif (Auth::user()->idrol == 4)
+            <template v-if="menu==0"><dashboardoper></dashboardoper></template>
             <template v-if="menu==1"><alumno></alumno></template>
             <template v-if="menu==2"><cliente></cliente></template>
             <template v-if="menu==3"><profesor></profesor></template>

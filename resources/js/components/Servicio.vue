@@ -16,7 +16,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
                                         <option value="codigo">Código</option>
                                         <option value="nombre">Nombre</option>
                                         <option value="descripcion">Descripción</option>
@@ -36,9 +36,9 @@
                                     </template>
                                     <template v-else>
                                         <input type="text" v-model="buscar" @keyup.enter="listarServicio(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
-                                    </template>
-                                    
+                                    </template>                                    
                                     <button type="submit" @click="listarServicio(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="input-group input-group-sm col-1">                                     
@@ -507,6 +507,7 @@ import vSelect from 'vue-select';
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.listarServicio(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },
         mounted() {

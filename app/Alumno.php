@@ -15,7 +15,7 @@ class Alumno extends Model
         'idprofesion',
         'sit_laboral',
         'empresa','cargo',
-        'estudiante',
+        'estudiante', 
         'iduniversidad',
         'edad',
         'peso',

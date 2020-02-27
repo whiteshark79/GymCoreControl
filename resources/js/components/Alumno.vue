@@ -10,13 +10,12 @@
                             <div class="card-tools">
                                 <button type="button" class="btn btn-sm btn-primary" @click="abrirModal('persona','registrar')"><i class="fas fa-plus-circle">  Nuevo Alumno</i></button>
                             </div>
-                        </div>                     
+                        </div>                      
 
-                        <div class="card-body">
-                            
+                        <div class="card-body">                            
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();"> @change="ceroBusqueda();">
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
                                         <option value="nombre">Nombre</option>
                                         <option value="num_documento">Documento</option>
                                         <option value="fec_nacimiento">Cumpleaños</option>
@@ -30,7 +29,8 @@
                                     <template v-else>
                                         <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
                                     </template>
-                                    <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                    <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="input-group input-group-sm col-1">                                     
@@ -45,6 +45,7 @@
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">
+                                            <th width="3%">#</th> 
                                             <th width="10%">DOC
                                                 <template v-if="(ordenado !== 'num_documento' && ascdesc === 'asc') || (ordenado === 'num_documento' && ascdesc === 'desc') ">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -53,7 +54,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="40%">NOMBRE
+                                            <th width="37%">NOMBRE
                                                 <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -75,6 +76,7 @@
                                     </thead>
                                     <tbody v-if="arrayPersona.length">
                                         <tr v-for="persona in arrayPersona" :key="persona.id">
+                                            <td align="center" v-text="persona.id"></td>
                                             <td align="center" v-text="persona.num_documento"></td>
                                             <td v-text="persona.nombre"></td>
                                             <td align="center" v-text="persona.fec_nacimiento"></td>
@@ -734,6 +736,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.listarPersona(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },
         mounted() {

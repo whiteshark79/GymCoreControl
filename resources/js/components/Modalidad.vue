@@ -15,12 +15,13 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">>
+                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
                                     <option value="nombre">Nombre</option>
                                     <option value="descripcion">Descripción</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarModalidad(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarModalidad(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                    <button type="submit" @click="listarModalidad(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="input-group input-group-sm col-1">                                     
@@ -171,7 +172,15 @@
                                     </div>
                                     <input type="number" min="0.0" v-model="precio" class="form-control" v-bind:class="{ 'is-invalid': e_precio }">
                                 </div>
-                            </div>  
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="clases">No de Clases: </span>
+                                    </div>
+                                    <input type="number" min="0.0" v-model="clases" class="form-control col-4" v-bind:class="{ 'is-invalid': e_clases }">                                    
+                                </div>
+                            </div> 
 
                         </form>
                     </div>
@@ -200,6 +209,7 @@
                 descripcion : '',
                 duracion : 0,
                 precio : 0.0,
+                clases : 0,
                 arrayModalidad : [],
                 modal : 0,
                 tituloModal : '',
@@ -210,7 +220,8 @@
                 e_nombre : false,
                 e_descripcion : false,
                 e_duracion : false,
-                e_precio : false, 
+                e_precio : false,
+                e_clases : false, 
 
                 pagination : {
                     'total' : 0,
@@ -287,7 +298,8 @@
                     'nombre': this.nombre,
                     'descripcion': this.descripcion,
                     'duracion': this.duracion,
-                    'precio': this.precio
+                    'precio': this.precio,
+                    'clases': this.clases
                 }).then(function (response) {
                     me.cerrarModal();
                     me.listarModalidad(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
@@ -304,6 +316,7 @@
                     'descripcion': this.descripcion,
                     'duracion': this.duracion,
                     'precio': this.precio,
+                    'clases': this.clases,
                     'id': this.modalidad_id
                 }).then(function (response) {
                     me.cerrarModal();
@@ -387,6 +400,8 @@
                 if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjModalidad.push('descripcion');}else{this.e_descripcion = false}
                 if (this.duracion == 0) {this.e_duracion = true; this.errorMostrarMsjModalidad.push('duracion');}else{this.e_duracion = false}
                 if (!this.precio) {this.e_precio = true; this.errorMostrarMsjModalidad.push('precio');}else{this.e_precio = false}
+                if (!this.clases) {this.e_clases = true; this.errorMostrarMsjModalidad.push('clases');}else{this.e_clases = false}
+
 
                 if (this.errorMostrarMsjModalidad.length) this.errorModalidad = 1;
                 return this.errorModalidad;
@@ -401,11 +416,13 @@
                 this.e_descripcion = false;
                 this.e_duracion = false;
                 this.e_precio = false;
+                this.e_clases = false;
                 
                 this.nombre='';
                 this.descripcion='';
                 this.duracion=0;
-                this.precio=0.0;                
+                this.precio=0.0; 
+                this.clases=0;               
 
                 
             },
@@ -422,6 +439,7 @@
                                 this.descripcion = '';
                                 this.duracion = 0;
                                 this.precio = 0.0;
+                                this.clases = 0;
                                 this.tipoAccion = 1;
 
                                 break;
@@ -436,6 +454,7 @@
                                 this.descripcion= data['descripcion'];                                
                                 this.duracion= data['duracion'];
                                 this.precio= data['precio'];
+                                this.clases= data['clases'];
                                 break;
                             }
                             case 'eliminar':
@@ -448,6 +467,7 @@
                                 this.descripcion= data['descripcion'];
                                 this.duracion= data['duracion'];
                                 this.precio= data['precio'];
+                                this.clases= data['clases'];
                                 break;
                             }
                         }
@@ -456,6 +476,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.listarModalidad(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },
         mounted() {

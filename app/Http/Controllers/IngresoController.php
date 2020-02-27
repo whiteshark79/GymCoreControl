@@ -22,6 +22,8 @@ class IngresoController extends Controller
         $paginado = $request->paginado;
         $ordenado = $request->ordenado;
         $ascdesc = $request->ascdesc;
+
+        if($criterio == 'idproveedor' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
           
         if ($buscar==''){
             $ingresos = Ingreso::join('personas','ingresos.idproveedor','=','personas.id')
@@ -37,7 +39,7 @@ class IngresoController extends Controller
             ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
             'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
             'ingresos.estado','personas.nombre','users.usuario')
-            ->where('ingresos.'.$criterio, 'like', '%'. $buscar . '%')
+            ->where('gastos.'.$criterio, 'like', $filtro ) 
             ->orderBy('ingresos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
          

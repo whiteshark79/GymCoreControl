@@ -16,6 +16,7 @@ class DashboardController extends Controller
         ->select(DB::raw('DATE_FORMAT(i.fecha_hora, "%b") as mes'),
             DB::raw('YEAR(i.fecha_hora) as anio'),
             DB::raw('SUM(i.total) as total'))
+        ->where('i.estado','Registrado')
         ->whereYear('i.fecha_hora',$anio)
         ->groupBy(DB::raw('DATE_FORMAT(i.fecha_hora, "%b")'),DB::raw('YEAR(i.fecha_hora)'))
         ->orderBy(DB::raw('i.id'), 'asc')
@@ -25,6 +26,7 @@ class DashboardController extends Controller
         ->select(DB::raw('DATE_FORMAT(v.fecha_hora, "%b") as mes'),
             DB::raw('YEAR(v.fecha_hora) as anio'),
             DB::raw('SUM(v.total) as total'))
+        ->where('v.estado','Cancelado')
         ->whereYear('v.fecha_hora',$anio)
         ->groupBy(DB::raw('DATE_FORMAT(v.fecha_hora, "%b")'),DB::raw('YEAR(v.fecha_hora)'))
         ->orderBy(DB::raw('v.id'), 'asc')
@@ -34,6 +36,7 @@ class DashboardController extends Controller
         ->select(DB::raw('DATE_FORMAT(in.fecha_ini, "%b") as mes'),
             DB::raw('YEAR(in.fecha_ini) as anio'),
             DB::raw('SUM(in.total) as total'))
+        ->where('in.estado','Registrado')
         ->whereYear('in.fecha_ini',$anio)
         ->groupBy(DB::raw('DATE_FORMAT(in.fecha_ini, "%b")'),DB::raw('YEAR(in.fecha_ini)'))
         ->orderBy(DB::raw('in.id'), 'asc')
@@ -43,6 +46,7 @@ class DashboardController extends Controller
         ->select(DB::raw('DATE_FORMAT(g.fecha_hora, "%b") as mes'),
             DB::raw('YEAR(g.fecha_hora) as anio'),
             DB::raw('SUM(g.total) as total'))
+        ->where('g.estado','Registrado')
         ->whereYear('g.fecha_hora',$anio)
         ->groupBy(DB::raw('DATE_FORMAT(g.fecha_hora, "%b")'),DB::raw('YEAR(g.fecha_hora)'))
         ->orderBy(DB::raw('g.id'), 'asc')
@@ -50,22 +54,23 @@ class DashboardController extends Controller
  
         return ['ingresos'=>$ingresos,'ventas'=>$ventas, 'inscripciones'=>$inscripciones, 'gastos'=>$gastos, 'anio'=>$anio];     
     }
-    
+     
     public function grafArticulo(Request $request){
         //if (!$request->ajax()) return redirect('/');
-
+        
         $anio=date('Y');
-
+        
         $articulos=DB::table('detalle_ventas')
         ->join('ventas','detalle_ventas.idventa','=','ventas.id')
         ->join('articulos','detalle_ventas.idarticulo','=','articulos.id')
         ->select(DB::raw('articulos.nombre as articulo'),
                 DB::raw('SUM(detalle_ventas.subtotal) as subtotal'))
+        ->where('ventas.estado','Cancelado')
         ->whereYear('ventas.fecha_hora',$anio)
         ->groupBy(DB::raw('articulos.nombre'))
         ->orderBy(DB::raw('ventas.fecha_hora'), 'asc')
         ->take(5)
-        ->get();
+        ->get();           
 
         return ['articulos'=>$articulos];   
 
@@ -73,28 +78,28 @@ class DashboardController extends Controller
 
     public function widgetInOuts(Request $request){
         if (!$request->ajax()) return redirect('/');
-
+ 
         $fechaActual= date('m');        
 
-        $ingresosValorTotal = DB::table('ingresos')->sum('total');
-        $ingresosValorMes = DB::table('ingresos')->whereMonth('fecha_hora', $fechaActual)->sum('total');        
-        $ingresosQtxTotal = DB::table('ingresos')->count();
-        $ingresosQtxMes = DB::table('ingresos')->whereMonth('fecha_hora', $fechaActual)->count(); 
+        $ingresosValorTotal = DB::table('ingresos')->where('estado','Registrado')->sum('total');
+        $ingresosValorMes = DB::table('ingresos')->where('estado','Registrado')->whereMonth('fecha_hora', $fechaActual)->sum('total');        
+        $ingresosQtxTotal = DB::table('ingresos')->where('estado','Registrado')->count();
+        $ingresosQtxMes = DB::table('ingresos')->where('estado','Registrado')->whereMonth('fecha_hora', $fechaActual)->count(); 
 
-        $ventasValorTotal = DB::table('ventas')->sum('total');
-        $ventasValorMes = DB::table('ventas')->whereMonth('fecha_hora', $fechaActual)->sum('total');        
-        $ventasQtxTotal = DB::table('ventas')->count();
-        $ventasQtxMes = DB::table('ventas')->whereMonth('fecha_hora', $fechaActual)->count();
+        $ventasValorTotal = DB::table('ventas')->where('estado','Cancelado')->sum('total');
+        $ventasValorMes = DB::table('ventas')->where('estado','Cancelado')->whereMonth('fecha_hora', $fechaActual)->sum('total');        
+        $ventasQtxTotal = DB::table('ventas')->where('estado','Cancelado')->count();
+        $ventasQtxMes = DB::table('ventas')->where('estado','Cancelado')->whereMonth('fecha_hora', $fechaActual)->count();
 
-        $inscripcionesValorTotal = DB::table('inscripciones')->sum('total');
-        $inscripcionesValorMes = DB::table('inscripciones')->whereMonth('fecha_ini', $fechaActual)->sum('total');        
-        $inscripcionesQtxTotal = DB::table('inscripciones')->count();
-        $inscripcionesQtxMes = DB::table('inscripciones')->whereMonth('fecha_ini', $fechaActual)->count();        
+        $inscripcionesValorTotal = DB::table('inscripciones')->where('estado','Registrado')->sum('total');
+        $inscripcionesValorMes = DB::table('inscripciones')->where('estado','Registrado')->whereMonth('fecha_ini', $fechaActual)->sum('total');        
+        $inscripcionesQtxTotal = DB::table('inscripciones')->where('estado','Registrado')->count();
+        $inscripcionesQtxMes = DB::table('inscripciones')->where('estado','Registrado')->whereMonth('fecha_ini', $fechaActual)->count();        
 
-        $gastosValorTotal = DB::table('gastos')->sum('total');
-        $gastosValorMes = DB::table('gastos')->whereMonth('fecha_hora', $fechaActual)->sum('total');        
-        $gastosQtxTotal = DB::table('gastos')->count();
-        $gastosQtxMes = DB::table('gastos')->whereMonth('fecha_hora', $fechaActual)->count(); 
+        $gastosValorTotal = DB::table('gastos')->where('estado','Registrado')->sum('total');
+        $gastosValorMes = DB::table('gastos')->where('estado','Registrado')->whereMonth('fecha_hora', $fechaActual)->sum('total');        
+        $gastosQtxTotal = DB::table('gastos')->where('estado','Registrado')->count();
+        $gastosQtxMes = DB::table('gastos')->where('estado','Registrado')->whereMonth('fecha_hora', $fechaActual)->count(); 
 
         $wingresos = 
             array([
@@ -136,7 +141,7 @@ class DashboardController extends Controller
     }    
 
     public function widgetAlumnos(Request $request){
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         $alumnosM=DB::table('alumnos as a')
         ->select('a.sexo')

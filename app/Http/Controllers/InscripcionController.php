@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Inscripcion;
+use App\Asistencia;
 
 class InscripcionController extends Controller
 {
@@ -18,15 +19,17 @@ class InscripcionController extends Controller
         $paginado = $request->paginado;
         $ordenado = $request->ordenado;
         $ascdesc = $request->ascdesc;
+
+        if($criterio == 'idalumno' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
          
         if ($buscar==''){
             $inscripciones = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
             ->join('users','inscripciones.idusuario','=','users.id')
             ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
             ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin','inscripciones.idalumno',
-            'inscripciones.idusuario','inscripciones.idmodalidad','inscripciones.abono','inscripciones.saldo',
-            'inscripciones.impuesto','inscripciones.total','inscripciones.observaciones','inscripciones.estado',
-            'personas.nombre','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
+            'inscripciones.idusuario','inscripciones.idmodalidad','inscripciones.idhorario','inscripciones.abono',
+            'inscripciones.saldo', 'inscripciones.impuesto','inscripciones.total','inscripciones.observaciones',
+            'inscripciones.estado', 'personas.nombre as nombre','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
             'users.usuario')
             ->orderBy('inscripciones.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -35,11 +38,11 @@ class InscripcionController extends Controller
             ->join('users','inscripciones.idusuario','=','users.id')
             ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
             ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin','inscripciones.idalumno',
-            'inscripciones.idusuario','inscripciones.idmodalidad','inscripciones.abono','inscripciones.saldo',
-            'inscripciones.impuesto','inscripciones.total','inscripciones.observaciones','inscripciones.estado',
-            'personas.nombre','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
+            'inscripciones.idusuario','inscripciones.idmodalidad','inscripciones.idhorario','inscripciones.abono',
+            'inscripciones.saldo', 'inscripciones.impuesto','inscripciones.total','inscripciones.observaciones',
+            'inscripciones.estado', 'personas.nombre as nombre','modalidades.nombre as modalidad_nombre','modalidades.duracion as modalidad_duracion',
             'users.usuario')
-            ->where('inscripciones.'.$criterio, 'like', '%'. $buscar . '%')
+            ->where('inscripciones.'.$criterio, 'like', $filtro )  
             ->orderBy('inscripciones.'.$ordenado, $ascdesc)->paginate($paginado);
         }
          
@@ -54,28 +57,56 @@ class InscripcionController extends Controller
             ],
             'inscripciones' => $inscripciones
         ];
-    }
-
-    public function listarAlumnoMes(Request $request){
-        if (!$request->ajax()) return redirect('/');        
-        
-        $inscripcionesM = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
-        ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin','inscripciones.idalumno','personas.nombre as alumno')
-        ->orderBy('inscripciones.fecha_fin', 'asc')
-        ->take(10)
-        ->get();  
+    } 
  
-        return ['inscripcionesM' => $inscripcionesM];
+    public function listarInscripcionAlumno(Request $request){ 
+        if (!$request->ajax()) return redirect('/');
+         
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        $paginado = $request->paginado;
+
+        if($criterio == 'idalumno' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
+
+        if ($buscar==''){        
+            $inscripcionesM = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+            ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
+            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 'modalidades.nombre as modalidad',
+              'inscripciones.idmodalidad','inscripciones.idhorario','personas.nombre as alumno')
+            ->orderBy('inscripciones.fecha_fin', 'asc')->paginate($paginado);
+        }else{ 
+            $inscripcionesM = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+            ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
+            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 'modalidades.nombre as modalidad',
+              'inscripciones.idmodalidad','inscripciones.idhorario','personas.nombre as alumno')
+            ->where('inscripciones.'.$criterio, 'like', $filtro )  
+            ->orderBy('inscripciones.fecha_fin', 'asc')->paginate($paginado);
+    
+        }
+ 
+        return [
+            'pagination' => [
+                'total'        => $inscripcionesM->total(),
+                'current_page' => $inscripcionesM->currentPage(),
+                'per_page'     => $inscripcionesM->perPage(),
+                'last_page'    => $inscripcionesM->lastPage(),
+                'from'         => $inscripcionesM->firstItem(),
+                'to'           => $inscripcionesM->lastItem(),
+            ],
+            'inscripcionesM' => $inscripcionesM
+        ];
     }
 
-    public function listarInscripcionesAlumno(Request $request){
+    public function listarInscripcionesAlumnoId(Request $request){
         if (!$request->ajax()) return redirect('/');        
-        
+         
         $id = \Auth::user()->id;
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
         $paginado = $request->paginado;
+
+        if($criterio == 'idalumno' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
 
         if ($buscar==''){
             $inscripcionesA = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
@@ -90,7 +121,7 @@ class InscripcionController extends Controller
             ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 'modalidades.nombre as modalidad',
             'inscripciones.abono','inscripciones.saldo','inscripciones.total','inscripciones.estado')
             ->where('personas.id',$id)
-            ->where('inscripciones.'.$criterio, 'like', '%'. $buscar . '%')
+            ->where('inscripciones.'.$criterio, 'like', $filtro )
             ->orderBy('inscripciones.fecha_fin', 'desc')->paginate($paginado);
         }
  
@@ -106,10 +137,10 @@ class InscripcionController extends Controller
             'inscripcionesA' => $inscripcionesA
         ];
     }
-      
+       
     public function store(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+        //if (!$request->ajax()) return redirect('/');
  
         $fecha_ini = Carbon::now();
         $fecha_fin = Carbon::now();
@@ -123,6 +154,7 @@ class InscripcionController extends Controller
             $inscripcion->idalumno = $request->idalumno;
             $inscripcion->idusuario = \Auth::user()->id;
             $inscripcion->idmodalidad = $request->idmodalidad;
+            $inscripcion->idhorario = $request->idhorario;
             $inscripcion->abono = $request->abono;
             $inscripcion->saldo = $request->saldo;
             $inscripcion->impuesto = $request->impuesto;
@@ -130,6 +162,13 @@ class InscripcionController extends Controller
             $inscripcion->observaciones = $request->observaciones;
             $inscripcion->estado = 'Registrado';
             $inscripcion->save();
+
+            $asistencia = new Asistencia();            
+            $asistencia->idalumno = $request->idalumno;
+            $asistencia->contador = 0;
+            $asistencia->clases = $request->clases;
+            $asistencia->id = $inscripcion->id;
+            $asistencia->save();            
 
             DB::commit();
  
@@ -156,6 +195,7 @@ class InscripcionController extends Controller
             $inscripcion->idalumno = $request->idalumno;
             $inscripcion->idusuario = \Auth::user()->id;
             $inscripcion->idmodalidad = $request->idmodalidad;
+            $inscripcion->idhorario = $request->idhorario;
             $inscripcion->abono = $request->abono;
             $inscripcion->saldo = $request->saldo;
             $inscripcion->impuesto = $request->impuesto;
@@ -163,6 +203,12 @@ class InscripcionController extends Controller
             $inscripcion->observaciones = $request->observaciones;
             $inscripcion->estado = 'Registrado';
             $inscripcion->save();
+
+            $asistencia = new Asistencia();
+            $asistencia->id = $inscripcion->id;
+            $asistencia->idalumno = $request->idalumno;
+            $asistencia->nclases = $request->clases;
+            $alumno->save();
 
             DB::commit();
  

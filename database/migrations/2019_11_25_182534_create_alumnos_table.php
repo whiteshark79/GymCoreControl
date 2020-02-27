@@ -15,27 +15,30 @@ class CreateAlumnosTable extends Migration
     {
         Schema::create('alumnos', function (Blueprint $table) {
             $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('personas')->onDelete('cascade');
             $table->string('cod_socio',20);
             $table->string('sexo',2)->nullable();
             $table->string('estado_civil',2)->nullable();
             $table->string('hijos',1)->nullable();
             $table->string('sector', 1)->nullable();
             $table->integer('idprofesion')->unsigned();
+            $table->foreign('idprofesion')->references('id')->on('profesiones');
             $table->string('sit_laboral', 1)->nullable();
             $table->string('empresa', 50)->nullable();
             $table->string('cargo', 30)->nullable(); 
             $table->string('estudiante', 2)->nullable();
             $table->integer('iduniversidad')->unsigned();
+            $table->foreign('iduniversidad')->references('id')->on('universidades'); 
             $table->string('edad', 3)->nullable();
             $table->string('peso', 3)->nullable();
             $table->string('estatura', 3)->nullable();
             $table->string('nivel_actividad', 2)->nullable();
             $table->string('tipo_actividad', 2)->nullable();
-            $table->string('objetivo', 2)->nullable();
+            $table->string('objetivo', 2)->nullable(); 
 
-            $table->foreign('id')->references('id')->on('personas')->onDelete('cascade');
-            $table->foreign('idprofesion')->references('id')->on('profesiones');
-            $table->foreign('iduniversidad')->references('id')->on('universidades');
+            
+            
+            
         });
     }
 
