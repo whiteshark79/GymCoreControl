@@ -24,7 +24,8 @@ window.Vue = require('vue');
 
 Vue.component('dashboardadmin', require('./components/DashboardAdmin.vue').default);
 Vue.component('dashboardoper', require('./components/DashboardOper.vue').default);
-Vue.component('dashboardalumno', require('./components/dashboardAlumno.vue').default);
+Vue.component('dashboardalumno', require('./components/DashboardAlumno.vue').default);
+Vue.component('caja', require('./components/Caja.vue').default);
 
 Vue.component('dbinscripciones', require('./components/DBInscripciones.vue').default);
 Vue.component('dbventas', require('./components/DBVentas.vue').default);

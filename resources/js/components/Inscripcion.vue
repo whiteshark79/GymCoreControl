@@ -57,6 +57,7 @@
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead  class="thead-table">
                                         <tr align="center"> 
+                                            <th width="3%">#</th> 
                                             <th width="10%">FECHA
                                                 <template v-if="(ordenado !== 'fecha_ini' && ascdesc === 'asc') || (ordenado === 'fecha_ini' && ascdesc === 'desc') ">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'fecha_ini','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -65,7 +66,7 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'fecha_ini','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="30%">ALUMNO
+                                            <th width="27%">ALUMNO
                                                 <template v-if="(ordenado !== 'idalumno' && ascdesc === 'asc') || (ordenado === 'idalumno' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'idalumno','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -107,11 +108,12 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'estado','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                                                                    
-                                            <th width="12%">ACCIONES</th>
+                                            <th width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayInscripcion.length">
                                         <tr v-for="inscripcion in arrayInscripcion" :key="inscripcion.id">
+                                            <td v-text="inscripcion.id"></td>
                                             <td>{{ inscripcion.fecha_ini }}</td>
                                             <td>{{inscripcion.nombre}}</td>
                                             <td v-text="inscripcion.modalidad_nombre"></td>                                     
@@ -120,13 +122,14 @@
                                             <td v-text="inscripcion.impuesto"></td>
                                             <td align="right">$ {{ inscripcion.total  }}</td>
                                             <td align="center"> 
-                                                <div v-if="inscripcion.estado=='Registrado'"><span class="badge badge-success">Registrado</span></div>
-                                                <div v-else><span class="badge badge-danger">Anulado</span></div>                                    
+                                                <div v-if="inscripcion.estado=='Cancelado'"><span class="badge badge-success">{{ inscripcion.estado }}</span></div>
+                                                <div v-if="inscripcion.estado=='Debe'"><span class="badge badge-warning">{{ inscripcion.estado }}</span></div>
+                                                <div v-if="inscripcion.estado=='Anulado'"><span class="badge badge-danger">{{ inscripcion.estado }}</span></div>                                    
                                             </td>
                                             <td align="center">                   
-                                                <template v-if="inscripcion.estado=='Registrado'">
+                                                <template v-if="inscripcion.estado=='Cancelado' || inscripcion.estado=='Debe'">
                                                     <a class="btn btn-sm btn-default" @click="abrirModal('inscripcion','actualizar',inscripcion)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                    <a class="btn btn-sm btn-default" @click="desactivarInscripcion(inscripcion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="desactivarInscripcion(inscripcion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>                                                     
                                                 </template>
                                                 <template v-else>
                                                     <a class="btn btn-sm btn-default" @click="activarInscripcion(inscripcion.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
@@ -136,7 +139,7 @@
                                     </tbody>
                                     <tbody v-else>
                                         <tr>
-                                            <td colspan="9" class="text-center">
+                                            <td colspan="10" class="text-center">
                                                 <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                             </td>
                                         </tr>
@@ -492,7 +495,7 @@
             registrarInscripcion(){
                 if (this.validarInscripcion()){ return; }            
                 let me = this;
-
+ 
                 axios.post('/inscripcion/registrar',{
                     'idalumno': this.idalumno,                    
                     'idmodalidad': this.idmodalidad,
@@ -607,7 +610,6 @@
                 this.tituloModal='';
                 
                 this.fecha_ini= '';
-                this.idalumno= '';
                 this.idmodalidad= 0;
                 this.idhorario= 0;
                 this.duracion = 0;

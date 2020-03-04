@@ -28,7 +28,7 @@ class GastoController extends Controller
             ->join('users','gastos.idusuario','=','users.id')
             ->select('gastos.id','gastos.tipo_comprobante','gastos.serie_comprobante',
             'gastos.num_comprobante','gastos.fecha_hora','gastos.impuesto','gastos.total',
-            'gastos.estado','personas.nombre','users.usuario')
+            'gastos.abono','gastos.estado','personas.nombre','users.usuario')
             ->orderBy('gastos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
@@ -36,7 +36,7 @@ class GastoController extends Controller
             ->join('users','gastos.idusuario','=','users.id')
             ->select('gastos.id','gastos.tipo_comprobante','gastos.serie_comprobante',
             'gastos.num_comprobante','gastos.fecha_hora','gastos.impuesto','gastos.total',
-            'gastos.estado','personas.nombre','users.usuario')
+            'gastos.abono','gastos.estado','personas.nombre','users.usuario')
             ->where('gastos.'.$criterio, 'like', $filtro ) 
             ->orderBy('gastos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -62,7 +62,7 @@ class GastoController extends Controller
         ->join('users','gastos.idusuario','=','users.id')
         ->select('gastos.id','gastos.tipo_comprobante','gastos.serie_comprobante',
         'gastos.num_comprobante','gastos.fecha_hora','gastos.impuesto','gastos.total',
-        'gastos.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'gastos.abono','gastos.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
         'personas.direccion','personas.celular','personas.email','users.usuario')
         ->where('gastos.id','=',$id)
         ->orderBy('gastos.id', 'desc')->take(1)->get();
@@ -83,6 +83,22 @@ class GastoController extends Controller
         return ['detalles' => $detalles];
     }
 
+    public function listarGastosDiario(Request $request){
+       //if (!$request->ajax()) return redirect('/');        
+        
+        $fechaActual= date('Y-m-d'); 
+        $fecha_hora = $request->fecha;
+        if($fecha_hora){$fecha = $fecha_hora;}else{$fecha = $fechaActual;}  
+
+        $gastosDia = Gasto::join('personas','gastos.idproveedor','=','personas.id')
+        ->select('gastos.id','gastos.fecha_hora', 'personas.nombre as proveedor', 'gastos.impuesto', 'gastos.total','gastos.abono','gastos.estado')
+        ->whereDate('gastos.fecha_hora', $fecha)
+        ->whereIn('gastos.estado',['Cancelado','Debe'])
+        ->orderBy('gastos.fecha_hora', 'desc')->get();         
+ 
+         return [ 'gastosDia' => $gastosDia ];
+    }
+
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
@@ -101,7 +117,8 @@ class GastoController extends Controller
             $gasto->fecha_hora = $mytime;
             $gasto->impuesto = $request->impuesto;
             $gasto->total = $request->total;
-            $gasto->estado = 'Registrado';
+            $gasto->abono = $request->abono;
+            $gasto->estado = 'Cancelado';
             $gasto->save();
  
             $detalles = $request->data;//Array de detalles

@@ -95,7 +95,7 @@
                                                     <a href="#" @click="listarArticulo(1,buscar,criterio,paginado,'condicion','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="12%">ACCIONES</th>
+                                            <th width="10%">ACCIONES</th>
                                         </tr> 
                                     </thead>
                                     <tbody v-if="arrayArticulo.length">

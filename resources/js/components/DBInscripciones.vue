@@ -262,8 +262,8 @@
             console.log(error);
         });
       },      
-      widgetInOuts(){
-        let me=this;
+      widgetInOuts(){ 
+        let me=this; 
           var url= '/dashboard/widgetInOuts';
           axios.get(url).then(function (response) {
               var respuesta_win= response.data;

@@ -14,14 +14,13 @@ class CreateAsistenciasTable extends Migration
     public function up()
     {
         Schema::create('asistencias', function (Blueprint $table) {
-            $table->integer('id')->unsigned();
-            $table->foreign('id')->references('id')->on('inscripciones')->onDelete('cascade');
-            $table->integer('idalumno')->unsigned();
-            $table->foreign('idalumno')->references('id')->on('alumnos');            
-            $table->integer('contador');
-            $table->integer('clases');
+            $table->increments('id');
+            $table->integer('idinscripcion')->unsigned();
+            $table->foreign('idinscripcion')->references('id')->on('inscripciones')->onDelete('cascade');
+            $table->dateTime('fecha_hora')->nullable();                     
+            $table->integer('contador')->default(0);
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.

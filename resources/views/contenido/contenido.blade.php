@@ -36,9 +36,9 @@
             <template v-if="menu==0"><perfil></perfil></template>
         @elseif (Auth::user()->idrol == 4)
             <template v-if="menu==0"><dashboardoper></dashboardoper></template>
-            <template v-if="menu==1"><alumno></alumno></template>
-            <template v-if="menu==2"><cliente></cliente></template>
-            <template v-if="menu==3"><profesor></profesor></template>
+            <template v-if="menu==1"><caja></caja></template>
+            <template v-if="menu==2"><alumno></alumno></template>
+            <template v-if="menu==3"><cliente></cliente></template>
             <template v-if="menu==4"><proveedor></proveedor></template>
             <template v-if="menu==5"><articulo></articulo></template>
             <template v-if="menu==6"><categoria></categoria></template>

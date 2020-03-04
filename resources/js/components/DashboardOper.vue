@@ -14,7 +14,8 @@
                                     <select class="form-control col-3" v-model="criterio" @onchange="ceroBusqueda();">
                                         <option value="fecha_ini">Fecha</option>
                                         <option value="idalumno">Alumno</option>
-                                        <option value="idmodalidad">Modalidad</option>                                      
+                                        <option value="idmodalidad">Modalidad</option>  
+                                        <option value="fecha_fin">Estado</option>                                    
                                     </select>                                    
                                     <template v-if="criterio=='fecha_ini'">
                                         <input type="date" v-model="buscar" class="form-control col-4">
@@ -36,7 +37,13 @@
                                             <option value="" disabled>--Seleccione--</option>
                                             <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
                                         </select>
-                                    </template>                                                                        
+                                    </template>
+                                    <template v-if="criterio=='fecha_fin'">
+                                        <select class="form-control col-4" v-model="buscar" @onchange="ceroBusqueda();">
+                                        <option value="" disabled>--Seleccione--</option>
+                                        <option value="0">Caducado</option>                          
+                                    </select>
+                                    </template>                                                                      
                                     <button type="submit" @click="listarInscripcionAlumno(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
                                     <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
                                 </div>                      
@@ -51,7 +58,7 @@
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
-                                        <tr align="center">  
+                                        <tr align="center">
                                             <th width="34%">NOMBRE</th> 
                                             <th width="21%">MODALIDAD</th>                                                                                       
                                             <th width="15%">FECHA</th>
@@ -61,8 +68,7 @@
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayInscripcionAlumno.length">
-                                        <tr v-for="inscripcion in arrayInscripcionAlumno" :key="inscripcion.id">
-                                            <td align="center" v-text="inscripcion.id"></td>
+                                        <tr v-for="inscripcion in arrayInscripcionAlumno" :key="inscripcion.id">   
                                             <td v-text="inscripcion.alumno"></td>
                                             <td v-text="inscripcion.modalidad"></td>
                                             <td align="center" v-text="inscripcion.fecha_ini"></td>                                  
@@ -72,13 +78,13 @@
                                                 <div v-else><span class="badge badge-success">Activo</span></div>                                    
                                             </td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="anotarAsistencia(inscripcion.id)"><i class="far fa-calendar-check"></i></a>  
+                                                <a class="btn btn-sm btn-default" @click="listarInscripcionDetalleAlumno(inscripcion.id)"><i class="far fa-calendar-check"></i></a>  
                                             </td>                                
                                         </tr>
                                     </tbody>
                                     <tbody v-else>
                                         <tr>
-                                        <td colspan="5" class="text-center">
+                                        <td colspan="6" class="text-center">
                                             <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                         </td>
                                         </tr>
@@ -133,7 +139,7 @@
                                     <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
                                 </div>                      
                                 <div class="input-group input-group-sm col-2">                                     
-                                    <select class="form-control" v-model="paginado" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
+                                    <select class="form-control" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -145,7 +151,7 @@
                                     <thead class="thead-table">
                                         <tr align="center">                                
                                             <th width="34%">NOMBRE</th>                                                                                       
-                                            <th width="28%">FECHA VENTA</th>
+                                            <th width="28%">FECHA</th>
                                             <th width="11%">TOTAL</th>
                                             <th width="11%">ABONO</th>
                                             <th width="11%">SALDO</th>
@@ -197,11 +203,93 @@
 
 <!--Inicio del modal agregar/actualizar-->
     <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" v-text="tituloModal"></h4>
                     <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="profile-username text-center">{{alumno}}</h3>
+                                    <p class="text-muted text-center">{{modalidad}}</p>
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Fecha Registro</b> <a class="float-right">{{fecha_ini}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Fecha Fin</b> <a class="float-right">{{fecha_fin}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>No. de clases</b> <a class="float-right">{{clases}}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Estado</b> 
+                                            <a class="float-right">
+                                                <div v-if="fecha_fin <= hoyFecha() "><span class="badge badge-danger">Caducado</span></div>
+                                                <div v-if="clases == contador "><span class="badge badge-warning">Horas completas</span></div>
+                                                <div v-else><span class="badge badge-success">Activo</span></div>
+                                            </a>
+                                        </li>                         
+                                    </ul>
+                                </div> 
+                            </div>                            
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-bordered table-sm table-hover" id="dtTable">
+                                <thead class="thead-table">
+                                    <tr align="center">
+                                        <th width="90%">Fecha</th>
+                                        <th>Contador</th>
+                                    </tr>
+                                </thead>
+                                <tbody v-if="arrayAsistenciasAlumno.length">
+                                    <tr v-for="detallei in arrayAsistenciasAlumno" :key="detallei.id"> 
+                                        <td align="center" v-text="detallei.fecha_hora"></td>
+                                        <td align="right" v-text="detallei.contador"></td>                                                                                                             
+                                    </tr>
+                                </tbody>                                   
+                            </table>
+                        </div>
+
+                    </div>        
+                  
+                </div>
+                <div class="modal-footer">  
+                    <input v-model="inscripcion_id" type="hidden"> 
+                    <input v-model="contador" type="hidden">    
+                    <input v-model="clases" type="hidden">    
+                    <template v-if="contador < clases">
+                        <button type="button" class="btn btn-primary btn-sm" @click="anotarAsistencia()">Asistencia No: <span class="badge badge-light">{{contador + 1 }} </span></button> 
+                    </template> 
+                    <template v-else>
+                        <div class="alert alert-info" role="alert">
+                        No de Horas: <span class="badge badge-light">{{contador}}</span>
+                        </div>
+                    </template> 
+                  <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>     
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+<!--Fin del modal--> 
+
+
+
+<!--Inicio del modal agregar/actualizar-->
+    <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal_}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" v-text="tituloModal_"></h4>
+                    <button type="button" class="close" @click="cerrarModal_()" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -231,7 +319,7 @@
                   <input v-model="saldo" type="number" step="0.1" min="0" :max="(total-abono)" class="form-control form-control-sm col-3">
                   <template v-if="modal<0"><input v-model="abono" type="number"><input v-model="total" type="number"></template>                    
                   <button type="button" class="btn btn-primary btn-sm" @click="pagarDeuda()">Pagar</button>
-                  <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>     
+                  <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal_()">Cerrar</button>     
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -240,6 +328,8 @@
     </div>
 <!--Fin del modal-->  
 
+
+ 
     </main>
 </template>
 
@@ -253,12 +343,24 @@
         saldo : 0,
         abono : 0,
         total : 0,
+
+        inscripcion_id : 0,
+        fecha_ini: '',
+        fecha_fin : '',
+        alumno : '',
+        modalidad : '',
+        contador : 0,
+        clases : 0,
+
         modal : 0,
         tituloModal : '',
+        modal_ : 0,
+        tituloModal_ : '',
 
         arrayVentaCliente:[],        
         arrayVentaDetalleCliente:[],
         arrayInscripcionAlumno:[],  
+        arrayAsistenciasAlumno:[],
         
         arrayModalidad : [],
         arrayCliente:[],
@@ -358,7 +460,6 @@
             console.log(error);
         });
       },            
-
       listarInscripcionAlumno(page,buscar,criterio,paginado){
         let me=this;
         var url= '/inscripcion/listarInscripcionAlumno?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado;
@@ -371,6 +472,62 @@
         .catch(function (error) {
             console.log(error);
         });
+      },
+      listarInscripcionDetalleAlumno(id, contador){
+        let me=this;
+
+        me.modal = 1;
+        me.tituloModal = 'Anotar asistencia';
+        me.inscripcion_id = id;
+
+        var url= '/inscripcion/listarInscripcionDetalleAlumno?id=' + id;
+        axios.get(url).then(function (response) {
+            var respuesta_fi= response.data;
+            var respuesta_fn= response.data;
+            var respuesta_a= response.data;
+            var respuesta_m= response.data;
+            var respuesta_c= response.data;
+            me.fecha_ini = respuesta_a.fecha_ini;
+            me.fecha_fin = respuesta_a.fecha_fin;    
+            me.alumno = respuesta_a.alumno;   
+            me.modalidad = respuesta_m.modalidad;
+            me.clases = respuesta_c.clases;            
+                      
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        var url_= '/asistencia/listarAsistenciasAlumno?id=' + id;
+        axios.get(url_).then(function (response) {
+            var respuesta_as= response.data;
+            var respuesta_cn= response.data;
+            me.arrayAsistenciasAlumno = respuesta_as.asistencias;   
+            me.contador = respuesta_cn.contador;    
+                      
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+      }, 
+      anotarAsistencia(){                    
+        let me = this;
+
+        axios.post('/asistencia/anotarAsistencia',{
+            'idinscripcion': this.inscripcion_id,                    
+            'contador': this.contador
+        }).then(function (response) {
+            me.cerrarModal();
+            me.listarInscripcionAlumno(1,me.buscar,me.criterio,me.paginado);
+        }).catch(function (error) {
+            console.log(error);
+        });
+      },
+      cerrarModal(){        
+        this.modal=0;
+        this.tituloModal='';
+        this.inscripcion_id = '';
+        this.contador = 0;
       },
       cambiarPagina(page,buscar,criterio,paginado){
         let me = this;
@@ -400,6 +557,7 @@
         me.buscar = val1.id;
       },
       ceroBusqueda(){
+        this.criterio='fecha_ini';
         this.buscar='';
         this.listarInscripcionAlumno(1,this.buscar,this.criterio,this.paginado);
       },
@@ -421,8 +579,8 @@
       listarVentaDetalleCliente(id, total, abono){
         let me=this;
 
-        me.modal = 1;
-        me.tituloModal = 'Consultar detalle';        
+        me.modal_ = 1;
+        me.tituloModal_ = 'Consultar detalle';        
         me.abono = abono;
         me.total = total;
         me.saldo = (total-abono);
@@ -459,16 +617,17 @@
         me.buscar_ = val1.id;
       },      
       ceroBusqueda_(){
-        this.buscar='';
+        this.buscar_='';
+        this.criterio_='fecha_hora';
         this.listarVentaCliente(1,this.buscar_,this.criterio_,this.paginado_);
       },
-      cerrarModal(){
+      cerrarModal_(){
         this.venta_id = 0,
         this.saldo = 0,
         this.abono = 0,
         this.total = 0,
-        this.modal=0;
-        this.tituloModal='';
+        this.modal_=0;
+        this.tituloModal_='';
       },
       pagarDeuda(){        
         let me = this;        
@@ -479,7 +638,7 @@
           'total': this.total,
           'id': this.venta_id
         }).then(function (response) {
-            me.cerrarModal();
+            me.cerrarModal_();
             me.listarVentaCliente(1,me.buscar_,me.criterio_,me.paginado_);
         }).catch(function (error) {
             console.log(error);

@@ -66,7 +66,7 @@
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
-                                                <th width="16%">FECHA
+                                                <th width="12%">FECHA
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'asc') || (ordenado === 'fecha_hora' && ascdesc === 'desc') ">
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -74,7 +74,7 @@
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'fecha_hora','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="25%">PROVEEDOR
+                                                <th width="22%">PROVEEDOR
                                                     <template v-if="(ordenado !== 'idproveedor' && ascdesc === 'asc') || (ordenado === 'idproveedor' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'idproveedor','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -82,11 +82,20 @@
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'idproveedor','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="20%">DOCUMENTO</th>                                         
-                                                <th width="6%">SUBTOTAL</th>
-                                                <th width="6%">IVA</th>
-                                                <th width="6%">TOTAL</th>                                           
-                                                <th width="9%">ESTADO
+                                                <th width="13%">DOCUMENTO</th>                                         
+                                                <th width="7%">SUBTOTAL</th>
+                                                <th width="7%">IVA</th>
+                                                <th width="7%">TOTAL</th>
+                                                <th width="7%">ABONO
+                                                    <template v-if="(ordenado !== 'abono' && ascdesc === 'asc') || (ordenado === 'abono' && ascdesc === 'desc')">
+                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                    </template>
+                                                    <template v-if="(ordenado !== 'abono' && ascdesc === 'desc') || (ordenado === 'abono' && ascdesc === 'asc')">
+                                                        <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                    </template>
+                                                </th>
+                                                <th width="7%">SALDO</th>                                        
+                                                <th width="8%">ESTADO
                                                     <template v-if="(ordenado !== 'estado' && ascdesc === 'asc') || (ordenado === 'estado' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -94,7 +103,7 @@
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'estado','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>                                                                                    
-                                                <th width="12%">ACCIONES</th>
+                                                <th width="10%">ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody v-if="arrayIngreso.length">
@@ -104,10 +113,13 @@
                                                 <td><span class="text-mini">{{ingreso.tipo_comprobante}} </span> {{ ingreso.serie_comprobante ? ingreso.serie_comprobante+'-'+ingreso.num_comprobante : '000-000' }}</td>
                                                 <td align="right">$ {{ (ingreso.total-ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
-                                                <td align="right">$ {{ ingreso.total  }}</td>
+                                                <td align="right">$ {{ ingreso.total }}</td>
+                                                <td align="right">$ {{ ingreso.abono }}</td>
+                                                <td align="right">$ {{ (ingreso.total-ingreso.abono).toFixed(2) }}</td>
                                                 <td align="center"> 
-                                                    <div v-if="ingreso.estado=='Registrado'"><span class="badge badge-success">Registrado</span></div>
-                                                    <div v-else><span class="badge badge-danger">Anulado</span></div>                                    
+                                                    <div v-if="ingreso.estado=='Cancelado'"><span class="badge badge-success">{{ingreso.estado}}</span></div>
+                                                    <div v-else-if="ingreso.estado=='Debe'"><span class="badge badge-warning">{{ingreso.estado}}</span></div>  
+                                                    <div v-else><span class="badge badge-danger">{{ingreso.estado}}</span></div>                                    
                                                 </td>
                                                 <td align="center">
                                                     <a class="btn btn-sm btn-default" @click="verIngreso(ingreso.id)"><i class="far fa-eye"></i></a>                                   
@@ -235,11 +247,11 @@
                                                         <table class="table table-bordered table-sm table-hover" id="dtTable">
                                                             <thead class="thead-light">
                                                                 <tr align="center">                                            
-                                                                    <th class="w-5">Opc.</th>
-                                                                    <th class="w-50">Artículo</th>
-                                                                    <th>Precio</th>
-                                                                    <th>Cantidad</th>
-                                                                    <th>Subtotal</th>
+                                                                    <th width="5%">Opc.</th>
+                                                                    <th width="65%">Artículo</th>
+                                                                    <th width="10%">Precio</th>
+                                                                    <th width="10%">Cantidad</th>
+                                                                    <th width="10%">Subtotal</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody v-if="arrayDetalle.length">
@@ -259,7 +271,13 @@
                                                                 </tr>
                                                             </tbody>                                    
                                                         </table>
-                                                        <table align="right" border="1" bordercolor="white" v-if="arrayDetalle.length">
+                                                        <table width="250" align="right" v-if="arrayDetalle.length">
+                                                            <tr width="70%">
+                                                                <td align="left"><strong>Abono:</strong></td>
+                                                                <td align="right">                                                                        
+                                                                    <input v-model="abono" type="number" step="0.1" min="0" :max="(total)" class="form-control form-control-sm"> 
+                                                                </td>
+                                                            </tr>
                                                             <tr>
                                                                 <td align="left"><strong>Total Parcial:</strong></td>
                                                                 <td align="right" class="w-25">$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
@@ -309,7 +327,6 @@
                                     <address>
                                         <strong>{{ proveedor }}</strong><br>
                                         Dirección: {{ direccion }}<br>
-                                        Ciudad<br>
                                         Teléfono: {{ celular }}<br>
                                         Correo: {{ email }}
                                     </address>
@@ -385,7 +402,7 @@
 
         <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -412,12 +429,12 @@
                             <table class="table table-bordered table-sm table-hover" id="dtTable">
                                 <thead class="thead-table">
                                     <tr align="center">                                
-                                        <th width="8%">COD</th>
+                                        <th width="10%">COD</th>
                                         <th>NOMBRE</th>                             
                                         <th width="12%">PVP</th>
                                         <th width="10%">STOCK</th>
                                         <th width="15%">ESTADO</th>                        
-                                        <th width="12%">ACCIONES</th>
+                                        <th width="10%">OPC.</th>
                                     </tr>
                                 </thead>
                                 <tbody v-if="arrayArticulo.length">
@@ -478,6 +495,7 @@
                 num_comprobante : '',
                 impuesto: 0.12,
                 total:0.0,
+                abono:0.0,
                 totalImpuesto: 0.0,
                 totalParcial: 0.0,
 
@@ -558,10 +576,12 @@
 
             },
             calcularTotal: function(){
+                let me=this;
                 var resultado=0.0;
                 for(var i=0;i<this.arrayDetalle.length;i++){
                     resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad)
                 }
+                me.abono= resultado;
                 return resultado;
             }
         },
@@ -738,6 +758,7 @@
                     'num_comprobante' : this.num_comprobante,
                     'impuesto' : this.impuesto,
                     'total' : this.total,
+                    'abono' : this.abono,
                     'data': this.arrayDetalle
 
                 }).then(function (response) {
@@ -749,6 +770,7 @@
                     me.num_comprobante='';
                     me.impuesto=0.12;
                     me.total=0.0;
+                    me.abono=0.0;
                     me.idarticulo=0;
                     me.articulo='';
                     me.cantidad=0;
@@ -795,6 +817,7 @@
                 me.num_comprobante='';
                 me.impuesto=0.12;
                 me.total=0.0;
+                me.abono=0.0;
                 me.idarticulo=0;
                 me.codigo='';
                 me.articulo='';
@@ -829,6 +852,7 @@
                     me.fecha_hora=arrayIngresoT[0]['fecha_hora'];
                     me.impuesto=arrayIngresoT[0]['impuesto'];
                     me.total=arrayIngresoT[0]['total'];
+                    me.abono=arrayIngresoT[0]['abono'];
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -883,6 +907,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.criterio = 'num_comprobante';
                 this.listarIngreso(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },

@@ -24,6 +24,11 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/dashboard/grafArticulo','DashboardController@grafArticulo');
         Route::get('/dashboard/widgetAlumnos','DashboardController@widgetAlumnos'); 
 
+        Route::get('/caja', 'CajaController@index');
+        Route::post('/caja/registrar', 'CajaController@store');
+        Route::get('/caja/InsOuts','CajaController@InsOuts');
+        Route::get('/caja/pdf/{fecha}', 'CajaController@pdf')->name('cuadre_pdf');
+
         Route::get('/user', 'UserController@index');
         Route::post('/user/registrar', 'UserController@store');
         Route::put('/user/actualizar', 'UserController@update');
@@ -67,12 +72,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/ingreso/desactivar', 'IngresoController@desactivar');        
         Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');
         Route::get('/ingreso/obtenerDetalles', 'IngresoController@obtenerDetalles');
+        Route::get('/ingreso/listarIngresosDiario', 'IngresoController@listarIngresosDiario');
 
         Route::get('/gasto', 'GastoController@index');
         Route::post('/gasto/registrar', 'GastoController@store');        
         Route::put('/gasto/desactivar', 'GastoController@desactivar');        
         Route::get('/gasto/obtenerCabecera', 'GastoController@obtenerCabecera');
         Route::get('/gasto/obtenerDetalles', 'GastoController@obtenerDetalles');
+        Route::get('/gasto/listarGastosDiario', 'GastoController@listarGastosDiario'); 
 
         Route::get('/venta', 'VentaController@index');
         Route::post('/venta/registrar', 'VentaController@store');        
@@ -86,6 +93,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/venta/listarVentasDetallesAlumno', 'VentaController@listarVentasDetallesAlumno');
         Route::put('/venta/pagarDeuda', 'VentaController@pagarDeuda'); 
         Route::get('/venta/mesVenta', 'VentaController@mesVenta');
+        Route::get('/venta/listarVentasDiario', 'VentaController@listarVentasDiario');
 
         Route::get('/inscripcion', 'InscripcionController@index');
         Route::post('/inscripcion/registrar', 'InscripcionController@store');
@@ -93,10 +101,13 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/inscripcion/activar', 'InscripcionController@activar');         
         Route::put('/inscripcion/desactivar', 'InscripcionController@desactivar');
         Route::get('/inscripcion/listarInscripcionAlumno', 'InscripcionController@listarInscripcionAlumno');
-        Route::get('/inscripcion/listarInscripcionesAlumnoId', 'InscripcionController@listarInscripcionesAlumnoId');        
+        Route::get('/inscripcion/listarInscripcionDetalleAlumno', 'InscripcionController@listarInscripcionDetalleAlumno');
+        Route::get('/inscripcion/listarInscripcionesAlumnoId', 'InscripcionController@listarInscripcionesAlumnoId'); 
+        Route::get('/inscripcion/listarInscripcionesDiario', 'InscripcionController@listarInscripcionesDiario');       
 
         Route::get('/asistencia', 'AsistenciaController@index');
-        Route::post('/asistencia/registrar', 'AsistenciaController@store');
+        Route::get('/asistencia/listarAsistenciasAlumno', 'AsistenciaController@listarAsistenciasAlumno');
+        Route::post('/asistencia/anotarAsistencia', 'AsistenciaController@anotarAsistencia'); 
 
         Route::get('/cliente', 'ClienteController@index');
         Route::post('/cliente/registrar', 'ClienteController@store');

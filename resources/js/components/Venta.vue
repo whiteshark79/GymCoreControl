@@ -73,7 +73,6 @@
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
-                                                <th width="3%">#</th>
                                                 <th width="12%">FECHA
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'asc') || (ordenado === 'fecha_hora' && ascdesc === 'desc') ">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -91,10 +90,10 @@
                                                     </template>
                                                 </th>                                                                                                                                        
                                                 <th width="13%">DOCUMENTO</th>
-                                                <th width="6%">SUBTOTAL</th>
-                                                <th width="6%">IVA</th>
-                                                <th width="6%">TOTAL</th>
-                                                <th width="6%">ABONO
+                                                <th width="7%">SUBTOTAL</th>
+                                                <th width="7%">IVA</th>
+                                                <th width="7%">TOTAL</th>
+                                                <th width="7%">ABONO
                                                     <template v-if="(ordenado !== 'abono' && ascdesc === 'asc') || (ordenado === 'abono' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -102,7 +101,7 @@
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="6%">SALDO</th>                                         
+                                                <th width="7%">SALDO</th>                                         
                                                 <th width="8%">ESTADO
                                                     <template v-if="(ordenado !== 'estado' && ascdesc === 'asc') || (ordenado === 'estado' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -111,20 +110,19 @@
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'estado','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>                                                                                    
-                                                <th width="12%">ACCIONES</th>
+                                                <th width="10%">ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody v-if="arrayVenta.length">
                                             <tr v-for="venta in arrayVenta" :key="venta.id">
-                                                <td v-text="venta.id"></td>
                                                 <td v-text="venta.fecha_hora"></td>
                                                 <td>{{venta.nombre}}</td> 
                                                 <td><span class="text-mini">{{venta.tipo_comprobante}}</span> : {{ venta.serie_comprobante ? venta.serie_comprobante+'-'+venta.num_comprobante : '000-000' }} </td>
                                                 <td align="right">$ {{ (venta.total-venta.impuesto*venta.total).toFixed(2) }}</td>
                                                 <td align="right">$ {{ (venta.impuesto*venta.total).toFixed(2) }}</td>
-                                                <td align="right">$ {{ venta.total  }}</td>
-                                                <td align="right">$ {{ venta.abono  }}</td>
-                                                <td align="right">$ {{ (venta.total-venta.abono).toFixed(2)  }}</td>
+                                                <td align="right">$ {{ venta.total }}</td>
+                                                <td align="right">$ {{ venta.abono }}</td>
+                                                <td align="right">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>
                                                 <td align="center"> 
                                                     <div v-if="venta.estado=='Cancelado'"><span class="badge badge-success">{{venta.estado}}</span></div>
                                                     <div v-else-if="venta.estado=='Debe'"><span class="badge badge-warning">{{venta.estado}}</span></div>  
@@ -259,7 +257,7 @@
                                                             <thead class="thead-light">
                                                                 <tr align="center">                                            
                                                                     <th width="5%">Opc.</th>
-                                                                    <th width="45%">Artículo</th>
+                                                                    <th width="55%">Artículo</th>
                                                                     <th width="10%">Precio</th>
                                                                     <th width="10%">Cantidad</th>
                                                                     <th width="10%">Descuento</th>
@@ -292,7 +290,7 @@
                                                         </table>                                                       
 
                                                         <table width="250" align="right" v-if="arrayDetalle.length">
-                                                            <tr width="65%">
+                                                            <tr width="70%">
                                                                 <td align="left"><strong>Abono:</strong></td>
                                                                 <td align="right">                                                                        
                                                                     <input v-model="abono" type="number" step="0.1" min="0" :max="(total)" class="form-control form-control-sm"> 
@@ -345,27 +343,15 @@
                                 </div>
                                 <div class="row invoice-info">
                                     <div class="col-sm-4 invoice-col">
-                                    <h6>Proveedor</h6>                          
-                                    <address>
-                                        <strong>Empresa, Inc.</strong><br>
-                                        Dirección:<br>
-                                        Ciudad<br>
-                                        Teléfono:<br>
-                                        Correo:
-                                    </address>
-                                    </div>
-                                    <!-- /.col -->
-                                    <div class="col-sm-4 invoice-col">
                                     <h6>Cliente</h6> 
                                     <address>
                                         <strong>{{ cliente }}</strong><br>
                                         Dirección: {{ direccion }}<br>
-                                        Ciudad<br>
                                         Teléfono: {{ celular }}<br>
                                         Correo: {{ email }}
                                     </address>
                                     </div>
-                                    <!-- /.col -->
+                                    <!-- /.col -->                                    
                                     <div class="col-sm-4 invoice-col">
                                     <b>{{ tipo_comprobante }}</b>  {{ serie_comprobante }} - {{ num_comprobante }}<br>
                                     <br>
@@ -440,7 +426,7 @@
 
         <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document"> 
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" v-text="tituloModal"></h4>
@@ -468,12 +454,12 @@
                             <table class="table table-bordered table-sm table-hover" id="dtTable">
                                 <thead class="thead-table">
                                     <tr align="center">                                
-                                        <th width="8%">COD</th>
+                                        <th width="10%">COD</th>
                                         <th>NOMBRE</th>                             
                                         <th width="12%">PVP</th>
                                         <th width="10%">STOCK</th>
                                         <th width="15%">ESTADO</th>                        
-                                        <th width="12%">ACCIONES</th>
+                                        <th width="10%">OPC.</th>
                                     </tr>
                                 </thead>
                                 <tbody v-if="arrayArticulo.length">
@@ -739,6 +725,7 @@
                 me.arrayDetalle.splice(index, 1);
             },
             agregarDetalle(){
+
                 let me=this;
                 if(me.idarticulo==0 || me.cantidad==0 || me.precio==0){
                 }
@@ -852,7 +839,7 @@
 
                     if(me.cbPdf) { 
                         window.open('venta/pdf/'+response.data.id);
-                        }  
+                    }  
 
                 }).catch(function (error) {
                     console.log(error);

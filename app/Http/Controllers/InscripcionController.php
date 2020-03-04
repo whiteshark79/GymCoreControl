@@ -66,23 +66,29 @@ class InscripcionController extends Controller
         $criterio = $request->criterio;
         $paginado = $request->paginado;
 
-        if($criterio == 'idalumno' && $buscar != ''){$filtro = $buscar;}else{$filtro = '%'. $buscar . '%';}
+        $fecha_hoy = Carbon::now();
+        $fecha_hoy =$fecha_hoy->format('Y-m-d');             
+
+        if($criterio == 'fecha_fin' && $buscar == 0){ $buscar = $fecha_hoy; }   
 
         if ($buscar==''){        
             $inscripcionesM = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
             ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
-            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 'modalidades.nombre as modalidad',
-              'inscripciones.idmodalidad','inscripciones.idhorario','personas.nombre as alumno')
-            ->orderBy('inscripciones.fecha_fin', 'asc')->paginate($paginado);
+            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 
+            'modalidades.nombre as modalidad','personas.nombre as alumno')
+            ->orderBy('inscripciones.id', 'desc')->paginate($paginado);            
         }else{ 
-            $inscripcionesM = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+            $inscripcionesM = DB::table('inscripciones')
+            ->join('personas','inscripciones.idalumno','=','personas.id')
             ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
-            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 'modalidades.nombre as modalidad',
-              'inscripciones.idmodalidad','inscripciones.idhorario','personas.nombre as alumno')
-            ->where('inscripciones.'.$criterio, 'like', $filtro )  
-            ->orderBy('inscripciones.fecha_fin', 'asc')->paginate($paginado);
+            ->select('inscripciones.id','inscripciones.fecha_ini','inscripciones.fecha_fin', 
+            'modalidades.nombre as modalidad','personas.nombre as alumno')
+            ->where('inscripciones.'.$criterio, $buscar )                                 
+            ->orderBy('inscripciones.id', 'desc')->paginate($paginado);
     
-        }
+        }         
+
+        
  
         return [
             'pagination' => [
@@ -95,6 +101,32 @@ class InscripcionController extends Controller
             ],
             'inscripcionesM' => $inscripcionesM
         ];
+        
+    }
+
+    public function listarInscripcionDetalleAlumno(Request $request){
+        if (!$request->ajax()) return redirect('/');        
+        
+        $id = $request->id;        
+
+        $datosInscripcionAlumno = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+        ->join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
+        ->select('inscripciones.fecha_ini','inscripciones.fecha_fin','personas.nombre as alumno','modalidades.nombre as modalidad')
+        ->where('inscripciones.id',$id)
+        ->first(); 
+           
+
+        $noClasesModalidad = Inscripcion::join('modalidades','inscripciones.idmodalidad','=','modalidades.id')
+        ->select('modalidades.clases')
+        ->where('inscripciones.id',$id)
+        ->first(); 
+
+ 
+        return ['fecha_ini' => $datosInscripcionAlumno->fecha_ini,
+                'fecha_fin' => $datosInscripcionAlumno->fecha_fin,
+                'alumno' => $datosInscripcionAlumno->alumno, 
+                'modalidad' => $datosInscripcionAlumno->modalidad, 
+                'clases' => $noClasesModalidad->clases];
     }
 
     public function listarInscripcionesAlumnoId(Request $request){
@@ -137,14 +169,32 @@ class InscripcionController extends Controller
             'inscripcionesA' => $inscripcionesA
         ];
     }
+
+    public function listarInscripcionesDiario(Request $request){
+        //if (!$request->ajax()) return redirect('/');        
+        
+        $fechaActual= date('Y-m-d'); 
+        $fecha_hora = $request->fecha;
+        if($fecha_hora){$fecha = $fecha_hora;}else{$fecha = $fechaActual;}  
+
+        $inscripcionesDia = Inscripcion::join('personas','inscripciones.idalumno','=','personas.id')
+        ->select('inscripciones.id','inscripciones.fecha_ini', 'personas.nombre as alumno', 'inscripciones.impuesto', 'inscripciones.abono','inscripciones.total','inscripciones.estado')
+        ->whereDate('inscripciones.fecha_ini', $fecha)
+        ->whereIn('inscripciones.estado',['Cancelado','Debe'])
+        ->orderBy('inscripciones.fecha_ini', 'desc')->get();         
+ 
+         return [ 'inscripcionesDia' => $inscripcionesDia ];
+    }
        
     public function store(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
  
         $fecha_ini = Carbon::now();
         $fecha_fin = Carbon::now();
         $fecha_fin = $fecha_fin->addDays($request->duracion);
+
+        if($request->abono != $request->total){$estado = 'Debe';}else{$estado = 'Cancelado';}
 
         try{
             DB::beginTransaction();
@@ -160,14 +210,13 @@ class InscripcionController extends Controller
             $inscripcion->impuesto = $request->impuesto;
             $inscripcion->total = $request->total;
             $inscripcion->observaciones = $request->observaciones;
-            $inscripcion->estado = 'Registrado';
+            $inscripcion->estado = $estado;
             $inscripcion->save();
 
-            $asistencia = new Asistencia();            
-            $asistencia->idalumno = $request->idalumno;
-            $asistencia->contador = 0;
-            $asistencia->clases = $request->clases;
-            $asistencia->id = $inscripcion->id;
+            $asistencia = new Asistencia();
+            $asistencia->idinscripcion = $inscripcion->id;
+            $asistencia->fecha_hora = $fecha_ini; 
+            $asistencia->contador = 0;        
             $asistencia->save();            
 
             DB::commit();
@@ -186,9 +235,12 @@ class InscripcionController extends Controller
             DB::beginTransaction();           
 
             $inscripcion = Inscripcion::findOrFail($request->id);
+            $asistencia = Asistencia::where('idinscripcion', $inscripcion->id)->firstOrFail();
 
             $fecha_fin= Carbon::createFromFormat("Y-m-d H:i:s", $request->fecha_ini.' 00:00:00');
             $fecha_fin= $fecha_fin->addDays($request->duracion);
+
+            if($request->abono != $request->total){$estado = 'Debe';}else{$estado = 'Cancelado';}
 
             $inscripcion->fecha_ini = $request->fecha_ini;
             $inscripcion->fecha_fin = $fecha_fin;
@@ -201,14 +253,11 @@ class InscripcionController extends Controller
             $inscripcion->impuesto = $request->impuesto;
             $inscripcion->total = $request->total;
             $inscripcion->observaciones = $request->observaciones;
-            $inscripcion->estado = 'Registrado';
-            $inscripcion->save();
-
-            $asistencia = new Asistencia();
-            $asistencia->id = $inscripcion->id;
-            $asistencia->idalumno = $request->idalumno;
-            $asistencia->nclases = $request->clases;
-            $alumno->save();
+            $inscripcion->estado = $estado;
+            $inscripcion->save();            
+            
+            $asistencia->fecha_hora = $request->fecha_ini; 
+            $asistencia->save();
 
             DB::commit();
  

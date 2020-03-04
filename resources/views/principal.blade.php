@@ -31,7 +31,7 @@
                     @include('plantilla/hdalumno')
                     @include('plantilla.sbprofe')
                 @elseif (Auth::user()->idrol == 4)
-                    @include('plantilla/hdadmin')
+                    @include('plantilla/hdoper')
                     @include('plantilla.sboper')
                 @else
      

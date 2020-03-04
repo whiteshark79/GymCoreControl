@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asistencia extends Model
 {
-    protected $fillable =['id','idalumno','contador','clases']; 
+    protected $fillable =['idinscripcion','fecha_hora','contador']; 
 
     public $timestamps = false;
 

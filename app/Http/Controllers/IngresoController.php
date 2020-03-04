@@ -30,7 +30,7 @@ class IngresoController extends Controller
             ->join('users','ingresos.idusuario','=','users.id')
             ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
             'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
-            'ingresos.estado','personas.nombre','users.usuario')
+            'ingresos.abono','ingresos.estado','personas.nombre','users.usuario')
             ->orderBy('ingresos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
@@ -38,8 +38,8 @@ class IngresoController extends Controller
             ->join('users','ingresos.idusuario','=','users.id')
             ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
             'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
-            'ingresos.estado','personas.nombre','users.usuario')
-            ->where('gastos.'.$criterio, 'like', $filtro ) 
+            'ingresos.abono','ingresos.estado','personas.nombre','users.usuario')
+            ->where('ingresos.'.$criterio, 'like', $filtro ) 
             ->orderBy('ingresos.'.$ordenado, $ascdesc)->paginate($paginado);
         }
          
@@ -64,7 +64,7 @@ class IngresoController extends Controller
         ->join('users','ingresos.idusuario','=','users.id')
         ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
         'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
-        'ingresos.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
+        'ingresos.abono','ingresos.estado','personas.tipo_documento','personas.num_documento','personas.nombre',
         'personas.direccion','personas.celular','personas.email','users.usuario')
         ->where('ingresos.id','=',$id)
         ->orderBy('ingresos.id', 'desc')->take(1)->get();
@@ -84,6 +84,22 @@ class IngresoController extends Controller
          
         return ['detalles' => $detalles];
     }
+
+    public function listarIngresosDiario(Request $request){
+        //if (!$request->ajax()) return redirect('/');        
+        
+        $fechaActual= date('Y-m-d'); 
+        $fecha_hora = $request->fecha;
+        if($fecha_hora){$fecha = $fecha_hora;}else{$fecha = $fechaActual;}   
+
+        $ingresosDia = Ingreso::join('personas','ingresos.idproveedor','=','personas.id')
+        ->select('ingresos.id','ingresos.fecha_hora', 'personas.nombre as proveedor', 'ingresos.impuesto', 'ingresos.total', 'ingresos.abono', 'ingresos.estado')
+        ->whereDate('ingresos.fecha_hora', $fecha)
+        ->whereIn('ingresos.estado',['Cancelado','Debe'])  
+        ->orderBy('ingresos.fecha_hora', 'desc')->get();         
+ 
+         return [ 'ingresosDia' => $ingresosDia ];
+    }
  
     public function store(Request $request)
     {
@@ -93,6 +109,7 @@ class IngresoController extends Controller
             DB::beginTransaction();
  
             $mytime= Carbon::now();
+            if($request->abono < $request->total){$estado = 'Debe';} else{$estado = 'Cancelado';}
  
             $ingreso = new Ingreso();
             $ingreso->idproveedor = $request->idproveedor;
@@ -103,7 +120,8 @@ class IngresoController extends Controller
             $ingreso->fecha_hora = $mytime;
             $ingreso->impuesto = $request->impuesto;
             $ingreso->total = $request->total;
-            $ingreso->estado = 'Registrado';
+            $ingreso->abono = $request->abono;
+            $ingreso->estado = $estado;
             $ingreso->save();
  
             $detalles = $request->data;//Array de detalles

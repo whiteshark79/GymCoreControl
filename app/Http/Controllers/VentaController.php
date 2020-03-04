@@ -11,7 +11,7 @@ use App\Persona;
 use App\Articulo;
 use App\User;
 use App\Notifications\NotifyAdmin;
-
+ 
 class VentaController extends Controller
 { 
     public function index(Request $request){
@@ -92,7 +92,7 @@ class VentaController extends Controller
     }
 
     public function listarVentasCabeceraAlumno(Request $request){
-        //if (!$request->ajax()) return redirect('/');        
+        if (!$request->ajax()) return redirect('/');        
         
         $id = \Auth::user()->id;
  
@@ -196,6 +196,22 @@ class VentaController extends Controller
         ];
     }
 
+    public function listarVentasDiario(Request $request){
+        if (!$request->ajax()) return redirect('/');        
+        
+        $fechaActual= date('Y-m-d'); 
+        $fecha_hora = $request->fecha;
+        if($fecha_hora){$fecha = $fecha_hora;}else{$fecha = $fechaActual;}
+
+        $ventasDia = Venta::join('personas','ventas.idcliente','=','personas.id')
+        ->select('ventas.id','ventas.fecha_hora', 'personas.nombre as cliente', 'ventas.impuesto', 'ventas.total', 'ventas.abono','ventas.estado')
+        ->whereDate('ventas.fecha_hora', $fecha)
+        ->whereIn('ventas.estado',['Cancelado','Debe'])
+        ->orderBy('ventas.fecha_hora', 'desc')->get();         
+ 
+         return [ 'ventasDia' => $ventasDia ];
+    }
+
     public function mesVenta(Request $request){
         //if (!$request->ajax()) return redirect('/');
 
@@ -258,8 +274,7 @@ class VentaController extends Controller
         $numventa=Venta::select('num_comprobante')->where('id',$id)->get();
 
         $pdf=\PDF::loadview('pdf.venta',['venta'=>$venta,'detalles'=>$detalles]);
-        return $pdf->download('venta-'.$numventa[0]->num_comprobante.'.pdf');
-        
+        return $pdf->download('venta-'.$numventa[0]->num_comprobante.'.pdf');        
 
     }
      
@@ -270,7 +285,7 @@ class VentaController extends Controller
             DB::beginTransaction();
  
             $mytime= Carbon::now();
-            if($request->abono<$request->total){$estado = 'Debe';} else{$estado = 'Cancelado';}
+            if($request->abono < $request->total){$estado = 'Debe';} else{$estado = 'Cancelado';}
  
             $venta = new Venta();
             $venta->idcliente = $request->idcliente;

@@ -199,7 +199,7 @@ table td {
   --secondary: #6c757d;
   --success: #28a745;
   --info: #17a2b8;
-  --warning: #FAD955;
+  --warning: #F5CB92;
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
@@ -5334,10 +5334,10 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .alert {
   position: relative;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
+  padding: 0.4rem 0.8rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  font-size: 12px;
 }
 
 .alert-heading {
@@ -5418,7 +5418,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .alert-warning {
   color: #856404;
-  background-color: #fff3cd;
+  background-color: #FBE9D0;
   border-color: #ffeeba;
 }
 
@@ -15887,8 +15887,8 @@ html.maximized-card {
 
 .card-title {
   float: left;
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: 1.3rem;
+  font-weight: bold;
   margin: 0;
 }
 

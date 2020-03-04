@@ -62,7 +62,7 @@
                                             </th>
                                             <th width="18%">EMAIL</th>
                                             <th width="10%">CONTACTO</th>                             
-                                            <th width="12%">ACCIONES</th>
+                                            <th width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayPersona.length">

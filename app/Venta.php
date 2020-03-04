@@ -16,7 +16,7 @@ class Venta extends Model
         'impuesto',
         'total',
         'abono',
-        'estado'
+        'estado' 
     ];
     public function usuario(){
         return $this->belongsTo('App\User');

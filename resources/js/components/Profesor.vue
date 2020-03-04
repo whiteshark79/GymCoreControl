@@ -70,7 +70,7 @@
                                                 </template>
                                             </th>
                                             <th width="28%">EMAIL</th>              
-                                            <th width="12%">ACCIONES</th>
+                                            <th width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayPersona.length">

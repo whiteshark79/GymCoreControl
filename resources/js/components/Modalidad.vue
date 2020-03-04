@@ -36,7 +36,7 @@
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead  class="thead-table">
                                         <tr align="center">
-                                            <th width="5%">#
+                                            <th width="3%">#
                                                 <template v-if="(ordenado !== 'id' && ascdesc === 'asc') || (ordenado === 'id' && ascdesc === 'desc') ">
                                                     <a href="#" @click="listarModalidad(1,buscar,criterio,paginado,'id','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -53,7 +53,7 @@
                                                 </template>
                                             </th>
                                             <th>DESCRIPCIÓN</th>
-                                            <th width="10%">DURACIÓN
+                                            <th width="8%">DURACIÓN
                                                 <template v-if="(ordenado !== 'duracion' && ascdesc === 'asc') || (ordenado === 'duracion' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarModalidad(1,buscar,criterio,paginado,'duracion','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -61,6 +61,7 @@
                                                     <a href="#" @click="listarModalidad(1,buscar,criterio,paginado,'duracion','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
+                                            <th width="8%">CLASES</th>
                                             <th width="8%">PRECIO</th>
                                             <th width="10%">ESTADO
                                                 <template v-if="(ordenado !== 'condicion' && ascdesc === 'asc') || (ordenado === 'condicion' && ascdesc === 'desc')">
@@ -70,7 +71,7 @@
                                                     <a href="#" @click="listarModalidad(1,buscar,criterio,paginado,'condicion','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="12%">ACCIONES</th>
+                                            <th width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayModalidad.length">
@@ -79,6 +80,7 @@
                                             <td v-text="modalidad.nombre"></td>
                                             <td v-text="modalidad.descripcion"></td>
                                             <td align="right">{{ modalidad.duracion }} <small>días</small></td>
+                                            <td align="right" v-text="modalidad.clases"></td>
                                             <td align="right"><small>$</small> {{ modalidad.precio }}</td>
                                             <td align="center">
                                                 <div v-if="modalidad.condicion"><span class="badge badge-success">Activo</span></div>
@@ -98,7 +100,7 @@
                                     </tbody>
                                     <tbody v-else>
                                         <tr>
-                                            <td colspan="7" class="text-center">
+                                            <td colspan="8" class="text-center">
                                                 <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                             </td>
                                         </tr>
@@ -136,7 +138,7 @@
                     <div class="modal-body">
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="form-row">
-                                <div class="input-group input-group-sm mb-3">
+                                <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="nombre">Nombre: </span>
                                     </div>
@@ -144,7 +146,7 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="input-group input-group-sm mb-3">
+                                <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="descripcion">Descripción: </span>
                                     </div>
@@ -174,11 +176,11 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="input-group input-group-sm mb-3">
+                                <div class="input-group input-group-sm mb-3 col-8">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="clases">No de Clases: </span>
                                     </div>
-                                    <input type="number" min="0.0" v-model="clases" class="form-control col-4" v-bind:class="{ 'is-invalid': e_clases }">                                    
+                                    <input type="number" min="0.0" v-model="clases" class="form-control" v-bind:class="{ 'is-invalid': e_clases }">                                    
                                 </div>
                             </div> 
 
