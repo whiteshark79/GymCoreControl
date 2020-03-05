@@ -153,7 +153,7 @@
                                                                     </tbody>
                                                                     <tbody v-else>
                                                                         <tr>
-                                                                            <td colspan="5" class="text-center">
+                                                                            <td colspan="6" class="text-center">
                                                                                 <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                                                             </td>
                                                                         </tr>
@@ -326,7 +326,7 @@
                                                                     </tbody>
                                                                     <tbody v-else>
                                                                         <tr>
-                                                                            <td colspan="5" class="text-center">
+                                                                            <td colspan="6" class="text-center">
                                                                                 <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                                                             </td>
                                                                         </tr>
@@ -358,7 +358,14 @@
                             </div> 
                             <div class="card-footer text-center">                                
                                 <button type="button" @click="ocultarDetalle()" class="btn btn-secondary btn-sm">Cerrar</button>
-                                <button type="button" class="btn btn-primary btn-sm" @click="registrarCuadreCaja()" v-if="btnSave==0">Guardar</button>                                  
+                                <template v-if="btnSave==0">
+                                    <button type="button" class="btn btn-primary btn-sm" @click="registrarCuadreCaja()">Guardar</button>   
+                                    <div class="custom-control custom-checkbox float-right">
+                                        <input class="custom-control-input" type="checkbox" id="cbPdf" value="1" v-model="cbPdf">
+                                        <label for="cbPdf" class="custom-control-label">Generar PDF</label>
+                                    </div>
+                                </template>
+                                                               
                             </div>                       
                         </template>
                         <!-- Fin Detalle -->
@@ -417,6 +424,7 @@
                 offset : 3,
                 criterio : 'fecha_hora',
                 buscar : '',
+                cbPdf : 0,
                 paginado : 10,
                 ordenado : 'id',
                 ascdesc : 'desc'
@@ -462,7 +470,7 @@
                 if(dd < 10) dd = '0'+dd;
                 if(mm < 10) mm = '0'+mm;
         
-                return dd+'/'+mm+'/'+yyyy;      
+                return yyyy+'-'+mm+'-'+dd;      
             }, 
             listarCuadreCaja (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
@@ -504,7 +512,11 @@
                     me.gastos=0.0;
                     me.ventas=0.0;
                     me.compras=0.0;
-                    me.total=0.0;                     
+                    me.total=0.0;  
+
+                    if(me.cbPdf) { 
+                        window.open('caja/pdf/'+me.hoyFecha());
+                    }                   
                     
 
                 }).catch(function (error) {

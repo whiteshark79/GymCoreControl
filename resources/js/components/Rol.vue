@@ -213,7 +213,7 @@
                 return pagesArray;             
 
             }
-        },
+        }, 
         methods : {
             listarRol (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;

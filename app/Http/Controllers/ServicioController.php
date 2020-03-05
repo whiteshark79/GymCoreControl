@@ -43,7 +43,7 @@ class ServicioController extends Controller
             ],
             'servicios' => $servicios
         ];
-    }
+    } 
 
     public function listarServicio(Request $request){
         if (!$request->ajax()) return redirect('/');

@@ -316,19 +316,32 @@ class VentaController extends Controller
             }
             
             $fechaActual= date('Y-m-d');
+            $numInscripciones = DB::table('inscripciones')->whereDate('created_at',$fechaActual)->count(); 
+            $numGastos = DB::table('gastos')->whereDate('created_at',$fechaActual)->count(); 
             $numVentas = DB::table('ventas')->whereDate('created_at', $fechaActual)->count(); 
             $numIngresos = DB::table('ingresos')->whereDate('created_at',$fechaActual)->count(); 
+            
 
             $arregloDatos = [ 
-            'ventas' => [ 
-                        'numero' => $numVentas, 
-                        'msj' => 'Ventas' 
-                    ], 
-            'ingresos' => [ 
-                        'numero' => $numIngresos, 
-                        'msj' => 'Ingresos' 
-                    ] 
-            ];                
+                'inscripciones' => [ 
+                    'numero' => $numInscripciones, 
+                    'msj' => 'Inscripciones' 
+                ],
+                'gastos' => [ 
+                    'numero' => $numGastos, 
+                    'msj' => 'Gastos' 
+                ],
+                'ventas' => [ 
+                    'numero' => $numVentas, 
+                    'msj' => 'Ventas' 
+                ],
+                'ingresos' => [ 
+                    'numero' => $numIngresos, 
+                    'msj' => 'Compras' 
+                ]
+                
+            ];
+
             $allUsers = User::all();
 
             foreach ($allUsers as $notificar) { 

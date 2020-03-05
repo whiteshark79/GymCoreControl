@@ -34,9 +34,14 @@ class CajaController extends Controller
             ->orderBy('cuadres_caja.fecha_hora', 'asc')->paginate($paginado);    
         }    
         
-        $lastRow = DB::table('cuadres_caja')->latest('fecha_hora')->first();
-
-        if($lastRow->fecha_hora == $fechaActual){$activo = 1;}else{$activo = 0;}
+        $cnt = $cajas->count();
+        
+        if($cnt>0){
+            $lastRow = DB::table('cuadres_caja')->latest('fecha_hora')->first();
+            if($lastRow->fecha_hora == $fechaActual){$activo = 1;}else{$activo = 0;}
+        }else{
+            $activo = 0;
+        }
 
         return [
             'pagination' => [

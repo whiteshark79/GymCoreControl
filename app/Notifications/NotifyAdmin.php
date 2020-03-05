@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class NotifyAdmin extends Notification
-{
+{ 
     use Queueable;
     public $GlobalDatos;
 

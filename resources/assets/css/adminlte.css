@@ -26541,8 +26541,8 @@ html.maximized-card {
 }
 
 .img-bordered-sm {
-  border: 2px solid #adb5bd;
-  padding: 2px;
+  border: 1px solid #adb5bd;
+  padding: 1px;
 }
 
 .img-rounded {

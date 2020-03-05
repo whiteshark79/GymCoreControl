@@ -25,9 +25,9 @@ class CreateInscripcionesTable extends Migration
             $table->foreign('idmodalidad')->references('id')->on('modalidades');
             $table->integer('idhorario')->unsigned();
             $table->foreign('idhorario')->references('id')->on('horarios');             
-            $table->decimal('abono', 4, 2);
-            $table->decimal('saldo', 4, 2);
-            $table->decimal('impuesto', 4, 2);
+            $table->decimal('abono', 11, 2);
+            $table->decimal('saldo', 11, 2);
+            $table->decimal('impuesto', 8, 2);
             $table->decimal('total', 11, 2);
             $table->string('observaciones', 50)->nullable();
             $table->string('estado', 20);

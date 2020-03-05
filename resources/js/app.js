@@ -26,6 +26,7 @@ Vue.component('dashboardadmin', require('./components/DashboardAdmin.vue').defau
 Vue.component('dashboardoper', require('./components/DashboardOper.vue').default);
 Vue.component('dashboardalumno', require('./components/DashboardAlumno.vue').default);
 Vue.component('caja', require('./components/Caja.vue').default);
+Vue.component('empresa', require('./components/Empresa.vue').default);
 
 Vue.component('dbinscripciones', require('./components/DBInscripciones.vue').default);
 Vue.component('dbventas', require('./components/DBVentas.vue').default);
@@ -77,8 +78,9 @@ const app = new Vue({
     el: '#app',
     data :{
         menu : 0,
-        notifications: []
-    },
+        notifications: [],
+        //empresa: []
+    }, 
     created() {
         let me = this;     
         axios.post('notification/get').then(function(response) {
@@ -92,7 +94,7 @@ const app = new Vue({
         
         Echo.private('App.User.' + userId).notification((notification) => {
              me.notifications.unshift(notification); 
-        }); 
+        });         
         
     } 
 });

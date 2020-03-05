@@ -86,18 +86,16 @@
               <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar_">
                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                     <thead class="thead-table">
-                        <tr align="center">                                  
-                          <th width="4%">#</th> 
-                          <th width="35%">NOMBRE</th> 
-                          <th width="21%">MODALIDAD</th>                                                                                       
-                          <th width="15%">FECHA</th>
-                          <th width="15%">FECHA FIN</th>
+                        <tr align="center">    
+                          <th width="36%">NOMBRE</th> 
+                          <th width="22%">MODALIDAD</th>                                                                                       
+                          <th width="16%">FECHA</th>
+                          <th width="16%">FECHA FIN</th>
                           <th width="10%">ESTADO</th>
                         </tr>
                     </thead>
                     <tbody v-if="arrayInscripcionAlumno.length">
                         <tr v-for="inscripcion in arrayInscripcionAlumno" :key="inscripcion.id">
-                            <td align="center" v-text="inscripcion.id"></td>
                             <td v-text="inscripcion.alumno"></td>
                             <td v-text="inscripcion.modalidad"></td>
                             <td align="center" v-text="inscripcion.fecha_ini"></td>                                  

@@ -51,7 +51,7 @@
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     </select>
-                                </div> 
+                                </div>  
                             </div>  
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
@@ -255,13 +255,13 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Abono: </span>
                                     </div>
-                                    <input type="number" class="form-control" v-bind:class="{ 'is-invalid': e_abono }" v-model="abono" min="1" :max="total" @change="calcularSaldo">
+                                    <input type="number" class="form-control" v-bind:class="{ 'is-invalid': e_abono }" v-model="abono" min="0" :max="total" @change="calcularSaldo">
                                 </div>
                                 <div class="input-group input-group-sm mb-3 col-md-4">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Saldo: </span>
                                     </div>
-                                    <input class="form-control" v-model="saldo" readonly>
+                                    <input class="form-control" v-model="saldo" value= "1" readonly>
                                 </div>                              
                                                                                        
                             </div>

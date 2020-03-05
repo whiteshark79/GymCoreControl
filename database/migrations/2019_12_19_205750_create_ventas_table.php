@@ -23,7 +23,7 @@ class CreateVentasTable extends Migration
             $table->string('serie_comprobante', 7)->nullable();
             $table->string('num_comprobante', 10)->nullable();
             $table->dateTime('fecha_hora');
-            $table->decimal('impuesto', 4, 2);
+            $table->decimal('impuesto', 8, 2);
             $table->decimal('total', 11, 2);
             $table->decimal('abono', 11, 2);
             $table->string('estado', 20);

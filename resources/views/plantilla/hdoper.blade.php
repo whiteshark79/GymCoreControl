@@ -7,8 +7,7 @@
     </ul>
 
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
+    <ul class="navbar-nav ml-auto"> 
       
       <notification :notifications="notifications"></notification>
       <!-- Cuenta Dropdown Menu -->

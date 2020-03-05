@@ -88,7 +88,6 @@
                                             </td>
                                             <td align="center">
                                                 <a class="btn btn-sm btn-default" @click="abrirModal('modalidad','actualizar',modalidad)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('modalidad','eliminar',modalidad)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
                                                 <template v-if="modalidad.condicion">
                                                     <a class="btn btn-sm btn-default" @click="desactivarModalidad(modalidad.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
                                                 </template>
@@ -105,6 +104,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    
                                 </table>
                             </div>
                             <nav>
@@ -165,7 +165,7 @@
                                         <option value="60">Bimensual</option>
                                         <option value="90">Trimestral</option>
                                         <option value="180">Semestral</option>
-                                        <option value="360">Anual</option>                                          
+                                        <option value="360">Anual</option>                                           
                                     </select>
                                 </div>
                                 <div class="input-group input-group-sm mb-3 col-4">
@@ -190,7 +190,6 @@
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
                         <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarModalidad()">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarModalidad()">Actualizar</button>
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarModalidad()">Eliminar</button>
 
                     </div>
                 </div>

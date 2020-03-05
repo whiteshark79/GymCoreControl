@@ -1,7 +1,7 @@
 <template>
  
     <main class="main"> 
-        <div class="row mt-3">
+        <div class="row mt-1">
             <div class="container-fluid">
                 <div class="col-md-12">
                     <div class="card card-outline card-primary">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\Horario; 
 
 class HorarioController extends Controller
@@ -19,10 +21,14 @@ class HorarioController extends Controller
         
         
         if ($buscar==''){
-            $horarios = Horario::orderBy($ordenado, $ascdesc)->paginate($paginado);
+            $horarios = Horario::select('id', DB::raw('DATE_FORMAT(hora_ini,"%H:%i") as hora_ini'), 
+            DB::raw('DATE_FORMAT(hora_fin,"%H:%i") as hora_fin'), 'periodo','descripcion','condicion')
+            ->orderBy($ordenado, $ascdesc)->paginate($paginado);
         }
         else{
-            $horarios = Horario::where($criterio, 'like', '%'. $buscar . '%')->orderBy($ordenado, $ascdesc)->paginate($paginado);
+            $horarios = Horario::select('id', DB::raw('DATE_FORMAT(hora_ini,"%H:%i") as hora_ini'), 
+            DB::raw('DATE_FORMAT(hora_fin,"%H:%i") as hora_fin'), 'periodo','descripcion','condicion')
+            ->where($criterio, 'like', '%'. $buscar . '%')->orderBy($ordenado, $ascdesc)->paginate($paginado);
         }
         
 
@@ -49,14 +55,23 @@ class HorarioController extends Controller
     public function store(Request $request)
     {
         //if (!$request->ajax()) return redirect('/');
+
+        try{
+            DB::beginTransaction();
+            $horario = new Horario();
+            $horario->hora_ini = $request->hora_ini;
+            $horario->hora_fin = $request->hora_fin;
+            $horario->periodo = $request->periodo;
+            $horario->descripcion = $request->descripcion;
+            $horario->condicion = '1';
+            $horario->save();
+ 
+            DB::commit();
+ 
+        } catch (Exception $e){
+            DB::rollBack();
+        }        
         
-        $horario = new Horario();
-        $horario->hora_ini = '01:00';
-        $horario->hora_fin = '02:00';
-        $horario->periodo = 'Mañana';
-        $horario->descripcion = 'Jab';
-        $horario->condicion = '1';
-        $horario->save();
     }
     public function update(Request $request)
     {

@@ -11,18 +11,22 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');    
     Route::post('/notification/get', 'NotificationController@get');
+    
      
     Route::get('/main', function () {
         return view('contenido/contenido');
        //return view('tooltip');
     })->name('main');
 
-    Route::group(['middleware' => ['Administrador']], function () {
+    Route::group(['middleware' => ['Administrador']], function () {        
 
         Route::get('/dashboard/grafInOuts','DashboardController@grafInOuts');
         Route::get('/dashboard/widgetInOuts','DashboardController@widgetInOuts');
         Route::get('/dashboard/grafArticulo','DashboardController@grafArticulo');
         Route::get('/dashboard/widgetAlumnos','DashboardController@widgetAlumnos'); 
+
+        Route::get('/empresa', 'EmpresaController@index');
+        Route::put('/empresa/actualizar', 'EmpresaController@update');
 
         Route::get('/caja', 'CajaController@index');
         Route::post('/caja/registrar', 'CajaController@store');
@@ -52,7 +56,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/horario', 'HorarioController@index');
         Route::post('/horario/registrar', 'HorarioController@store');
         Route::put('/horario/actualizar', 'HorarioController@update');
-        Route::put('/horario/eliminar', 'HorarioController@destroy');
         Route::put('/horario/desactivar', 'HorarioController@desactivar');
         Route::put('/horario/activar', 'HorarioController@activar');
         Route::get('/horario/selectHorario', 'HorarioController@selectHorario');

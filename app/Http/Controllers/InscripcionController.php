@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Inscripcion;
 use App\Asistencia;
+use App\User;
+use App\Notifications\NotifyAdmin;
 
 class InscripcionController extends Controller
 {
@@ -171,7 +173,7 @@ class InscripcionController extends Controller
     }
 
     public function listarInscripcionesDiario(Request $request){
-        //if (!$request->ajax()) return redirect('/');        
+        if (!$request->ajax()) return redirect('/');        
         
         $fechaActual= date('Y-m-d'); 
         $fecha_hora = $request->fecha;
@@ -188,7 +190,7 @@ class InscripcionController extends Controller
        
     public function store(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+       // if (!$request->ajax()) return redirect('/');
  
         $fecha_ini = Carbon::now();
         $fecha_fin = Carbon::now();
@@ -217,7 +219,41 @@ class InscripcionController extends Controller
             $asistencia->idinscripcion = $inscripcion->id;
             $asistencia->fecha_hora = $fecha_ini; 
             $asistencia->contador = 0;        
-            $asistencia->save();            
+            $asistencia->save();                
+            
+            $fechaActual= date('Y-m-d');
+            $numInscripciones = DB::table('inscripciones')->whereDate('created_at',$fechaActual)->count(); 
+            $numGastos = DB::table('gastos')->whereDate('created_at',$fechaActual)->count(); 
+            $numVentas = DB::table('ventas')->whereDate('created_at', $fechaActual)->count(); 
+            $numIngresos = DB::table('ingresos')->whereDate('created_at',$fechaActual)->count(); 
+            
+
+            $arregloDatos = [ 
+                'inscripciones' => [ 
+                    'numero' => $numInscripciones, 
+                    'msj' => 'Inscripciones' 
+                ],
+                'gastos' => [ 
+                    'numero' => $numGastos, 
+                    'msj' => 'Gastos' 
+                ],
+                'ventas' => [ 
+                    'numero' => $numVentas, 
+                    'msj' => 'Ventas' 
+                ],
+                'ingresos' => [ 
+                    'numero' => $numIngresos, 
+                    'msj' => 'Compras' 
+                ]
+                
+            ];
+                            
+            $allUsers = User::all();
+
+            foreach ($allUsers as $notificar) { 
+                User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos)); 
+            } 
+
 
             DB::commit();
  

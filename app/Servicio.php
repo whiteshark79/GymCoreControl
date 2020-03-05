@@ -8,6 +8,8 @@ class Servicio extends Model
 {
     protected $fillable =['idclasificacion','codigo','nombre','descripcion','condicion'];
 
+    public $timestamps = false;
+
     public function clasificacion(){
         return $this->belongsTo('App\Clasificacion');
     }

@@ -23,7 +23,7 @@ class LoginController extends Controller
         ->withErrors(['usuario' => trans('auth.failed')])
         ->withInput(request(['usuario']));
 
-    }
+    } 
 
     protected function validateLogin(Request $request){
         $this->validate($request,[

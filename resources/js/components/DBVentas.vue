@@ -82,19 +82,17 @@
                 <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar_">
                   <table class="table table-bordered table-sm table-hover" id="dtTable">
                       <thead class="thead-table">
-                          <tr align="center"> 
-                            <th width="3%">#</th>                               
-                            <th width="31%">NOMBRE</th>                                                                                       
-                            <th width="28%">FECHA VENTA</th>
-                            <th width="11%">TOTAL</th>
-                            <th width="11%">ABONO</th>
-                            <th width="11%">SALDO</th>
-                            <th width="5%">OPC</th>
+                          <tr align="center">                             
+                            <th width="36%">NOMBRE</th>                                                                                       
+                            <th width="16%">FECHA VENTA</th>
+                            <th width="13%">TOTAL</th>
+                            <th width="13%">ABONO</th>
+                            <th width="13%">SALDO</th>
+                            <th width="9%">OPC</th>
                           </tr>
                       </thead>
                       <tbody v-if="arrayVentaCliente.length">
                           <tr v-for="venta in arrayVentaCliente" :key="venta.id">
-                            <td align="center" v-text="venta.id"></td>
                             <td v-text="venta.cliente"></td>
                             <td align="center"> {{venta.fecha_hora}}</td>                                  
                             <td align="center">$ {{venta.total}}</td>
