@@ -253,20 +253,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarProvincia(){
-               if (this.validarProvincia()){ return; }
-                let me = this;
-
-                axios.put('/provincia/eliminar',{
-                    'id': this.provincia_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarProvincia(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
+            },            
             desactivarProvincia(id){
                Swal.fire({
                 title: 'Desactivar la categoría?',
@@ -364,17 +351,7 @@
                                 this.nombre = data['nombre'];
                                 this.descripcion= data['descripcion'];
                                 break;
-                            }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar categoría';
-                                this.tipoAccion=3;
-                                this.provincia_id=data['id'];
-                                this.nombre = data['nombre'];
-                                this.descripcion= data['descripcion'];
-                                break;
-                            }
+                            }                            
                         }
                     }
                 }

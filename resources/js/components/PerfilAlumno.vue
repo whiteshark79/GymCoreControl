@@ -52,7 +52,7 @@
                         <div class="form-row">
                           <div class="form-group col-md-5 text-label">Dirección</div>
                           <div class="form-group col-md-7">
-                            <textarea  v-model="direccion" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_direccion }" rows="2" :disabled="stsEditar == 0"></textarea>
+                            <textarea  v-model="direccion" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_direccion }" rows="2" maxlength="60" :disabled="stsEditar == 0"></textarea>
                           </div>
                         </div>
                       </li>
@@ -242,7 +242,7 @@
           celular : '',
           email : '',
 
-          cod_socio : '',
+          usuario : '',
           sexo : 0,
           estado_civil : 0,
           hijos : 0,
@@ -327,7 +327,7 @@
             me.celular= arrayPersona[0]['celular'];
             me.email= arrayPersona[0]['email'];
 
-            me.cod_socio=arrayPersona[0]['cod_socio'];
+            me.usuario=arrayPersona[0]['usuario'];
             me.sexo= arrayPersona[0]['sexo'];
             me.sector= arrayPersona[0]['sector'];
             me.estado_civil= arrayPersona[0]['estado_civil'];
@@ -362,7 +362,7 @@
             'celular' : this.celular,
             'email' : this.email,
 
-            'cod_socio' : this.cod_socio,
+            'usuario' : this.usuario,
             'sexo' : this.sexo,
             'estado_civil' : this.estado_civil,
             'hijos' : this.hijos,

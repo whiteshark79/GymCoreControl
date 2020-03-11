@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\Persona;
+use App\User;
 
 class ClienteController extends Controller
 {
@@ -17,10 +21,19 @@ class ClienteController extends Controller
         $ascdesc = $request->ascdesc;
         
         if ($buscar==''){
-            $personas = Persona::orderBy($ordenado, $ascdesc)->paginate($paginado);
+            $personas = Persona::join('users','personas.id','=','users.id')
+            ->select('personas.tipo_documento','personas.num_documento','personas.nombre',
+            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular',
+            'personas.email','personas.perfil')
+            ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
-            $personas = Persona::where($criterio, 'like', '%'. $buscar . '%')->orderBy($ordenado, $ascdesc)->paginate($paginado);
+            $personas = Persona::join('users','personas.id','=','users.id')
+            ->select('personas.tipo_documento','personas.num_documento','personas.nombre',
+            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular',
+            'personas.email','personas.perfil')
+            ->where($criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         
 
@@ -40,16 +53,21 @@ class ClienteController extends Controller
     public function selectPersonaId(Request $request){ 
         //if (!$request->ajax()) return redirect('/');
 
-        $id = \Auth::user()->id;
-
-        $personas = Persona::join('users','personas.id','=','users.id')
-        ->select('personas.id','personas.nombre','personas.email','personas.perfil')           
-        ->where('personas.id',$id)->get();
+        $num_documento = $request->num_documento;
+        $personaDatosId = Persona::where('num_documento',$num_documento)->get();      
+        $stsPersonaId=$personaDatosId->count();
  
-        //return ['personas' => $personas];       
-         
-        return view("plantilla.sbalumno",compact('personas'));
-        
+        return ['stsPersonaId'=>$stsPersonaId];     
+    }
+
+    public function selectPersonaEmail(Request $request){ 
+        if (!$request->ajax()) return redirect('/');
+
+        $email = $request->email;
+        $personaDatosEmail = Persona::where('email',$email)->get();      
+        $stsPersonaEmail=$personaDatosEmail->count();
+ 
+        return ['stsPersonaEmail'=>$stsPersonaEmail];     
     }
 
     public function selectCliente(Request $request){ 
@@ -71,31 +89,57 @@ class ClienteController extends Controller
   
     public function store(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
-        $persona = new Persona();
-        $persona->tipo_documento = $request->tipo_documento;
-        $persona->num_documento = $request->num_documento;
-        $persona->nombre = $request->nombre;
-        $persona->fec_nacimiento = $request->fec_nacimiento;
-        $persona->direccion = $request->direccion;
-        $persona->celular = $request->celular;
-        $persona->email = $request->email;
-        $persona->perfil = 'Cliente';
-        $persona->save();
+        try{
+            DB::beginTransaction();
+            if (!$request->ajax()) return redirect('/');
+            $persona = new Persona();
+            $persona->tipo_documento = $request->tipo_documento;
+            $persona->num_documento = $request->num_documento;
+            $persona->nombre = $request->nombre;
+            $persona->fec_nacimiento = $request->fec_nacimiento;
+            $persona->direccion = $request->direccion;
+            $persona->celular = $request->celular;
+            $persona->email = $request->email;
+            $persona->perfil = 'Cliente';
+            $persona->save();
+
+            $user = new User();
+            $user->usuario = $request->usuario;
+
+            DB::commit();
+ 
+        } catch (Exception $e){
+            DB::rollBack();
+        }
     }
 
     public function update(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
-        $persona = Persona::findOrFail($request->id);
-        $persona->tipo_documento = $request->tipo_documento;
-        $persona->num_documento = $request->num_documento;
-        $persona->nombre = $request->nombre;
-        $persona->fec_nacimiento = $request->fec_nacimiento;
-        $persona->direccion = $request->direccion;
-        $persona->celular = $request->celular;
-        $persona->email = $request->email;
-        $persona->perfil = 'Cliente';
-        $persona->save();
+        //if (!$request->ajax()) return redirect('/');
+
+        try{
+            DB::beginTransaction();
+            
+            $persona = Persona::findOrFail($request->id);
+            $user = User::findOrFail($persona->id);
+
+            $persona->tipo_documento = $request->tipo_documento;
+            $persona->num_documento = $request->num_documento;
+            $persona->nombre = $request->nombre;
+            $persona->fec_nacimiento = $request->fec_nacimiento;
+            $persona->direccion = $request->direccion;
+            $persona->celular = $request->celular;
+            $persona->email = $request->email;
+            $persona->perfil = 'Cliente';
+            $persona->save();
+
+            $user->usuario = $request->usuario;
+            $user->save();
+ 
+            DB::commit();
+ 
+        } catch (Exception $e){
+            DB::rollBack();
+        }
     }
 }

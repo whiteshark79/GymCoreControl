@@ -112,7 +112,6 @@
                 mes : '',
                 nombre_articulo : '',
                 subtotal : 0,
-
                 arrayMeses: [],
                 varArticulo:null,
                 charArticulo:null,
@@ -124,7 +123,6 @@
                 varBackgroundColor:'',
                 backgroundcolor:[],
                 hoverbackgroundcolor:[],       
-
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -154,19 +152,16 @@
                 if(from < 1) {
                     from = 1;
                 }
-
                 var to = from + (this.offset * 2); 
                 if(to >= this.pagination.last_page){
                     to = this.pagination.last_page;
                 }  
-
                 var pagesArray = [];
                 while(from <= to) {
                     pagesArray.push(from);
                     from++;
                 }
                 return pagesArray;             
-
             }
         },
         methods : {
@@ -223,10 +218,8 @@
                     me.backgroundcolor.push('rgba('+me.varBackgroundColor+',0.3)');
                     me.hoverbackgroundcolor.push('rgba('+me.varBackgroundColor+',0.5)'); 
                 });
-
                 
                 me.varArticulo=document.getElementById('chart_articulos').getContext('2d');
-
                 me.charArticulo = new Chart(me.varArticulo, {
                     type: 'doughnut',
                     data: {

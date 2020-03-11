@@ -15,12 +15,11 @@ class CreateProfesoresTable extends Migration
     {
         Schema::create('profesores', function (Blueprint $table) {
             $table->integer('id')->unsigned();
+			$table->foreign('id')->references('id')->on('personas')->onDelete('cascade');
             $table->string('horario', 1)->nullable(); 
             $table->integer('idespecialidad')->unsigned();
-            $table->decimal('sueldo_hora', 11, 2);
-
-            $table->foreign('id')->references('id')->on('personas')->onDelete('cascade');
-            $table->foreign('idespecialidad')->references('id')->on('especialidades');
+			$table->foreign('idespecialidad')->references('id')->on('especialidades');
+            $table->decimal('sueldo_hora', 11, 2);        
 
         });
     }

@@ -111,8 +111,7 @@
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('articulo','actualizar',articulo)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('articulo','eliminar',articulo)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('articulo','actualizar',articulo)"><i class="fas fa-edit" title="Editar"></i></a>                                  
                                                 <template v-if="articulo.condicion">
                                                     <a class="btn btn-sm btn-default" @click="desactivarArticulo(articulo.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
                                                 </template>
@@ -164,7 +163,7 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-7">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="categoria">Categoría: </span>
+                                        <span class="input-group-text">Categoría: </span>
                                     </div>
                                     <select v-model="idcategoria" class="form-control" v-bind:class="{ 'is-invalid': e_idcategoria }">
                                         <option value="0" disabled>--Seleccione--</option>
@@ -173,7 +172,7 @@
                                 </div>
                                 <div class="input-group input-group-sm mb-3 col-5">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="codigo">Cód.: </span>
+                                        <span class="input-group-text">Cód.: </span>
                                     </div>
                                     <input type="text" v-model="codigo" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_codigo }"> 
                                 </div>
@@ -182,7 +181,7 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="precio">Nombre: </span>
+                                        <span class="input-group-text">Nombre: </span>
                                     </div>
                                     <input type="text" v-model="nombre" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_nombre }"> 
                                 </div>
@@ -190,23 +189,23 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="descripcion">Descripción: </span>
+                                        <span class="input-group-text">Descripción: </span>
                                     </div>                                    
-                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2" maxlength="60"></textarea>
                                 </div>                              
                             </div>
                             <div class="form-row">    
                                 <div class="input-group input-group-sm mb-3 col-6">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="precio_venta">PVP: </span>
+                                        <span class="input-group-text">PVP: </span>
                                     </div>
-                                    <input type="number" v-model="precio_venta" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_precio_venta }"> 
+                                    <input type="number" v-model="precio_venta" min="0.1" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_precio_venta }"> 
                                 </div>
                                 <div class="input-group input-group-sm mb-3 col-6">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="strock">Stock: </span>
+                                        <span class="input-group-text">Stock: </span>
                                     </div>
-                                    <input type="number" v-model="stock" class="form-control input-sm" v-bind:class="{ 'is-invalid': e_stock }"> 
+                                    <input type="number" v-model="stock" min="0" class="form-control input-sm"> 
                                 </div>
                                 
                             </div>                     
@@ -216,7 +215,6 @@
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
                         <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarArticulo()">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarArticulo()">Actualizar</button>
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarArticulo()">Eliminar</button>
 
                     </div>
                 </div>
@@ -256,7 +254,6 @@ import VueBarcode from 'vue-barcode';
                 e_codigo : false,
                 e_nombre : false,
                 e_precio_venta : false,
-                e_stock : false,
                 e_descripcion : false,
 
                 
@@ -404,20 +401,7 @@ import VueBarcode from 'vue-barcode';
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarArticulo(){
-               if (this.validarArticulo()){ return; }
-                let me = this;
-
-                axios.put('/articulo/eliminar',{
-                    'id': this.articulo_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarArticulo(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
+            },            
             desactivarArticulo(id){
                Swal.fire({
                 title: 'Desactivar el artículo?',
@@ -481,7 +465,6 @@ import VueBarcode from 'vue-barcode';
                 if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjArticulo.push('nombre');}else{this.e_nombre = false}
                 if (!this.descripcion) {this.e_descripcion = true; this.errorMostrarMsjArticulo.push('descripcion');}else{this.e_descripcion = false}
                 if (!this.precio_venta) {this.e_precio_venta = true; this.errorMostrarMsjArticulo.push('precio_venta');}else{this.e_precio_venta = false}
-                if (!this.stock) {this.e_stock = true; this.errorMostrarMsjArticulo.push('stock');}else{this.e_stock = false}
                 
 
                  if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
@@ -497,7 +480,6 @@ import VueBarcode from 'vue-barcode';
                 this.e_codigo = false;
                 this.e_nombre = false;
                 this.e_precio_venta = false;
-                this.e_stock = false;
                 this.e_descripcion = false;
                 
                 this.idcategoria= 0;
@@ -540,21 +522,7 @@ import VueBarcode from 'vue-barcode';
                                 this.precio_venta=data['precio_venta'];
                                 this.descripcion= data['descripcion'];
                                 break;
-                            }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar Artículo';
-                                this.tipoAccion=3;
-                                this.articulo_id=data['id'];
-                                this.idcategoria=data['idcategoria'];
-                                this.codigo=data['codigo'];
-                                this.nombre = data['nombre'];
-                                this.stock=data['stock'];
-                                this.precio_venta=data['precio_venta'];
-                                this.descripcion= data['descripcion'];
-                                break;
-                            }
+                            }                            
                         }
                     }
                 }

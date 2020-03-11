@@ -30,41 +30,53 @@ table td {
 */ 
 
 .text-error{
-    color: red !important;
-    font-weight: bold;
-    font-size: 12px;
-  }
+  color: red !important;
+  font-weight: bold;
+  font-size: 12px;
+}
 
-  .text-info{
-    color: #3C8DBC !important;
-    font-size: 12px;
-  }
+.text-error_br{
+  content: '\A'; white-space: pre;
+  color: red !important;
+  font-weight: bold;
+  font-size: 12px;
+}
 
-  .text-mini{
-    color: #000000 !important;
-    font-size: 12px;
-    font-weight: bolder;
-  }
+.text-info{
+  color: #3C8DBC !important;
+  font-size: 12px;
+}
 
-  .text-label{
-    color: #4C4C4C !important;
-    font-size: 15px;
-    font-weight: bolder;
-  }
+.text-mini{
+  color: #000000 !important;
+  font-size: 12px;
+  font-weight: bolder;
+}
 
-  .text-relieve {
-    background: #000000;
-    -webkit-background-clip: text;
-    -moz-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0px 3px 3px rgba(255,255,255,0.5),0px -1px 1px rgba(0,0,0,.3);
-    }
+.text-label{
+  color: #4C4C4C !important;
+  font-size: 15px;
+  font-weight: bolder;
+}
 
-  a:link    {color: black; }
-  a:visited {color: #3C8DBC; }
-  a:hover   {color: white; }
-  a:active  {color: #3C8DBC; }
+.text-relieve {
+  background: #000000;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0px 3px 3px rgba(255,255,255,0.5),0px -1px 1px rgba(0,0,0,.3);
+}
+
+.text-cursiva{    
+  font-weight: lighter;
+  font-style: italic;
+}
+
+a:link    {color: black; }
+a:visited {color: #3C8DBC; }
+a:hover   {color: white; }
+a:active  {color: #3C8DBC; }
 
 /************** modal************************/
 
@@ -152,15 +164,13 @@ table td {
 
     .menu_title {
       color: #fff;
-      text-transform: uppercase;
       letter-spacing: .5px;
-      font-weight: bold;
-      font-size: 14px;
+      font-size: 15px;
       text-shadow: 1px 1px #000;}
 
     .icon_title {
       color: #fff;
-      font-weight: bold;
+      font-size: 15px;
       text-shadow: 1px 2px #000;}
     
     .icon_title:hover {
@@ -168,4 +178,24 @@ table td {
       font-weight: bold;
       text-shadow: 1px 2px #000;}
 
-/***********************************************/
+    .icon_subtitle {
+      color: #fff;
+      font-weight: lighter;
+      font-size: 8px;}
+
+/*******************calendario******************/
+th.rotate {
+  height:80px;
+  white-space: nowrap;
+  position:relative;
+}
+
+th.rotate > div {
+  transform: rotate(90deg);
+  position:absolute;
+  left:0;
+  right:0;
+  top: 10px;
+  margin:auto;
+  
+}

@@ -126,7 +126,7 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="nombre">Nombre: </span>
+                                        <span class="input-group-text">Nombre: </span>
                                     </div>
                                     <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                                 </div>
@@ -134,9 +134,9 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="descripcion">Descripción: </span>
+                                        <span class="input-group-text">Descripción: </span>
                                     </div>
-                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2" maxlength="60"></textarea>
                                 </div>
                             </div>    
                         </form>

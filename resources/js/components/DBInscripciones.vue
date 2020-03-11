@@ -309,15 +309,16 @@
       },
       loadInsGas(){
         let me=this;
-        me.inscripciones.map(function(x){
-          me.varBackgroundColorI = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+        me.varBackgroundColorI = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+        me.varBackgroundColorG = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+
+        me.inscripciones.map(function(x){          
           me.varMesInscripcion.push(x.mes);
           me.varTotalInscripcion.push(x.total);
           me.backgroundcolorI.push('rgba('+me.varBackgroundColorI+',0.3)');
           me.hoverbackgroundcolorI.push('rgba('+me.varBackgroundColorI+',0.5)'); 
         });
-        me.gastos.map(function(x){
-          me.varBackgroundColorG = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+        me.gastos.map(function(x){          
           me.varMesGasto.push(x.mes);
           me.varTotalGasto.push(x.total);
           me.backgroundcolorG.push('rgba('+me.varBackgroundColorG+',0.3)');

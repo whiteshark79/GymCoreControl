@@ -1,5 +1,5 @@
 <template> 
-
+ 
     <main class="main">
         <div class="row mt-3">
             <div class="container-fluid">
@@ -53,7 +53,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="40%">NOMBRE
+                                            <th width="27%">NOMBRE
                                                 <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -69,6 +69,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'fec_nacimiento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
+                                            <th width="15%">CELULAR</th>
                                             <th width="28%">EMAIL</th>              
                                             <th width="10%">ACCIONES</th>
                                         </tr>
@@ -78,16 +79,10 @@
                                             <td align="center" v-text="persona.num_documento"></td>
                                             <td v-text="persona.nombre"></td>
                                             <td align="center" v-text="persona.fec_nacimiento"></td>
+                                            <td v-text="persona.celular"></td>
                                             <td v-text="persona.email"></td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <!-- <a class="btn btn-sm btn-default" @click="abrirModal('persona','eliminar',persona)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
-                                                <template v-if="profesor.condicion">
-                                                    <a class="btn btn-sm btn-default" @click="desactivarCategoria(profesor.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
-                                                </template>
-                                                <template v-else>
-                                                    <a class="btn btn-sm btn-default" @click="activarCategoria(profesor.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
-                                                </template> -->
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="fas fa-edit" title="Editar"></i></a>                                                
                                             </td>
                                         </tr>
                                     </tbody>
@@ -140,8 +135,9 @@
                                             <option value="R">RUC</option>
                                             <option value="P">Pasaporte</option>                                            
                                         </select>
-                                        <input type="number" v-model="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento">
+                                        <input type="number" v-model="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" @change="existePersonaId()" placeholder="Número de documento">
                                     </div>
+                                    <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
                                 </div>
                                 <div class="form-group col-md-5">
                                     <div class="input-group input-group-sm">
@@ -151,12 +147,19 @@
                                 </div>                                                
                             </div>                            
                             <div class="form-row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-7">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         <input type="text" maxlength="60" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
                                     </div>                                        
-                                </div>                                                                                                        
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                        <input type="text" maxlength="15" v-model="usuario" class="form-control" v-bind:class="{ 'is-invalid': e_usuario }" @change="existeUsuario()" placeholder="Usuario">
+                                    </div>    
+                                    <span class="text-error" v-show="stsUsuarioUser">Usuario ya existe</span>                                     
+                                </div>                                                                                                         
                             </div>                                                
                             <div class="form-row">
                                 <div class="form-group col-md-5">
@@ -168,8 +171,9 @@
                                 <div class="form-group col-md-7">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" v-model="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email">
+                                        <input type="email" v-model="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" @change="existePersonaEmail()" placeholder="Email">
                                     </div>
+                                    <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>
                                 </div>                                           
                             </div>
                             <div class="form-row">
@@ -188,7 +192,7 @@
                                             <option value="0" disabled>--Especialidad--</option>
                                             <option v-for="especialidad in arrayEspecialidad" :key="especialidad.id" :value="especialidad.id" v-text="especialidad.nombre"></option>
                                         </select>                                                            
-                                    </div>
+                                    </div> 
                                 </div> 
                                 <div class="form-group col-md-4">
                                     <div class="input-group input-group-sm">
@@ -212,7 +216,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
-                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarPersona()">Guardar</button>                        
+                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarPersona()" :disabled="stsPersona!=''">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarPersona()">Actualizar</button>
                     </div>
                 </div>
@@ -233,6 +237,7 @@
                 tipo_documento : 'C',
                 num_documento : '',                
                 nombre : '',
+                usuario : '',
                 fec_nacimiento : '',                
                 direccion : '',
                 celular : '',
@@ -241,15 +246,22 @@
                 sueldo_hora : 0,
                 arrayPersona : [],
                 arrayEspecialidad : [],
+
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
+
+                stsPersona : '',
+                stsPersonaId : '',
+                stsPersonaEmail :'',
+                stsUsuarioUser :'',
 
                 errorPersona : 0,
                 errorMostrarMsjPersona : [],
                 e_num_documento : false,
                 e_fec_nacimiento : false,
                 e_nombre : false,
+                e_usuario : false,
                 e_celular : false,
                 e_email : false,
                 e_direccion : false,
@@ -336,6 +348,57 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarPersona(page,buscar,criterio,paginado,ordenado,ascdesc);
             },
+            existePersonaId(){
+                let me=this;
+                
+                var url= '/cliente/selectPersonaId?num_documento='+this.num_documento;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsPersonaId = respuesta.stsPersonaId;    
+                    me.habilitarGuardar();                 
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                });  
+            },
+            existePersonaEmail(){
+                let me=this;
+                
+                var url= '/cliente/selectPersonaEmail?email='+this.email;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsPersonaEmail = respuesta.stsPersonaEmail;   
+                    me.habilitarGuardar();                  
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                });          
+            },
+            existeUsuario(){
+                let me=this;
+                
+                var url= '/user/selectUsuario?usuario='+this.usuario;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsUsuarioUser = respuesta.stsUsuarioUser; 
+                    me.habilitarGuardar();                    
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                });       
+            },
+            habilitarGuardar(){
+                let me=this;
+                if(me.stsPersonaId || me.stsPersonaEmail || me.stsUsuarioUser)
+                {
+                    me.stsPersona=1;
+                }else{
+                    me.stsPersona='';
+                    }
+            },
             registrarPersona(){
                if (this.validarPersona()){ return; }
                 let me = this;
@@ -344,6 +407,7 @@
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
                     'nombre' : this.nombre,
+                    'usuario' : this.usuario,
                     'fec_nacimiento' : this.fec_nacimiento,                    
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
@@ -366,6 +430,7 @@
                     'tipo_documento' : this.tipo_documento,
                     'num_documento' : this.num_documento,
                     'nombre' : this.nombre,
+                    'usuario' : this.usuario,
                     'fec_nacimiento' : this.fec_nacimiento,                    
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
@@ -384,10 +449,11 @@
             validarPersona(){
                 this.errorPersona=0;
                 this.errorMostrarMsjPersona =[];
-
+                
                 if (!this.num_documento) {this.e_num_documento = true; this.errorMostrarMsjPersona.push('num_documento');}else{this.e_num_documento = false}
                 if (!this.fec_nacimiento) {this.e_fec_nacimiento = true; this.errorMostrarMsjPersona.push('fec_nacimiento');}else{this.e_fec_nacimiento = false}
                 if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjPersona.push('nombre');}else{this.e_nombre = false}
+                if (!this.usuario) {this.e_usuario = true; this.errorMostrarMsjPersona.push('usuario');}else{this.e_usuario = false}
                 if (!this.celular) {this.e_celular = true; this.errorMostrarMsjPersona.push('celular');}else{this.e_celular = false}
                 if (!this.email) {this.e_email = true; this.errorMostrarMsjPersona.push('email');}else{this.e_email = false}
                 if (!this.direccion) {this.e_direccion = true; this.errorMostrarMsjPersona.push('direccion');}else{this.e_direccion = false}
@@ -405,6 +471,12 @@
 
                 this.errorPersona = 0;
                 this.errorMostrarMsjPersona = [];
+
+                this.stsPersona = '';
+                this.stsPersonaId = '';
+                this.stsPersonaEmail = '';
+                this.stsUsuarioUser = '';
+
                 this.e_num_documento = false;
                 this.e_fec_nacimiento = false;
                 this.e_nombre = false;
@@ -413,7 +485,7 @@
                 this.e_direccion = false;
                 this.e_idespecialidad = false;
                 this.e_horario = false;
-                this.e_sueldo_hora = false;
+                this.e_sueldo_hora = false;                
                 
                 this.tipo_documento = 'C';
                 this.num_documento = '';
@@ -438,9 +510,11 @@
                                 this.tituloModal = 'Registrar Profesor';
                                 this.tipoAccion = 1;
                                 
+                                this.stsPersonaId = '';
                                 this.tipo_documento = 'C';
                                 this.num_documento = '';
                                 this.nombre = '';
+                                this.usuario = '';
                                 this.fec_nacimiento = '';
                                 this.direccion = '';                
                                 this.celular = '';
@@ -449,7 +523,7 @@
                                 this.idespecialidad = 0;
                                 this.sueldo_hora = 0;
                                 break;
-                            }
+                            }  
                             case 'actualizar':
                             {
                                 this.modal=1;
@@ -460,6 +534,7 @@
                                 this.tipo_documento=data['tipo_documento'];
                                 this.num_documento=data['num_documento'];                                
                                 this.nombre = data['nombre'];
+                                this.usuario = data['usuario'];
                                 this.fec_nacimiento = data['fec_nacimiento'];                               
                                 this.direccion= data['direccion'];
                                 this.celular= data['celular'];
@@ -476,6 +551,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.criterio='nombre';
                 this.listarPersona(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },

@@ -6,23 +6,8 @@ use Illuminate\Database\Eloquent\Model;
  
 class Alumno extends Model 
 {
-    protected $fillable = [
-        'id',
-        'cod_socio',
-        'sexo',
-        'estado_civil',
-        'hijos','sector',
-        'idprofesion',
-        'sit_laboral',
-        'empresa','cargo',
-        'estudiante', 
-        'iduniversidad',
-        'edad',
-        'peso',
-        'estatura',
-        'nivel_actividad',
-        'tipo_actividad',
-        'objetivo'];
+    protected $fillable = ['id','sexo','estado_civil','hijos','sector','idprofesion','sit_laboral','empresa','cargo',
+        'estudiante','iduniversidad','edad','peso','estatura','nivel_actividad','tipo_actividad','objetivo'];
 
     public $timestamps = false;
 

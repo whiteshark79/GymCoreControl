@@ -51,6 +51,16 @@ class UserController extends Controller
         ];
     }
 
+    public function selectUsuario(Request $request){ 
+        //if (!$request->ajax()) return redirect('/');
+
+        $usuario = $request->usuario;
+        $usuarioUser = User::where('usuario',$usuario)->get();      
+        $stsUsuarioUser=$usuarioUser->count();
+ 
+        return ['stsUsuarioUser'=>$stsUsuarioUser];     
+    }
+
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');

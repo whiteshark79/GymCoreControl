@@ -8,6 +8,8 @@ class Categoria extends Model
 {
     protected $fillable = ['nombre','descripcion','condicion'];
 
+    public $timestamps = false;
+
      public function articulos(){
         return $this->hasMany('App\Articulo');
     } 

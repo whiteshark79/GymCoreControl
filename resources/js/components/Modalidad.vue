@@ -140,7 +140,7 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="nombre">Nombre: </span>
+                                        <span class="input-group-text">Nombre: </span>
                                     </div>
                                     <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                                 </div>
@@ -148,15 +148,15 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="descripcion">Descripción: </span>
+                                        <span class="input-group-text">Descripción: </span>
                                     </div>
-                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>                                    
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2" maxlength="60"></textarea>                                    
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-8">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="duracion">Duración: </span>
+                                        <span class="input-group-text">Duración: </span>
                                     </div>
                                     <select v-model="duracion" class="form-control" v-bind:class="{ 'is-invalid': e_duracion }">
                                         <option value="0" disabled>--Seleccione--</option>
@@ -178,7 +178,7 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-8">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="clases">No de Clases: </span>
+                                        <span class="input-group-text">No de Clases: </span>
                                     </div>
                                     <input type="number" min="0.0" v-model="clases" class="form-control" v-bind:class="{ 'is-invalid': e_clases }">                                    
                                 </div>
@@ -236,8 +236,8 @@
                 criterio : 'nombre',
                 buscar : '',
                 paginado : 10,
-                ordenado : 'id',
-                ascdesc : 'desc'
+                ordenado : 'nombre',
+                ascdesc : 'asc'
             }
         },
         computed:{
@@ -325,20 +325,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarModalidad(){
-               if (this.validarModalidad()){ return; }
-                let me = this;
-
-                axios.put('/modalidad/eliminar',{
-                    'id': this.modalidad_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarModalidad(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
+            },            
             desactivarModalidad(id){
                Swal.fire({
                 title: 'Desactivar la modalidad?',
@@ -458,19 +445,7 @@
                                 this.clases= data['clases'];
                                 break;
                             }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar modalidad';
-                                this.tipoAccion=3;
-                                this.modalidad_id=data['id'];
-                                this.nombre = data['nombre'];
-                                this.descripcion= data['descripcion'];
-                                this.duracion= data['duracion'];
-                                this.precio= data['precio'];
-                                this.clases= data['clases'];
-                                break;
-                            }
+                            
                         }
                     }
                 }

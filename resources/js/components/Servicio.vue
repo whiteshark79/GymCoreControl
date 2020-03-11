@@ -100,8 +100,7 @@
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('servicio','actualizar',servicio)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('servicio','eliminar',servicio)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('servicio','actualizar',servicio)"><i class="fas fa-edit" title="Editar"></i></a>                                   
                                                 <template v-if="servicio.condicion">
                                                     <a class="btn btn-sm btn-default" @click="desactivarServicio(servicio.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
                                                 </template>
@@ -153,7 +152,7 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-7">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="clasificacion">Clasificacion: </span>
+                                        <span class="input-group-text">Clasificacion: </span>
                                     </div>
                                     <select class="form-control" v-bind:class="{ 'is-invalid': e_idclasificacion }" v-model="idclasificacion">
                                         <option value="0" disabled>--Seleccione--</option>
@@ -162,7 +161,7 @@
                                 </div>
                                 <div class="input-group input-group-sm mb-3 col-5">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="codigo">Cód.: </span>
+                                        <span class="input-group-text">Cód.: </span>
                                     </div>
                                     <input type="text" v-model="codigo" class="form-control" v-bind:class="{ 'is-invalid': e_codigo }"> 
                                 </div>                                
@@ -170,7 +169,7 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="precio">Nombre: </span>
+                                        <span class="input-group-text">Nombre: </span>
                                     </div>
                                     <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }"> 
                                 </div>
@@ -178,9 +177,9 @@
                             <div class="form-row">
                                 <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="descripcion">Descripción: </span>
+                                        <span class="input-group-text">Descripción: </span>
                                     </div>                                    
-                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                                    <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2" maxlength="60"></textarea>
                                 </div>
                                                           
                             </div>                                                
@@ -190,7 +189,6 @@
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
                         <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarServicio()">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarServicio()">Actualizar</button>
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarServicio()">Eliminar</button>
 
                     </div>
                 </div>
@@ -362,20 +360,7 @@ import vSelect from 'vue-select';
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarServicio(){
-               if (this.validarServicio()){ return; }
-                let me = this;
-
-                axios.put('/servicio/eliminar',{
-                    'id': this.servicio_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarServicio(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
+            },            
             desactivarServicio(id){
                Swal.fire({
                 title: 'Desactivar el artículo?',
@@ -487,19 +472,7 @@ import vSelect from 'vue-select';
                                 this.nombre = data['nombre'];
                                 this.descripcion= data['descripcion'];
                                 break;
-                            }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar Servicio';
-                                this.tipoAccion=3;
-                                this.servicio_id=data['id'];
-                                this.idclasificacion=data['idclasificacion'];
-                                this.codigo=data['codigo'];
-                                this.nombre = data['nombre'];
-                                this.descripcion= data['descripcion'];
-                                break;
-                            }
+                            }                            
                         }
                     }
                 }

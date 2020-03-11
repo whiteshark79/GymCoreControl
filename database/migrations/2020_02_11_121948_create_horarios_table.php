@@ -15,11 +15,13 @@ class CreateHorariosTable extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('hora_ini',5);
-            $table->string('hora_fin',5);
+            $table->integer('idlocal')->unsigned();
+            $table->foreign('idlocal')->references('id')->on('locales');
+            $table->time('hora_ini');
+            $table->time('hora_fin');
             $table->string('periodo',10);
             $table->string('descripcion',60)->nullable();
-            $table->boolean('condicion')->default(1);
+            $table->boolean('condicion')->default(1); 
             
         });
     }

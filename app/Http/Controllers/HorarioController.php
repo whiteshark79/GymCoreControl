@@ -21,14 +21,17 @@ class HorarioController extends Controller
         
         
         if ($buscar==''){
-            $horarios = Horario::select('id', DB::raw('DATE_FORMAT(hora_ini,"%H:%i") as hora_ini'), 
-            DB::raw('DATE_FORMAT(hora_fin,"%H:%i") as hora_fin'), 'periodo','descripcion','condicion')
+            $horarios = Horario::join('locales','horarios.idlocal','=','locales.id')
+            ->select('horarios.id', 'horarios.idlocal', 'locales.nombre as local', DB::raw('DATE_FORMAT(horarios.hora_ini,"%H:%i") as hora_ini'), 
+            DB::raw('DATE_FORMAT(horarios.hora_fin,"%H:%i") as hora_fin'), 'horarios.periodo','horarios.descripcion','horarios.condicion')
             ->orderBy($ordenado, $ascdesc)->paginate($paginado);
         }
         else{
-            $horarios = Horario::select('id', DB::raw('DATE_FORMAT(hora_ini,"%H:%i") as hora_ini'), 
-            DB::raw('DATE_FORMAT(hora_fin,"%H:%i") as hora_fin'), 'periodo','descripcion','condicion')
-            ->where($criterio, 'like', '%'. $buscar . '%')->orderBy($ordenado, $ascdesc)->paginate($paginado);
+            $horarios = Horario::join('locales','horarios.idlocal','=','locales.id')
+            ->select('horarios.id', 'horarios.idlocal', 'locales.nombre as local', DB::raw('DATE_FORMAT(horarios.hora_ini,"%H:%i") as hora_ini'), 
+            DB::raw('DATE_FORMAT(horarios.hora_fin,"%H:%i") as hora_fin'), 'horarios.periodo','horarios.descripcion','horarios.condicion')
+            ->where($criterio, 'like', '%'. $buscar . '%')
+            ->orderBy($ordenado, $ascdesc)->paginate($paginado);
         }
         
 
@@ -47,18 +50,25 @@ class HorarioController extends Controller
 
     public function selectHorario(Request $request){
         if (!$request->ajax()) return redirect('/');
+
+        $idlocal = $request->idlocal;
+
         $horarios = Horario::where('condicion','=','1')
-        ->select('id','hora_ini','hora_fin','periodo')->orderBy('periodo', 'asc')->get();
+        ->select('id',DB::raw('DATE_FORMAT(horarios.hora_ini,"%H:%i") as hora_ini'),
+        DB::raw('DATE_FORMAT(horarios.hora_fin,"%H:%i") as hora_fin'), 'periodo')
+        ->where('idlocal',$idlocal)
+        ->orderBy('hora_ini', 'asc')->get();
         return ['horarios' => $horarios];
     }
  
     public function store(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         try{
             DB::beginTransaction();
             $horario = new Horario();
+            $horario->idlocal = $request->idlocal;
             $horario->hora_ini = $request->hora_ini;
             $horario->hora_fin = $request->hora_fin;
             $horario->periodo = $request->periodo;
@@ -77,20 +87,14 @@ class HorarioController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $horario = Horario::findOrFail($request->id);
+        $horario->idlocal = $request->idlocal;
         $horario->hora_ini = $request->hora_ini;
         $horario->hora_fin = $request->hora_fin;
         $horario->periodo = $request->periodo;
         $horario->descripcion = $request->descripcion;
         $horario->condicion = '1';
         $horario->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $horario = Horario::findOrFail($request->id);        
-        $horario->delete();
-    }
+    }    
 
     public function desactivar(Request $request)
     {

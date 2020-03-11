@@ -72,14 +72,7 @@ class ModalidadController extends Controller
         $modalidad->clases = $request->clases;
         $modalidad->condicion = '1';
         $modalidad->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $modalidad = Modalidad::findOrFail($request->id);        
-        $modalidad->delete();
-    }
+    }    
 
     public function desactivar(Request $request)
     {

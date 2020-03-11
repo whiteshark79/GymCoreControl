@@ -73,14 +73,7 @@ class ClasificacionController extends Controller
         $clasificacion->descripcion = $request->descripcion;
         $clasificacion->condicion = '1';
         $clasificacion->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $clasificacion = Clasificacion::findOrFail($request->id);        
-        $clasificacion->delete();
-    }
+    }    
 
     public function desactivar(Request $request)
     {

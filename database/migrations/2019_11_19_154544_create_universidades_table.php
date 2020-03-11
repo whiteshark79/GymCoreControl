@@ -17,13 +17,13 @@ class CreateUniversidadesTable extends Migration
             $table->increments('id');
             $table->string('nombre', 100);
             $table->integer('idprovincia')->unsigned();
-            $table->integer('idcanton')->unsigned();
-            $table->boolean('condicion')->default(1);
-
-            $table->timestamps();
-
             $table->foreign('idprovincia')->references('id')->on('provincias');
+            $table->integer('idcanton')->unsigned();
             $table->foreign('idcanton')->references('id')->on('cantones');
+            $table->boolean('condicion')->default(1);            
+
+            
+            
         });
     }
 

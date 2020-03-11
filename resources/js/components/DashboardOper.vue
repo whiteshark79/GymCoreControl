@@ -317,7 +317,7 @@
                   <input v-model="venta_id" type="hidden"> 
                   <label for="abono" class="text-info">Saldo: </label>
                   <input v-model="saldo" type="number" step="0.1" min="0" :max="(total-abono)" class="form-control form-control-sm col-3">
-                  <template v-if="modal<0"><input v-model="abono" type="number"><input v-model="total" type="number"></template>                    
+                  <template v-if="modal<0"><input v-model="abono" type="number" min="0"><input v-model="total" type="number"></template>                    
                   <button type="button" class="btn btn-primary btn-sm" @click="pagarDeuda()">Pagar</button>
                   <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal_()">Cerrar</button>     
                 </div>

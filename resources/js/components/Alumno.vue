@@ -45,7 +45,6 @@
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">
-                                            <th width="3%">#</th> 
                                             <th width="10%">DOC
                                                 <template v-if="(ordenado !== 'num_documento' && ascdesc === 'asc') || (ordenado === 'num_documento' && ascdesc === 'desc') ">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -54,7 +53,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="37%">NOMBRE
+                                            <th width="27%">NOMBRE
                                                 <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -70,26 +69,20 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'fec_nacimiento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
+                                            <th width="15%">CELULAR</th>
                                             <th width="28%">EMAIL</th>              
                                             <th width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayPersona.length">
                                         <tr v-for="persona in arrayPersona" :key="persona.id">
-                                            <td align="center" v-text="persona.id"></td>
                                             <td align="center" v-text="persona.num_documento"></td>
                                             <td v-text="persona.nombre"></td>
                                             <td align="center" v-text="persona.fec_nacimiento"></td>
+                                            <td v-text="persona.celular"></td>
                                             <td v-text="persona.email"></td>
                                             <td align="center">
                                                 <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <!-- <a class="btn btn-sm btn-default" @click="abrirModal('persona','eliminar',persona)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
-                                                <template v-if="alumno.condicion">
-                                                    <a class="btn btn-sm btn-default" @click="desactivarCategoria(alumno.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
-                                                </template>
-                                                <template v-else>
-                                                    <a class="btn btn-sm btn-default" @click="activarCategoria(alumno.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
-                                                </template> -->
                                             </td>
                                         </tr>
                                     </tbody>
@@ -151,14 +144,16 @@
                                                             <option value="R">RUC</option>
                                                             <option value="P">Pasaporte</option>                                            
                                                         </select>
-                                                        <input type="number" v-model="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento">                                                        
+                                                        <input type="number" v-model="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" @change="existePersonaId()" placeholder="Número de documento">                                                        
                                                     </div>
+                                                    <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <div class="input-group input-group-sm">
-                                                        <span class="input-group-text"><i class="fas fa-qrcode"></i></span>
-                                                        <input type="text" maxlength="10" v-model="cod_socio" class="form-control" placeholder="Código Socio">
-                                                    </div>                                        
+                                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                                        <input type="text" maxlength="15" v-model="usuario" class="form-control" v-bind:class="{ 'is-invalid': e_usuario }" @change="existeUsuario()" placeholder="Usuario">
+                                                    </div>    
+                                                    <span class="text-error" v-show="stsUsuarioUser">Usuario ya existe</span>                                     
                                                 </div>                                                
                                             </div>
                                             <div class="form-row">
@@ -220,8 +215,9 @@
                                                 <div class="form-group col-md-6">
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                                        <input type="email" v-model="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email">                                                    
-                                                    </div>                                        
+                                                        <input type="email" v-model="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" @change="existePersonaEmail()" placeholder="Email">                                                    
+                                                    </div>   
+                                                    <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>                                     
                                                 </div>                                                                                                         
                                             </div>
                                             <div class="form-row">
@@ -377,7 +373,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
-                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarPersona()">Guardar</button>                        
+                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarPersona()" :disabled="stsPersona!=''">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarPersona()">Actualizar</button>
                     </div>
                 </div>
@@ -401,8 +397,7 @@
                 direccion : '',
                 celular : '',
                 email : '',
-
-                cod_socio : '',
+                usuario : '',
                 sexo : 0,
                 estado_civil : 0,
                 hijos : 0,
@@ -424,6 +419,11 @@
                 arrayProfesion: [],
                 arrayUniversidad: [],
 
+                stsPersona : '',
+                stsPersonaId : '',
+                stsPersonaEmail : '',
+                stsUsuarioUser : '',
+
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -432,6 +432,7 @@
                 errorMostrarMsjPersona : [],                
                 e_num_documento : false,
                 e_nombre : false,
+                e_usuario : false,
                 e_sexo : false,
                 e_fec_nacimiento : false,
                 e_celular : false,
@@ -528,6 +529,57 @@
                     console.log(error);
                 });
             },
+            existePersonaId(){
+                let me=this;
+                
+                var url= '/cliente/selectPersonaId?num_documento='+this.num_documento;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsPersonaId = respuesta.stsPersonaId;      
+                    me.habilitarGuardar();               
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                }); 
+            },
+            existePersonaEmail(){
+                let me=this;
+                
+                var url= '/cliente/selectPersonaEmail?email='+this.email;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsPersonaEmail = respuesta.stsPersonaEmail;  
+                    me.habilitarGuardar();                   
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                });          
+            },
+            existeUsuario(){
+                let me=this;
+                
+                var url= '/user/selectUsuario?usuario='+this.usuario;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsUsuarioUser = respuesta.stsUsuarioUser;   
+                    me.habilitarGuardar();            
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                });                     
+            },
+            habilitarGuardar(){
+                let me=this;
+                if(me.stsPersonaId || me.stsPersonaEmail || me.stsUsuarioUser)
+                {
+                    me.stsPersona=1;
+                }else{
+                    me.stsPersona='';
+                    }
+            },
             registrarPersona(){
                if (this.validarPersona()){ return; }
                 let me = this;
@@ -540,8 +592,7 @@
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
                     'email' : this.email,
-
-                    'cod_socio' : this.cod_socio,
+                    'usuario' : this.usuario,
                     'sexo' : this.sexo,
                     'estado_civil' : this.estado_civil,
                     'hijos' : this.hijos,
@@ -577,8 +628,7 @@
                     'direccion' : this.direccion,                  
                     'celular' : this.celular,
                     'email' : this.email,
-
-                    'cod_socio' : this.cod_socio,
+                    'usuario' : this.usuario,
                     'sexo' : this.sexo,
                     'estado_civil' : this.estado_civil,
                     'hijos' : this.hijos,
@@ -609,6 +659,7 @@
 
                 if (!this.num_documento) {this.e_num_documento = true; this.errorMostrarMsjPersona.push('num_documento');}else{this.e_num_documento = false}
                 if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjPersona.push('nombre');}else{this.e_nombre = false}
+                if (!this.usuario) {this.e_usuario = true; this.errorMostrarMsjPersona.push('usuario');}else{this.e_usuario = false}
                 if (!this.sexo) {this.e_sexo = true; this.errorMostrarMsjPersona.push('sexo');}else{this.e_sexo = false}
                 if (!this.fec_nacimiento) {this.e_fec_nacimiento = true; this.errorMostrarMsjPersona.push('fec_nacimiento');}else{this.e_fec_nacimiento = false}
                 if (!this.celular) {this.e_celular = true; this.errorMostrarMsjPersona.push('celular');}else{this.e_celular = false}
@@ -622,7 +673,13 @@
                 this.tituloModal='';
 
                 this.errorPersona = 0;
-                this.errorMostrarMsjPersona = [];                
+                this.errorMostrarMsjPersona = []; 
+                 
+                this.stsPersona = '';
+                this.stsPersonaId = '';
+                this.stsPersonaEmail = '';
+                this.stsUsuarioUser = '';
+
                 this.e_num_documento = false;
                 this.e_nombre = false;
                 this.e_sexo = false;
@@ -637,8 +694,7 @@
                 this.direccion = '';                
                 this.celular = '';
                 this.email = '';
-
-                this.cod_socio = '';                
+                this.usuario = '';                
                 this.sexo = 0;
                 this.estado_civil = 0;
                 this.hijos = 0;
@@ -674,8 +730,7 @@
                                 this.direccion = '';                
                                 this.celular = '';
                                 this.email = '';
-
-                                this.cod_socio = '';                
+                                this.usuario = '';                
                                 this.sexo = 0;
                                 this.estado_civil = 0;
                                 this.hijos = 0;
@@ -708,8 +763,7 @@
                                 this.direccion= data['direccion'];
                                 this.celular= data['celular'];
                                 this.email= data['email'];
-
-                                this.cod_socio=data['cod_socio'];
+                                this.usuario=data['usuario'];
                                 this.sexo= data['sexo'];
                                 this.sector= data['sector'];
                                 this.estado_civil= data['estado_civil'];
@@ -736,6 +790,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.criterio='nombre';
                 this.listarPersona(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },

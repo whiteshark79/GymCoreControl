@@ -74,8 +74,7 @@
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('clasificacion','actualizar',clasificacion)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('clasificacion','eliminar',clasificacion)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('clasificacion','actualizar',clasificacion)"><i class="fas fa-edit" title="Editar"></i></a>                                  
                                                 <template v-if="clasificacion.condicion">
                                                     <a class="btn btn-sm btn-default" @click="desactivarClasificacion(clasificacion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
                                                 </template>
@@ -126,15 +125,15 @@
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="nombre">Nombre: </span>
+                                    <span class="input-group-text">Nombre: </span>
                                 </div>
                                 <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="descripcion">Descripción: </span>
+                                    <span class="input-group-text">Descripción: </span>
                                 </div>
-                                <textarea  v-model="descripcion" class="form-control form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                                <textarea  v-model="descripcion" class="form-control form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2" maxlength="60"></textarea>
                             </div>                           
 
                         </form>
@@ -143,7 +142,6 @@
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
                         <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarClasificacion()">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarClasificacion()">Actualizar</button>
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarClasificacion()">Eliminar</button>
 
                     </div>
                 </div>
@@ -267,20 +265,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarClasificacion(){
-               if (this.validarClasificacion()){ return; }
-                let me = this;
-
-                axios.put('/clasificacion/eliminar',{
-                    'id': this.clasificacion_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarClasificacion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
+            },            
             desactivarClasificacion(id){
                Swal.fire({
                 title: 'Desactivar la categoría?',
@@ -381,17 +366,7 @@
                                 this.nombre = data['nombre'];
                                 this.descripcion= data['descripcion'];
                                 break;
-                            }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar categoría';
-                                this.tipoAccion=3;
-                                this.clasificacion_id=data['id'];
-                                this.nombre = data['nombre'];
-                                this.descripcion= data['descripcion'];
-                                break;
-                            }
+                            }                            
                         }
                     }
                 }

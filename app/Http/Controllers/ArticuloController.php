@@ -126,8 +126,7 @@ class ArticuloController extends Controller
         $cont=Articulo::count();
         $pdf=\PDF::loadview('pdf.articulos',['articulos'=>$articulos,'cont'=>$cont]);
         return $pdf->download('articulos-'.$hoy->toDateString().'.pdf'); 
-    }
-    
+    }    
 
     public function store(Request $request)
     {
@@ -154,14 +153,7 @@ class ArticuloController extends Controller
         $articulo->descripcion = $request->descripcion;
         $articulo->condicion = '1';
         $articulo->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $articulo = Articulo::findOrFail($request->id);        
-        $articulo->delete();
-    }
+    }   
 
     public function desactivar(Request $request)
     {

@@ -16,13 +16,13 @@ class CreateServiciosTable extends Migration
         Schema::create('servicios', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idclasificacion')->unsigned();
+            $table->foreign('idclasificacion')->references('id')->on('clasificaciones'); 
             $table->string('codigo', 50)->nullable();
             $table->string('nombre', 100)->unique();
-            $table->string('descripcion', 256)->nullable();
+            $table->string('descripcion', 60)->nullable();
             $table->boolean('condicion')->default(1);
-            $table->timestamps(); 
 
-            $table->foreign('idclasificacion')->references('id')->on('clasificaciones'); 
+           
         });
     } 
 

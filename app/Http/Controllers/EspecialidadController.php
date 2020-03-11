@@ -65,14 +65,7 @@ class EspecialidadController extends Controller
         $especialidad->descripcion = $request->descripcion;
         $especialidad->condicion = '1';
         $especialidad->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $especialidad = Especialidad::findOrFail($request->id);        
-        $especialidad->delete();
-    }
+    }    
 
     public function desactivar(Request $request)
     {

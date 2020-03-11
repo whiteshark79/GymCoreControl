@@ -83,7 +83,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> 
                                 <nav>
                                     <ul class="pagination justify-content-end">
                                         <li class="page-item" v-if="pagination.current_page > 1">

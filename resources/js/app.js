@@ -25,8 +25,14 @@ window.Vue = require('vue');
 Vue.component('dashboardadmin', require('./components/DashboardAdmin.vue').default);
 Vue.component('dashboardoper', require('./components/DashboardOper.vue').default);
 Vue.component('dashboardalumno', require('./components/DashboardAlumno.vue').default);
+
+Vue.component('headerapp', require('./components/HeaderApp.vue').default);
+
 Vue.component('caja', require('./components/Caja.vue').default);
 Vue.component('empresa', require('./components/Empresa.vue').default);
+Vue.component('local', require('./components/Local.vue').default);
+Vue.component('calendario', require('./components/Calendario.vue').default);
+
 
 Vue.component('dbinscripciones', require('./components/DBInscripciones.vue').default);
 Vue.component('dbventas', require('./components/DBVentas.vue').default);
@@ -53,6 +59,7 @@ Vue.component('clasificacion', require('./components/Clasificacion.vue').default
 Vue.component('modalidad', require('./components/Modalidad.vue').default);
 Vue.component('horario', require('./components/Horario.vue').default);
 Vue.component('especialidad', require('./components/Especialidad.vue').default);
+Vue.component('rutina', require('./components/Rutina.vue').default);
 Vue.component('profesion', require('./components/Profesion.vue').default);
 
 Vue.component('universidad', require('./components/Universidad.vue').default);

@@ -64,14 +64,7 @@ class RolController extends Controller
         $rol->descripcion = $request->descripcion;
         $rol->condicion = '1';
         $rol->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $rol = Rol::findOrFail($request->id);        
-        $rol->delete();
-    }
+    }    
 
     public function desactivar(Request $request)
     {

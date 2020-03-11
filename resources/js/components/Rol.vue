@@ -11,7 +11,7 @@
                                 <button type="button" class="btn btn-sm btn-primary btn-sm" @click="abrirModal('rol','registrar')"><i class="fas fa-plus-circle">  Nuevo Rol</i></button>
                             </div>
                         </div>                      
-
+ 
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="input-group input-group-sm col-7">                                
@@ -132,7 +132,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Descripción: </span>
                                 </div>
-                                <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                                <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2" maxlength="60"></textarea>
                             </div>                           
 
                         </form>
@@ -140,8 +140,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
                         <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarRol()">Guardar</button>                        
-                        <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarRol()">Actualizar</button>                        
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarRol()">Eliminar</button>
+                        <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarRol()">Actualizar</button> 
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -264,20 +263,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarRol(){
-               if (this.validarRol()){ return; }
-                let me = this;
-
-                axios.put('/rol/eliminar',{
-                    'id': this.rol_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarRol(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
+            },            
             desactivarRol(id){
                Swal.fire({
                 title: 'Desactivar el rol?',
@@ -379,22 +365,14 @@
                                 this.descripcion= data['descripcion'];
                                 break;
                             }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar rol';
-                                this.tipoAccion=3;
-                                this.rol_id=data['id'];
-                                this.nombre = data['nombre'];
-                                this.descripcion= data['descripcion'];
-                                break;
-                            }
+                            
                         }
                     }
                 }
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.criterio='nombre';
                 this.listarRol(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },

@@ -190,7 +190,7 @@
                             <div class="row">
                                 <div class="input-group input-group-sm mb-3 col-md-8">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="alumno">Alumno: </span>
+                                        <span class="input-group-text">Alumno: </span>
                                     </div>
                                     <template v-if="this.tipoAccion == 2">
                                         <input class="form-control" v-model="nombre" readonly>
@@ -268,9 +268,9 @@
                             <div class="row">
                                 <div class="input-group input-group-sm mb-3 col-12">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="observaciones">Observaciones: </span>
+                                        <span class="input-group-text">Observaciones: </span>
                                     </div>
-                                    <textarea  v-model="observaciones" class="form-control form-control" rows="2"></textarea>
+                                    <textarea  v-model="observaciones" class="form-control form-control" rows="2" maxlength="60"></textarea>
                                 </div>                                                             
                                                                
                             </div> 

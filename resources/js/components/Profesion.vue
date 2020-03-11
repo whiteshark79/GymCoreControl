@@ -74,8 +74,7 @@
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('profesion','actualizar',profesion)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('profesion','eliminar',profesion)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('profesion','actualizar',profesion)"><i class="fas fa-edit" title="Editar"></i></a>                                 
                                                 <template v-if="profesion.condicion">
                                                     <a class="btn btn-sm btn-default" @click="desactivarProfesion(profesion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
                                                 </template>
@@ -132,9 +131,9 @@
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="descripcion">Descripción: </span>
+                                    <span class="input-group-text">Descripción: </span>
                                 </div>                                
-                                <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="2"></textarea>
+                                <textarea  v-model="descripcion" class="form-control" v-bind:class="{ 'is-invalid': e_descripcion }" rows="4" maxlength="200"></textarea>
                             </div>                            
 
                         </form>
@@ -143,7 +142,6 @@
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
                         <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarProfesion()">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarProfesion()">Actualizar</button>
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarProfesion()">Eliminar</button>
 
                     </div>
                 </div>
@@ -185,7 +183,7 @@
                 buscar : '',
                 paginado : 10,
                 ordenado : 'id',
-                ascdesc : 'desc'
+                ascdesc : 'asc'
             }
         },
         computed:{
@@ -267,20 +265,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarProfesion(){
-               if (this.validarProfesion()){ return; }
-                let me = this;
-
-                axios.put('/profesion/eliminar',{
-                    'id': this.profesion_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarProfesion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            },
+            },            
             desactivarProfesion(id){
                Swal.fire({
                 title: 'Desactivar la categoría?',
@@ -381,17 +366,7 @@
                                 this.nombre = data['nombre'];
                                 this.descripcion= data['descripcion'];
                                 break;
-                            }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar Profesión';
-                                this.tipoAccion=3;
-                                this.profesion_id=data['id'];
-                                this.nombre = data['nombre'];
-                                this.descripcion= data['descripcion'];
-                                break;
-                            }
+                            }                            
                         }
                     }
                 }

@@ -18,7 +18,7 @@ class CreatePersonasTable extends Migration
             $table->string('tipo_documento', 2);
             $table->string('num_documento',20)->unique();
             $table->string('nombre', 60)->nullable();
-            $table->string('fec_nacimiento', 12)->nullable();
+            $table->date('fec_nacimiento')->nullable(); 
             $table->string('direccion', 70)->nullable();
             $table->string('celular', 15)->nullable();            
             $table->string('email', 50)->nullable();

@@ -3,6 +3,7 @@
 Route::group(['middleware'=>['guest']],function(){
 
     Route::get('/','Auth\LoginController@showLoginForm'); 
+    Route::get('/main','Auth\LoginController@showLoginForm'); 
     Route::post('/login', 'Auth\LoginController@login')->name('login');   
 });
   
@@ -26,7 +27,22 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/dashboard/widgetAlumnos','DashboardController@widgetAlumnos'); 
 
         Route::get('/empresa', 'EmpresaController@index');
+        Route::post('/empresa/registrar', 'EmpresaController@store');
         Route::put('/empresa/actualizar', 'EmpresaController@update');
+        Route::put('/empresa/desactivar', 'EmpresaController@desactivar');
+        Route::put('/empresa/activar', 'EmpresaController@activar');
+        Route::get('/empresa/selectEmpresa', 'EmpresaController@selectEmpresa');
+
+        Route::get('/local', 'LocalController@index');
+        Route::post('/local/registrar', 'LocalController@store');
+        Route::put('/local/actualizar', 'LocalController@update');
+        Route::put('/local/desactivar', 'LocalController@desactivar');
+        Route::put('/local/activar', 'LocalController@activar');
+        Route::get('/local/selectLocal', 'LocalController@selectLocal');
+
+        Route::get('/calendario', 'CalendarioController@index');
+        Route::post('/calendario/registrar', 'CalendarioController@store');
+        Route::put('/calendario/actualizar', 'CalendarioController@update');
 
         Route::get('/caja', 'CajaController@index');
         Route::post('/caja/registrar', 'CajaController@store');
@@ -38,11 +54,11 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/user/actualizar', 'UserController@update');
         Route::put('/user/desactivar', 'UserController@desactivar');
         Route::put('/user/activar', 'UserController@activar');
+        Route::get('/user/selectUsuario', 'UserController@selectUsuario');
 
         Route::get('/rol', 'RolController@index');
         Route::post('/rol/registrar', 'RolController@store');
         Route::put('/rol/actualizar', 'RolController@update');
-        Route::put('/rol/eliminar', 'RolController@destroy');
         Route::put('/rol/desactivar', 'RolController@desactivar');
         Route::put('/rol/activar', 'RolController@activar');
         Route::get('/rol/selectRol', 'RolController@selectRol');
@@ -68,7 +84,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/profesor', 'ProfesorController@index');
         Route::post('/profesor/registrar', 'ProfesorController@store');
         Route::put('/profesor/actualizar', 'ProfesorController@update');        
-        Route::get('/profesor/selectProveedor', 'ProfesorController@selectProfesor');
+        Route::get('/profesor/selectProfesor', 'ProfesorController@selectProfesor');
 
         Route::get('/ingreso', 'IngresoController@index');
         Route::post('/ingreso/registrar', 'IngresoController@store');        
@@ -117,11 +133,11 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/cliente/actualizar', 'ClienteController@update');                
         Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
         Route::get('/cliente/selectPersonaId', 'ClienteController@selectPersonaId');
+        Route::get('/cliente/selectPersonaEmail', 'ClienteController@selectPersonaEmail');
         
         Route::get('/servicio', 'ServicioController@index');
         Route::post('/servicio/registrar', 'ServicioController@store');
         Route::put('/servicio/actualizar', 'ServicioController@update');
-        Route::put('/servicio/eliminar', 'ServicioController@destroy');
         Route::put('/servicio/desactivar', 'ServicioController@desactivar');
         Route::put('/servicio/activar', 'ServicioController@activar');
         Route::get('/servicio/buscarServicio', 'ServicioController@buscarServicio');
@@ -132,7 +148,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/clasificacion', 'ClasificacionController@index');
         Route::post('/clasificacion/registrar', 'ClasificacionController@store');
         Route::put('/clasificacion/actualizar', 'ClasificacionController@update');
-        Route::put('/clasificacion/eliminar', 'ClasificacionController@destroy');
         Route::put('/clasificacion/desactivar', 'ClasificacionController@desactivar');
         Route::put('/clasificacion/activar', 'ClasificacionController@activar');
         Route::get('/clasificacion/selectClasificacion', 'ClasificacionController@selectClasificacion');
@@ -141,7 +156,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/especialidad', 'EspecialidadController@index');
         Route::post('/especialidad/registrar', 'EspecialidadController@store');
         Route::put('/especialidad/actualizar', 'EspecialidadController@update');
-        Route::put('/especialidad/eliminar', 'EspecialidadController@destroy');
         Route::put('/especialidad/desactivar', 'EspecialidadController@desactivar');
         Route::put('/especialidad/activar', 'EspecialidadController@activar');
         Route::get('/especialidad/selectEspecialidad', 'EspecialidadController@selectEspecialidad');
@@ -177,7 +191,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/articulo', 'ArticuloController@index');
         Route::post('/articulo/registrar', 'ArticuloController@store');
         Route::put('/articulo/actualizar', 'ArticuloController@update');
-        Route::put('/articulo/eliminar', 'ArticuloController@destroy');
         Route::put('/articulo/desactivar', 'ArticuloController@desactivar');
         Route::put('/articulo/activar', 'ArticuloController@activar');
         Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
@@ -189,7 +202,6 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/categoria', 'CategoriaController@index');
         Route::post('/categoria/registrar', 'CategoriaController@store');
         Route::put('/categoria/actualizar', 'CategoriaController@update');
-        Route::put('/categoria/eliminar', 'CategoriaController@destroy');
         Route::put('/categoria/desactivar', 'CategoriaController@desactivar');
         Route::put('/categoria/activar', 'CategoriaController@activar');
         Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
@@ -198,10 +210,16 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/modalidad', 'ModalidadController@index');
         Route::post('/modalidad/registrar', 'ModalidadController@store');
         Route::put('/modalidad/actualizar', 'ModalidadController@update');
-        Route::put('/modalidad/eliminar', 'ModalidadController@destroy');
         Route::put('/modalidad/desactivar', 'ModalidadController@desactivar');
         Route::put('/modalidad/activar', 'ModalidadController@activar');
         Route::get('/modalidad/selectModalidad', 'ModalidadController@selectModalidad');
+
+        Route::get('/rutina', 'RutinaController@index');
+        Route::post('/rutina/registrar', 'RutinaController@store');
+        Route::put('/rutina/actualizar', 'RutinaController@update');
+        Route::put('/rutina/desactivar', 'RutinaController@desactivar');
+        Route::put('/rutina/activar', 'RutinaController@activar');
+        Route::get('/rutina/selectRutina', 'RutinaController@selectRutina');
 
     });
 

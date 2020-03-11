@@ -164,7 +164,7 @@
                   <input v-model="venta_id" type="hidden"> 
                   <label for="abono" class="text-info">Saldo: </label>
                   <input v-model="saldo" type="number" step="0.1" min="0" :max="(total-abono)" class="form-control form-control-sm col-3">
-                  <template v-if="modal<0"><input v-model="abono" type="number"><input v-model="total" type="number"></template>                    
+                  <template v-if="modal<0"><input v-model="abono" type="number" min="0"><input v-model="total" type="number"></template>                    
                   <button type="button" class="btn btn-primary btn-sm" @click="pagarDeuda()">Pagar</button>
                   <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>     
                 </div>
@@ -395,15 +395,16 @@
       },
       loadIngVen(){
         let me=this;
-        me.ingresos.map(function(x){
-          me.varBackgroundColorIn = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+        me.varBackgroundColorIn = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+        me.varBackgroundColorV = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+
+        me.ingresos.map(function(x){          
           me.varMesIngreso.push(x.mes);
           me.varTotalIngreso.push(x.total);
           me.backgroundcolorIn.push('rgba('+me.varBackgroundColorIn+',0.3)');
           me.hoverbackgroundcolorIn.push('rgba('+me.varBackgroundColorIn+',0.5)'); 
         });
-        me.ventas.map(function(x){
-          me.varBackgroundColorV = Math.random()*255+','+Math.random()*255+','+Math.random()*255;
+        me.ventas.map(function(x){          
           me.varMesVenta.push(x.mes);
           me.varTotalVenta.push(x.total);
           me.backgroundcolorV.push('rgba('+me.varBackgroundColorV+',0.3)');

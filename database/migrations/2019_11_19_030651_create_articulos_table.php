@@ -17,12 +17,11 @@ class CreateArticulosTable extends Migration
             $table->increments('id');
             $table->integer('idcategoria')->unsigned();
             $table->string('codigo', 50)->nullable();
-            $table->string('nombre', 100)->unique();
+            $table->string('nombre', 60)->unique();
             $table->decimal('precio_venta', 11, 2);
             $table->integer('stock');
-            $table->string('descripcion', 256)->nullable();
+            $table->string('descripcion', 60)->nullable();
             $table->boolean('condicion')->default(1);
-            $table->timestamps(); 
 
             $table->foreign('idcategoria')->references('id')->on('categorias'); 
         });

@@ -17,7 +17,6 @@ class CreateProvinciasTable extends Migration
             $table->increments('id');
             $table->string('nombre', 50);
             $table->boolean('condicion')->default(1);
-            $table->timestamps();
         });
     }
 

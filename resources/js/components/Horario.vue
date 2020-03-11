@@ -20,7 +20,7 @@
                                     </select>
                                     <template v-if="criterio=='periodo'">
                                         <select class="form-control col-4" v-model="buscar">
-                                            <option value="0" disabled>--Turno--</option>
+                                            <option value="" disabled>--Periodo--</option>
                                             <option value="Mañana">Mañana</option>
                                             <option value="Tarde">Tarde</option>
                                             <option value="Noche">Noche</option>                                            
@@ -50,6 +50,14 @@
                                                     <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'id','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
+                                            <th width="15%">LOCAL
+                                                <template v-if="(ordenado !== 'idlocal' && ascdesc === 'asc') || (ordenado === 'idlocal' && ascdesc === 'desc')">
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'idlocal','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
+                                                </template>
+                                                <template v-if="(ordenado !== 'idlocal' && ascdesc === 'desc') || (ordenado === 'idlocal' && ascdesc === 'asc')">
+                                                    <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'idlocal','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
+                                                </template>
+                                            </th>
                                             <th width="20%">HORARIO
                                                 <template v-if="(ordenado !== 'hora_ini' && ascdesc === 'asc') || (ordenado === 'hora_ini' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'hora_ini','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -58,7 +66,7 @@
                                                     <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'hora_ini','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="23%">PERIODO
+                                            <th width="15%">PERIODO
                                                 <template v-if="(ordenado !== 'periodo' && ascdesc === 'asc') || (ordenado === 'periodo' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'periodo','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -66,7 +74,7 @@
                                                     <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'periodo','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="30%">DESCRIPCION</th>
+                                            <th width="25%">DESCRIPCION</th>
                                             <th width="10%">ESTADO
                                                 <template v-if="(ordenado !== 'condicion' && ascdesc === 'asc') || (ordenado === 'condicion' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarHorario(1,buscar,criterio,paginado,'condicion','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
@@ -81,6 +89,7 @@
                                     <tbody v-if="arrayHorario.length">
                                         <tr v-for="horario in arrayHorario" :key="horario.id">
                                             <td v-text="horario.id" align="center"></td>
+                                            <td v-text="horario.local" align="center"></td>
                                             <td align="center">{{horario.hora_ini}} - {{horario.hora_fin}}</td>
                                             <td v-text="horario.periodo" align="center"></td>
                                             <td v-text="horario.descripcion"></td>
@@ -101,7 +110,7 @@
                                     </tbody>
                                     <tbody v-else>
                                         <tr>
-                                            <td colspan="6" class="text-center">
+                                            <td colspan="7" class="text-center">
                                                 <span class="badge badge-pill badge-secondary">-- NO existen registros --</span>                                       
                                             </td>
                                         </tr>
@@ -138,33 +147,57 @@
                     </div>
                     <div class="modal-body">
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Horas: </span>
+                            <div class="form-row">
+                                <div class="input-group input-group-sm mb-3 col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Desde: </span>
+                                    </div>
+                                    <input type="time" v-model="hora_ini" class="form-control" v-bind:class="{ 'is-invalid': e_hora_ini }">
                                 </div>
-                                <input type="time" v-model="hora_ini" class="form-control" v-bind:class="{ 'is-invalid': e_hora_ini }">
-                                <input type="time" v-model="hora_fin" class="form-control" v-bind:class="{ 'is-invalid': e_hora_fin }">
-                                <select v-model="periodo" class="form-control col-4" v-bind:class="{ 'is-invalid': e_periodo }">
-                                    <option value="0" disabled>--Turno--</option>
-                                    <option value="Mañana">Mañana</option>
-                                    <option value="Tarde">Tarde</option>
-                                    <option value="Noche">Noche</option>                                            
-                                </select>
+                                <div class="input-group input-group-sm mb-3 col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Hasta: </span>
+                                    </div>
+                                    <input type="time" v-model="hora_fin" class="form-control" v-bind:class="{ 'is-invalid': e_hora_fin }"> 
+                                </div>                                
                             </div>
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Descripción: </span>
+                            <div class="form-row">
+                                <div class="input-group input-group-sm mb-3 col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Turno: </span>
+                                    </div>
+                                    <select v-model="periodo" class="form-control" v-bind:class="{ 'is-invalid': e_periodo }">
+                                        <option value="0" disabled>--Turno--</option>
+                                        <option value="Mañana">Mañana</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noche">Noche</option>                                            
+                                    </select>
                                 </div>
-                                <textarea  v-model="descripcion" class="form-control" rows="2"></textarea>
-                            </div>                           
+                                <div class="input-group input-group-sm mb-3 col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Locales: </span>
+                                    </div>
+                                    <select class="form-control" v-bind:class="{ 'is-invalid': e_idlocal }" v-model="idlocal">
+                                        <option value="0" disabled>--Local--</option>
+                                        <option v-for="local in arrayLocal" :key="local.id" :value="local.id" v-text="local.nombre"></option>
+                                    </select>
+                                </div>                                
+                            </div>
+                            <div class="form-row">
+                                <div class="input-group input-group-sm mb-3 col-12">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Descripción: </span>
+                                    </div>
+                                    <textarea  v-model="descripcion" class="form-control" rows="2" maxlength="60"></textarea>
+                                </div>                                                            
+                            </div>                                                                   
 
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
                         <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarHorario()">Guardar</button>                        
-                        <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarHorario()">Actualizar</button>                        
-                        <button type="button" v-if="tipoAccion==3" class="btn btn-danger btn-sm" @click="eliminarHorario()">Eliminar</button>
+                        <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarHorario()">Actualizar</button>  
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -180,6 +213,7 @@
         data (){
             return {
                 horario_id: 0,
+                idlocal: 0,
                 hora_ini : '00:00',
                 hora_fin : '00:00',
                 periodo : 0,
@@ -189,8 +223,12 @@
                 tituloModal : '',
                 tipoAccion : 0,
 
+                arrayLocal : [],
+
                 errorHorario : 0,
                 errorMostrarMsjHorario : [],
+                
+                e_idlocal : false,
                 e_hora_ini : false,
                 e_hora_fin : false,
                 e_periodo : false,
@@ -262,12 +300,25 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarHorario(page,buscar,criterio,paginado,ordenado,ascdesc);
             },
+            selectLocal(){
+                let me=this;
+                var url= '/local/selectLocal';
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.arrayLocal = respuesta.locales;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             registrarHorario(){
                if (this.validarHorario()){ return; }
                 let me = this;
 
                 axios.post('/horario/registrar',{
-                    'hora_ini': this.hora_ini,
+                    'idlocal': this.idlocal,
+                    'hora_ini': this.hora_ini, 
                     'hora_fin': this.hora_fin,
                     'periodo': this.periodo,
                     'descripcion': this.descripcion
@@ -283,6 +334,7 @@
                 let me = this;
 
                 axios.put('/horario/actualizar',{
+                    'idlocal': this.idlocal,
                     'hora_ini': this.hora_ini,
                     'hora_fin': this.hora_fin,
                     'periodo': this.periodo,
@@ -294,20 +346,7 @@
                 }).catch(function (error) {
                     console.log(error);
                 }); 
-            },
-            eliminarHorario(){
-               if (this.validarHorario()){ return; }
-                let me = this;
-
-                axios.put('/horario/eliminar',{
-                    'id': this.horario_id
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.listarHorario(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
-            }, 
+            },            
             desactivarHorario(id){
                Swal.fire({
                 title: 'Desactivar el horario?',
@@ -366,6 +405,7 @@
                 this.errorHorario=0;
                 this.errorMostrarMsjHorario =[];
 
+                if (!this.idlocal) {this.e_idlocal = true; this.errorMostrarMsjHorario.push('idlocal');}else{this.e_idlocal = false}
                 if (!this.hora_ini) {this.e_hora_ini = true; this.errorMostrarMsjHorario.push('hora_ini');}else{this.e_hora_ini = false}
                 if (!this.hora_fin) {this.e_hora_fin = true; this.errorMostrarMsjHorario.push('hora_fin');}else{this.e_hora_fin = false}
                 if (this.periodo == 0) {this.e_periodo = true; this.errorMostrarMsjHorario.push('periodo');}else{this.e_periodo = false}
@@ -380,10 +420,12 @@
 
                 this.errorHorario=0;
                 this.errorMostrarMsjHorario = [];
+                this.e_idlocal = false;
                 this.e_hora_ini = false;
                 this.e_hora_fin = false;
                 this.e_periodo = false;
                 
+                this.idlocal= 0;
                 this.hora_ini= '00:00';
                 this.hora_fin='00:00';
                 this.periodo=0;
@@ -398,6 +440,7 @@
                             {
                                 this.modal = 1;
                                 this.tituloModal = 'Registrar Horario';
+                                this.idlocal= 0;
                                 this.hora_ini= '00:00';
                                 this.hora_fin = '00:00';
                                 this.periodo = 0;
@@ -411,27 +454,17 @@
                                 this.tituloModal='Actualizar Horario';
                                 this.tipoAccion=2;
                                 this.horario_id=data['id'];
+                                this.idlocal = data['idlocal'];
                                 this.hora_ini = data['hora_ini'];
                                 this.hora_fin = data['hora_fin'];
                                 this.periodo = data['periodo'];
                                 this.descripcion= data['descripcion'];
                                 break;
-                            }
-                            case 'eliminar':
-                            {
-                                this.modal=1;
-                                this.tituloModal='Eliminar Horario';
-                                this.tipoAccion=3;
-                                this.horario_id=data['id'];
-                                this.hora_ini = data['hora_ini'];
-                                this.hora_fin = data['hora_fin'];
-                                this.periodo = data['periodo'];
-                                this.descripcion= data['descripcion'];
-                                break;
-                            }
+                            }                            
                         }
                     }
                 }
+                this.selectLocal();
             },
             ceroBusqueda(){
                 this.buscar='';

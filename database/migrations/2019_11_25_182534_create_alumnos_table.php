@@ -16,7 +16,6 @@ class CreateAlumnosTable extends Migration
         Schema::create('alumnos', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->foreign('id')->references('id')->on('personas')->onDelete('cascade');
-            $table->string('cod_socio',20);
             $table->string('sexo',2)->nullable();
             $table->string('estado_civil',2)->nullable();
             $table->string('hijos',1)->nullable();
@@ -34,10 +33,7 @@ class CreateAlumnosTable extends Migration
             $table->string('estatura', 3)->nullable();
             $table->string('nivel_actividad', 2)->nullable();
             $table->string('tipo_actividad', 2)->nullable();
-            $table->string('objetivo', 2)->nullable(); 
-
-            
-            
+            $table->string('objetivo', 2)->nullable();     
             
         });
     }

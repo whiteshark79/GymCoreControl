@@ -18,7 +18,6 @@ class CreateProfesionesTable extends Migration
             $table->string('nombre', 60)->nullable();
             $table->string('descripcion', 200)->nullable();
             $table->boolean('condicion')->default(1);
-            $table->timestamps();
         });
     }
 

@@ -133,14 +133,7 @@ class ServicioController extends Controller
         $servicio->descripcion = $request->descripcion;
         $servicio->condicion = '1';
         $servicio->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $servicio = Servicio::findOrFail($request->id);        
-        $servicio->delete();
-    }
+    }    
 
     public function desactivar(Request $request)
     {

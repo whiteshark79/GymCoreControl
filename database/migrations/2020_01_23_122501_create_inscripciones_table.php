@@ -30,7 +30,7 @@ class CreateInscripcionesTable extends Migration
             $table->decimal('impuesto', 8, 2);
             $table->decimal('total', 11, 2);
             $table->string('observaciones', 50)->nullable();
-            $table->string('estado', 20);
+            $table->string('estado', 15);
             $table->timestamps();
         });
     }

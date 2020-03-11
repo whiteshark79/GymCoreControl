@@ -87,7 +87,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 abbr[title],
@@ -4176,10 +4176,12 @@ input[type="button"].btn-block {
   border-radius: 0.25rem;
 }
 
+/***tabs***/
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #ffffff;
   background-color: #017BA0;
+  font-weight: bolder;
 }
 
 .nav-fill .nav-item {
@@ -11735,14 +11737,14 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 .nav-sidebar > .nav-item .nav-icon {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-right: .2rem;
   text-align: center;
   width: 1.6rem;
 }
 
 .nav-sidebar > .nav-item .nav-icon.fa, .nav-sidebar > .nav-item .nav-icon.fas, .nav-sidebar > .nav-item .nav-icon.far, .nav-sidebar > .nav-item .nav-icon.fab, .nav-sidebar > .nav-item .nav-icon.glyphicon, .nav-sidebar > .nav-item .nav-icon.ion {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .nav-sidebar > .nav-item .float-right {

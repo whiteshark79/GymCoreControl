@@ -5,9 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Empresa extends Model
-{
-    protected $table = 'empresa';
-    protected $fillable =['nombre','slogan','direccion','telefono','email','web'];
+{    
+    protected $fillable =['ruc','razon_social','nombre','slogan',
+    'email','web','nombre_propietario','celular_propietario','condicion'];
 
-    public $timestamps = false;
+    public $timestamps = false; 
+
+    public function locales(){
+        return $this->hasMany('App\Local');
+    } 
 }

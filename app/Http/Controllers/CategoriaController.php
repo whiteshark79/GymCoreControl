@@ -73,14 +73,7 @@ class CategoriaController extends Controller
         $categoria->descripcion = $request->descripcion;
         $categoria->condicion = '1';
         $categoria->save();
-    }
-
-    public function destroy(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
-        $categoria = Categoria::findOrFail($request->id);        
-        $categoria->delete();
-    }
+    }    
 
     public function desactivar(Request $request)
     {

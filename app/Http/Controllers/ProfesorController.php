@@ -24,19 +24,21 @@ class ProfesorController extends Controller
         $ascdesc = $request->ascdesc;
          
         if ($buscar==''){
-            $personas = Profesor::join('personas','profesores.id','=','personas.id')
-            ->join('especialidades','profesores.idespecialidad','=','especialidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
-            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-            'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre')
+            $personas = Profesor::join('users','profesores.id','=','users.id')
+            ->join('personas','profesores.id','=','personas.id')
+            ->join('especialidades','profesores.idespecialidad','=','especialidades.id')            
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre as nombre',
+            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
+            'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre as especialidad')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
-            $personas = Profesor::join('personas','profesores.id','=','personas.id')
-            ->join('especialidades','profesores.idespecialidad','=','especialidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
-            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-            'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre')           
+            $personas = Profesor::join('users','profesores.id','=','users.id')
+            ->join('personas','profesores.id','=','personas.id')
+            ->join('especialidades','profesores.idespecialidad','=','especialidades.id')            
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre as nombre',
+            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
+            'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre as especialidad')          
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -94,8 +96,8 @@ class ProfesorController extends Controller
 
             $rol = DB::table('roles')->where('nombre', 'like', '%Profesor%')->first();
 
-            $user = new User();
-            $user->usuario = $request->num_documento;
+            $user = new User(); 
+            $user->usuario = $request->usuario;
             $user->password = bcrypt( $request->num_documento);
             $user->condicion = '1';
             $user->idrol = $rol->id;
@@ -109,6 +111,7 @@ class ProfesorController extends Controller
         }
 
     }
+    
     public function update(Request $request)
     {
         if (!$request->ajax()) return redirect('/');

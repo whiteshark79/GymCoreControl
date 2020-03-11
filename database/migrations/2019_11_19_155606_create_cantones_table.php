@@ -17,10 +17,10 @@ class CreateCantonesTable extends Migration
             $table->increments('id');
             $table->string('nombre', 50);
             $table->integer('idprovincia')->unsigned();
-            $table->boolean('condicion')->default(1);
-            $table->timestamps();
-
             $table->foreign('idprovincia')->references('id')->on('provincias');
+            $table->boolean('condicion')->default(1);
+
+            
         });
     }
 

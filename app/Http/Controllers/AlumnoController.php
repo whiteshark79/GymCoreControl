@@ -24,23 +24,25 @@ class AlumnoController extends Controller
         
         
         if ($buscar==''){
-            $personas = Alumno::join('personas','alumnos.id','=','personas.id')
+            $personas = Alumno::join('users','alumnos.id','=','users.id')
+            ->join('personas','alumnos.id','=','personas.id')
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre', 'users.usuario',
             'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-            'alumnos.cod_socio', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
+            'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
             'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
             'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
-            $personas = Alumno::join('personas','alumnos.id','=','personas.id')
+            $personas = Alumno::join('users','alumnos.id','=','users.id')
+            ->join('personas','alumnos.id','=','personas.id')
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre', 'users.usuario',
             'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-            'alumnos.cod_socio', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
+            'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
             'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
             'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')           
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
@@ -83,7 +85,7 @@ class AlumnoController extends Controller
         ->join('universidades','alumnos.iduniversidad','=','universidades.id')
         ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
         'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-        'alumnos.cod_socio', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
+        'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
         'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
         'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')           
         ->where('personas.id',$id)->get();
@@ -109,8 +111,7 @@ class AlumnoController extends Controller
             $persona->perfil = 'Alumno';
             $persona->save();
  
-            $alumno = new Alumno();
-            $alumno->cod_socio = $request->cod_socio;        
+            $alumno = new Alumno();     
             $alumno->sexo = $request->sexo;
             $alumno->estado_civil = $request->estado_civil;
             $alumno->hijos = $request->hijos;
@@ -128,12 +129,12 @@ class AlumnoController extends Controller
             $alumno->tipo_actividad = $request->tipo_actividad;
             $alumno->objetivo = $request->objetivo;            
             $alumno->id = $persona->id;
-            $alumno->save();
+            $alumno->save(); 
 
             $rol = DB::table('roles')->where('nombre', 'like', '%Alumno%')->first();
 
-            $user = new User();
-            $user->usuario = $request->cod_socio;
+            $user = new User(); 
+            $user->usuario = $request->usuario;
             $user->password = bcrypt( $request->num_documento);
             $user->condicion = '1';
             $user->idrol = $rol->id;
@@ -165,9 +166,8 @@ class AlumnoController extends Controller
             $persona->celular = $request->celular;
             $persona->email = $request->email;
             $persona->perfil = 'Alumno';
-            $persona->save(); 
-            
-            $alumno->cod_socio = $request->cod_socio;        
+            $persona->save();             
+                
             $alumno->sexo = $request->sexo;
             $alumno->estado_civil = $request->estado_civil;
             $alumno->hijos = $request->hijos;

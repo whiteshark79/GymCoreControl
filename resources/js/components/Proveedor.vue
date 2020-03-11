@@ -73,14 +73,7 @@
                                             <td v-text="persona.email"></td>
                                             <td v-text="persona.nombre_contacto"></td>
                                             <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                <!-- <a class="btn btn-sm btn-default" @click="abrirModal('persona','eliminar',persona)"><i class="far fa-trash-alt" title="Eliminar"></i></a>                                    
-                                                <template v-if="proveedor.condicion">
-                                                    <a class="btn btn-sm btn-default" @click="desactivarCategoria(proveedor.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
-                                                </template>
-                                                <template v-else>
-                                                    <a class="btn btn-sm btn-default" @click="activarCategoria(proveedor.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
-                                                </template> -->
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="fas fa-edit" title="Editar"></i></a>                                                
                                             </td>
                                         </tr>
                                     </tbody>
@@ -130,12 +123,12 @@
                                         <select v-model="tipo_documento" class="form-control col-2">
                                             <option value="0" disabled>--Doc.--</option>
                                             <option value="C">Cédula</option>
-                                            <option value="R">RUC</option>
-                                            <option value="P">Pasaporte</option>                                            
+                                            <option value="R">RUC</option>                                          
                                         </select>
-                                        <input type="number" v-model="num_documento" class="form-control col-4" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="No. de documento">
+                                        <input type="number" v-model="num_documento" class="form-control col-4" v-bind:class="{ 'is-invalid': e_num_documento }" @change="existePersonaId()" placeholder="No. de documento">
                                         <input type="text" maxlength="60" v-model="nombre" class="form-control col-6" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Razón Social">
                                     </div>
+                                    <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
                                 </div>                                                                                
                             </div>
                             
@@ -157,8 +150,9 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" v-model="email" class="form-control" placeholder="Email">
+                                        <input type="email" v-model="email" class="form-control" @change="existePersonaEmail()" placeholder="Email">
                                     </div>
+                                    <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>
                                 </div>                                           
                             </div>
                             <div class="form-row">
@@ -188,7 +182,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" @click="cerrarModal()">Cerrar</button>
-                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarPersona()">Guardar</button>                        
+                        <button type="button" v-if="tipoAccion==1" class="btn btn-info btn-sm" @click="registrarPersona()" :disabled="stsPersona!=''">Guardar</button>                        
                         <button type="button" v-if="tipoAccion==2" class="btn btn-success btn-sm" @click="actualizarPersona()">Actualizar</button>
                     </div>
                 </div>
@@ -215,6 +209,11 @@
                 celular_contacto : '',
                 email_contacto : '',
                 arrayPersona : [],
+
+                stsPersona : '',
+                stsPersonaId : '',
+                stsPersonaEmail : '',
+
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -293,6 +292,43 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarPersona(page,buscar,criterio,paginado,ordenado,ascdesc);
             },
+            existePersonaId(){
+                let me=this;
+                
+                var url= '/cliente/selectPersonaId?num_documento='+this.num_documento;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsPersonaId = respuesta.stsPersonaId;
+                    me.habilitarGuardar();                     
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                }); 
+            },
+            existePersonaEmail(){
+                let me=this;
+                
+                var url= '/cliente/selectPersonaEmail?email='+this.email;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;
+                    me.stsPersonaEmail = respuesta.stsPersonaEmail; 
+                    me.habilitarGuardar();                    
+                })                
+                .catch(function (error) {
+                    console.log(error);
+                });          
+            },
+            habilitarGuardar(){
+                let me=this;
+                if(me.stsPersonaId || me.stsPersonaEmail)
+                {
+                    me.stsPersona=1;
+                }else{
+                    me.stsPersona='';
+                    }
+            },
             registrarPersona(){
                if (this.validarPersona()){ return; }
                 let me = this;
@@ -356,6 +392,11 @@
 
                 this.errorPersona=0;
                 this.errorMostrarMsjPersona = [];
+
+                this.stsPersona = '';
+                this.stsPersonaId = '';
+                this.stsPersonaEmail = '';
+
                 this.e_num_documento = false;
                 this.e_nombre = false;
                 this.e_direccion = false;
@@ -417,6 +458,7 @@
             },
             ceroBusqueda(){
                 this.buscar='';
+                this.criterio='nombre';
                 this.listarPersona(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },
