@@ -10,74 +10,76 @@
                         </div> 
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
-                                <div class="input-group input-group-sm col-10">                                
-                                    <select class="form-control col-3" v-model="criterio" @onchange="ceroBusqueda();">
-                                        <option value="fecha_ini">Fecha</option>
-                                        <option value="idalumno">Alumno</option>
-                                        <option value="idmodalidad">Modalidad</option>  
-                                        <option value="fecha_fin">Estado</option>                                    
-                                    </select>                                    
-                                    <template v-if="criterio=='fecha_ini'">
-                                        <input type="date" v-model="buscar" class="form-control col-4">
-                                    </template>
-                                    <template v-if="criterio=='idalumno'">
-                                        <div class="col-md-7">                                                         
-                                            <v-select
-                                            id="buscar"
-                                            @search="selectAlumno"
-                                            label="nombre"
-                                            :options="arrayAlumno"
-                                            placeholder="Buscar Alumnos..."
-                                            @input="getDatosAlumno"                                    
-                                            ></v-select>
-                                        </div> 
-                                    </template>
-                                    <template v-if="criterio=='idmodalidad'">
-                                        <select class="form-control col-5" v-model="buscar">
-                                            <option value="" disabled>--Seleccione--</option>
-                                            <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
+                                <div class="row col-sm-12 col-md-12">
+                                    <div class="input-group input-group-sm col-sm-10 col-md-11">                                
+                                        <select class="form-control col-sm-3 col-md-3" v-model="criterio" @onchange="ceroBusqueda();">
+                                            <option value="fecha_ini">Fecha</option>
+                                            <option value="idalumno">Alumno</option>
+                                            <option value="idmodalidad">Modalidad</option>  
+                                            <option value="fecha_fin">Estado</option>                                    
+                                        </select>                                    
+                                        <template v-if="criterio=='fecha_ini'">
+                                            <input type="date" v-model="buscar" class="form-control col-sm-5 col-md-4">
+                                        </template>
+                                        <template v-if="criterio=='idalumno'">
+                                            <div class="col-sm-6 col-md-5">                                                         
+                                                <v-select
+                                                id="buscar"
+                                                @search="selectAlumno"
+                                                label="nombre"
+                                                :options="arrayAlumno"
+                                                placeholder="Buscar Alumnos..."
+                                                @input="getDatosAlumno"                                    
+                                                ></v-select>
+                                            </div> 
+                                        </template>
+                                        <template v-if="criterio=='idmodalidad'">
+                                            <select class="form-control col-sm-5 col-md-4" v-model="buscar">
+                                                <option value="" disabled>--Seleccione--</option>
+                                                <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
+                                            </select>
+                                        </template>
+                                        <template v-if="criterio=='fecha_fin'">
+                                            <select class="form-control col-sm-5 col-md-5" v-model="buscar" @onchange="ceroBusqueda();">
+                                                <option value="" disabled>--Seleccione--</option>
+                                                <option value="0">Caducado</option>                          
+                                            </select>
+                                        </template>                                                                      
+                                        <button type="submit" @click="listarInscripcionAlumno(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                                    </div>                      
+                                    <div class="input-group input-group-sm col-sm-2 col-md-1">                                     
+                                        <select class="form-control col-sm-12 col-md-12" v-model="paginado" @change="listarInscripcionAlumno(1,buscar,criterio,paginado)">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
                                         </select>
-                                    </template>
-                                    <template v-if="criterio=='fecha_fin'">
-                                        <select class="form-control col-4" v-model="buscar" @onchange="ceroBusqueda();">
-                                        <option value="" disabled>--Seleccione--</option>
-                                        <option value="0">Caducado</option>                          
-                                    </select>
-                                    </template>                                                                      
-                                    <button type="submit" @click="listarInscripcionAlumno(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
-                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
-                                </div>                      
-                                <div class="input-group input-group-sm col-2">                                     
-                                    <select class="form-control" v-model="paginado" @change="listarInscripcionAlumno(1,buscar,criterio,paginado)">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                    </select>
-                                </div> 
+                                    </div> 
+                                </div>
                             </div>
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">
-                                            <th width="34%">NOMBRE</th> 
-                                            <th width="21%">MODALIDAD</th>                                                                                       
-                                            <th width="15%">FECHA</th>
-                                            <th width="15%">FECHA FIN</th>
-                                            <th width="10%">ESTADO</th>
-                                            <th width="5%">OPC</th>
+                                            <th scope="col" width="34%">NOMBRE</th> 
+                                            <th scope="col" width="21%">MODALIDAD</th>                                                                                       
+                                            <th scope="col" width="15%">REGISTRO</th>
+                                            <th scope="col" width="15%">CADUCA</th>
+                                            <th scope="col" width="10%">ESTADO</th>
+                                            <th scope="col" width="5%">OPC</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayInscripcionAlumno.length">
                                         <tr v-for="inscripcion in arrayInscripcionAlumno" :key="inscripcion.id">   
-                                            <td v-text="inscripcion.alumno"></td>
-                                            <td v-text="inscripcion.modalidad"></td>
-                                            <td align="center" v-text="inscripcion.fecha_ini"></td>                                  
-                                            <td align="center" v-text="inscripcion.fecha_fin"></td>
-                                            <td align="center">
+                                            <td v-text="inscripcion.alumno" scope="row" data-label="NOMBRE"></td>
+                                            <td v-text="inscripcion.modalidad" data-label="MODALIDAD"></td>
+                                            <td align="center" v-text="inscripcion.fecha_ini" data-label="REGISTRO"></td>                                  
+                                            <td align="center" v-text="inscripcion.fecha_fin" data-label="CADUCA"></td>
+                                            <td align="center" data-label="ESTADO">
                                                 <div v-if="inscripcion.fecha_fin <= hoyFecha() "><span class="badge badge-danger">Caducado</span></div>
                                                 <div v-else><span class="badge badge-success">Activo</span></div>                                    
                                             </td>
-                                            <td align="center">
+                                            <td align="center" data-label="OPC">
                                                 <a class="btn btn-sm btn-default" @click="listarInscripcionDetalleAlumno(inscripcion.id)"><i class="far fa-calendar-check"></i></a>  
                                             </td>                                
                                         </tr>
@@ -115,57 +117,59 @@
                         </div>  
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
-                                <div class="input-group input-group-sm col-10">                                
-                                    <select class="form-control col-3" v-model="criterio_" @onchange="ceroBusqueda_();">
-                                        <option value="fecha_hora">Fecha</option>
-                                        <option value="idcliente">Alumno</option>                                      
-                                    </select>                                    
-                                    <template v-if="criterio_=='fecha_hora'">
-                                        <input type="date" v-model="buscar_" class="form-control col-4">
-                                    </template>
-                                    <template v-if="criterio_=='idcliente'">
-                                        <div class="col-md-7">                                                         
-                                        <v-select
-                                            id="buscar_"
-                                            @search="selectCliente"
-                                            label="nombre"
-                                            :options="arrayCliente"
-                                            placeholder="Buscar Cliente..."
-                                            @input="getDatosCliente"                                    
-                                        ></v-select>
-                                        </div>
-                                    </template>                                                                          
-                                    <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
-                                    <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
-                                </div>                      
-                                <div class="input-group input-group-sm col-2">                                     
-                                    <select class="form-control" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    </select>
-                                </div> 
+                                <div class="row col-sm-12 col-md-12">
+                                    <div class="input-group input-group-sm col-sm-10 col-md-11">                                
+                                        <select class="form-control col-sm-3 col-md-3" v-model="criterio_" @onchange="ceroBusqueda_();">
+                                            <option value="fecha_hora">Fecha</option>
+                                            <option value="idcliente">Alumno</option>                                      
+                                        </select>                                    
+                                        <template v-if="criterio_=='fecha_hora'">
+                                            <input type="date" v-model="buscar_" class="form-control col-sm-5 col-md-4">
+                                        </template>
+                                        <template v-if="criterio_=='idcliente'">
+                                            <div class="col-sm-6 col-md-5">                                                         
+                                            <v-select
+                                                id="buscar_"
+                                                @search="selectCliente"
+                                                label="nombre"
+                                                :options="arrayCliente"
+                                                placeholder="Buscar Cliente..."
+                                                @input="getDatosCliente"                                    
+                                            ></v-select>
+                                            </div>
+                                        </template>                                                                          
+                                        <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
+                                        <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
+                                    </div>                      
+                                    <div class="input-group input-group-sm col-sm-2 col-md-1">                                     
+                                        <select class="form-control col-sm-12 col-md-12" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div> 
+                                </div>
                             </div>
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">                                
-                                            <th width="34%">NOMBRE</th>                                                                                       
-                                            <th width="28%">FECHA</th>
-                                            <th width="11%">TOTAL</th>
-                                            <th width="11%">ABONO</th>
-                                            <th width="11%">SALDO</th>
-                                            <th width="5%">OPC</th>
+                                            <th scope="col" width="34%">NOMBRE</th>                                                                                       
+                                            <th scope="col" width="28%">FECHA</th>
+                                            <th scope="col" width="11%">TOTAL</th>
+                                            <th scope="col" width="11%">ABONO</th>
+                                            <th scope="col" width="11%">SALDO</th>
+                                            <th scope="col" width="5%">OPC</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayVentaCliente.length">
                                         <tr v-for="venta in arrayVentaCliente" :key="venta.id">
-                                            <td v-text="venta.cliente"></td>
-                                            <td align="center"> {{venta.fecha_hora}}</td>                                  
-                                            <td align="center">$ {{venta.total}}</td>
-                                            <td align="center">$ {{venta.abono}}</td>
-                                            <td align="center">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>
-                                            <td align="center">
+                                            <td v-text="venta.cliente" scope="row" data-label="NOMBRE"></td>
+                                            <td align="center" data-label="FECHA"> {{venta.fecha_hora}}</td>                                  
+                                            <td align="center" data-label="TOTAL">$ {{venta.total}}</td>
+                                            <td align="center" data-label="ABONO">$ {{venta.abono}}</td>
+                                            <td align="center" data-label="SALDO">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>
+                                            <td align="center" data-label="NOMBRE">
                                                 <a class="btn btn-sm btn-default" @click="listarVentaDetalleCliente(venta.id, venta.total, venta.abono)"><i class="far fa-credit-card"></i></a>  
                                             </td>                                                                    
                                         </tr>
@@ -557,7 +561,6 @@
         me.buscar = val1.id;
       },
       ceroBusqueda(){
-        this.criterio='fecha_ini';
         this.buscar='';
         this.listarInscripcionAlumno(1,this.buscar,this.criterio,this.paginado);
       },

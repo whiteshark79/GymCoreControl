@@ -345,8 +345,6 @@
         //Envia la petición para visualizar la data de esa página
         me.listarInscripcionesAlumnoId(page,buscar,criterio,paginado);
       },
-
-
       listarVentasCabeceraAlumno(page_,buscar_,criterio_,paginado_){
         let me=this;
         var url= '/venta/listarVentasCabeceraAlumno?page='+page_+'&buscar='+buscar_+'&criterio='+criterio_+'&paginado='+paginado_;

@@ -18,47 +18,48 @@
                         <template v-if="listado==1">
                             <div class="card-body">
                                 <div class="form-group row justify-content-between">
-                                    <div class="input-group input-group-sm col-7">                                
-                                        <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
-                                            <option value="idproveedor">Proveedor</option>
-                                            <option value="fecha_hora">Fecha</option>
-                                            <option value="tipo_comprobante">Tipo Doc.</option>
-                                            <option value="num_comprobante">Núm. Doc.</option>                                           
-                                        </select>
-                                        <template v-if="criterio=='idproveedor'">
-                                            <div class="col-md-4">                                                        
-                                                <v-select
-                                                    id="buscar"
-                                                    @search="selectProveedor"
-                                                    label="nombre"
-                                                    :options="arrayProveedor"
-                                                    placeholder="Buscar Proveedores..."
-                                                    @input="getDatosProveedor2"                                    
-                                                ></v-select>
-                                            </div>
-                                        </template>
-                                        <template v-else-if="criterio=='fecha_hora'">
-                                            <input type="date" v-model="buscar" class="form-control col-4">
-                                        </template>
-                                        <template v-else-if="criterio=='tipo_comprobante'">
-                                            <select class="form-control form-control-sm col-4" v-model="buscar">
-                                                <option value="FACTURA" selected>Factura</option>
-                                                <option value="NOTA">Nota</option>                                                
+                                    <div class="row col-sm-12 col-md-12">                                    
+                                        <div class="input-group input-group-sm col-sm-11 col-md-11">                                
+                                            <select class="form-control col-sm-3 col-md-2" v-model="criterio" @change="ceroBusqueda();">
+                                                <option value="idproveedor">Proveedor</option>
+                                                <option value="fecha_hora">Fecha</option>
+                                                <option value="tipo_comprobante">Tipo Doc.</option>
+                                                <option value="num_comprobante">Núm. Doc.</option>                                           
                                             </select>
-                                        </template>
-                                        <template v-else>
-                                            <input type="number" v-model="buscar" @keyup.enter="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="No del comprobante">
-                                        </template>                                       
-                                        <button type="submit" @click="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button> 
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                
-                                    </div>
-                                    <div class="col-4"></div>
-                                    <div class="input-group input-group-sm col-1">                                     
-                                        <select class="form-control" v-model="paginado" @change="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        </select>
+                                            <template v-if="criterio=='idproveedor'">
+                                                <div class="col-sm-3 col-md-3">                                                        
+                                                    <v-select
+                                                        id="buscar"
+                                                        @search="selectProveedor"
+                                                        label="nombre"
+                                                        :options="arrayProveedor"
+                                                        placeholder="Buscar Proveedores..."
+                                                        @input="getDatosProveedor2"                                    
+                                                    ></v-select>
+                                                </div>
+                                            </template>
+                                            <template v-else-if="criterio=='fecha_hora'">
+                                                <input type="date" v-model="buscar" class="form-control col-sm-3 col-md-3">
+                                            </template>
+                                            <template v-else-if="criterio=='tipo_comprobante'">
+                                                <select class="form-control form-control-sm col-sm-3 col-md-3" v-model="buscar">
+                                                    <option value="FACTURA" selected>Factura</option>
+                                                    <option value="NOTA">Nota</option>                                                
+                                                </select>
+                                            </template>
+                                            <template v-else>
+                                                <input type="number" v-model="buscar" @keyup.enter="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-sm-3 col-md-3" placeholder="No del comprobante">
+                                            </template>                                       
+                                            <button type="submit" @click="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button> 
+                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                
+                                        </div>                                    
+                                        <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
+                                            <select class="form-control col-sm-6 col-md-12" v-model="paginado" @change="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -66,7 +67,7 @@
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
-                                                <th width="12%">FECHA
+                                                <th scope="col" width="12%">FECHA
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'asc') || (ordenado === 'fecha_hora' && ascdesc === 'desc') ">
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -74,7 +75,7 @@
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'fecha_hora','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="22%">PROVEEDOR
+                                                <th scope="col" width="22%">PROVEEDOR
                                                     <template v-if="(ordenado !== 'idproveedor' && ascdesc === 'asc') || (ordenado === 'idproveedor' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'idproveedor','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -82,11 +83,11 @@
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'idproveedor','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="13%">DOCUMENTO</th>                                         
-                                                <th width="7%">SUBTOTAL</th>
-                                                <th width="7%">IVA</th>
-                                                <th width="7%">TOTAL</th>
-                                                <th width="7%">ABONO
+                                                <th scope="col" width="13%">DOCUMENTO</th>                                         
+                                                <th scope="col" width="7%">SUBTOTAL</th>
+                                                <th scope="col" width="7%">IVA</th>
+                                                <th scope="col" width="7%">TOTAL</th>
+                                                <th scope="col" width="7%">ABONO
                                                     <template v-if="(ordenado !== 'abono' && ascdesc === 'asc') || (ordenado === 'abono' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -94,8 +95,8 @@
                                                         <a href="#" @click="listarVenta(1,buscar,criterio,paginado,'abono','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="7%">SALDO</th>                                        
-                                                <th width="8%">ESTADO
+                                                <th scope="col" width="7%">SALDO</th>                                        
+                                                <th scope="col" width="8%">ESTADO
                                                     <template v-if="(ordenado !== 'estado' && ascdesc === 'asc') || (ordenado === 'estado' && ascdesc === 'desc')">
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -103,25 +104,25 @@
                                                         <a href="#" @click="listarIngreso(1,buscar,criterio,paginado,'estado','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>                                                                                    
-                                                <th width="10%">ACCIONES</th>
+                                                <th scope="col" width="10%">ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody v-if="arrayIngreso.length">
                                             <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
-                                                <td v-text="ingreso.fecha_hora"></td>
-                                                <td>{{ingreso.nombre}}</td>                        
-                                                <td><span class="text-mini">{{ingreso.tipo_comprobante}} </span> {{ ingreso.serie_comprobante ? ingreso.serie_comprobante+'-'+ingreso.num_comprobante : '000-000' }}</td>
-                                                <td align="right">$ {{ (ingreso.total-ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
-                                                <td align="right">$ {{ (ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
-                                                <td align="right">$ {{ ingreso.total }}</td>
-                                                <td align="right">$ {{ ingreso.abono }}</td>
-                                                <td align="right">$ {{ (ingreso.total-ingreso.abono).toFixed(2) }}</td>
-                                                <td align="center"> 
+                                                <td v-text="ingreso.fecha_hora" scope="row" data-label="FECHA"></td>
+                                                <td data-label="PROVEEDOR">{{ingreso.nombre}}</td>                        
+                                                <td data-label="DOCUMENTO"><span class="text-mini">{{ingreso.tipo_comprobante}} </span> {{ ingreso.serie_comprobante ? ingreso.serie_comprobante+'-'+ingreso.num_comprobante : '000-000' }}</td>
+                                                <td align="right" data-label="SUBTOTAL">$ {{ (ingreso.total-ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
+                                                <td align="right" data-label="IVA">$ {{ (ingreso.impuesto*ingreso.total).toFixed(2) }}</td>
+                                                <td align="right" data-label="TOTAL">$ {{ ingreso.total }}</td>
+                                                <td align="right" data-label="ABONO">$ {{ ingreso.abono }}</td>
+                                                <td align="right" data-label="SALDO">$ {{ (ingreso.total-ingreso.abono).toFixed(2) }}</td>
+                                                <td align="center" data-label="ESTADO"> 
                                                     <div v-if="ingreso.estado=='Cancelado'"><span class="badge badge-success">{{ingreso.estado}}</span></div>
                                                     <div v-else-if="ingreso.estado=='Debe'"><span class="badge badge-warning">{{ingreso.estado}}</span></div>  
                                                     <div v-else><span class="badge badge-danger">{{ingreso.estado}}</span></div>                                    
                                                 </td>
-                                                <td align="center">
+                                                <td align="center" data-label="ACCIONES">
                                                     <a class="btn btn-sm btn-default" @click="verIngreso(ingreso.id)"><i class="far fa-eye"></i></a>                                   
                                                     <template v-if="ingreso.estado=='Registrado'">
                                                         <a class="btn btn-sm btn-default" @click="desactivarIngreso(ingreso.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
@@ -763,6 +764,14 @@
 
                 }).then(function (response) {
                     me.listado=1;
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro creado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarIngreso(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc); 
                     me.idproveedor=0;
                     me.tipo_comprobante='FACTURA';
@@ -883,6 +892,7 @@
                Swal.fire({
                 title: 'Anular el ingreso?',
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -907,7 +917,6 @@
             },
             ceroBusqueda(){
                 this.buscar='';
-                this.criterio = 'num_comprobante';
                 this.listarIngreso(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },

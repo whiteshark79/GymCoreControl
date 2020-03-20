@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
  
 class Alumno extends Model 
 {
-    protected $fillable = ['id','sexo','estado_civil','hijos','sector','idprofesion','sit_laboral','empresa','cargo',
+    protected $fillable = ['id','sexo','estado_civil','hijos','sector','idprofesion','idlocal','sit_laboral','empresa','cargo',
         'estudiante','iduniversidad','edad','peso','estatura','nivel_actividad','tipo_actividad','objetivo'];
 
     public $timestamps = false;
@@ -21,6 +21,10 @@ class Alumno extends Model
 
     public function universidad(){
         return $this->belongsTo('App\Universidad');
+    }
+
+    public function local(){
+        return $this->belongsTo('App\Local');
     }
      
 }

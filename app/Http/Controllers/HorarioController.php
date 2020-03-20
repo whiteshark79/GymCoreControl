@@ -49,7 +49,17 @@ class HorarioController extends Controller
     }
 
     public function selectHorario(Request $request){
-        if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');        
+
+        $horarios = Horario::where('condicion','=','1')
+        ->select('id',DB::raw('DATE_FORMAT(horarios.hora_ini,"%H:%i") as hora_ini'),
+        DB::raw('DATE_FORMAT(horarios.hora_fin,"%H:%i") as hora_fin'), 'periodo')
+        ->orderBy('hora_ini', 'asc')->get();
+        return ['horarios' => $horarios];
+    }
+
+    public function selectHorarioId(Request $request){
+        //if (!$request->ajax()) return redirect('/');
 
         $idlocal = $request->idlocal;
 

@@ -20,6 +20,8 @@ class CreateAlumnosTable extends Migration
             $table->string('estado_civil',2)->nullable();
             $table->string('hijos',1)->nullable();
             $table->string('sector', 1)->nullable();
+            $table->integer('idlocal')->unsigned();
+            $table->foreign('idlocal')->references('id')->on('locales');
             $table->integer('idprofesion')->unsigned();
             $table->foreign('idprofesion')->references('id')->on('profesiones');
             $table->string('sit_laboral', 1)->nullable();

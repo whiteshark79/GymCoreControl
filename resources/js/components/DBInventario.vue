@@ -26,48 +26,50 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
-                                <div class="input-group input-group-sm col-10">                                
-                                    <select class="form-control col-3 " v-model="criterio"  @onchange="ceroBusqueda();"> 
-                                        <option value="nombre">Articulo</option>
-                                        <option value="fecha_hora">Mes</option>
-                                    </select>
-                                    <template v-if="criterio=='nombre'">
-                                        <input type="text" v-model="buscar" @keyup.enter="listarArticuloVenta(1,buscar,criterio,paginado)" class="form-control col-5" placeholder="Artículo a buscar">
-                                    </template>
-                                    <template v-if="criterio=='fecha_hora'">
-                                        <select class="form-control col-5" v-model="buscar"> 
-                                            <option value="">--Seleccione--</option>                                                              
-                                            <option v-for="mes in arrayMeses" :key="mes.id" :value="mes.id" v-text="mes.nombre"></option>
+                                <div class="row col-sm-12 col-md-12">
+                                    <div class="input-group input-group-sm col-sm-10 col-md-10">                                
+                                        <select class="form-control col-sm-3 col-md-3" v-model="criterio"  @onchange="ceroBusqueda();"> 
+                                            <option value="nombre">Articulo</option>
+                                            <option value="fecha_hora">Mes</option>
                                         </select>
-                                    </template>                          
-                                    
-                                    <button type="submit" @click="listarArticuloVenta(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
-                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                   
-                                </div>
-                                <div class="input-group input-group-sm  col-2">                                     
-                                    <select class="form-control" v-model="paginado" @change="listarArticuloVenta(1,buscar,criterio,paginado)">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    </select>
+                                        <template v-if="criterio=='nombre'">
+                                            <input type="text" v-model="buscar" @keyup.enter="listarArticuloVenta(1,buscar,criterio,paginado)" class="form-control col-sm-5 col-md-4" placeholder="Artículo a buscar">
+                                        </template>
+                                        <template v-if="criterio=='fecha_hora'">
+                                            <select class="form-control col-sm-5 col-md-4" v-model="buscar"> 
+                                                <option value="">--Seleccione--</option>                                                              
+                                                <option v-for="mes in arrayMeses" :key="mes.id" :value="mes.id" v-text="mes.nombre"></option>
+                                            </select>
+                                        </template>                          
+                                        
+                                        <button type="submit" @click="listarArticuloVenta(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                   
+                                    </div>
+                                    <div class="input-group input-group-sm col-sm-2 col-md-2">                                     
+                                        <select class="form-control col-sm-12 col-md-12" v-model="paginado" @change="listarArticuloVenta(1,buscar,criterio,paginado)">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div> 
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar_">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead  class="thead-table"> 
                                         <tr align="center">
-                                            <th width="20%">MES</th>
-                                            <th >ARTICULO</th>
-                                            <th width="10%">SUBTOTAL</th>
-                                            <th width="10%">OPC</th>                                     
+                                            <th scope="col" width="20%">MES</th>
+                                            <th scope="col">ARTICULO</th>
+                                            <th scope="col" width="10%">SUBTOTAL</th>
+                                            <th scope="col" width="10%">OPC</th>                                     
                                         </tr> 
                                     </thead>
                                     <tbody v-if="arrayArticuloVenta.length">
                                         <tr v-for="venta in arrayArticuloVenta" :key="venta.id">
-                                            <td v-text="venta.mes"></td>
-                                            <td v-text="venta.nombre_articulo"></td>
-                                            <td align="right" width="5%">$ {{venta.subtotal}}</td>
-                                            <td align="center">
+                                            <td v-text="venta.mes" scope="row" data-label="MES"></td>
+                                            <td v-text="venta.nombre_articulo" data-label="ARTICULO"></td>
+                                            <td align="right" data-label="SUBTOTAL"><small>$</small> {{venta.subtotal}}</td>
+                                            <td align="center" data-label="OPC">
                                                 <a class="btn btn-sm btn-default" @click="verGraf()"><i class="fas fa-chart-pie" title="Grafico"></i></a>
                                             </td>
                                         </tr>

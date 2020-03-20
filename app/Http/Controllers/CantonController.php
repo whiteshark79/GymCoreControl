@@ -45,7 +45,19 @@ class CantonController extends Controller
     public function selectCanton(Request $request){
         if (!$request->ajax()) return redirect('/');
         $cantones = Canton::where('condicion','=','1')
-        ->select('id','nombre','idprovincia')->orderBy('nombre', 'asc')->get();
+        ->select('id','nombre','idprovincia')
+        ->orderBy('nombre', 'asc')->get();
+        return ['cantones' => $cantones];
+    }
+
+    public function selectCantonId(Request $request){
+        if (!$request->ajax()) return redirect('/');
+
+        $id = $request->id;
+        $cantones = Canton::where('condicion','=','1')
+        ->select('id','nombre','idprovincia')
+        ->where('idprovincia','=',$id)
+        ->orderBy('nombre', 'asc')->get();
         return ['cantones' => $cantones];
     }
     

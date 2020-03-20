@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 use App\Calendario;
 
@@ -10,7 +12,7 @@ class CalendarioController extends Controller
 {
     public function index(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
@@ -74,5 +76,27 @@ class CalendarioController extends Controller
         ->orderBy('detalle_calendarios.id', 'desc')->get();
          
         return ['detalles' => $detalles];
+    }
+
+    public function selectDias(Request $request)
+    {
+        setlocale(LC_ALL, 'es_ES');
+
+        $fecha_ini = $request->fecha_ini;
+        $fecha_fin = $request->fecha_fin;
+        
+        $start = Carbon::create($fecha_ini);
+        $end = Carbon::create($fecha_fin); 
+
+        $cntdias = $start->diffInDays($end);        
+        $dias = [];
+
+        for ($i = 0; $i <= $cntdias; $i++) {            
+            $dias[] = $start->formatLocalized('%A').' '.$start->day;            
+            $start->addDay();
+        }
+
+        //return ['uno' => $dias[0], 'dos' => $dias[1], 'tres' => $dias[2], 'cuatro' => $dias[3],'cinco' => $dias[4],'seis' => $dias[5],'cntdias' => $cntdias];
+        return ['dias' => $dias,'cntdias' => $cntdias];
     }
 }

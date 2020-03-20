@@ -48,7 +48,7 @@ Vue.component('alumno', require('./components/Alumno.vue').default);
 Vue.component('profesor', require('./components/Profesor.vue').default);
 
 Vue.component('perfilalumno', require('./components/PerfilAlumno.vue').default);
-
+Vue.component('perfilprofesor', require('./components/PerfilProfesor.vue').default);
 
 Vue.component('categoria', require('./components/Categoria.vue').default);
 Vue.component('articulo', require('./components/Articulo.vue').default);

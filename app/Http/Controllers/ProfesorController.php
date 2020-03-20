@@ -21,7 +21,7 @@ class ProfesorController extends Controller
         $criterio = $request->criterio;
         $paginado = $request->paginado;
         $ordenado = $request->ordenado;
-        $ascdesc = $request->ascdesc;
+        $ascdesc = $request->ascdesc; 
          
         if ($buscar==''){
             $personas = Profesor::join('users','profesores.id','=','users.id')
@@ -68,6 +68,21 @@ class ProfesorController extends Controller
         ->orderBy('personas.nombre', 'asc')->get();
  
         return ['profesores' => $profesores];
+    } 
+
+    public function selectProfesorId(Request $request){ 
+        if (!$request->ajax()) return redirect('/');
+
+        $id = \Auth::user()->id;
+
+        $personas = Profesor::join('personas','profesores.id','=','personas.id')
+        ->join('especialidades','profesores.idespecialidad','=','especialidades.id')
+        ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre', 'personas.fec_nacimiento',
+        'personas.direccion', 'personas.celular','personas.email','personas.perfil', 'personas.foto', 'profesores.horario', 
+        'profesores.idespecialidad', 'especialidades.nombre as especialidad', 'profesores.sueldo_hora',)           
+        ->where('personas.id',$id)->get();
+ 
+        return ['personas' => $personas];        
     } 
 
     public function store(Request $request)

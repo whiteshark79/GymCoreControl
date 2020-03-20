@@ -14,29 +14,30 @@
 
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
-                                <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
-                                    <option value="nombre">Nombre</option>
-                                    <option value="num_documento">Documento</option>
-                                    </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
-                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
-                                </div>
-                                <div class="col-4"></div>
-                                <div class="input-group input-group-sm col-1">                                     
-                                    <select class="form-control" v-model="paginado" @change="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    </select>
+                                <div class="row col-sm-12 col-md-12">
+                                    <div class="input-group input-group-sm col-sm-11 col-md-11">                                
+                                        <select class="form-control col-sm-3 col-md-2" v-model="criterio" @change="ceroBusqueda();">
+                                            <option value="nombre">Nombre</option>
+                                            <option value="num_documento">Documento</option>
+                                        </select>
+                                        <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-sm-3 col-md-3" placeholder="Texto a buscar">
+                                        <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                    </div>
+                                    <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
+                                        <select class="form-control col-sm-6 col-md-12" v-model="paginado" @change="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>  
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">
-                                            <th width="10%">DOC
+                                            <th scope="col" width="10%">DOC
                                                 <template v-if="(ordenado !== 'num_documento' && ascdesc === 'asc') || (ordenado === 'num_documento' && ascdesc === 'desc') ">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -44,7 +45,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="50%">NOMBRE
+                                            <th scope="col" width="50%">NOMBRE
                                                 <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -52,9 +53,9 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                                                                    
-                                            <th width="8%">USUARIO</th>
-                                            <th width="10%">ROL</th>                                            
-                                            <th width="10%">ESTADO
+                                            <th scope="col" width="8%">USUARIO</th>
+                                            <th scope="col" width="10%">ROL</th>                                            
+                                            <th scope="col" width="10%">ESTADO
                                                 <template v-if="(ordenado !== 'condicion' && ascdesc === 'asc') || (ordenado === 'condicion' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'condicion','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -62,7 +63,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'condicion','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                                                                    
-                                            <th width="10%">ACCIONES</th>
+                                            <th scope="col" width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayPersona.length">
@@ -146,11 +147,20 @@
                                 </div>                                                
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-7">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
                                         <input type="text" maxlength="60" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
                                     </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
+                                        <select class="form-control" v-bind:class="{ 'is-invalid': e_idrol }" v-model="idrol">
+                                            <option value="0" disabled>--Rol--</option>
+                                            <option v-for="rol in arrayRol" :key="rol.id" :value="rol.id" v-text="rol.nombre"></option>
+                                        </select>
+                                    </div>                                        
                                 </div>                                                                                                        
                             </div>                                                
                             <div class="form-row">
@@ -176,28 +186,19 @@
                                 </div> 
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         <input type="text" v-model="usuario" class="form-control" v-bind:class="{ 'is-invalid': e_usuario }" placeholder="Usuario">
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                                         <input type="text" v-model="password" class="form-control" v-bind:class="{ 'is-invalid': e_password }" placeholder="Clave">
                                     </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
-                                        <select class="form-control" v-bind:class="{ 'is-invalid': e_idrol }" v-model="idrol">
-                                            <option value="0" disabled>--Rol--</option>
-                                            <option v-for="rol in arrayRol" :key="rol.id" :value="rol.id" v-text="rol.nombre"></option>
-                                        </select>
-                                    </div>                                        
-                                </div>                                                     
-                            </div>                           
+                                </div>                                                                                     
+                            </div>                            
 
                         </form>
                     </div>
@@ -347,6 +348,14 @@
                     'idrol' : this.idrol
                 }).then(function (response) {
                     me.cerrarModal();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro creado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
@@ -370,6 +379,14 @@
                     'id': this.persona_id
                 }).then(function (response) {
                     me.cerrarModal();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro actualizado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
@@ -380,6 +397,7 @@
                 title: 'Desactivar el Usuario?',
                 text: "Puede activarla nuevamente.",
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -407,6 +425,7 @@
                 title: 'Activar el Usuario?',
                 text: "Puede desactivarla nuevamente.",
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -440,7 +459,7 @@
                 if (!this.email) {this.e_email = true; this.errorMostrarMsjPersona.push('email');}else{this.e_email = false}
                 if (!this.direccion) {this.e_direccion = true; this.errorMostrarMsjPersona.push('direccion');}else{this.e_direccion = false}
                 if (!this.usuario) {this.e_usuario = true; this.errorMostrarMsjPersona.push('usuario');}else{this.e_usuario = false}
-                if (!this.password) {this.e_password = true; this.errorMostrarMsjPersona.push('password');}else{this.e_password = false}
+               // if (!this.password) {this.e_password = true; this.errorMostrarMsjPersona.push('password');}else{this.e_password = false}
                 if (!this.idrol) {this.e_idrol = true; this.errorMostrarMsjPersona.push('idrol');}else{this.e_idrol = false}                
 
                 if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;

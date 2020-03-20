@@ -18,20 +18,20 @@ class ClienteController extends Controller
         $criterio = $request->criterio;
         $paginado = $request->paginado;
         $ordenado = $request->ordenado;
-        $ascdesc = $request->ascdesc;
+        $ascdesc = $request->ascdesc; 
         
         if ($buscar==''){
             $personas = Persona::join('users','personas.id','=','users.id')
             ->select('personas.tipo_documento','personas.num_documento','personas.nombre',
             'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular',
-            'personas.email','personas.perfil')
+            'personas.email','personas.perfil','personas.foto')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
             $personas = Persona::join('users','personas.id','=','users.id')
             ->select('personas.tipo_documento','personas.num_documento','personas.nombre',
             'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular',
-            'personas.email','personas.perfil')
+            'personas.email','personas.perfil','personas.foto')
             ->where($criterio, 'like', '%'. $buscar . '%')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -51,7 +51,7 @@ class ClienteController extends Controller
     }
  
     public function selectPersonaId(Request $request){ 
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         $num_documento = $request->num_documento;
         $personaDatosId = Persona::where('num_documento',$num_documento)->get();      
@@ -85,13 +85,13 @@ class ClienteController extends Controller
  
         return ['clientes' => $clientes];
     }  
-
   
     public function store(Request $request)
     {
+        if (!$request->ajax()) return redirect('/');
+
         try{
-            DB::beginTransaction();
-            if (!$request->ajax()) return redirect('/');
+            DB::beginTransaction();            
             $persona = new Persona();
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
@@ -101,6 +101,7 @@ class ClienteController extends Controller
             $persona->celular = $request->celular;
             $persona->email = $request->email;
             $persona->perfil = 'Cliente';
+            $persona->foto = $request->foto;
             $persona->save();
 
             $user = new User();
@@ -115,7 +116,7 @@ class ClienteController extends Controller
 
     public function update(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         try{
             DB::beginTransaction();
@@ -131,10 +132,34 @@ class ClienteController extends Controller
             $persona->celular = $request->celular;
             $persona->email = $request->email;
             $persona->perfil = 'Cliente';
+            $persona->foto = $request->foto;
             $persona->save();
 
             $user->usuario = $request->usuario;
             $user->save();
+ 
+            DB::commit();
+ 
+        } catch (Exception $e){
+            DB::rollBack();
+        }
+    }
+
+    public function actualizarAlumno(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+
+        try{
+            DB::beginTransaction();
+            
+            $persona = Persona::findOrFail($request->id);
+            
+            $persona->num_documento = $request->num_documento;
+            $persona->fec_nacimiento = $request->fec_nacimiento;
+            $persona->email = $request->email;
+            $persona->celular = $request->celular;
+            $persona->direccion = $request->direccion;
+            $persona->save();           
  
             DB::commit();
  

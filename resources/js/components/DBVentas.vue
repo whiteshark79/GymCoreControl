@@ -8,34 +8,41 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="info-box col-6">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cash-register"></i></span>
-                      <div class="info-box-content">                        
-                        <span class="info-box-text">{{v_msj}}</span>
-                        <span class="info-box-number">Mes: ${{v_val_mes}} <small>( {{v_qtx_mes}} )</small></span>
-                        <span class="info-box-number">Total: ${{v_val_total}}  <small>( {{v_qtx_total}} )</small></span>      
-                    </div>
-                  </div> 
-                  <div class="info-box col-6">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">{{i_msj}}</span>
-                        <span class="info-box-number">Mes: ${{i_val_mes}} <small>( {{i_qtx_mes}} )</small></span>
-                        <span class="info-box-number">Total: ${{i_val_total}}  <small>( {{i_qtx_total}} )</small></span>           
+                  <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cash-register"></i></span>
+                        <div class="info-box-content">                        
+                          <span class="info-box-text">{{v_msj}}</span>
+                          <span class="info-box-number">Mes: ${{v_val_mes}} <small>( {{v_qtx_mes}} )</small></span>
+                          <span class="info-box-number">Total: ${{v_val_total}}  <small>( {{v_qtx_total}} )</small></span>      
+                      </div>
+                    </div> 
+                  </div>
+
+                  <div class="col-12 col-sm-6 col-md-6">
+                    <div class="info-box">
+                      <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                      <div class="info-box-content">
+                          <span class="info-box-text">{{i_msj}}</span>
+                          <span class="info-box-number">Mes: ${{i_val_mes}} <small>( {{i_qtx_mes}} )</small></span>
+                          <span class="info-box-number">Total: ${{i_val_total}}  <small>( {{i_qtx_total}} )</small></span>           
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="card callout callout-info col-12">
-                    <div class="card-header">
-                        <h4>Ventas vs Compras</h4>
-                    </div>
-                    <div class="card-content">
-                      <div class="ct-chart">
-                          <canvas id="chart_ingven">                                                
-                          </canvas>
+                  <div class="col-md-12">
+                    <div class="card callout callout-info">
+                      <div class="card-header">
+                          <h4>Ventas vs Compras</h4>
                       </div>
-                    </div>                          
+                      <div class="card-content">
+                        <div class="ct-chart">
+                            <canvas id="chart_ingven">                                                
+                            </canvas>
+                        </div>
+                      </div>                          
+                    </div>
                   </div>
                 </div> 
               </div>
@@ -48,57 +55,59 @@
               </div>
               <div class="card-body">
                 <div class="form-group row justify-content-between">
-                  <div class="input-group input-group-sm col-10">                                
-                      <select class="form-control col-3" v-model="criterio_" @onchange="ceroBusqueda();">
-                          <option value="fecha_hora">Fecha</option>
-                          <option value="idcliente">Alumno</option>                                      
-                      </select>                                    
-                      <template v-if="criterio_=='fecha_hora'">
-                          <input type="date" v-model="buscar_" class="form-control col-5">
-                      </template>
-                      <template v-if="criterio_=='idcliente'">
-                        <div class="col-md-7">                                                         
-                          <v-select
-                            id="buscar_"
-                            @search="selectCliente"
-                            label="nombre"
-                            :options="arrayCliente"
-                            placeholder="Buscar Cliente..."
-                            @input="getDatosCliente"                                    
-                          ></v-select>
-                        </div>
-                      </template>                                                                          
-                      <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
-                      <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
-                  </div>                      
-                  <div class="input-group input-group-sm col-2">                                     
-                      <select class="form-control" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      </select>
-                  </div> 
+                  <div class="row col-sm-12 col-md-12">
+                    <div class="input-group input-group-sm col-sm-10 col-md-10">                                
+                        <select class="form-control col-sm-3 col-md-3" v-model="criterio_" @onchange="ceroBusqueda();">
+                            <option value="fecha_hora">Fecha</option>
+                            <option value="idcliente">Cliente</option>                                      
+                        </select>                                    
+                        <template v-if="criterio_=='fecha_hora'">
+                            <input type="date" v-model="buscar_" class="form-control col-sm-5 col-md-4">
+                        </template>
+                        <template v-if="criterio_=='idcliente'">
+                          <div class="col-sm-6 col-md-5">                                                         
+                            <v-select
+                              id="buscar_"
+                              @search="selectCliente"
+                              label="nombre"
+                              :options="arrayCliente"
+                              placeholder="Buscar Cliente..."
+                              @input="getDatosCliente"                                    
+                            ></v-select>
+                          </div>
+                        </template>                                                                          
+                        <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
+                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
+                    </div>                      
+                    <div class="input-group input-group-sm col-sm-2 col-md-2">                                     
+                        <select class="form-control col-sm-12 col-md-12" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
+                          <option value="10">10</option>
+                          <option value="25">25</option>
+                          <option value="50">50</option>
+                        </select>
+                    </div> 
+                  </div>
                 </div>
                 <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar_">
                   <table class="table table-bordered table-sm table-hover" id="dtTable">
                       <thead class="thead-table">
                           <tr align="center">                             
-                            <th width="36%">NOMBRE</th>                                                                                       
-                            <th width="16%">FECHA VENTA</th>
-                            <th width="13%">TOTAL</th>
-                            <th width="13%">ABONO</th>
-                            <th width="13%">SALDO</th>
-                            <th width="9%">OPC</th>
+                            <th scope="col" width="36%">NOMBRE</th>                                                                                       
+                            <th scope="col" width="16%">FECHA</th>
+                            <th scope="col" width="13%">TOTAL</th>
+                            <th scope="col" width="13%">ABONO</th>
+                            <th scope="col" width="13%">SALDO</th>
+                            <th scope="col" width="9%">OPC</th>
                           </tr>
                       </thead>
                       <tbody v-if="arrayVentaCliente.length">
                           <tr v-for="venta in arrayVentaCliente" :key="venta.id">
-                            <td v-text="venta.cliente"></td>
-                            <td align="center"> {{venta.fecha_hora}}</td>                                  
-                            <td align="center">$ {{venta.total}}</td>
-                            <td align="center">$ {{venta.abono}}</td>
-                            <td align="center">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>
-                            <td align="center">
+                            <td v-text="venta.cliente" scope="row" data-label="NOMBRE"></td>
+                            <td align="center" data-label="FECHA"> {{venta.fecha_hora}}</td>                                  
+                            <td align="center" data-label="TOTAL">$ {{venta.total}}</td>
+                            <td align="center" data-label="ABONO">$ {{venta.abono}}</td>
+                            <td align="center" data-label="SALDO">$ {{ (venta.total-venta.abono).toFixed(2) }}</td>
+                            <td align="center" data-label="OPC">
                               <a class="btn btn-sm btn-default" @click="listarVentaDetalleCliente(venta.id, venta.total, venta.abono)"><i class="far fa-credit-card"></i></a>  
                             </td>                                                                    
                           </tr>

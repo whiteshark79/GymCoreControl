@@ -14,29 +14,30 @@
 
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
-                                <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
-                                    <option value="nombre">Nombre</option>
-                                    <option value="num_documento">Documento</option>
-                                    </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
-                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
-                                </div>
-                                <div class="col-4"></div>
-                                <div class="input-group input-group-sm col-1">                                     
-                                    <select class="form-control" v-model="paginado" @change="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    </select>
+                                <div class="row col-sm-12 col-md-12">
+                                    <div class="input-group input-group-sm col-sm-11 col-md-11">                                
+                                        <select class="form-control col-sm-3 col-md-2" v-model="criterio" @change="ceroBusqueda();">
+                                            <option value="nombre">Nombre</option>
+                                            <option value="num_documento">Documento</option>
+                                        </select>
+                                        <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-sm-3 col-md-3" placeholder="Texto a buscar">
+                                        <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                                    </div>                                    
+                                    <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
+                                        <select class="form-control col-sm-6 col-md-12" v-model="paginado" @change="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>  
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead class="thead-table">
                                         <tr align="center">
-                                            <th width="10%">DOC
+                                            <th scope="col" width="10%">DOC
                                                 <template v-if="(ordenado !== 'num_documento' && ascdesc === 'asc') || (ordenado === 'num_documento' && ascdesc === 'desc') ">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -44,7 +45,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'num_documento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="40%">NOMBRE
+                                            <th scope="col" width="40%">NOMBRE
                                                 <template v-if="(ordenado !== 'nombre' && ascdesc === 'asc') || (ordenado === 'nombre' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -52,7 +53,7 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'nombre','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                            
-                                            <th width="10%">CUMPLEAÑOS
+                                            <th scope="col" width="10%">CUMPLEAÑOS
                                                 <template v-if="(ordenado !== 'fec_nacimiento' && ascdesc === 'asc') || (ordenado === 'fec_nacimiento' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'fec_nacimiento','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -60,17 +61,17 @@
                                                     <a href="#" @click="listarPersona(1,buscar,criterio,paginado,'fec_nacimiento','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="28%">EMAIL</th>                                            
-                                            <th width="10%">ACCIONES</th>
+                                            <th scope="col" width="28%">EMAIL</th>                                            
+                                            <th scope="col" width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayPersona.length">
                                         <tr v-for="persona in arrayPersona" :key="persona.id">
-                                            <td align="center" v-text="persona.num_documento"></td>
-                                            <td v-text="persona.nombre"></td>
-                                            <td align="center" v-text="persona.fec_nacimiento"></td>
-                                            <td v-text="persona.email"></td>
-                                            <td align="center">
+                                            <td align="center" v-text="persona.num_documento" scope="row" data-label="DOC"></td>
+                                            <td v-text="persona.nombre" data-label="NOMBRE"></td>
+                                            <td align="center" v-text="persona.fec_nacimiento" data-label="CUMPLEAÑOS"></td>
+                                            <td v-text="persona.email" data-label="EMAIL"></td>
+                                            <td align="center" data-label="ACCIONES">
                                                 <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="fas fa-edit" title="Editar"></i></a>                                   
                                             </td>
                                         </tr>
@@ -351,6 +352,14 @@
                     'email' : this.email
                 }).then(function (response) {
                     me.cerrarModal();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro creado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
@@ -372,6 +381,14 @@
                     'id': this.persona_id
                 }).then(function (response) {
                     me.cerrarModal();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro actualizado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
@@ -467,7 +484,6 @@
             },
             ceroBusqueda(){
                 this.buscar='';
-                this.criterio='nombre';
                 this.listarPersona(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
             }
         },

@@ -29,12 +29,12 @@
             <template v-if="menu==22"><calendario></calendario></template>
             <template v-if="menu==23"><especialidad></especialidad></template>
             <template v-if="menu==24"><universidad></universidad></template>
-            <template v-if="menu==25"><profesion></especialidad></template>
+            <template v-if="menu==25"><profesion></profesion></template>
         @elseif (Auth::user()->idrol == 2)
             <template v-if="menu==0"><perfilalumno></perfilalumno></template>
             <template v-if="menu==1"><dashboardalumno></dashboardalumno></template>
         @elseif (Auth::user()->idrol == 3)
-            <template v-if="menu==0"><perfil></perfil></template>
+            <template v-if="menu==0"><perfilprofesor></perfilprofesor></template>
         @elseif (Auth::user()->idrol == 4)
             <template v-if="menu==0"><dashboardoper></dashboardoper></template>
             <template v-if="menu==1"><caja></caja></template>

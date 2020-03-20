@@ -4,7 +4,12 @@ Route::group(['middleware'=>['guest']],function(){
 
     Route::get('/','Auth\LoginController@showLoginForm'); 
     Route::get('/main','Auth\LoginController@showLoginForm'); 
-    Route::post('/login', 'Auth\LoginController@login')->name('login');   
+    Route::post('/login', 'Auth\LoginController@login')->name('login'); 
+    
+    Route::get('/clear-cache', function() {
+        Artisan::call('cache:clear');
+        return "Cache is cleared";
+    });
 });
   
 
@@ -43,6 +48,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/calendario', 'CalendarioController@index');
         Route::post('/calendario/registrar', 'CalendarioController@store');
         Route::put('/calendario/actualizar', 'CalendarioController@update');
+        Route::get('/calendario/selectDias', 'CalendarioController@selectDias');
 
         Route::get('/caja', 'CajaController@index');
         Route::post('/caja/registrar', 'CajaController@store');
@@ -66,15 +72,18 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/alumno', 'AlumnoController@index');
         Route::post('/alumno/registrar', 'AlumnoController@store');
         Route::put('/alumno/actualizar', 'AlumnoController@update');
+        Route::put('/alumno/actualizarAlumnoLaboral', 'AlumnoController@actualizarAlumnoLaboral');
+        Route::put('/alumno/actualizarAlumnoFisico', 'AlumnoController@actualizarAlumnoFisico');
         Route::get('/alumno/selectAlumno', 'AlumnoController@selectAlumno');
         Route::get('/alumno/selectAlumnoId', 'AlumnoController@selectAlumnoId');
 
         Route::get('/horario', 'HorarioController@index');
         Route::post('/horario/registrar', 'HorarioController@store');
-        Route::put('/horario/actualizar', 'HorarioController@update');
+        Route::put('/horario/actualizarAlumnoLaboral', 'HorarioController@update');
         Route::put('/horario/desactivar', 'HorarioController@desactivar');
         Route::put('/horario/activar', 'HorarioController@activar');
         Route::get('/horario/selectHorario', 'HorarioController@selectHorario');
+        Route::get('/horario/selectHorarioId', 'HorarioController@selectHorarioId');
 
         Route::get('/proveedor', 'ProveedorController@index');
         Route::post('/proveedor/registrar', 'ProveedorController@store');
@@ -85,6 +94,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/profesor/registrar', 'ProfesorController@store');
         Route::put('/profesor/actualizar', 'ProfesorController@update');        
         Route::get('/profesor/selectProfesor', 'ProfesorController@selectProfesor');
+        Route::get('/profesor/selectProfesorId', 'ProfesorController@selectProfesorId');
 
         Route::get('/ingreso', 'IngresoController@index');
         Route::post('/ingreso/registrar', 'IngresoController@store');        
@@ -130,7 +140,8 @@ Route::group(['middleware'=>['auth']],function(){
 
         Route::get('/cliente', 'ClienteController@index');
         Route::post('/cliente/registrar', 'ClienteController@store');
-        Route::put('/cliente/actualizar', 'ClienteController@update');                
+        Route::put('/cliente/actualizar', 'ClienteController@update');
+        Route::put('/cliente/actualizarAlumno', 'ClienteController@actualizarAlumno');                  
         Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
         Route::get('/cliente/selectPersonaId', 'ClienteController@selectPersonaId');
         Route::get('/cliente/selectPersonaEmail', 'ClienteController@selectPersonaEmail');
@@ -173,6 +184,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/universidad/desactivar', 'UniversidadController@desactivar');
         Route::put('/universidad/activar', 'UniversidadController@activar');
         Route::get('/universidad/selectUniversidad', 'UniversidadController@selectUniversidad');
+        Route::get('/universidad/selectUniversidadId', 'UniversidadController@selectUniversidadId');
 
         Route::get('/provincia', 'ProvinciaController@index');
         Route::post('/provincia/registrar', 'ProvinciaController@store');
@@ -187,6 +199,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/canton/desactivar', 'CantonController@desactivar');
         Route::put('/canton/activar', 'CantonController@activar');
         Route::get('/canton/selectCanton', 'CantonController@selectCanton');
+        Route::get('/canton/selectCantonId', 'CantonController@selectCantonId');
 
         Route::get('/articulo', 'ArticuloController@index');
         Route::post('/articulo/registrar', 'ArticuloController@store');
@@ -220,6 +233,9 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/rutina/desactivar', 'RutinaController@desactivar');
         Route::put('/rutina/activar', 'RutinaController@activar');
         Route::get('/rutina/selectRutina', 'RutinaController@selectRutina');
+
+        Route::get('/frase', 'FraseController@index');
+        Route::get('/frase/selectFraseId', 'FraseController@selectFraseId');
 
     });
 

@@ -2,7 +2,6 @@
  * Style for data table 
  */
 
-
 .thtable {
     color: #ffffff;
     background-color: #3C8DBC;
@@ -11,6 +10,11 @@
 
 .thead-table {
   border-bottom: 3px solid #B6B6B6;
+  background-color: #EDEFF1;
+}
+
+.th-footer {
+  border-top: 2px solid #B6B6B6;
   background-color: #EDEFF1;
 }
 
@@ -28,6 +32,20 @@ table td {
 /***********************************************************************************
 * Customs styles
 */ 
+
+.nav-item-icon{
+  margin-left: 10px;
+}
+
+.nav-item-icon-level{
+  margin-left: 20px;
+}
+
+.modal-dialog-vertical {
+  position:absolute;  
+  top:calc(40% + 5px);   
+  margin:auto; 
+}
 
 .text-error{
   color: red !important;
@@ -112,7 +130,74 @@ a:active  {color: #3C8DBC; }
   padding-top: 1.5px;
   padding-bottom: 1.5px;}  
 
-/****************************/
+
+/************table collapse*****************/
+
+.table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.table caption {
+  font-size: 1.5em;
+  margin: .25em 0 .75em;
+}
+
+.table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+.table th, table td {
+  padding: .625em;
+}
+
+.table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.table td img { text-align: center; }
+
+@media screen and (max-width: 600px) 
+{
+
+  .table { border: 0; }
+
+  .table caption { font-size: 1.3em; }
+
+  .table thead { display: none; }
+
+  .table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  .table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    text-align: right;
+  }
+
+  .table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .table td:last-child { border-bottom: 0; }
+}
+
+
+/*************************************/
 
 .num-col{
   position: relative;
@@ -162,40 +247,248 @@ a:active  {color: #3C8DBC; }
 
 /*********Menu***********/
 
-    .menu_title {
-      color: #fff;
-      letter-spacing: .5px;
-      font-size: 15px;
-      text-shadow: 1px 1px #000;}
+  .menu_title {
+    color: #fff;
+    letter-spacing: .5px;
+    font-size: 15px;
+    text-shadow: 1px 1px #000;}
 
-    .icon_title {
-      color: #fff;
-      font-size: 15px;
-      text-shadow: 1px 2px #000;}
-    
-    .icon_title:hover {
-      color: #017BA0;
-      font-weight: bold;
-      text-shadow: 1px 2px #000;}
+  .icon_title {
+    color: #fff;
+    font-size: 15px;
+    text-shadow: 1px 2px #000;}
+  
+  .icon_title:hover {
+    color: #017BA0;
+    font-weight: bold;
+    text-shadow: 1px 2px #000;}
 
-    .icon_subtitle {
-      color: #fff;
-      font-weight: lighter;
-      font-size: 8px;}
+  .icon_subtitle {
+    color: #fff;
+    font-weight: lighter;
+    font-size: 8px;}
 
 /*******************calendario******************/
-th.rotate {
-  height:80px;
-  white-space: nowrap;
-  position:relative;
+  th.rotate {
+    height:80px;
+    white-space: nowrap;
+    position:relative;
+  }
+
+  th.rotate > div {
+    transform: rotate(90deg);
+    position:absolute;
+    left:0;
+    right:0;
+    top: 10px;
+    margin:auto;    
+  }
+
+th.borde {  
+  background-color: #ffffff; 
 }
 
-th.rotate > div {
-  transform: rotate(90deg);
-  position:absolute;
-  left:0;
-  right:0;
-  top: 10px;
-  margin:auto;
-  
+
+/********************profile**********************/
+
+.profile-header{
+background-color: #017BA0;
+height:56px;
 }
+.user-detail{
+margin:-50px 0px 30px 0px;
+}
+.user-detail img{
+height:100px;
+width:100px;
+}
+.user-detail h5{
+margin:15px 0px 5px 0px;
+}
+
+
+/*==================================================
+                    NAV-BAR
+====================================================*/
+#sideNav .navbar-nav .nav-item .nav-link {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@media (min-width: 992px) {
+  #sideNav {
+      text-align: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      width: 17rem;
+      height: 100vh;
+  }
+  #sideNav .navbar-brand {
+      display: flex;
+      margin: auto auto 0;
+      padding: 0.5rem;
+  }
+  #sideNav .navbar-brand .img-profile {
+      max-width: 10rem;
+      max-height: 10rem;
+      border: 0.5rem solid rgba(255, 255, 255, 0.2);
+  }
+  #sideNav .navbar-collapse {
+      display: flex;
+      align-items: flex-start;
+      flex-grow: 0;
+      width: 100%;
+      margin-bottom: auto;
+  }
+  #sideNav .navbar-collapse .navbar-nav {
+      flex-direction: column;
+      width: 100%;
+  }
+  #sideNav .navbar-collapse .navbar-nav .nav-item {
+      display: block;
+  }
+  #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link {
+      display: block;
+  }
+}
+
+/*==================================================
+                  SECTION (Generic)
+====================================================*/
+.heading-border {
+  width: 60px;
+  height: 10px;
+  background-color: #2196f3;
+  margin: 0 auto 20px auto;
+}
+
+section.resume-section {
+  border-bottom: 1px solid #dee2e6;
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+section.resume-section .resume-item .resume-date {
+  min-width: none;
+}
+
+@media (min-width: 768px) {
+  section.resume-section {
+      min-height: 100vh;
+  }
+  section.resume-section .resume-item .resume-date {
+      min-width: 18rem;
+  }
+}
+
+@media (min-width: 992px) {
+  section.resume-section {
+      padding-top: 3rem !important;
+      padding-bottom: 3rem !important;
+  }
+}
+
+.text-section{
+  font-size: 18px;
+  color: #868e96;
+}
+
+/*==================================================
+                      ABOUT
+====================================================*/
+#about {
+  background-image: url(../img/perfil_wall.jpg); 
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+#about h1 {
+/*font-size: 100%;*/
+}
+
+/*==================================================
+                  SOCIAL-ICON
+====================================================*/
+.list-social-icons {
+  text-align: center;
+}
+
+.list-social-icons a {
+  color: #495057;
+}
+
+.list-social-icons a:hover {
+  color: #2196f3;
+}
+
+.list-social-icons a .fa-lg {
+  font-size: 1.5rem;
+} 
+
+
+/********************PROFILE***************************/
+
+.blockquote {
+  font-size: 8px;
+  position: relative;
+  align-self: center;
+  border-top: solid 1px;
+  border-bottom: solid 1px;
+}
+
+.mp-auto {
+  margin-top: 60px !important;
+  margin-bottom: auto !important;
+}
+
+.profile-user-info {
+  display: table;
+  width: 98%;
+  width: calc(100% - 24px);
+  margin: 0 auto
+}
+
+.profile-info-row {
+  display: table-row
+}
+
+.profile-info-name,
+.profile-info-value,
+.profile-info-field,
+.profile-info-key {
+  display: table-cell;
+  border-top: 1px dotted #D5E4F1
+}
+
+.profile-info-name {
+  text-align: right;
+  padding: 6px 10px 6px 4px;
+  font-weight: 400;
+  color: #667E99;
+  background-color: transparent;
+  width: 130px;
+  vertical-align: middle
+}
+
+.profile-info-field {
+  text-align: right;
+  padding: 6px 10px 6px 4px;
+  font-weight: 400;
+  color: #667E99;
+  background-color: transparent;
+  width: 130px;
+  vertical-align: middle
+}
+
+.profile-info-value {
+  padding: 6px 4px 6px 6px
+}
+
+.profile-info-key {
+  padding: 4px 2px 4px 4px
+}
+

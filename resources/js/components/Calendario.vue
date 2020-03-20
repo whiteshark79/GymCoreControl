@@ -24,11 +24,11 @@
                                             <option value="idlocal">Local</option>                                   
                                         </select>                                        
                                         <template v-if="criterio=='fecha_hora'">
-                                            <input type="date" v-model="buscar" class="form-control col-4">
+                                            <input type="date" v-model="buscar" class="form-control col-3">
                                         </template>
                                         <template v-else-if="criterio=='idlocal'">                                            
-                                            <select class="form-control  col-5"  v-model="buscar">
-                                                <option value="0" disabled>--Local--</option>
+                                            <select class="form-control  col-3"  v-model="buscar">
+                                                <option value="" disabled>--Local--</option>
                                                 <option v-for="local in arrayLocal" :key="local.id" :value="local.id" v-text="local.nombre"></option>
                                             </select>
                                         </template>                                        
@@ -153,7 +153,7 @@
                                             <span class="input-group-text">Desde: </span>
                                         </div>
                                         <input type="date" v-model="fecha_ini" class="form-control" v-bind:class="{ 'is-invalid': e_fecha_ini }">
-                                    </div>
+                                    </div>                                    
                                     <div class="input-group input-group-sm mb-3 col-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Hasta: </span>
@@ -170,47 +170,54 @@
                                         </select>
                                     </div>
                                     <div class="col-auto">
-                                        <button type="button" class="btn btn-sm btn-primary" @click="selectHorario()"><i class="far fa-calendar-check">Generar</i></button>  
-                                    </div>                                                        
-                                    
+                                        <button type="button" class="btn btn-sm btn-primary" @click="generaCalendario()"><i class="far fa-calendar-check"> Generar</i></button>
+                                        <button type="button" @click="ceroFechas();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>   
+                                    </div> 
                                 </div>
+                                <span class="text-error" v-show="s_fechas">{{ msg_fechas }}</span>              
 
-                                <div class="row col-12">
+                                <div class="row col-12" v-if="tabla==1">                                                                       
                                     <div class="table-responsive-sm">
                                         <table class="table table-bordered table-hover" id="dtTable">
-                                            <thead>
+                                            <thead class="thead-table">
                                                 <tr align="center">
-                                                    <th scope="col"></th>
-                                                    <th scope="col">Lunes</th>
-                                                    <th scope="col">Martes</th>
-                                                    <th scope="col">Miércoles</th>
-                                                    <th scope="col">Jueves</th>
-                                                    <th scope="col">Viernes</th>
-                                                    <th scope="col">Sábado</th>
+                                                    <th class="borde"></th> 
+                                                    <template v-for="(cnt, idx) in arrayDia.length">
+                                                        <th scope="col" v-bind:key="cnt">{{ dia = arrayDia[idx]}}</th>
+                                                    </template>                                                                                                                                                       
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="horario in arrayHorario" :key="horario.id">
-                                                    <!-- <th class="rotate"><div><span>{{ horario.periodo}}</span></div></th> -->
-                                                    <th scope="row">{{ horario.hora_ini}} - {{ horario.hora_fin}}</th>
-                                                        <td>
-                                                            <select v-model="idprofesor" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_idprofesor }">
+                                                    <th>{{ horario.hora_ini}} - {{ horario.hora_fin}}</th>
+                                                    <template v-for="(cnt, idx) in cntdias+1">
+                                                        <td v-bind:key="cnt">
+                                                            <select v-model="idprofesor[idx]" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_idprofesor }" @change="agregarDetalle">
                                                                 <option value="0" disabled>--Seleccione--</option>
                                                                 <option v-for="profesor in arrayProfesor" :key="profesor.id" :value="profesor.id" v-text="profesor.nombre"></option>
                                                             </select>
-                                                        </td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                </tr>                                                
+                                                            <h6>--{{idprofesor.id}}--</h6>
+                                                        </td>                                                        
+                                                    </template>
+                                                </tr>
                                             </tbody>
                                         </table>
-                                        {{ crearPeriodo }}
-                                    </div>
-
-                                    
+                                        <table class="table table-borderless">
+                                            <thead class="th-footer">
+                                                <tr >
+                                                    <th scope="col" width= "10%">Rutinas</th>
+                                                    <template v-for="(cnt, idx) in cntdias+1">
+                                                        <th v-bind:key="cnt">
+                                                            <select v-model="idrutina[idx]" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_idrutina }">
+                                                                <option value="0" disabled>--Seleccione--</option>
+                                                                <option v-for="rutina in arrayRutina" :key="rutina.id" :value="rutina.id" v-text="rutina.nombre"></option>
+                                                            </select>
+                                                        </th>
+                                                    </template>                                                  
+                                                </tr>
+                                            </thead>                                            
+                                        </table>
+                                    </div>                                   
 
                                 </div>
                             </div>                         
@@ -316,9 +323,8 @@
 
 </template>
 
-<script>
-    import 'vue-select/dist/vue-select.css';
-    import vSelect from 'vue-select';
+<script>    
+    const moment = require('moment'); 
     export default {
         data (){
             return {                
@@ -328,16 +334,27 @@
                 arrayHorario : [],
                 arrayProfesor : [],
                 arrayRutina : [],
+                arrayDia : [],
+
+                cntdias : 0,  
+                fechaHoy : '',
+                fecha0 : '',
+                fecha1 : '',
+                fecha2 : '',
+                difDia : 0,
+                       
+
+                dia : '',
 
                 fecha_ini : '',
                 fecha_fin : '',
                 idlocal : 0, 
                 idhorario : 0,
                 idprofesor : 0,
-                idrutina : 0,
-                
+                idrutina : 0,                                             
 
-                listado:1,                
+                listado:1,  
+                tabla:0,                 
 
                 modal : 0,
                 tituloModal : '',
@@ -345,6 +362,10 @@
 
                 errorCalendario : 0,
                 errorMostrarMsjCalendario : [], 
+                errorCronograma : 0,
+                errorMostrarMsjCronograma : [], 
+                s_fechas : '',
+                msg_fechas : '',
                 e_fecha_ini : false,
                 e_fecha_fin : false,
                 e_idlocal : false,  
@@ -368,10 +389,7 @@
                 ordenado : 'id',
                 ascdesc : 'desc'
             }
-        },
-        components: {
-            vSelect
-        },
+        },        
         computed:{
             isActived: function(){
                 return this.pagination.current_page;
@@ -399,18 +417,7 @@
                 }
                 return pagesArray;             
 
-            },
-            crearPeriodo: function(){
-                let me=this;
-                var fecha_inicial=strtotime("25-02-2008");
-                var fecha_fin=strtotime("01-04-2008");
-                var periodo = [];
-
-                for(var i=fecha_inicial;i<fecha_fin;i+=86400){
-                    periodo.push(i)
-                }
-                return periodo;
-            }
+            }            
         },
         methods : {
             hoyFecha(){
@@ -422,7 +429,7 @@
                 if(dd < 10) dd = '0'+dd;
                 if(mm < 10) mm = '0'+mm;
         
-                return dd+'/'+mm+'/'+yyyy;      
+                return yyyy+'-'+mm+'-'+dd;      
             },                        
             listarCalendario (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
@@ -458,9 +465,9 @@
                     console.log(error);
                 });
             },
-            selectHorario(){
+            selectHorarioId(){
                 let me=this;
-                var url= '/horario/selectHorario?idlocal='+me.idlocal;
+                var url= '/horario/selectHorarioId?idlocal='+me.idlocal;
                 axios.get(url).then(function (response) {
                     //console.log(response);
                     var respuesta= response.data;
@@ -493,8 +500,89 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-            },           
-            
+            }, 
+            selectDias(){
+                let me=this;
+                var url= '/calendario/selectDias?fecha_ini='+me.fecha_ini+'&fecha_fin='+me.fecha_fin;
+                axios.get(url).then(function (response) {
+                    //console.log(response);
+                    var respuesta= response.data;                    
+                    me.arrayDia = respuesta.dias;
+                    me.cntdias = respuesta.cntdias;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },              
+            generaCalendario(){  
+                 if (this.validarCronograma()){
+                    return;
+                }
+
+                let me=this;                
+
+                me.fechaHoy= moment().format();  
+                me.fecha0= moment(me.fechaHoy);
+                me.fecha1= moment(me.fecha_ini);
+                me.fecha2 = moment(me.fecha_fin);
+                me.difDia = me.fecha2.diff(me.fecha1, 'days'); 
+                me.difDiaHoy = me.fecha1.diff(me.fecha0, 'days'); 
+
+                if(me.difDia < 0){
+                    me.s_fechas = 1;
+                    me.msg_fechas = 'Fecha inicial mayor a fecha final';
+                    me.e_fecha_ini = true; 
+                    me.e_fecha_fin = true; 
+
+                }else if(me.difDiaHoy < 0){
+                    me.s_fechas = 1;
+                    me.msg_fechas = 'Fecha inicial menor a la actual';
+                    me.e_fecha_ini = true; 
+                    me.e_fecha_fin = true;
+
+                }else if(me.difDia > 5)
+                {
+                    me.s_fechas = 1;
+                    me.msg_fechas = 'Fechas fuera de rango (máx. 6 días)';
+                    me.e_fecha_ini = true; 
+                    me.e_fecha_fin = true; 
+
+                }else{
+
+                    me.s_fechas = '';
+                    me.e_fecha_ini = false;
+                    me.e_fecha_fin = false
+
+                    me.tabla=1;
+
+                    me.selectHorarioId();
+                    me.selectDias();                
+                    me.selectProfesor();                
+                    me.selectRutina();
+                }                
+
+            }, 
+            agregarDetalle(e){
+                let me=this;
+                me.idprofesor = e.target.options[e.target.options.selectedIndex].value;     
+                //alert(e.target.options[e.target.options.selectedIndex].id)          
+
+                me.arrayDetalle.push({
+                    idprofesor1: me.idprofesor
+                });
+
+            },
+            validarCronograma(){
+                this.errorCronograma=0;
+                this.errorMostrarMsjCronograma =[];               
+                
+                if (!this.fecha_ini) { this.e_fecha_ini = true; this.errorMostrarMsjCronograma.push('fecha_ini'); }else{ this.e_fecha_ini = false; }
+                if (!this.fecha_fin) { this.e_fecha_fin = true; this.errorMostrarMsjCronograma.push('fecha_fin'); }else{ this.e_fecha_fin = false; }
+                if (this.idlocal == 0) { this.e_idlocal = true; this.errorMostrarMsjCronograma.push('idlocal'); }else{ this.e_idlocal = false; }     
+
+                if (this.errorMostrarMsjCronograma.length) this.errorCronograma = 1;
+                return this.errorCronograma;
+            },
             registrarCalendario(){
                 if (this.validarCalendario()){
                     return;
@@ -521,11 +609,9 @@
                 });
             },
             validarCalendario(){
-                 this.errorCalendario=0;
+                this.errorCalendario=0;
                 this.errorMostrarMsjCalendario =[];
-
-                if (!this.fecha_ini) {this.e_fecha_ini = true; this.errorMostrarMsjCalendario.push('fecha_ini');}else{this.e_fecha_ini = false}
-                if (!this.fecha_fin) {this.e_fecha_fin = true; this.errorMostrarMsjCalendario.push('fecha_fin');}else{this.e_fecha_fin = false}
+                
                 if (!this.idlocal) {this.e_idlocal = true; this.errorMostrarMsjCalendario.push('idlocal');}else{this.e_idlocal = false}
 
                 if (this.errorMostrarMsjCalendario.length) this.errorCalendario = 1;
@@ -533,12 +619,7 @@
             },
             mostrarDetalle(){
                 let me=this;
-                me.listado=0;
-
-                me.selectLocal();
-                me.selectProfesor();
-                me.selectHorario();
-                me.selectRutina();
+                me.listado=0;                              
 
                 this.e_fecha_ini = false;
                 this.e_fecha_fin = false;
@@ -590,6 +671,7 @@
                Swal.fire({
                 title: 'Anular el calendario?',
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -614,11 +696,21 @@
             },
             ceroBusqueda(){
                 this.buscar='';
-                this.criterio='fecha_hora'
                 this.listarCalendario(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
+            },
+            ceroFechas(){
+                this.fecha_ini = '';
+                this.fecha_fin = '';
+                this.idlocal = 0; 
+                this.s_fechas = '';
+                this.e_fecha_ini = false;
+                this.e_fecha_fin = false
+
+                this.tabla=0;
             }
         },
         mounted() {
+            this.selectLocal(); 
             this.listarCalendario(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
         }
     }

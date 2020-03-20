@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        if (!$request->ajax()) return redirect('/'); 
+        //if (!$request->ajax()) return redirect('/'); 
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
@@ -52,7 +52,7 @@ class UserController extends Controller
     }
 
     public function selectUsuario(Request $request){ 
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
 
         $usuario = $request->usuario;
         $usuarioUser = User::where('usuario',$usuario)->get();      

@@ -37,7 +37,7 @@ class RutinaController extends Controller
             ],
             'rutinas' => $rutinas
         ];
-    }
+    } 
 
     public function selectRutina(Request $request){
         if (!$request->ajax()) return redirect('/');

@@ -14,51 +14,52 @@
 
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
-                                <div class="input-group input-group-sm col-7">                                
-                                    <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
-                                        <option value="idalumno">Alumno</option>
-                                        <option value="fecha_ini">Fecha</option>
-                                        <option value="idmodalidad">Modalidad</option>                                      
-                                    </select>
-                                    <template v-if="criterio=='idalumno'">
-                                        <div class="col-md-4">                                                         
-                                            <v-select
-                                                id="buscar"
-                                                @search="selectAlumno"
-                                                label="nombre"
-                                                :options="arrayAlumno"
-                                                placeholder="Buscar Alumnos..."
-                                                @input="getDatosAlumnos2"                                    
-                                            ></v-select>
-                                        </div>
-                                    </template>
-                                    <template v-else-if="criterio=='fecha_ini'">
-                                        <input type="date" v-model="buscar" class="form-control col-4">
-                                    </template>
-                                    <template v-else-if="criterio=='idmodalidad'">
-                                        <select class="form-control col-4" v-model="buscar">
-                                            <option value="0" disabled>--Seleccione--</option>
-                                            <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
+                                <div class="row col-sm-12 col-md-12">
+                                    <div class="input-group input-group-sm col-sm-11 col-md-11">                                
+                                        <select class="form-control col-sm-3 col-md-2" v-model="criterio" @change="ceroBusqueda();">
+                                            <option value="idalumno">Alumno</option>
+                                            <option value="fecha_ini">Fecha</option>
+                                            <option value="idmodalidad">Modalidad</option>                                      
                                         </select>
-                                    </template>                                                                          
-                                    <button type="submit" @click="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
-                                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
-                                </div>
-                                <div class="col-4"></div>
-                                <div class="input-group input-group-sm col-1">                                     
-                                    <select class="form-control" v-model="paginado" @change="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    </select>
+                                        <template v-if="criterio=='idalumno'">
+                                            <div class="col-sm-3 col-md-3">                                                         
+                                                <v-select
+                                                    id="buscar"
+                                                    @search="selectAlumno"
+                                                    label="nombre"
+                                                    :options="arrayAlumno"
+                                                    placeholder="Buscar Alumnos..."
+                                                    @input="getDatosAlumnos2"                                    
+                                                ></v-select>
+                                            </div>
+                                        </template>
+                                        <template v-else-if="criterio=='fecha_ini'">
+                                            <input type="date" v-model="buscar" class="form-control  col-sm-3 col-md-3">
+                                        </template>
+                                        <template v-else-if="criterio=='idmodalidad'">
+                                            <select class="form-control  col-sm-3 col-md-3" v-model="buscar">
+                                                <option value="0" disabled>--Seleccione--</option>
+                                                <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
+                                            </select>
+                                        </template>                                                                          
+                                        <button type="submit" @click="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                                    </div>
+                                    <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
+                                        <select class="form-control col-sm-6 col-md-12" v-model="paginado" @change="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div>
                                 </div>  
                             </div>  
                             <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                                     <thead  class="thead-table">
                                         <tr align="center"> 
-                                            <th width="3%">#</th> 
-                                            <th width="10%">FECHA
+                                            <th scope="col" width="3%">#</th> 
+                                            <th scope="col" width="10%">FECHA
                                                 <template v-if="(ordenado !== 'fecha_ini' && ascdesc === 'asc') || (ordenado === 'fecha_ini' && ascdesc === 'desc') ">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'fecha_ini','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -66,7 +67,7 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'fecha_ini','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="27%">ALUMNO
+                                            <th scope="col" width="27%">ALUMNO
                                                 <template v-if="(ordenado !== 'idalumno' && ascdesc === 'asc') || (ordenado === 'idalumno' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'idalumno','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -74,7 +75,7 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'idalumno','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                                
-                                            <th width="10%">MODALIDAD
+                                            <th scope="col" width="10%">MODALIDAD
                                                 <template v-if="(ordenado !== 'idmodalidad' && ascdesc === 'asc') || (ordenado === 'idmodalidad' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'idmodalidad','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -82,7 +83,7 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'idmodalidad','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                          
-                                            <th width="8%">ABONO
+                                            <th scope="col" width="8%">ABONO
                                                 <template v-if="(ordenado !== 'abono' && ascdesc === 'asc') || (ordenado === 'abono' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'abono','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -90,7 +91,7 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'abono','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>
-                                            <th width="8%">SALDO
+                                            <th scope="col" width="8%">SALDO
                                                 <template v-if="(ordenado !== 'saldo' && ascdesc === 'asc') || (ordenado === 'saldo' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'saldo','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -98,9 +99,9 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'saldo','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>     
-                                            <th width="5%">IVA</th>                                         
-                                            <th width="8%">TOTAL</th>                                                                                        
-                                            <th width="9%">ESTADO
+                                            <th scope="col" width="5%">IVA</th>                                         
+                                            <th scope="col" width="8%">TOTAL</th>                                                                                        
+                                            <th scope="col" width="9%">ESTADO
                                                 <template v-if="(ordenado !== 'estado' && ascdesc === 'asc') || (ordenado === 'estado' && ascdesc === 'desc')">
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'estado','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                 </template>
@@ -108,25 +109,25 @@
                                                     <a href="#" @click="listarInscripcion(1,buscar,criterio,paginado,'estado','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                 </template>
                                             </th>                                                                                    
-                                            <th width="10%">ACCIONES</th>
+                                            <th scope="col" width="10%">ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayInscripcion.length">
                                         <tr v-for="inscripcion in arrayInscripcion" :key="inscripcion.id">
-                                            <td v-text="inscripcion.id"></td>
-                                            <td>{{ inscripcion.fecha_ini }}</td>
-                                            <td>{{inscripcion.nombre}}</td>
-                                            <td v-text="inscripcion.modalidad_nombre"></td>                                     
-                                            <td v-text="inscripcion.abono"></td>
-                                            <td v-text="inscripcion.saldo"></td>
-                                            <td v-text="inscripcion.impuesto"></td>
-                                            <td align="right">$ {{ inscripcion.total  }}</td>
-                                            <td align="center"> 
+                                            <td v-text="inscripcion.id" scope="row" data-label="#"></td>
+                                            <td data-label="FECHA">{{ inscripcion.fecha_ini }}</td>
+                                            <td data-label="NOMBRE">{{inscripcion.nombre}}</td>
+                                            <td v-text="inscripcion.modalidad_nombre" data-label="MODALIDAD"></td>                                     
+                                            <td v-text="inscripcion.abono" data-label="ABONO"></td>
+                                            <td v-text="inscripcion.saldo" data-label="SALDO"></td>
+                                            <td v-text="inscripcion.impuesto" data-label="IVA"></td>
+                                            <td align="right" data-label="TOTAL">$ {{ inscripcion.total  }}</td>
+                                            <td align="center" data-label="ESTADO"> 
                                                 <div v-if="inscripcion.estado=='Cancelado'"><span class="badge badge-success">{{ inscripcion.estado }}</span></div>
                                                 <div v-if="inscripcion.estado=='Debe'"><span class="badge badge-warning">{{ inscripcion.estado }}</span></div>
                                                 <div v-if="inscripcion.estado=='Anulado'"><span class="badge badge-danger">{{ inscripcion.estado }}</span></div>                                    
                                             </td>
-                                            <td align="center">                   
+                                            <td align="center" data-label="ACCIONES">                   
                                                 <template v-if="inscripcion.estado=='Cancelado' || inscripcion.estado=='Debe'">
                                                     <a class="btn btn-sm btn-default" @click="abrirModal('inscripcion','actualizar',inscripcion)"><i class="fas fa-edit" title="Editar"></i></a>
                                                     <a class="btn btn-sm btn-default" @click="desactivarInscripcion(inscripcion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>                                                     
@@ -202,7 +203,7 @@
                                             label="nombre"
                                             :options="arrayAlumno"
                                             placeholder="Buscar Alumnos..."
-                                            @input="getDatosAlumno"                                    
+                                            @input="getDatosAlumno"                   
                                         ></v-select>
                                         <span class="text-error" v-show="e_idalumno">Eligir alumno</span>
                                     </template>                                    
@@ -238,7 +239,7 @@
                                         <option value="0" disabled>--Seleccione--</option>
                                         <option v-for="horario in arrayHorario" :key="horario.id" :value="horario.id" v-text="horario.hora_ini+' '+horario.hora_fin"></option>
                                     </select>
-                                </div> 
+                                </div>  
                             </div>
                             <div class="row">                                
                                 <div class="input-group input-group-sm mb-3 col-4">
@@ -311,7 +312,8 @@
                 subtotal : 0.0,
                 total : 0.0,
                 observaciones : '',
-                idhorario : 0,         
+                idhorario : 0,     
+                idlocal : '', 
 
                 arrayInscripcion : [],
                 arrayAlumno : [],
@@ -429,6 +431,8 @@
                 let me = this;
                 me.loading = true;
                 me.idalumno = val1.id;
+                me.idlocal = val1.idlocal;
+                me.selectHorario(me.idlocal)
             },
             getDatosAlumnos2(val2){
                 let me = this;
@@ -461,9 +465,10 @@
                     me.iva = 'N';
                 } 
             },
-            selectHorario(){
-                let me=this;
-                var url= '/horario/selectHorario';
+            selectHorario(local){
+                let me=this;               
+                
+                var url= '/horario/selectHorarioId?idlocal='+local;
                 axios.get(url).then(function (response) {
                     //console.log(response);
                     var respuesta= response.data;
@@ -509,6 +514,14 @@
                     'observaciones': this.observaciones
                 }).then(function (response) {
                     me.cerrarModal();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro creado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarInscripcion(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
@@ -533,6 +546,14 @@
                     'id': this.inscripcion_id
                 }).then(function (response) {
                     me.cerrarModal();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro actualizado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarInscripcion(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                 }).catch(function (error) {
                     console.log(error);
@@ -543,6 +564,7 @@
                 title: 'Desactivar la inscripción?',
                 text: "Puede activarla nuevamente.",
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -570,6 +592,7 @@
                 title: 'Activar la inscripción?',
                 text: "Puede desactivarla nuevamente.",
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -676,7 +699,7 @@
                         }
                     }
                 }
-                this.selectHorario();
+                //this.selectHorario(this.idlocal);
             },
             ceroBusqueda(){
                 this.buscar='';

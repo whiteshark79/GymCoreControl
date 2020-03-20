@@ -25,10 +25,8 @@
                     @include('plantilla/hdadmin')
                     @include('plantilla.sbadmin')
                 @elseif (Auth::user()->idrol == 2)
-                    @include('plantilla/hdalumno')
                     @include('plantilla.sbalumno')
                 @elseif (Auth::user()->idrol == 3)
-                    @include('plantilla/hdalumno')
                     @include('plantilla.sbprofe')
                 @elseif (Auth::user()->idrol == 4)
                     @include('plantilla/hdoper')
@@ -44,8 +42,17 @@
                     @yield('contenido')                    
                 </section>                       
             </div>
+
+            @if(Auth::check())
+                @if (Auth::user()->idrol == 1)
+                    @include('plantilla/footer')                              
+                @else
+     
+                @endif
+     
+            @endif 
             
-            @include('plantilla/footer')
+            
                         
         </div>
     </div>

@@ -595,6 +595,7 @@
                Swal.fire({
                 title: 'Anular el ingreso?',
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',

@@ -9,6 +9,7 @@ use App\Alumno;
 use App\Persona;
 use App\User;
 use App\Rol;
+use App\Local;
 
 class AlumnoController extends Controller
 {
@@ -28,11 +29,13 @@ class AlumnoController extends Controller
             ->join('personas','alumnos.id','=','personas.id')
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre', 'users.usuario',
-            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-            'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
-            'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
-            'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')
+            ->join('locales','alumnos.idlocal','=','locales.id')
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre','personas.foto', 'users.usuario',
+            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil','alumnos.sexo',
+            'alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idlocal', 'locales.nombre as local','alumnos.idprofesion', 
+            'profesiones.nombre as profesion', 'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad',
+            'universidades.nombre as universidad', 'universidades.idprovincia','alumnos.edad','alumnos.peso', 'alumnos.estatura','alumnos.nivel_actividad',
+            'alumnos.tipo_actividad','alumnos.objetivo')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
@@ -40,11 +43,13 @@ class AlumnoController extends Controller
             ->join('personas','alumnos.id','=','personas.id')
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre', 'users.usuario',
-            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-            'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
-            'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
-            'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')           
+            ->join('locales','alumnos.idlocal','=','locales.id')
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre','personas.foto', 'users.usuario',
+            'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil','alumnos.sexo',
+            'alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idlocal', 'locales.nombre as local','alumnos.idprofesion', 
+            'profesiones.nombre as profesion', 'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad',
+            'universidades.nombre as universidad', 'universidades.idprovincia','alumnos.edad','alumnos.peso', 'alumnos.estatura','alumnos.nivel_actividad',
+            'alumnos.tipo_actividad','alumnos.objetivo')   
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }            
@@ -69,7 +74,7 @@ class AlumnoController extends Controller
         $alumnos = Alumno::join('personas','alumnos.id','=','personas.id')
         ->where('personas.nombre', 'like', '%'. $filtro . '%')
         ->orWhere('personas.num_documento', 'like', '%'. $filtro . '%')
-        ->select('personas.id','personas.nombre','personas.num_documento')
+        ->select('personas.id','personas.nombre','personas.num_documento','alumnos.idlocal')
         ->orderBy('personas.nombre', 'asc')->get();
  
         return ['alumnos' => $alumnos];
@@ -79,19 +84,22 @@ class AlumnoController extends Controller
         if (!$request->ajax()) return redirect('/');
 
         $id = \Auth::user()->id;
+        //DB::raw('DATE_FORMAT(personas.fec_nacimiento, "%d - %b - %Y") as fec_nacimiento')
 
-        $personas = Alumno::join('personas','alumnos.id','=','personas.id')
+        $personas = Alumno::join('users','alumnos.id','=','users.id')
+        ->join('personas','alumnos.id','=','personas.id')
         ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
         ->join('universidades','alumnos.iduniversidad','=','universidades.id')
-        ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
-        'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
-        'alumnos.sexo','alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idprofesion', 'profesiones.nombre as profesion',
-        'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad','universidades.nombre as universidad', 
-        'alumnos.edad','alumnos.peso','alumnos.estatura','alumnos.nivel_actividad','alumnos.tipo_actividad','alumnos.objetivo')           
+        ->join('locales','alumnos.idlocal','=','locales.id')
+        ->select('users.usuario','personas.id','personas.tipo_documento','personas.num_documento', DB::raw('SUBSTRING_INDEX(personas.nombre," ",1) as nombre'),
+        DB::raw('SUBSTRING_INDEX(personas.nombre," ",-1) as apellido'),'personas.fec_nacimiento', 'personas.direccion','personas.celular','personas.email',
+        'personas.perfil', 'personas.foto', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos', 'alumnos.sector','alumnos.idlocal', 'locales.nombre as local', 
+        'alumnos.idprofesion', 'profesiones.nombre as profesion','alumnos.sit_laboral', 'alumnos.empresa','alumnos.cargo', 'alumnos.estudiante','alumnos.iduniversidad',
+        'universidades.nombre as universidad', 'universidades.idprovincia', 'alumnos.edad','alumnos.peso', 'alumnos.estatura','alumnos.nivel_actividad',
+        'alumnos.tipo_actividad','alumnos.objetivo')           
         ->where('personas.id',$id)->get();
  
-        return ['personas' => $personas];
-        //return $id;
+        return ['personas' => $personas];        
     } 
 
     public function store(Request $request)
@@ -109,6 +117,7 @@ class AlumnoController extends Controller
             $persona->celular = $request->celular;
             $persona->email = $request->email;
             $persona->perfil = 'Alumno';
+            $persona->foto = $request->foto;
             $persona->save();
  
             $alumno = new Alumno();     
@@ -116,7 +125,8 @@ class AlumnoController extends Controller
             $alumno->estado_civil = $request->estado_civil;
             $alumno->hijos = $request->hijos;
             $alumno->sector = $request->sector;
-            $alumno->idprofesion = $request->idprofesion;
+            $alumno->idlocal = $request->idlocal;
+            $alumno->idprofesion = $request->idprofesion;            
             $alumno->sit_laboral = $request->sit_laboral;
             $alumno->empresa = $request->empresa;
             $alumno->cargo = $request->cargo;
@@ -151,7 +161,7 @@ class AlumnoController extends Controller
 
     public function update(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/'); 
         
         try{
             DB::beginTransaction();
@@ -166,12 +176,14 @@ class AlumnoController extends Controller
             $persona->celular = $request->celular;
             $persona->email = $request->email;
             $persona->perfil = 'Alumno';
+            $persona->foto = $request->file('foto')->store('public');
             $persona->save();             
                 
             $alumno->sexo = $request->sexo;
             $alumno->estado_civil = $request->estado_civil;
             $alumno->hijos = $request->hijos;
             $alumno->sector = $request->sector;
+            $alumno->idlocal = $request->idlocal;
             $alumno->idprofesion = $request->idprofesion;
             $alumno->sit_laboral = $request->sit_laboral;
             $alumno->empresa = $request->empresa;
@@ -191,7 +203,55 @@ class AlumnoController extends Controller
         } catch (Exception $e){
             DB::rollBack();
         }
-    }
+    } 
+
+    public function actualizarAlumnoLaboral(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/'); 
+        
+        try{
+            DB::beginTransaction();
+            $alumno = Alumno::findOrFail($request->id);             
+                
+            $alumno->estudiante = $request->estudiante;
+            $alumno->iduniversidad = $request->iduniversidad;
+            $alumno->idprofesion = $request->idprofesion;
+
+            $alumno->sit_laboral = $request->sit_laboral;
+            $alumno->empresa = $request->empresa;
+            $alumno->cargo = $request->cargo;            
+            
+            $alumno->save();
+ 
+            DB::commit();
+ 
+        } catch (Exception $e){
+            DB::rollBack();
+        }
+    } 
+
+    public function actualizarAlumnoFisico(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/'); 
+        
+        try{
+            DB::beginTransaction();
+            $alumno = Alumno::findOrFail($request->id);   
+                
+            $alumno->edad = $request->edad;
+            $alumno->peso = $request->peso;
+            $alumno->estatura = $request->estatura;
+            $alumno->nivel_actividad = $request->nivel_actividad;
+            $alumno->tipo_actividad = $request->tipo_actividad;
+            $alumno->objetivo = $request->objetivo;
+            $alumno->save();
+ 
+            DB::commit();
+ 
+        } catch (Exception $e){
+            DB::rollBack();
+        }
+    } 
 
         
 }

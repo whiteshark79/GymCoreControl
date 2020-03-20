@@ -18,30 +18,33 @@
                         <template v-if="listado==1">
                             <div class="card-body">
                                 <div class="form-group row justify-content-between">
-                                    <div class="input-group input-group-sm col-7">                                
-                                        <select class="form-control col-2 " v-model="criterio" @change="ceroBusqueda();">
-                                            <option value="fecha_hora">Fecha</option>                                   
-                                        </select> 
-                                        <input type="date" v-model="buscar" class="form-control col-4">                                                                          
-                                        <button type="submit" @click="listarCuadreCaja(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                    <div class="row col-sm-12 col-md-12">
+                                        <div class="input-group input-group-sm col-sm-11 col-md-11">                                
+                                            <select class="form-control col-sm-3 col-md-2" v-model="criterio" @change="ceroBusqueda();">
+                                                <option value="fecha_hora">Fecha</option>                                   
+                                            </select> 
+                                            <input type="date" v-model="buscar" class="form-control col-sm-3 col-md-3">                                                                          
+                                            <button type="submit" @click="listarCuadreCaja(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
+                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                        </div>
+                                        
+                                        <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
+                                            <select class="form-control col-sm-6 col-md-12" v-model="paginado" @change="listarCuadreCaja(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-4"></div>
-                                    <div class="input-group input-group-sm col-1">                                     
-                                        <select class="form-control" v-model="paginado" @change="listarCuadreCaja(1,buscar,criterio,paginado,ordenado,ascdesc)">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        </select>
-                                    </div>
+
                                 </div>
 
                                 <div class="table-responsive-sm table-wrapper-scroll-y my-custom-scrollbar">
                                     <table class="table table-bordered table-sm table-hover" id="dtTable">
                                         <thead  class="thead-table">
                                             <tr align="center">
-                                                <th width="3%">#</th>
-                                                <th width="12%">FECHA
+                                                <th scope="col" width="3%">#</th>
+                                                <th scope="col" width="12%">FECHA
                                                     <template v-if="(ordenado !== 'fecha_hora' && ascdesc === 'asc') || (ordenado === 'fecha_hora' && ascdesc === 'desc') ">
                                                         <a href="#" @click="listarCuadreCaja(1,buscar,criterio,paginado,'fecha_hora','asc')"><span style="float:right"><i class="fas fa-arrow-down fa-xs"></i></span></a>
                                                     </template>
@@ -49,24 +52,24 @@
                                                         <a href="#" @click="listarCuadreCaja(1,buscar,criterio,paginado,'fecha_hora','desc')"><span style="float:right"><i class="fas fa-arrow-up fa-xs"></i></span></a>
                                                     </template>
                                                 </th>
-                                                <th width="14%">INSCRIPCIONES</th>                                                                                                                                        
-                                                <th width="14%">GASTOS</th>
-                                                <th width="14%">VENTAS</th>
-                                                <th width="14%">COMPRAS</th>
-                                                <th width="17%">TOTAL</th>                                                          
-                                                <th width="10%">ACCIONES</th>
+                                                <th scope="col" width="14%">INSCRIPCIONES</th>                                                                                                                                        
+                                                <th scope="col" width="14%">GASTOS</th>
+                                                <th scope="col" width="14%">VENTAS</th>
+                                                <th scope="col" width="14%">COMPRAS</th>
+                                                <th scope="col" width="17%">TOTAL</th>                                                          
+                                                <th scope="col" width="10%">ACCIONES</th>
                                             </tr>
                                         </thead>
                                         <tbody v-if="arrayCaja.length">
                                             <tr v-for="caja in arrayCaja" :key="caja.id">
-                                                <td align="center" v-text="caja.id"></td>
-                                                <td align="center" v-text="caja.fecha_hora"></td>
-                                                <td align="right"><small>$</small> {{ caja.inscripciones }}</td>
-                                                <td align="right"><small>$</small> {{ caja.gastos }}</td>
-                                                <td align="right"><small>$</small> {{ caja.ventas  }}</td>
-                                                <td align="right"><small>$</small> {{ caja.compras }}</td>
-                                                <td align="right"><small>$</small> {{ caja.total  }}<i class="fas fa-sort-up" style="color:green;" v-if="caja.total>0"></i><i class="fas fa-sort-down" style="color:red;" v-else></i></td>                                                
-                                                <td align="center">
+                                                <td align="center" v-text="caja.id" scope="row" data-label="#"></td>
+                                                <td align="center" v-text="caja.fecha_hora" data-label="FECHA"></td>
+                                                <td align="right" data-label="INSCRIPCIONES"><small>$</small> {{ caja.inscripciones }}</td>
+                                                <td align="right" data-label="GASTOS"><small>$</small> {{ caja.gastos }}</td>
+                                                <td align="right" data-label="VENTAS"><small>$</small> {{ caja.ventas  }}</td>
+                                                <td align="right" data-label="COMPRAS"><small>$</small> {{ caja.compras }}</td>
+                                                <td align="right" data-label="TOTAL"><small>$</small> {{ caja.total  }}<i class="fas fa-sort-up" style="color:green;" v-if="caja.total>0"></i><i class="fas fa-sort-down" style="color:red;" v-else></i></td>                                                
+                                                <td align="center" data-label="ACCIONES">
                                                     <a class="btn btn-sm btn-default" @click="mostrarDetalle(caja.fecha_hora)"><i class="far fa-eye"></i></a>
                                                     <a class="btn btn-sm btn-default" @click="pdfCaja(caja.fecha_hora)"><i class="fas fa-print"></i></a>                        
                                                     <template v-if="caja.estado=='Cancelado'">
@@ -507,6 +510,14 @@
 
                 }).then(function (response) {
                     me.listado=1;
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '<h5>Registro creado</h5>',
+                        width: 250,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                     me.listarCuadreCaja(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc); 
                     me.inscripciones=0.0;
                     me.gastos=0.0;
@@ -629,6 +640,7 @@
                Swal.fire({
                 title: 'Anular la caja?',
                 icon: 'warning',
+                width: 450,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',

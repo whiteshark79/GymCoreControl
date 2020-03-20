@@ -8,36 +8,42 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="info-box col-6">
-                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">{{in_msj}}</span>
-                    <span class="info-box-number">Mes: ${{in_val_mes}} <small>( {{in_qtx_mes}} )</small></span>
-                    <span class="info-box-number">Total: ${{in_val_total}}  <small>( {{in_qtx_total}} )</small></span> 
+                <div class="col-12 col-sm-6 col-md-6">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">{{in_msj}}</span>
+                      <span class="info-box-number">Mes: ${{in_val_mes}} <small>( {{in_qtx_mes}} )</small></span>
+                      <span class="info-box-number">Total: ${{in_val_total}}  <small>( {{in_qtx_total}} )</small></span> 
+                    </div>
                   </div>
                 </div>
-                <div class="info-box col-6">
-                  <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">{{g_msj}}</span>
-                    <span class="info-box-number">Mes: ${{g_val_mes}} <small>( {{g_qtx_mes}} )</small></span>
-                    <span class="info-box-number">Total: ${{g_val_total}}  <small>( {{g_qtx_total}} )</small></span>
+                <div class="col-12 col-sm-6 col-md-6">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">{{g_msj}}</span>
+                      <span class="info-box-number">Mes: ${{g_val_mes}} <small>( {{g_qtx_mes}} )</small></span>
+                      <span class="info-box-number">Total: ${{g_val_total}}  <small>( {{g_qtx_total}} )</small></span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div class="row">
-                <div class="card callout callout-success col-12">
-                  <div class="card-header">
-                    <h4>Inscripciones vs Gastos</h4>                 
-                  </div>                      
-                  <div class="card-content">
-                    <div class="ct-chart">
-                        <canvas id="chart_insgas">                                                
-                        </canvas>
-                    </div>
-                  </div>                      
-                </div>                
+                <div class="col-md-12">
+                  <div class="card callout callout-success">
+                    <div class="card-header">
+                      <h4>Inscripciones vs Gastos</h4>                 
+                    </div>                      
+                    <div class="card-content">
+                      <div class="ct-chart">
+                          <canvas id="chart_insgas">                                                
+                          </canvas>
+                      </div>
+                    </div>                      
+                  </div>  
+                </div>              
 
               </div>
             </div>
@@ -52,55 +58,57 @@
             </div>
             <div class="card-body">
               <div class="form-group row justify-content-between">
-                <div class="input-group input-group-sm col-10">                                
-                    <select class="form-control col-3" v-model="criterio" @onchange="ceroBusqueda();">
-                        <option value="fecha_ini">Fecha</option>
-                        <option value="idalumno">Alumno</option>                                      
-                    </select>                                    
-                    <template v-if="criterio=='fecha_ini'">
-                        <input type="date" v-model="buscar" class="form-control col-5">
-                    </template>
-                    <template v-if="criterio=='idalumno'">
-                      <div class="col-md-7">                                                         
-                          <v-select
-                            id="buscar"
-                            @search="selectAlumno"
-                            label="nombre"
-                            :options="arrayAlumno"
-                            placeholder="Buscar Alumnos..."
-                            @input="getDatosAlumno"                                    
-                          ></v-select>
-                      </div>
-                    </template>                                                                          
-                    <button type="submit" @click="listarInscripcionAlumno(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
-                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
-                </div>                      
-                <div class="input-group input-group-sm col-2">                                     
-                    <select class="form-control" v-model="paginado" @change="listarInscripcionAlumno(1,buscar,criterio,paginado)">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    </select>
-                </div> 
+                <div class="row col-sm-12 col-md-12">
+                  <div class="input-group input-group-sm col-sm-10 col-md-10">                                
+                      <select class="form-control col-sm-3 col-md-3" v-model="criterio" @onchange="ceroBusqueda();">
+                          <option value="fecha_ini">Fecha</option>
+                          <option value="idalumno">Alumno</option>                                      
+                      </select>                                    
+                      <template v-if="criterio=='fecha_ini'">
+                          <input type="date" v-model="buscar" class="form-control col-sm-5 col-md-4">
+                      </template>
+                      <template v-if="criterio=='idalumno'">
+                        <div class="col-sm-6 col-md-5">                                                         
+                            <v-select
+                              id="buscar"
+                              @search="selectAlumno"
+                              label="nombre"
+                              :options="arrayAlumno"
+                              placeholder="Buscar Alumnos..."
+                              @input="getDatosAlumno"                                    
+                            ></v-select>
+                        </div>
+                      </template>                                                                          
+                      <button type="submit" @click="listarInscripcionAlumno(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
+                      <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                  </div>                      
+                  <div class="input-group input-group-sm col-sm-2 col-md-2">                                     
+                      <select class="form-control col-sm-12 col-md-12" v-model="paginado" @change="listarInscripcionAlumno(1,buscar,criterio,paginado)">
+                      <option value="10">10</option>
+                      <option value="25">25</option>
+                      <option value="50">50</option>
+                      </select>
+                  </div> 
+                </div>
               </div>
               <div class="table-responsive-sm table-wrapper-scroll-y my-custom-mini-scrollbar_">
                 <table class="table table-bordered table-sm table-hover" id="dtTable">
                     <thead class="thead-table">
                         <tr align="center">    
-                          <th width="36%">NOMBRE</th> 
-                          <th width="22%">MODALIDAD</th>                                                                                       
-                          <th width="16%">FECHA</th>
-                          <th width="16%">FECHA FIN</th>
-                          <th width="10%">ESTADO</th>
+                          <th scope="col" width="36%">NOMBRE</th> 
+                          <th scope="col" width="22%">MODALIDAD</th>                                                                                       
+                          <th scope="col" width="16%">REGISTRO</th>
+                          <th scope="col" width="16%">CADUCA</th>
+                          <th scope="col" width="10%">ESTADO</th>
                         </tr>
                     </thead>
                     <tbody v-if="arrayInscripcionAlumno.length">
                         <tr v-for="inscripcion in arrayInscripcionAlumno" :key="inscripcion.id">
-                            <td v-text="inscripcion.alumno"></td>
-                            <td v-text="inscripcion.modalidad"></td>
-                            <td align="center" v-text="inscripcion.fecha_ini"></td>                                  
-                            <td align="center" v-text="inscripcion.fecha_fin"></td>
-                            <td align="center">
+                            <td v-text="inscripcion.alumno" scope="row" data-label="NOMBRE"></td>
+                            <td v-text="inscripcion.modalidad" data-label="MODALIDAD"></td>
+                            <td align="center" v-text="inscripcion.fecha_ini" data-label="REGISTRO"></td>                                  
+                            <td align="center" v-text="inscripcion.fecha_fin" data-label="CADUCA"></td>
+                            <td align="center" data-label="ESTADO">
                                 <div v-if="inscripcion.fecha_fin <= hoyFecha() "><span class="badge badge-danger">Caducado</span></div>
                                 <div v-else><span class="badge badge-success">Activo</span></div>                                    
                             </td>                                  

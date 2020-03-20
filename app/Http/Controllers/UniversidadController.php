@@ -42,13 +42,25 @@ class UniversidadController extends Controller
             ],
             'universidades' => $universidades
         ];
-    }    
-
+    }   
+    
     public function selectUniversidad(Request $request){
         if (!$request->ajax()) return redirect('/');
+
         $universidades = Universidad::where('condicion','=','1')
         ->select('id','nombre')->orderBy('nombre', 'asc')->get();
         return ['universidades' => $universidades];
+    }
+
+    public function selectUniversidadId(Request $request){
+        if (!$request->ajax()) return redirect('/');
+
+        $idprovincia = $request->idprovincia;
+        $universidadesId = Universidad::where('condicion','=','1')
+        ->select('id','nombre')
+        ->where('idprovincia','=',$idprovincia)
+        ->orderBy('nombre', 'asc')->get();
+        return ['universidadesId' => $universidadesId];
     }
 
    
