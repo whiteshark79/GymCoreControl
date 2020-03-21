@@ -49,6 +49,19 @@ class ClienteController extends Controller
             'personas' => $personas
         ];
     }
+
+    public function selectPersonaLogin(Request $request){ 
+        if (!$request->ajax()) return redirect('/');
+
+        $id = \Auth::user()->id;
+
+        $personas = Persona::join('users','personas.id','=','users.id')
+        ->select('users.usuario', DB::raw('SUBSTRING_INDEX(personas.nombre," ",1) as nombre'),
+        DB::raw('SUBSTRING_INDEX(personas.nombre," ",-1) as apellido'),'personas.perfil')         
+        ->where('personas.id',$id)->get();
+ 
+        return ['personas' => $personas];        
+    } 
  
     public function selectPersonaId(Request $request){ 
         if (!$request->ajax()) return redirect('/');

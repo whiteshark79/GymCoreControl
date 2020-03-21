@@ -264,8 +264,7 @@
             <h2 class="text-center">INSCRIPCIONES</h2>
             <div class="mb-5 heading-border"></div>
           </div>
-          <div class="resume-item col-md-12 col-sm-12" > 
-            
+          <div class="resume-item col-md-12 col-sm-12">             
             <div class="card card-primary card-outline">
               <div class="card-header">
                   <div class="card-title"><h5><i class="fas fa-dumbbell mr-1"></i> Inscripciones</h5></div>                            

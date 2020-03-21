@@ -12,7 +12,7 @@
                     <div class="row float-left text-muted text-small">
                         <div class="col-6"><em>by</em> ωнιτєѕнαяκ</div>
                     </div>                
-                </div>
+                </div> 
                 <div class="card p-3 bg-primary text-white">          
                     <form role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }} 
@@ -29,7 +29,7 @@
                             </div> 
                             <div class="input-group input-group-sm mb-4">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+                                    <span class="input-group-text"><i class="fas fa-unlock-alt" id="i_lock"></i></span>
                                 </div>                           
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
                                 @error('password')
@@ -52,7 +52,11 @@
 @push('scripts')
     <script type="text/javascript">
 	$('#btn_login').click(function() {
-        $('#btn_login').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>').addClass('disabled');
+        if ($('#usuario').val().length && $('#password').val().length) {
+            $('#btn_login').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>').addClass('disabled');
+            $('#i_lock').removeClass('fas fa-unlock-alt');
+            $('#i_lock').addClass('fas fa-lock');
+        }
     });
     </script>
 @endpush

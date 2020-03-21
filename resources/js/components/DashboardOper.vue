@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="row col-sm-12 col-md-12">
-                                    <div class="input-group input-group-sm col-sm-10 col-md-11">                                
+                                    <div class="input-group input-group-sm col-sm-10 col-md-10">                                
                                         <select class="form-control col-sm-3 col-md-3" v-model="criterio" @onchange="ceroBusqueda();">
                                             <option value="fecha_ini">Fecha</option>
                                             <option value="idalumno">Alumno</option>
@@ -48,7 +48,7 @@
                                         <button type="submit" @click="listarInscripcionAlumno(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
                                         <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
                                     </div>                      
-                                    <div class="input-group input-group-sm col-sm-2 col-md-1">                                     
+                                    <div class="input-group input-group-sm col-sm-2 col-md-2">                                     
                                         <select class="form-control col-sm-12 col-md-12" v-model="paginado" @change="listarInscripcionAlumno(1,buscar,criterio,paginado)">
                                             <option value="10">10</option>
                                             <option value="25">25</option>
@@ -118,7 +118,7 @@
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
                                 <div class="row col-sm-12 col-md-12">
-                                    <div class="input-group input-group-sm col-sm-10 col-md-11">                                
+                                    <div class="input-group input-group-sm col-sm-10 col-md-10">                                
                                         <select class="form-control col-sm-3 col-md-3" v-model="criterio_" @onchange="ceroBusqueda_();">
                                             <option value="fecha_hora">Fecha</option>
                                             <option value="idcliente">Alumno</option>                                      
@@ -141,7 +141,7 @@
                                         <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
                                         <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
                                     </div>                      
-                                    <div class="input-group input-group-sm col-sm-2 col-md-1">                                     
+                                    <div class="input-group input-group-sm col-sm-2 col-md-2">                                     
                                         <select class="form-control col-sm-12 col-md-12" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
                                             <option value="10">10</option>
                                             <option value="25">25</option>

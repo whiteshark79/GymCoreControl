@@ -8,8 +8,9 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-lightblue fixed-top" id="sideNav">
         
         <a href="../../index3.html" class="brand-link">
-          <img src="img/logo_aside.png" alt="GymCore Logo" class="brand-image">
-          <span class="brand-text font-weight-bold">GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</span>
+          <img src="img/logo_sidebar.png" alt="GymCore Logo" >
+          {{-- <span class="brand-text">GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</span> --}}
+          
         </a>
         
         <a class="navbar-brand js-scroll-trigger" href="#page-top">

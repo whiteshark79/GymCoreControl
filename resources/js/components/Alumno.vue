@@ -37,9 +37,9 @@
                                     
                                     <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
                                         <select class="form-control" v-model="paginado" @change="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
                                         </select>
                                     </div> 
                                 </div>

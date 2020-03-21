@@ -24,7 +24,7 @@ Route::group(['middleware'=>['auth']],function(){
        //return view('tooltip');
     })->name('main');
 
-    Route::group(['middleware' => ['Administrador']], function () {        
+    Route::group(['middleware' => ['Administrador']], function () {      
 
         Route::get('/dashboard/grafInOuts','DashboardController@grafInOuts');
         Route::get('/dashboard/widgetInOuts','DashboardController@widgetInOuts');
@@ -145,6 +145,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
         Route::get('/cliente/selectPersonaId', 'ClienteController@selectPersonaId');
         Route::get('/cliente/selectPersonaEmail', 'ClienteController@selectPersonaEmail');
+        Route::get('/cliente/selectPersonaLogin', 'ClienteController@selectPersonaLogin');
         
         Route::get('/servicio', 'ServicioController@index');
         Route::post('/servicio/registrar', 'ServicioController@store');

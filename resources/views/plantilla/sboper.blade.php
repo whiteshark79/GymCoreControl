@@ -3,21 +3,12 @@
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
       <img src="img/logo_aside.png" alt="GymCore Logo" class="brand-image">
-      <span class="brand-text font-weight-bold">GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</span>
+      <span class="brand-text">GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</span>
     </a>
 
     <!-- Sidebar -->    
-    <div class="sidebar">
-      
-      <!-- menu profile quick info -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="/img/avatar5.png" class="img-circle" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->usuario}}</a>
-        </div>
-      </div>
+    <div class="sidebar">      
+      <userbar></userbar>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

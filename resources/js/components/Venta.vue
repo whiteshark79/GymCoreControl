@@ -61,7 +61,7 @@
                                             <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
                                         </div>
                                         <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
-                                            <select class="form-control col-sm-6 col-md-12" v-model="paginado" @change="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)">
+                                            <select class="form-control" v-model="paginado" @change="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
                                                 <option value="50">50</option>
