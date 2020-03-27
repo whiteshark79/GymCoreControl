@@ -30,7 +30,7 @@ class AlumnoController extends Controller
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
             ->join('locales','alumnos.idlocal','=','locales.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre','personas.foto', 'users.usuario',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre','users.usuario', 'users.avatar',
             'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil','alumnos.sexo',
             'alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idlocal', 'locales.nombre as local','alumnos.idprofesion', 
             'profesiones.nombre as profesion', 'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad',
@@ -44,7 +44,7 @@ class AlumnoController extends Controller
             ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
             ->join('universidades','alumnos.iduniversidad','=','universidades.id')
             ->join('locales','alumnos.idlocal','=','locales.id')
-            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre','personas.foto', 'users.usuario',
+            ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre','users.usuario', 'users.avatar',
             'personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil','alumnos.sexo',
             'alumnos.estado_civil','alumnos.hijos','alumnos.sector','alumnos.idlocal', 'locales.nombre as local','alumnos.idprofesion', 
             'profesiones.nombre as profesion', 'alumnos.sit_laboral','alumnos.empresa','alumnos.cargo','alumnos.estudiante','alumnos.iduniversidad',
@@ -91,9 +91,9 @@ class AlumnoController extends Controller
         ->join('profesiones','alumnos.idprofesion','=','profesiones.id')
         ->join('universidades','alumnos.iduniversidad','=','universidades.id')
         ->join('locales','alumnos.idlocal','=','locales.id')
-        ->select('users.usuario','personas.id','personas.tipo_documento','personas.num_documento', DB::raw('SUBSTRING_INDEX(personas.nombre," ",1) as nombre'),
+        ->select('users.usuario', 'users.avatar','personas.id','personas.tipo_documento','personas.num_documento', DB::raw('SUBSTRING_INDEX(personas.nombre," ",1) as nombre'),
         DB::raw('SUBSTRING_INDEX(personas.nombre," ",-1) as apellido'),'personas.fec_nacimiento', 'personas.direccion','personas.celular','personas.email',
-        'personas.perfil', 'personas.foto', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos', 'alumnos.sector','alumnos.idlocal', 'locales.nombre as local', 
+        'personas.perfil', 'alumnos.sexo','alumnos.estado_civil','alumnos.hijos', 'alumnos.sector','alumnos.idlocal', 'locales.nombre as local', 
         'alumnos.idprofesion', 'profesiones.nombre as profesion','alumnos.sit_laboral', 'alumnos.empresa','alumnos.cargo', 'alumnos.estudiante','alumnos.iduniversidad',
         'universidades.nombre as universidad', 'universidades.idprovincia', 'alumnos.edad','alumnos.peso', 'alumnos.estatura','alumnos.nivel_actividad',
         'alumnos.tipo_actividad','alumnos.objetivo')           
@@ -104,7 +104,8 @@ class AlumnoController extends Controller
 
     public function store(Request $request)
     {
-        if (!$request->ajax()) return redirect('/');      
+        if (!$request->ajax()) return redirect('/');     
+        if($request->sexo == 'M') { $avatar = 'female.png';}else{ $avatar = 'male.png';}
         
         try{
             DB::beginTransaction();
@@ -116,8 +117,7 @@ class AlumnoController extends Controller
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;
             $persona->email = $request->email;
-            $persona->perfil = 'Alumno';
-            $persona->foto = $request->foto;
+            $persona->perfil = 'Alumno';            
             $persona->save();
  
             $alumno = new Alumno();     
@@ -146,6 +146,7 @@ class AlumnoController extends Controller
             $user = new User(); 
             $user->usuario = $request->usuario;
             $user->password = bcrypt( $request->num_documento);
+            $user->avatar = $avatar;
             $user->condicion = '1';
             $user->idrol = $rol->id;
             $user->id = $persona->id;
@@ -162,11 +163,13 @@ class AlumnoController extends Controller
     public function update(Request $request)
     {
         if (!$request->ajax()) return redirect('/'); 
+        if($request->sexo == 'M') { $avatar = 'female.png';}else{ $avatar = 'male.png';}
         
         try{
             DB::beginTransaction();
             $alumno = Alumno::findOrFail($request->id); 
             $persona = Persona::findOrFail($alumno->id);
+            $user = User::findOrFail($alumno->id);
 
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
@@ -175,8 +178,7 @@ class AlumnoController extends Controller
             $persona->direccion = $request->direccion;
             $persona->celular = $request->celular;
             $persona->email = $request->email;
-            $persona->perfil = 'Alumno';
-            $persona->foto = $request->file('foto')->store('public');
+            $persona->perfil = 'Alumno';            
             $persona->save();             
                 
             $alumno->sexo = $request->sexo;
@@ -197,6 +199,9 @@ class AlumnoController extends Controller
             $alumno->tipo_actividad = $request->tipo_actividad;
             $alumno->objetivo = $request->objetivo;
             $alumno->save();
+
+            $user->avatar = $avatar;
+            $user->save();
  
             DB::commit();
  

@@ -1,73 +1,79 @@
 <template> 
   <main class="main">
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0">      
 
       <!--====================================================
                       ABOUT
       ======================================================-->
-      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-        <div class="mp-auto col-md-5" >            
-            
-          <h1 class="mb-0">{{nombre}} <span class="text-primary">{{apellido}}</span></h1>
-          <div class="text-cursiva">            
-              <p class="mb-0">{{f_descripcion}}</p>
-              <footer class="blockquote-footer">{{f_autor}}</footer>  
-          </div>
-          <br>
-          <div class="card-header">
-            <div class="card-title"><h5><i class="far fa-id-card mr-1"></i> Datos Generales</h5></div>                
-            <div class="card-tools">
-              <button type="button" class="btn btn-primary btn-sm" v-if="stsDatos==0" @click="activarDatos()"><i class="fas fa-edit fa-lg"></i></button> 
-              <button type="button" class="btn btn-success btn-sm" v-if="stsDatos==1" @click="actualizarAlumno()" :disabled="stsPersona!=''"><i class="fas fa-save fa-lg"></i></button>                                 
-            </div>
-          </div>          
-          <div class="row">                                        
-            <div class="profile-user-info">                
-                <div class="profile-info-row">
-                    <div class="profile-info-name">Usuario </div>
-                    <div class="profile-info-value"><span>{{usuario}}</span></div>
+      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">        
+
+          <div class="mp-auto col-sm-6 col-md-5" > 
+
+                   
+              
+              <h1 class="mb-0">{{nombre}} <span class="text-primary">{{apellido}}</span></h1>
+              <div class="text-cursiva">            
+                  <p class="mb-0">{{f_descripcion}}</p>
+                  <footer class="blockquote-footer">{{f_autor}}</footer>  
+              </div>
+              <br>
+              <div class="card-header">
+                <div class="card-title"><h5><i class="far fa-id-card mr-1"></i> Datos Generales</h5></div>                
+                <div class="card-tools">
+                  <button type="button" class="btn btn-primary btn-sm" v-if="stsDatos==0" @click="activarDatos()"><i class="fas fa-edit fa-lg"></i></button> 
+                  <button type="button" class="btn btn-success btn-sm" v-if="stsDatos==1" @click="actualizarAlumno()" :disabled="stsPersona!=''"><i class="fas fa-save fa-lg"></i></button>  
                 </div>
-                <div class="profile-info-row">
-                    <div class="profile-info-name"> Local </div>
-                    <div class="profile-info-value"><i class="fas fa-store-alt"></i><span> {{local}}</span></div>
-                </div>
-                <div class="profile-info-row">
-                  <div class="profile-info-name">C.I. </div>
-                  <div class="profile-info-value">
-                    <input type="number" v-model="num_documento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento" @change="existePersonaId()" :disabled="stsDatos == 0">
-                    <input type="hidden" v-model="num_documento_">
-                    <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
-                  </div>                  
-                </div>                
-                <div class="profile-info-row">
-                    <div class="profile-info-name"> Cumpleaños </div>
-                    <div class="profile-info-value">
-                      <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_fec_nacimiento }" :disabled="stsDatos == 0">
+              </div>          
+              <div class="row">                                        
+                <div class="profile-user-info">                
+                    <div class="profile-info-row">
+                        <div class="profile-info-name">Usuario </div>
+                        <div class="profile-info-value"><span>{{usuario}}</span></div>
                     </div>
-                </div>
-                <div class="profile-info-row">
-                    <div class="profile-info-name"> Correo </div>
-                    <div class="profile-info-value">
-                      <input type="email" v-model="email" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email" @change="existePersonaEmail()"  :disabled="stsDatos == 0"> 
-                      <input type="hidden" v-model="email_">
-                      <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>
-                    </div>                    
-                </div>
-                <div class="profile-info-row">
-                    <div class="profile-info-name"> Celular </div>
-                    <div class="profile-info-value">
-                      <input type="number" v-model="celular" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular" :disabled="stsDatos == 0">
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Local </div>
+                        <div class="profile-info-value"><i class="fas fa-store-alt"></i><span> {{local}}</span></div>
                     </div>
-                </div>
-                <div class="profile-info-row">
-                    <div class="profile-info-name"> Dirección </div>
-                    <div class="profile-info-value">
-                      <textarea  v-model="direccion" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_direccion }" rows="2" maxlength="60" :disabled="stsDatos == 0"></textarea>
+                    <div class="profile-info-row">
+                      <div class="profile-info-name">C.I. </div>
+                      <div class="profile-info-value">
+                        <input type="number" v-model="num_documento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento" @change="existePersonaId()" :disabled="stsDatos == 0">
+                        <input type="hidden" v-model="num_documento_">
+                        <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
+                      </div>                  
+                    </div>                
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Cumpleaños </div>
+                        <div class="profile-info-value">
+                          <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_fec_nacimiento }" :disabled="stsDatos == 0">
+                        </div>
                     </div>
-                </div>
-            </div>    
-          </div>   
-        </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Correo </div>
+                        <div class="profile-info-value">
+                          <input type="email" v-model="email" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email" @change="existePersonaEmail()"  :disabled="stsDatos == 0"> 
+                          <input type="hidden" v-model="email_">
+                          <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>
+                        </div>                    
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Celular </div>
+                        <div class="profile-info-value">
+                          <input type="number" v-model="celular" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular" :disabled="stsDatos == 0">
+                        </div>
+                    </div>
+                    <div class="profile-info-row">
+                        <div class="profile-info-name"> Dirección </div>
+                        <div class="profile-info-value">
+                          <textarea  v-model="direccion" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_direccion }" rows="2" maxlength="60" :disabled="stsDatos == 0"></textarea>
+                        </div>
+                    </div>
+                                      
+                </div>    
+              </div> 
+
+          </div>     
+       
           
       </section>
 
@@ -517,9 +523,9 @@
           direccion : '',
           celular : '',
           email : '',
-          email_ : '',
-          foto : '',
-          miniatura : '',
+          email_ : '',    
+          
+          file: '',
 
           usuario : '',
           sexo : 0,
@@ -642,9 +648,10 @@
 
             return pagesArray_;             
 
-        }             
+        }                  
       },
-      methods : {
+      methods : {    
+
         activarDatos(){
           this.stsDatos = 1;
         },
@@ -653,8 +660,7 @@
         }, 
         activarFisico(){
           this.stsFisico = 1;
-        },
-        
+        },               
         activarUniversidad(){
           this.stsLaboral_ = 1;
         },        
@@ -746,10 +752,10 @@
             me.celular= arrayPersona[0]['celular'];
             me.email= arrayPersona[0]['email'];
             me.email_= arrayPersona[0]['email'];
-            me.perfil= arrayPersona[0]['perfil'];
-            me.foto= arrayPersona[0]['foto'];
+            me.perfil= arrayPersona[0]['perfil'];            
 
             me.usuario=arrayPersona[0]['usuario'];
+            me.avatar= arrayPersona[0]['avatar'];
             me.sexo= arrayPersona[0]['sexo'];
             me.sector= arrayPersona[0]['sector'];
             me.idlocal= arrayPersona[0]['idlocal'];
@@ -816,66 +822,7 @@
           let me=this;
           if(me.stsPersonaId || me.stsPersonaEmail){ me.stsPersona=1;
           }else{ me.stsPersona=''; }
-        },
-        // obtenerImagen(e){
-        //   let me=this;
-        //   let file = e.target.files[0];
-        //   me.foto = file;
-        //   me.cargarImagen(file);
-        // },
-        // cargarImagen(file){
-        //   let me = this;
-        //   let reader = new FileReader();
-
-        //   reader.onload = (e)=> { me.miniatura = e.target.result; }
-        //   reader.readAsDataURL(file);
-        // },
-        actualizarPersona(){
-          if (this.validarPersona()){ return; }
-          let me = this;
-
-          axios.put('/alumno/actualizar',{
-            'tipo_documento' : this.tipo_documento,
-            'num_documento' : this.num_documento,
-            'nombre' : this.nombre,
-            'fec_nacimiento' : this.fec_nacimiento,                    
-            'direccion' : this.direccion,                  
-            'celular' : this.celular,
-            'email' : this.email,
-            'foto' : this.foto,
-
-            'usuario' : this.usuario,
-            'sexo' : this.sexo,
-            'estado_civil' : this.estado_civil,
-            'hijos' : this.hijos,
-            'sector' : this.sector,
-            'idlocal' : this.idlocal,
-            'idprofesion' : this.idprofesion,
-            'sit_laboral' : this.sit_laboral,
-            'empresa' : this.empresa,
-            'cargo' : this.cargo,
-            'estudiante' : this.estudiante,
-            'iduniversidad' : this.iduniversidad,
-            'edad' : this.edad,
-            'peso' : this.peso,
-            'estatura' : this.estatura,
-            'nivel_actividad' : this.nivel_actividad,
-            'tipo_actividad' : this.tipo_actividad,
-            'objetivo' : this.objetivo,
-            'id': this.persona_id
-          }).then(function (response) {
-              me.stsEditar = 0;
-              // Swal.fire({
-              //   position: 'top-end',
-              //   icon: 'success',
-              //   title: 'Datos actualizados',
-              //   showConfirmButton: false,
-              //   timer: 1500
-              // })
-            }).catch(function (error) {
-                console.log(error);
-          }); 
-        },
+        },         
         actualizarAlumno(){ 
           let me = this;         
 
@@ -884,9 +831,9 @@
             'fec_nacimiento' : this.fec_nacimiento, 
             'email' : this.email,                 
             'celular' : this.celular,
-            'direccion' : this.direccion, 
+            'direccion' : this.direccion,
             'id': this.persona_id
-          }).then(function (response) {
+          }).then(function (response) {            
               me.stsDatos = 0;
               Swal.fire({
                 position: 'top-end',
@@ -898,7 +845,7 @@
               })
             }).catch(function (error) {
                 console.log(error);
-          }); 
+          });        
 
         },
         actualizarAlumnoLaboral(){ 

@@ -145,7 +145,7 @@
                                 </div> 
                                 <div class="form-group col-md-5">
                                     <div class="input-group input-group-sm">
-                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
                                         <input type="text" maxlength="10" v-model="usuario" class="form-control" v-bind:class="{ 'is-invalid': e_usuario }" @change="existeUsuario()" placeholder="Usuario">
                                     </div>
                                     <span class="text-error" v-show="stsUsuarioUser">Usuario ya existe</span>                                       

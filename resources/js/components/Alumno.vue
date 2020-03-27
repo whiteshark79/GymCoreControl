@@ -147,14 +147,16 @@
                                                             <option value="R">RUC</option>
                                                             <option value="P">Pasaporte</option>                                            
                                                         </select>
-                                                        <input type="number" v-model="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" @change="existePersonaId()" placeholder="Número de documento">                                                        
+                                                        <input type="text" v-model="num_documento" id="num_documento" class="form-control col-8" v-bind:class="{ 'is-invalid': e_num_documento }" @change="existePersonaId()" placeholder="Número de documento">
+                                                        <input type="hidden" :value="num_documento" id="ci">                                                                                                     
                                                     </div>
                                                     <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
                                                 </div>
                                                 <div class="form-group col-md-4">
                                                     <div class="input-group input-group-sm">
-                                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                                                        <input type="text" maxlength="15" v-model="usuario" class="form-control" v-bind:class="{ 'is-invalid': e_usuario }" @change="existeUsuario()" placeholder="Usuario">
+                                                        <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+                                                        <input type="text" v-model="usuario" id="usuario" class="form-control" v-bind:class="{ 'is-invalid': e_usuario }" @change="existeUsuario()" placeholder="Usuario">
+                                                        <input type="hidden" :value="usuario" id="user">
                                                     </div>    
                                                     <span class="text-error" v-show="stsUsuarioUser">Usuario ya existe</span>                                     
                                                 </div>                                                
@@ -163,7 +165,7 @@
                                                 <div class="form-group col-md-8">
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                        <input type="text" maxlength="60" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
+                                                        <input type="text" v-model="nombre" id="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre y Apellido">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-4">
@@ -212,13 +214,14 @@
                                                 <div class="form-group col-md-6">
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-mobile-alt"></i></span>
-                                                        <input type="number" v-model="celular" class="form-control" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular">
+                                                        <input type="text" v-model="celular" id="celular" class="form-control" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular">
                                                     </div>                                        
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                                        <input type="email" v-model="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" @change="existePersonaEmail()" placeholder="Email">                                                    
+                                                        <input type="text" v-model="email" id="email" class="form-control" v-bind:class="{ 'is-invalid': e_email }" @change="existePersonaEmail()" placeholder="Email">
+                                                        <input type="hidden" :value="email" id="mail">                                                   
                                                     </div>   
                                                     <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>                                     
                                                 </div>                                                                                                         
@@ -318,7 +321,7 @@
                                                 <div class="form-group col-md-4">
                                                     <div class="input-group input-group-sm">
                                                         <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
-                                                        <input type="number" min="8" max="80" v-model="edad" class="form-control" placeholder="Edad">                                                        
+                                                        <input type="number" step="1" min="4" max="80" v-model="edad" class="form-control" placeholder="Edad">                                                        
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-md-4">
@@ -398,6 +401,7 @@
 </template>
 
 <script>
+import Inputmask from 'inputmask';
     export default {
         data (){
             return {                
@@ -469,6 +473,7 @@
             }
         },
         computed:{
+            
             isActived: function(){
                 return this.pagination.current_page;
             },
@@ -498,6 +503,27 @@
             }
         },
         methods : {
+            validarInput(){                
+                Inputmask("99-99999999").mask(num_documento);
+                Inputmask("a{5,15}").mask(usuario);
+                Inputmask("Aa{3,15} Aa{3,15}").mask(nombre);                              
+                Inputmask("099-999-9999").mask(celular);
+                Inputmask({
+                            mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+                            greedy: false,
+                            onBeforePaste: function (pastedValue, opts) {
+                            pastedValue = pastedValue.toLowerCase();
+                            return pastedValue.replace("mailto:", "");
+                            },
+                            definitions: {
+                            '*': {
+                                validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                                casing: "lower"
+                            }
+                            }
+                        }).mask(email);           
+
+            },         
             listarPersona (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
                 var url= '/alumno?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
@@ -557,8 +583,10 @@
             },
             existePersonaId(){
                 let me=this;
+
+                me.ci=document.getElementById('ci').value;
                 
-                var url= '/cliente/selectPersonaId?num_documento='+this.num_documento;
+                var url= '/cliente/selectPersonaId?num_documento='+me.ci;
                 axios.get(url).then(function (response) {
                     //console.log(response);
                     var respuesta= response.data;
@@ -571,8 +599,10 @@
             },
             existePersonaEmail(){
                 let me=this;
+
+                me.mail=document.getElementById('mail').value;
                 
-                var url= '/cliente/selectPersonaEmail?email='+this.email;
+                var url= '/cliente/selectPersonaEmail?email='+me.mail;
                 axios.get(url).then(function (response) {
                     //console.log(response);
                     var respuesta= response.data;
@@ -585,8 +615,10 @@
             },
             existeUsuario(){
                 let me=this;
+
+                me.user=document.getElementById('user').value;
                 
-                var url= '/user/selectUsuario?usuario='+this.usuario;
+                var url= '/user/selectUsuario?usuario='+me.user;
                 axios.get(url).then(function (response) {
                     //console.log(response);
                     var respuesta= response.data;
@@ -834,6 +866,7 @@
                 this.selectProfesion();
                 this.selectUniversidad();
                 this.selectLocal();
+                this.validarInput();
             },
             ceroBusqueda(){
                 this.buscar='';
@@ -841,7 +874,7 @@
             }
         },
         mounted() {
-            this.listarPersona(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc);
+            this.listarPersona(1,this.buscar,this.criterio,this.paginado,this.ordenado,this.ascdesc); 
         }
     }
 </script>

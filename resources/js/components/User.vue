@@ -150,7 +150,7 @@
                                 <div class="form-group col-md-7">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                        <input type="text" maxlength="60" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
+                                        <input type="text" v-model="nombre" maxlength="60" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-5">

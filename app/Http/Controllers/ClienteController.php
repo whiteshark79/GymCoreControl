@@ -23,15 +23,15 @@ class ClienteController extends Controller
         if ($buscar==''){
             $personas = Persona::join('users','personas.id','=','users.id')
             ->select('personas.tipo_documento','personas.num_documento','personas.nombre',
-            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular',
-            'personas.email','personas.perfil','personas.foto')
+            'users.usuario', 'users.avatar', 'personas.fec_nacimiento','personas.direccion','personas.celular',
+            'personas.email','personas.perfil')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
             $personas = Persona::join('users','personas.id','=','users.id')
             ->select('personas.tipo_documento','personas.num_documento','personas.nombre',
-            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular',
-            'personas.email','personas.perfil','personas.foto')
+            'users.usuario', 'users.avatar', 'personas.fec_nacimiento','personas.direccion','personas.celular',
+            'personas.email','personas.perfil')
             ->where($criterio, 'like', '%'. $buscar . '%')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -56,7 +56,7 @@ class ClienteController extends Controller
         $id = \Auth::user()->id;
 
         $personas = Persona::join('users','personas.id','=','users.id')
-        ->select('users.usuario', DB::raw('SUBSTRING_INDEX(personas.nombre," ",1) as nombre'),
+        ->select('users.usuario', 'users.avatar', 'users.idrol', DB::raw('SUBSTRING_INDEX(personas.nombre," ",1) as nombre'),
         DB::raw('SUBSTRING_INDEX(personas.nombre," ",-1) as apellido'),'personas.perfil')         
         ->where('personas.id',$id)->get();
  
@@ -114,7 +114,6 @@ class ClienteController extends Controller
             $persona->celular = $request->celular;
             $persona->email = $request->email;
             $persona->perfil = 'Cliente';
-            $persona->foto = $request->foto;
             $persona->save();
 
             $user = new User();
@@ -145,7 +144,6 @@ class ClienteController extends Controller
             $persona->celular = $request->celular;
             $persona->email = $request->email;
             $persona->perfil = 'Cliente';
-            $persona->foto = $request->foto;
             $persona->save();
 
             $user->usuario = $request->usuario;
@@ -159,25 +157,50 @@ class ClienteController extends Controller
     }
 
     public function actualizarAlumno(Request $request)
-    {
-        if (!$request->ajax()) return redirect('/');
+    {               
 
         try{
             DB::beginTransaction();
             
-            $persona = Persona::findOrFail($request->id);
             
+            $persona = Persona::findOrFail($request->id); 
+            $user = User::findOrFail($persona->id);             
+            
+            $exploded = explode(',', $request->avatar);
+            $decoded = base64_decode($exploded[1]);
+
+            if(str_contains($exploded[0], 'jpeg'))
+            { 
+                $ext = 'jpg';
+            }else{ 
+                $ext = 'png';
+            }
+
+            $usuario = $request->num_documento;
+            $fileName = $usuario.'-'.str_random(3).'.'.$ext;            
+            $path = public_path().'/avatars/'.$fileName;
+            file_put_contents($path , $decoded);      
+            
+            //$value = $request->session()->get($fileName);                
+                                  
             $persona->num_documento = $request->num_documento;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->email = $request->email;
             $persona->celular = $request->celular;
-            $persona->direccion = $request->direccion;
-            $persona->save();           
- 
+            $persona->direccion = $request->direccion; 
+            $persona->save();  
+            
+            $user->avatar = $fileName; 
+            $user->save(); 
+
             DB::commit();
+
+            
  
         } catch (Exception $e){
             DB::rollBack();
         }
     }
+    
+    
 }

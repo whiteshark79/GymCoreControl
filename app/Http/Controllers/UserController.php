@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        //if (!$request->ajax()) return redirect('/'); 
+        if (!$request->ajax()) return redirect('/'); 
 
         $buscar = $request->buscar;
         $criterio = $request->criterio;
@@ -24,7 +24,7 @@ class UserController extends Controller
             ->join('roles','users.idrol','=','roles.id')
             ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.fec_nacimiento','personas.direccion','personas.celular', 'personas.email',
-            'users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol')
+            'users.usuario','users.password', 'users.avatar', 'users.condicion','users.idrol','roles.nombre as rol')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
         else{
@@ -32,7 +32,7 @@ class UserController extends Controller
             ->join('roles','users.idrol','=','roles.id')
             ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre',
             'personas.fec_nacimiento','personas.direccion','personas.celular', 'personas.email',
-            'users.usuario','users.password','users.condicion','users.idrol','roles.nombre as rol')           
+            'users.usuario','users.password', 'users.avatar', 'users.condicion','users.idrol','roles.nombre as rol')           
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -51,7 +51,8 @@ class UserController extends Controller
         ];
     }
 
-    public function selectUsuario(Request $request){ 
+    public function selectUsuario(Request $request)
+    { 
         if (!$request->ajax()) return redirect('/');
 
         $usuario = $request->usuario;
@@ -81,8 +82,7 @@ class UserController extends Controller
             $user->usuario = $request->usuario;
             $user->password = bcrypt( $request->password);
             $user->condicion = '1';
-            $user->idrol = $request->idrol;          
- 
+            $user->idrol = $request->idrol;
             $user->id = $persona->id;
             $user->save();
  
@@ -122,7 +122,8 @@ class UserController extends Controller
         } catch (Exception $e){
             DB::rollBack();
         }
-    }
+    }   
+
  
     public function desactivar(Request $request)
     {

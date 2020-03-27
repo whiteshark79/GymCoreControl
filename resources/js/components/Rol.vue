@@ -127,7 +127,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Nombre: </span>
                                 </div>
-                                <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
+                                <input type="text" v-model="nombre" maxlength="35" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }">
                             </div>
                             <div class="input-group input-group-sm mb-3">
                                 <div class="input-group-prepend">

@@ -26,8 +26,7 @@ Vue.component('dashboardadmin', require('./components/DashboardAdmin.vue').defau
 Vue.component('dashboardoper', require('./components/DashboardOper.vue').default);
 Vue.component('dashboardalumno', require('./components/DashboardAlumno.vue').default);
 
-Vue.component('headerapp', require('./components/HeaderApp.vue').default);
-Vue.component('userbar', require('./components/UserBar.vue').default);
+Vue.component('useravatar', require('./components/UserAvatar.vue').default);
 
 Vue.component('caja', require('./components/Caja.vue').default);
 Vue.component('empresa', require('./components/Empresa.vue').default);

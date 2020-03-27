@@ -25,14 +25,8 @@ mix.styles([
    'resources/assets/js/Chart.min.js',
    'resources/assets/js/adminlte.min.js',
    'resources/assets/js/jquery.pace.min.js',
-   //'resources/assets/js/popper.min.js',
    'resources/assets/js/sweetalert2.all.min.js',   
-   'resources/assets/js/jquery.validate.min.js',
-   'resources/assets/js/moment.min.js',
-   'resources/assets/js/fullcalendar-main.min.js',
-   'resources/assets/js/fullcalendar-daygrid.min.js',
-   'resources/assets/js/fullcalendar-timegrid.min.js',
-   'resources/assets/js/fullcalendar-interaction.min.js',
-   'resources/assets/js/fullcalendar-bootstrap.min.js'
+   //'resources/assets/js/jquery.validate.min.js',
+   'resources/assets/js/moment.min.js' 
 ], 'public/js/plantilla.js')
 .js(['resources/js/app.js'],'public/js/app.js');

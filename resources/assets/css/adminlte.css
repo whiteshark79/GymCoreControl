@@ -487,7 +487,8 @@ mark,
 }
 
 .img-fluid {
-  max-width: 100%;
+  /*max-width: 100%;*/
+  width: auto;
   height: auto;
 }
 
@@ -11675,7 +11676,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .user-panel img {
   height: auto;
-  width: 3rem;
+  width: 3.4rem;
 }
 
 .user-panel .info {

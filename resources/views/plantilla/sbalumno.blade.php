@@ -8,36 +8,52 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-lightblue fixed-top" id="sideNav">
         
         <a href="../../index3.html" class="brand-link">
-          <img src="img/logo_sidebar.png" alt="GymCore Logo" >
-          {{-- <span class="brand-text">GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</span> --}}
-          
-        </a>
+          <img src="img/logo_sidebar.png" alt="GymCore Logo" >          
+        </a>  
+
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+                <strong>{{ $message }}</strong>
+        </div>
+        {{-- <img src="avatars/{{ Session::get('file') }}"> --}}
+        @endif
+  
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Error!</strong>No se pudo actualizar el avatar.
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
-          <span class="d-none d-lg-block">
-            <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/avatar2.png" alt="">
-          </span>
-        </a>
+          <useravatar></useravatar>
+       
+         
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav">
-              <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#about">Acerca de</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#laboral">Datos Laborales</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#fisico">Datos Físicos</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#inscripcion">Inscripciones</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link js-scroll-trigger" href="#compra">Compras</a>
-              </li>              
+          <ul class="navbar-nav">            
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#about">Acerca de</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#laboral">Datos Laborales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#fisico">Datos Físicos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#inscripcion">Inscripciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#compra">Compras</a>
+            </li>              
           </ul>          
         </div>
         <div class="my-auto" >   
@@ -58,4 +74,4 @@
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->    
-  </aside>
+  </aside>  

@@ -146,7 +146,7 @@
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-building"></i></span>                                        
                                         <input type="number" v-model="ruc" class="form-control col-4" v-bind:class="{ 'is-invalid': e_ruc }" placeholder="RUC">
-                                        <input type="text" maxlength="60" v-model="razon_social" class="form-control col-8" v-bind:class="{ 'is-invalid': e_razon_social }" placeholder="Razón Social">
+                                        <input type="text" v-model="razon_social" maxlength="60" class="form-control col-8" v-bind:class="{ 'is-invalid': e_razon_social }" placeholder="Razón Social">
                                     </div>
                                 </div>                                                                                
                             </div>
@@ -154,7 +154,7 @@
                                 <div class="form-group col-md-12">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-signature"></i></span>                                        
-                                        <input type="text" maxlength="60" v-model="nombre" class="form-control col-4" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
+                                        <input type="text" v-model="nombre" maxlength="60" class="form-control col-4" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre">
                                         <input type="text" maxlength="100" v-model="slogan" class="form-control col-8 text-cursiva" placeholder="Slogan">
                                     </div>
                                 </div>                                                                                

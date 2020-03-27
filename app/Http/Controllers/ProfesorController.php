@@ -10,7 +10,7 @@ use App\Persona;
 use App\User;
 use App\Rol;
   
- 
+  
 class ProfesorController extends Controller
 {
     public function index(Request $request)
@@ -28,7 +28,7 @@ class ProfesorController extends Controller
             ->join('personas','profesores.id','=','personas.id')
             ->join('especialidades','profesores.idespecialidad','=','especialidades.id')            
             ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre as nombre',
-            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
+            'users.usuario','users.avatar','personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
             'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre as especialidad')
             ->orderBy('personas.'.$ordenado, $ascdesc)->paginate($paginado);
         }
@@ -37,7 +37,7 @@ class ProfesorController extends Controller
             ->join('personas','profesores.id','=','personas.id')
             ->join('especialidades','profesores.idespecialidad','=','especialidades.id')            
             ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre as nombre',
-            'users.usuario','personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
+            'users.usuario','users.avatar','personas.fec_nacimiento','personas.direccion','personas.celular','personas.email','personas.perfil',
             'profesores.horario','profesores.idespecialidad','profesores.sueldo_hora','especialidades.nombre as especialidad')          
             ->where('personas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('.'.$ordenado, $ascdesc)->paginate($paginado);
@@ -78,7 +78,7 @@ class ProfesorController extends Controller
         $personas = Profesor::join('personas','profesores.id','=','personas.id')
         ->join('especialidades','profesores.idespecialidad','=','especialidades.id')
         ->select('personas.id','personas.tipo_documento','personas.num_documento','personas.nombre', 'personas.fec_nacimiento',
-        'personas.direccion', 'personas.celular','personas.email','personas.perfil', 'personas.foto', 'profesores.horario', 
+        'personas.direccion', 'personas.celular','personas.email','personas.perfil', 'profesores.horario', 
         'profesores.idespecialidad', 'especialidades.nombre as especialidad', 'profesores.sueldo_hora',)           
         ->where('personas.id',$id)->get();
  
@@ -114,6 +114,7 @@ class ProfesorController extends Controller
             $user = new User(); 
             $user->usuario = $request->usuario;
             $user->password = bcrypt( $request->num_documento);
+            $user->avatar = 'coach.png';
             $user->condicion = '1';
             $user->idrol = $rol->id;
             $user->id = $persona->id;
@@ -135,6 +136,7 @@ class ProfesorController extends Controller
             DB::beginTransaction();
             $profesor = Profesor::findOrFail($request->id);
             $persona = Persona::findOrFail($profesor->id);
+            $user = User::findOrFail($profesor->id);
  
             $persona->tipo_documento = $request->tipo_documento;
             $persona->num_documento = $request->num_documento;
@@ -150,6 +152,9 @@ class ProfesorController extends Controller
             $profesor->idespecialidad = $request->idespecialidad;
             $profesor->sueldo_hora = $request->sueldo_hora;
             $profesor->save();
+
+            $user->avatar = 'coach.png';
+            $user->save();
  
             DB::commit();
  

@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "inputmask": "^5.0.3",
         "laravel-echo": "^1.6.1",
         "pusher-js": "^5.0.3",
         "vue-barcode": "^1.2.0",

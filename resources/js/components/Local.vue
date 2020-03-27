@@ -145,7 +145,7 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-signature"></i></span>
-                                        <input type="text" maxlength="60" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre local">
+                                        <input type="text" v-model="nombre" maxlength="35" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Nombre local">
                                     </div>                                        
                                 </div>                                
                                                                                                               

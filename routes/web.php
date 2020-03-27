@@ -17,11 +17,12 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');    
     Route::post('/notification/get', 'NotificationController@get');
-    
+
+    //Route::get('file-upload', 'FileUploadController@fileUpload')->name('file.upload');
+    //Route::post('file-upload', 'FileUploadController@fileUploadPost')->name('file.upload.post');    
      
     Route::get('/main', function () {
         return view('contenido/contenido');
-       //return view('tooltip');
     })->name('main');
 
     Route::group(['middleware' => ['Administrador']], function () {      
@@ -141,12 +142,13 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/cliente', 'ClienteController@index');
         Route::post('/cliente/registrar', 'ClienteController@store');
         Route::put('/cliente/actualizar', 'ClienteController@update');
-        Route::put('/cliente/actualizarAlumno', 'ClienteController@actualizarAlumno');                  
+        Route::put('/cliente/actualizarAlumno', 'ClienteController@actualizarAlumno');   
+        Route::post('/cliente/actualizarAlumnoPic', 'ClienteController@actualizarAlumnoPic')->name('pic.alumno');              
         Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
         Route::get('/cliente/selectPersonaId', 'ClienteController@selectPersonaId');
         Route::get('/cliente/selectPersonaEmail', 'ClienteController@selectPersonaEmail');
         Route::get('/cliente/selectPersonaLogin', 'ClienteController@selectPersonaLogin');
-        
+                
         Route::get('/servicio', 'ServicioController@index');
         Route::post('/servicio/registrar', 'ServicioController@store');
         Route::put('/servicio/actualizar', 'ServicioController@update');

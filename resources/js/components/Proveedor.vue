@@ -126,8 +126,9 @@
                                             <option value="C">Cédula</option>
                                             <option value="R">RUC</option>                                          
                                         </select>
-                                        <input type="number" v-model="num_documento" class="form-control col-4" v-bind:class="{ 'is-invalid': e_num_documento }" @change="existePersonaId()" placeholder="No. de documento">
-                                        <input type="text" maxlength="60" v-model="nombre" class="form-control col-6" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Razón Social">
+                                        <input type="text" v-model="num_documento" id="num_documento" class="form-control col-4" v-bind:class="{ 'is-invalid': e_num_documento }" @change="existePersonaId()" placeholder="No. de documento">
+                                        <input type="hidden" :value="num_documento" id="ci">
+                                        <input type="text" v-model="nombre" maxlength="60" id="nombre" class="form-control col-6" v-bind:class="{ 'is-invalid': e_nombre }" placeholder="Razón Social">
                                     </div>
                                     <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
                                 </div>                                                                                
@@ -145,13 +146,14 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
-                                        <input type="number" v-model="celular" class="form-control" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Teléfono">
+                                        <input type="text" v-model="celular" id="celular" class="form-control" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Teléfono">
                                     </div>                                        
                                 </div> 
                                 <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" v-model="email" class="form-control" @change="existePersonaEmail()" placeholder="Email">
+                                        <input type="text" v-model="email" id="email" class="form-control" @change="existePersonaEmail()" placeholder="Email">
+                                        <input type="hidden" :value="email" id="mail">
                                     </div>
                                     <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>
                                 </div>                                           
@@ -160,13 +162,13 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                        <input type="text" v-model="nombre_contacto" class="form-control" placeholder="Nombre contacto">                                                            
+                                        <input type="text" v-model="nombre_contacto" id="nombre_contacto" class="form-control" placeholder="Nombre y apellido contacto">                                                            
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
-                                        <input type="number" v-model="celular_contacto" class="form-control" placeholder="Celular contacto">                                                            
+                                        <input type="text" v-model="celular_contacto" id="celular_contacto" class="form-control" placeholder="Celular contacto">                                                            
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +176,7 @@
                                 <div class="form-group col-md-6">
                                     <div class="input-group input-group-sm">
                                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                        <input type="email" v-model="email_contacto" class="form-control" placeholder="Email contacto">                                                            
+                                        <input type="text" v-model="email_contacto" id="email_contacto" class="form-control" placeholder="Email contacto">                                                            
                                     </div>
                                 </div>
                             </div>                           
@@ -196,6 +198,7 @@
 </template>
 
 <script>
+import Inputmask from 'inputmask';
     export default {
         data (){
             return {
@@ -272,6 +275,43 @@
             }
         },
         methods : {
+            validarInput(){                
+                Inputmask("99-99999999").mask(num_documento);
+                Inputmask("09-999-9999").mask(celular);
+                Inputmask({
+                            mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+                            greedy: false,
+                            onBeforePaste: function (pastedValue, opts) {
+                            pastedValue = pastedValue.toLowerCase();
+                            return pastedValue.replace("mailto:", "");
+                            },
+                            definitions: {
+                            '*': {
+                                validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                                casing: "lower"
+                            }
+                            }
+                        }).mask(email);
+                Inputmask("Aa{3,15} Aa{3,15}").mask(nombre_contacto); 
+                Inputmask("09-999-9999").mask(celular_contacto); 
+                Inputmask({
+                            mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+                            greedy: false,
+                            onBeforePaste: function (pastedValue, opts) {
+                            pastedValue = pastedValue.toLowerCase();
+                            return pastedValue.replace("mailto:", "");
+                            },
+                            definitions: {
+                            '*': {
+                                validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                                casing: "lower"
+                            }
+                            }
+                        }).mask(email_contacto);                            
+                
+                         
+
+            }, 
             listarPersona (page,buscar,criterio,paginado,ordenado,ascdesc){
                 let me=this;
                 var url= '/proveedor?page='+page+'&buscar='+buscar+'&criterio='+criterio+'&paginado='+paginado+'&ordenado='+ordenado+'&ascdesc='+ascdesc;
@@ -295,8 +335,10 @@
             },
             existePersonaId(){
                 let me=this;
+
+                me.ci=document.getElementById('ci').value;
                 
-                var url= '/cliente/selectPersonaId?num_documento='+this.num_documento;
+                var url= '/cliente/selectPersonaId?num_documento='+me.ci;
                 axios.get(url).then(function (response) {
                     //console.log(response);
                     var respuesta= response.data;
@@ -309,8 +351,10 @@
             },
             existePersonaEmail(){
                 let me=this;
+
+                me.mail=document.getElementById('mail').value;
                 
-                var url= '/cliente/selectPersonaEmail?email='+this.email;
+                var url= '/cliente/selectPersonaEmail?email='+me.mail;
                 axios.get(url).then(function (response) {
                     //console.log(response);
                     var respuesta= response.data;
@@ -472,6 +516,7 @@
                         }
                     }
                 }
+                this.validarInput();
             },
             ceroBusqueda(){
                 this.buscar='';

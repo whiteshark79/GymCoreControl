@@ -140,7 +140,7 @@
         </div>
     <!--Inicio del modal agregar/actualizar-->
         <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-            <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" v-text="tituloModal"></h5>
@@ -151,16 +151,16 @@
                     <div class="modal-body">
                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <div class="form-row">
-                                <div class="input-group input-group-sm mb-3 col-7">
+                                <div class="input-group input-group-sm mb-3 col-6">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Clasificacion: </span>
+                                        <span class="input-group-text">Clas.: </span>
                                     </div>
                                     <select class="form-control" v-bind:class="{ 'is-invalid': e_idclasificacion }" v-model="idclasificacion">
                                         <option value="0" disabled>--Seleccione--</option>
                                         <option v-for="clasificacion in arrayClasificacion" :key="clasificacion.id" :value="clasificacion.id" v-text="clasificacion.nombre"></option>
                                     </select>
                                 </div>
-                                <div class="input-group input-group-sm mb-3 col-5">
+                                <div class="input-group input-group-sm mb-3 col-6">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Cód.: </span>
                                     </div>
@@ -172,7 +172,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Nombre: </span>
                                     </div>
-                                    <input type="text" v-model="nombre" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }"> 
+                                    <input type="text" v-model="nombre" maxlength="35" class="form-control" v-bind:class="{ 'is-invalid': e_nombre }"> 
                                 </div>
                             </div>                             
                             <div class="form-row">

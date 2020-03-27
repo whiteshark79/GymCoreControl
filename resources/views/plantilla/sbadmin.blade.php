@@ -8,7 +8,7 @@
 
     <!-- Sidebar -->    
     <div class="sidebar">
-      <userbar></userbar>
+      <useravatar></useravatar>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -115,8 +115,9 @@
           </li>         
              
         </ul>
+        
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-  </aside>
+  </aside> 
