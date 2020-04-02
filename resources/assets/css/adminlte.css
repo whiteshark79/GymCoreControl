@@ -1906,26 +1906,31 @@ pre code {
 }
 
 .form-control::-webkit-input-placeholder {
+  font-size: 14px;
   color: #939ba2;
   opacity: 1;
 }
 
 .form-control::-moz-placeholder {
+  font-size: 14px;
   color: #939ba2;
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
+  font-size: 14px;
   color: #939ba2;
   opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
+  font-size: 14px;
   color: #939ba2;
   opacity: 1;
 }
 
 .form-control::placeholder {
+  font-size: 14px;
   color: #939ba2;
   opacity: 1;
 }
@@ -2450,7 +2455,7 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
   color: #ffffff;
-  background-color: #029DC1;
+  background-color: #548CBE;
   border-color: #01010D;
 }
 
@@ -3566,7 +3571,7 @@ input[type="button"].btn-block {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #000;
+  color: rgb(82, 81, 81);
   text-align: center;
   white-space: nowrap;
   background-color: #E9ECEF;
@@ -5993,6 +5998,9 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   }
   .modal-sm {
     max-width: 400px;
+  }
+  .modal-xs {
+    max-width: 350px;
   }
 }
 
@@ -18441,10 +18449,10 @@ html.maximized-card {
 }
 
 .btn-xs {
-  padding: 0.125rem 0.25rem;
+  padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
   line-height: 1.5;
-  border-radius: 0.15rem;
+  border-radius: 0.2rem;
 }
 
 .callout {
@@ -26553,7 +26561,7 @@ html.maximized-card {
 }
 
 .img-circle {
-  border-radius: 50%;  
+  border-radius: 15%;  
 }
 
 .img-size-64,
@@ -27925,7 +27933,7 @@ blockquote.quote-gray-dark h6 {
 }
 
 .bg-gradient-primary.btn:hover {
-  background: #029DC1 linear-gradient(180deg, #267fde, #029DC1) repeat-x !important;
+  background: #548CBE linear-gradient(180deg, #267fde, #548CBE) repeat-x !important;
 }
 
 .bg-gradient-primary.btn:not(:disabled):not(.disabled):active, .bg-gradient-primary.btn:not(:disabled):not(.disabled).active, .bg-gradient-primary.btn:active, .bg-gradient-primary.btn.active {
@@ -28359,7 +28367,7 @@ blockquote.quote-gray-dark h6 {
 }
 
 .bg-gradient-blue.btn:hover {
-  background: #029DC1 linear-gradient(180deg, #267fde, #029DC1) repeat-x !important;
+  background: #548CBE linear-gradient(180deg, #267fde, #548CBE) repeat-x !important;
 }
 
 .bg-gradient-blue.btn:not(:disabled):not(.disabled):active, .bg-gradient-blue.btn:not(:disabled):not(.disabled).active, .bg-gradient-blue.btn:active, .bg-gradient-blue.btn.active {

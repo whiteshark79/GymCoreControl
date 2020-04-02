@@ -58,7 +58,7 @@ class ClienteController extends Controller
         $personas = Persona::join('users','personas.id','=','users.id')
         ->select('users.usuario', 'users.avatar', 'users.idrol', DB::raw('SUBSTRING_INDEX(personas.nombre," ",1) as nombre'),
         DB::raw('SUBSTRING_INDEX(personas.nombre," ",-1) as apellido'),'personas.perfil')         
-        ->where('personas.id',$id)->get();
+        ->where('personas.id',$id)->get();       
  
         return ['personas' => $personas];        
     } 
@@ -154,14 +154,13 @@ class ClienteController extends Controller
         } catch (Exception $e){
             DB::rollBack();
         }
-    }
+    } 
 
     public function actualizarAlumno(Request $request)
     {               
 
         try{
-            DB::beginTransaction();
-            
+            DB::beginTransaction();            
             
             $persona = Persona::findOrFail($request->id); 
             $user = User::findOrFail($persona->id);             
@@ -169,12 +168,7 @@ class ClienteController extends Controller
             $exploded = explode(',', $request->avatar);
             $decoded = base64_decode($exploded[1]);
 
-            if(str_contains($exploded[0], 'jpeg'))
-            { 
-                $ext = 'jpg';
-            }else{ 
-                $ext = 'png';
-            }
+            if(str_contains($exploded[0], 'jpeg')) { $ext = 'jpg'; }else{  $ext = 'png'; }
 
             $usuario = $request->num_documento;
             $fileName = $usuario.'-'.str_random(3).'.'.$ext;            
@@ -200,7 +194,7 @@ class ClienteController extends Controller
         } catch (Exception $e){
             DB::rollBack();
         }
-    }
+    }    
     
     
 }

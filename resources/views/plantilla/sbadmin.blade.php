@@ -8,7 +8,22 @@
 
     <!-- Sidebar -->    
     <div class="sidebar">
-      <useravatar></useravatar>
+      {{-- <useravatar></useravatar> --}}
+
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="profile_pic">
+            <img src="avatars/{{Auth::user()->avatar}}" class="img-circle profile_img" alt="{{session('usuario')}}">
+        </div>
+        <div class="info menu_title">
+            <span>Bienvenid@,</span>
+            <h6>{{session('nombre')}} <span class="text-bold">{{session('apellido')}}</span></h6>
+            <span class="user-status">
+                <i class="fa fa-circle"></i>
+                <span>{{session('perfil')}}</span>
+            </span>
+          
+        </div>
+      </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">

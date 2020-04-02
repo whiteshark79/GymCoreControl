@@ -26,8 +26,6 @@ Vue.component('dashboardadmin', require('./components/DashboardAdmin.vue').defau
 Vue.component('dashboardoper', require('./components/DashboardOper.vue').default);
 Vue.component('dashboardalumno', require('./components/DashboardAlumno.vue').default);
 
-Vue.component('useravatar', require('./components/UserAvatar.vue').default);
-
 Vue.component('caja', require('./components/Caja.vue').default);
 Vue.component('empresa', require('./components/Empresa.vue').default);
 Vue.component('local', require('./components/Local.vue').default);
@@ -47,6 +45,7 @@ Vue.component('proveedor', require('./components/Proveedor.vue').default);
 Vue.component('alumno', require('./components/Alumno.vue').default);
 Vue.component('profesor', require('./components/Profesor.vue').default);
 
+Vue.component('perfiluser', require('./components/PerfilUser.vue').default);
 Vue.component('perfilalumno', require('./components/PerfilAlumno.vue').default);
 Vue.component('perfilprofesor', require('./components/PerfilProfesor.vue').default);
 

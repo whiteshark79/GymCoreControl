@@ -9,29 +9,19 @@
         
         <a href="../../index3.html" class="brand-link">
           <img src="img/logo_sidebar.png" alt="GymCore Logo" >          
-        </a>  
-
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-block">
-                <strong>{{ $message }}</strong>
-        </div>
-        {{-- <img src="avatars/{{ Session::get('file') }}"> --}}
-        @endif
-  
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Error!</strong>No se pudo actualizar el avatar.
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
+        </a>          
         
-          <useravatar></useravatar>
-       
+        <div class="navbar-brand js-scroll-trigger"> 
+          <span class="d-none d-lg-block container">  
+              <img class="img-fluid img-profile rounded-circle mx-auto mb-2 image" src="avatars/{{Auth::user()->avatar}}" alt="">
+              <div class="middle">
+                  <div class="icon_file ">
+                      <div class="text-mini">{{session('nombre')}} {{session('apellido')}}</div>
+                      <div class="text-light">{{session('perfil')}}</div>
+                  </div>
+              </div>
+          </span>        
+        </div>   
          
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

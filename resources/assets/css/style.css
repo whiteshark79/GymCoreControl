@@ -1,3 +1,84 @@
+/**************PACE*************/
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #3c8dbc;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+
+.pace .pace-progress-inner {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #3c8dbc, 0 0 5px #3c8dbc;
+  opacity: 1.0;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -moz-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  -o-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+.pace .pace-activity {
+  display: block;
+  position: fixed;
+  z-index: 2000;
+  top: 15px;
+  right: 15px;
+  width: 14px;
+  height: 14px;
+  border: solid 2px transparent;
+  border-top-color: #3c8dbc;
+  border-left-color: #3c8dbc;
+  border-radius: 10px;
+  -webkit-animation: pace-spinner 400ms linear infinite;
+  -moz-animation: pace-spinner 400ms linear infinite;
+  -ms-animation: pace-spinner 400ms linear infinite;
+  -o-animation: pace-spinner 400ms linear infinite;
+  animation: pace-spinner 400ms linear infinite;
+}
+
+@-webkit-keyframes pace-spinner {
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-moz-keyframes pace-spinner {
+  0% { -moz-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -moz-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-o-keyframes pace-spinner {
+  0% { -o-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -o-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@-ms-keyframes pace-spinner {
+  0% { -ms-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -ms-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes pace-spinner {
+  0% { transform: rotate(0deg); transform: rotate(0deg); }
+  100% { transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+
+
+
 /***********************************************************************************
  * Style for data table 
  */
@@ -32,6 +113,46 @@ table td {
 /***********************************************************************************
 * Customs styles
 */ 
+
+.btnClose{
+  float: right;
+  background:#6C757D;
+  width:125px;
+  padding-top:5px;
+  padding-bottom:5px;
+  color:white;
+  border-radius:4px;
+  border: #444a50 1px solid;
+  
+  margin-top:20px;
+  margin-bottom:20px;
+  float:left;
+  margin-left:16px;
+}
+
+.btnClose:hover{
+  background:#565e64; 
+}
+
+.btnSave{
+  float:left;
+  background:#3C8DBC;
+  width:125px;  
+  padding-top:5px;
+  padding-bottom:5px;
+  color:white;
+  border-radius:4px;
+  border: #2980b9 1px solid;
+  
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:10px;
+}
+
+.btnSave:hover{ 
+  background:#3594D2; 
+}
+
 
 
 .nav-item-icon{
@@ -85,7 +206,7 @@ table td {
 
 .text-label{
   color: #4C4C4C !important;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bolder;
 }
 
@@ -110,10 +231,19 @@ table td {
   width: 150px;
 }
 
+.avatar-mini {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  margin-top: 20px;
+  padding: 5px;
+  width: 100px;
+}
+
 a:link    {color: black; }
 a:visited {color: #3C8DBC; }
 a:hover   {color: white; }
 a:active  {color: #3C8DBC; }
+
 
 /************** modal************************/
 
@@ -137,6 +267,103 @@ a:active  {color: #3C8DBC; }
 .modal-title {
   margin-bottom: 0;
   line-height: 1.5; }
+
+
+  /**************************modal style**************/
+  .modal-custom {		
+		color: #636363;
+		width: 350px;
+	}
+	.modal-custom .modal-content {
+		padding: 20px;
+		border-radius: 5px;
+		border: none;
+  }
+  
+  .modal-custom .modal-body {
+		padding: 0.5px;
+  }
+  
+	.modal-custom .modal-header {
+		border-bottom: none;   
+    position: relative;
+    justify-content: center;
+	}
+	.modal-custom h4 {
+		text-align: center;
+		font-size: 26px;
+		margin: 20px 0 -25px;
+	}
+	.modal-custom .form-control:focus {
+		border-color: #3C8DBC;
+	}
+	.modal-custom .form-control, .modal-custom .btn {
+		border-radius: 3px; 
+	}
+	.modal-custom .close {
+    position: absolute;
+		top: -5px;
+		right: -5px;
+	}	
+	.modal-custom .modal-footer {
+    justify-content: center;
+    padding: 0px;
+		border-radius: 5px;
+		font-size: 13px;
+	}
+	.modal-custom .modal-footer a {
+		color: #999;
+	}		
+	.modal-custom .pic {
+		position: absolute;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		top: -70px;
+		width: 100px;
+		border-radius: 25%;
+		z-index: 9;
+		background: rgba(60, 141, 188, 0.192);
+		padding: 5px;
+		box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.1);
+	}
+	.modal-custom .pic img {
+		width: 100%;
+	}
+	.modal-custom.modal-dialog {
+		margin-top: 80px;
+	}
+  .modal-custom .btn {
+    color: #fff;
+    border-radius: 4px;
+    background: #3C8DBC;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    border: none;
+  }
+	.modal-custom .btn:hover, .modal-custom .btn:focus {
+		background: #3C8DBC;
+		outline: none;
+  }
+
+  .modal-custom .pic-label {
+    margin-bottom: -5px;   
+  } 
+
+  .modal-custom .file-input {
+    margin-top: -5px;   
+  } 
+  
+  .modal-custom .file-img {
+    margin-top: 10px;   
+  } 
+
+  .modal-custom .file-data {
+    margin-top: 30px; 
+    font-size: 13px;  
+  } 
+
 
 /*************************************/
 #dtTable {
@@ -305,7 +532,78 @@ a:active  {color: #3C8DBC; }
     font-weight: lighter;
     font-size: 8px;}
 
-/*******************calendario******************/
+    
+
+
+/********************NAVBAR****************************/
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+  .navbar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin-top: 20px;
+  }
+
+  /* Flip around the padding for proper display in narrow viewports */
+  .navbar-wrapper .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .navbar-wrapper .navbar {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .navbar-content
+  {
+    min-width: 250px;
+    padding: 10px 10px 0;
+    overflow:hidden;
+  }
+  .navbar-content:before, .navbar-content:after
+  {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 15px !important;
+  } 
+  
+  .dropdown-menu {
+    padding: 0px;
+    overflow: hidden;
+  } 
+
+  .login-card {
+    width: 700px !important;
+  }
+
+  #login-dp {
+    margin-top: 10px;   
+    font-size: 14px; 
+  } 
+
+  #login-dp .data {
+    margin-top: 15px;    
+  }
+
+  #login-dp .social-buttons{
+    margin:2px 0    
+  }
+  #login-dp .social-buttons a{
+    width: 49%;
+  }
+
+  .btn-pass{ background-color:#3b5998; }
+  .btn-pass:hover{ background-color:#496ebc }
+  .btn-session{ background-color:#55acee; }
+  .btn-session:hover{ background-color:#59b5fa; }
+
+
+    /*******************calendario******************/
   th.rotate {
     height:80px;
     white-space: nowrap;
@@ -541,8 +839,8 @@ section.resume-section .resume-item .resume-date {
   margin-left: 20%;
   z-index: 1000;
   position: inherit;
-  margin-top: 10px;
-  border: 2px solid rgba(52, 73, 94, 0.44);
+  margin-top: 12px;
+  border: 1px solid rgb(136, 135, 135);
   padding: 1px; }
 
 .profile_info {

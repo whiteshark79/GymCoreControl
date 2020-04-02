@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row justify-content-md-center vertical-center">
-            <div class="card-group">
+            <div class="card-group login-card">
                 <div class="card p-3" style="width: 25rem;">
                     <div class="card-body text-center py-5" style="vertical-align: middle;">
                     <div><p><img src="img/logo_login.png" alt="Login" ><br>sɪsᴛᴇᴍᴀ ᴅᴇ ᴄᴏɴᴛʀᴏʟ</p></div>     
@@ -13,11 +13,11 @@
                         <div class="col-6"><em>by</em> ωнιτєѕнαяκ</div>
                     </div>                
                 </div> 
-                <div class="card p-3 bg-primary text-white">          
+                <div class="card p-3 bg-primary text-white" style="width: 25rem;">          
                     <form role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }} 
                         <div class="card-body">
-                            <h1>Login</h1><p>Control de acceso al sistema</p>
+                            <h1>Login</h1><p>Control de acceso al sistema</p>  
                             <div class="input-group input-group-sm mb-4">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -35,13 +35,11 @@
                                 @error('password')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
-                            </div>                  
-                        </div>               
-                        <div class="row float-right">
-                            <div class="col-10">      
-                                <button type="submit" id="btn_login" class="btn btn-primary btn-sm px-4">Ingresar</button>
+                            </div>   
+                            <div class="input-group input-group-sm">                                 
+                                <button type="submit" id="btn_login" class="btn btn-primary btn-xs px-4">Ingresar</button>                          
                             </div>
-                        </div>
+                        </div>  
                     </form>
                 </div>        
             </div>

@@ -124,6 +124,61 @@ class UserController extends Controller
         }
     }   
 
+    public function actualizarPerfil(Request $request)
+    {                     
+        $id = \Auth::user()->id;
+        $usuario = $request->input('usuario');
+        $password = $request->input('password');
+        
+        $user = User::find($id);
+        
+        $user->usuario = $usuario;
+        $user->password = bcrypt($password);
+        
+        $user->update();
+
+        return  back();
+        
+    }
+
+    public function actualizarUsuario(Request $request)
+    {               
+ 
+        try{
+            DB::beginTransaction();            
+            
+            $id = \Auth::user()->id;    
+            $user = User::find($id);
+            $password= $request->password;
+            $avatar= $request->avatar;
+            
+            if($avatar!=''){
+                $exploded = explode(',', $avatar);
+                $decoded = base64_decode($exploded[1]);
+                if(str_contains($exploded[0], 'jpeg')) { $ext = 'jpg'; }else{  $ext = 'png'; }            
+                $fileName = time().str_random(3).'.'.$ext;            
+                $path = public_path().'/avatars/'.$fileName;
+                file_put_contents($path , $decoded);   
+            }
+
+            if($password!='' && $avatar!=''){
+                $user->password = bcrypt($password);
+                $user->avatar = $fileName; 
+                $request->session()->put('avatar', $fileName);
+            }elseif($password!='' && $avatar ==''){
+                $user->password = bcrypt($password);
+            }elseif($password =='' && $avatar!=''){
+                $user->avatar = $fileName; 
+            }
+            $user->save(); 
+
+            DB::commit();            
+ 
+        } catch (Exception $e){
+            DB::rollBack();
+        }
+    } 
+
  
     public function desactivar(Request $request)
     {

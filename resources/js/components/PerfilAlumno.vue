@@ -684,8 +684,7 @@
           fileReader.onload = (e)=> {
             me.avatar = e.target.result;
             me.miniatura = me.avatar;
-          }             
-
+          } 
         }, 
 
         activarDatos(){

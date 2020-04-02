@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="GymCore Control">
-  <meta name="author" content="WhiteShark.com">
+  <meta name="author" content="WhiteShark">
   <meta name="keyword" content="Sistema de Control de Gimnasios">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -22,14 +22,14 @@
 
             @if(Auth::check())
                 @if (Auth::user()->idrol == 1)
-                    @include('plantilla/hdadmin')
+                    @include('plantilla/hdapp')
                     @include('plantilla.sbadmin')
                 @elseif (Auth::user()->idrol == 2)
                     @include('plantilla.sbalumno')
                 @elseif (Auth::user()->idrol == 3)
                     @include('plantilla.sbprofe')
                 @elseif (Auth::user()->idrol == 4)
-                    @include('plantilla/hdoper')
+                    @include('plantilla/hdapp')
                     @include('plantilla.sboper')
                 @else
      
@@ -47,11 +47,9 @@
                 @if (Auth::user()->idrol == 1)
                     @include('plantilla/footer')                              
                 @else
-     
-                @endif
-     
-            @endif 
-            
+
+                @endif     
+            @endif           
             
                         
         </div>

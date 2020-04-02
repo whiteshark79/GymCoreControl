@@ -59,6 +59,8 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/user', 'UserController@index');
         Route::post('/user/registrar', 'UserController@store');
         Route::put('/user/actualizar', 'UserController@update');
+        Route::put('/user/actualizarUsuario', 'UserController@actualizarUsuario');
+        Route::post('/user/perfil', 'UserController@actualizarPerfil')->name('perfil');
         Route::put('/user/desactivar', 'UserController@desactivar');
         Route::put('/user/activar', 'UserController@activar');
         Route::get('/user/selectUsuario', 'UserController@selectUsuario');

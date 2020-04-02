@@ -26,7 +26,7 @@ mix.styles([
    'resources/assets/js/adminlte.min.js',
    'resources/assets/js/jquery.pace.min.js',
    'resources/assets/js/sweetalert2.all.min.js',   
-   //'resources/assets/js/jquery.validate.min.js',
+   'resources/assets/js/pace.min.js',
    'resources/assets/js/moment.min.js' 
 ], 'public/js/plantilla.js')
 .js(['resources/js/app.js'],'public/js/app.js');
