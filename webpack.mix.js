@@ -13,18 +13,16 @@ const mix = require('laravel-mix');
 
 mix.styles([
    'resources/assets/css/style.css',
-   'resources/assets/css/fontawesome-all.min.css',   
+   'resources/assets/css/fontawesome-all.min.css', 
+  // 'resources/assets/css/simple-line-icons.min.css',   
    'resources/assets/css/Chart.min.css',
-   'resources/assets/css/adminlte.css',
-   'resources/assets/css/fullcalendar-main.min.css',
-   'resources/assets/css/fullcalendar-daygrid.min.css',
-   'resources/assets/css/fullcalendar-timegrid.min.css'
+   'resources/assets/css/adminlte.css'
 ], 'public/css/plantilla.css')
 .scripts([
    'resources/assets/js/jquery.min.js',   
    'resources/assets/js/Chart.min.js',
    'resources/assets/js/adminlte.min.js',
-   'resources/assets/js/jquery.pace.min.js',
+  // 'resources/assets/js/jquery.pace.min.js',
    'resources/assets/js/sweetalert2.all.min.js',   
    'resources/assets/js/pace.min.js',
    'resources/assets/js/moment.min.js' 

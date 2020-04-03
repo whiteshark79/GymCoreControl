@@ -9,7 +9,7 @@
                             <div class="card-title"><h3>Ventas</h3></div>
                             <div class="card-tools">
                                 <template v-if="listado!=0">
-                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="fas fa-plus-circle">  Nueva Venta</i></button>
+                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="icon-plus">  Nueva Venta</i></button>
                                 </template>
                             </div>
                         </div>                      
@@ -57,8 +57,8 @@
                                             <template v-else>
                                                 <input type="number" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-sm-3 col-md-3" placeholder="No del comprobante">
                                             </template>                                       
-                                            <button type="submit" @click="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
-                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                            <button type="submit" @click="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>                                 
+                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>
                                         </div>
                                         <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
                                             <select class="form-control" v-model="paginado" @change="listarVenta(1,buscar,criterio,paginado,ordenado,ascdesc)">
@@ -130,10 +130,10 @@
                                                     <div v-else><span class="badge badge-danger">{{venta.estado}}</span></div>      
                                                 </td>
                                                 <td align="center" data-label="ACCIONES">
-                                                    <a class="btn btn-sm btn-default" @click="verVenta(venta.id)"><i class="far fa-eye"></i></a>
-                                                    <a class="btn btn-sm btn-default" @click="pdfVenta(venta.id)"><i class="fas fa-print"></i></a>                                   
+                                                    <a class="btn btn-sm btn-default" @click="verVenta(venta.id)"><i class="icon-eye"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="pdfVenta(venta.id)"><i class="icon-printer"></i></a>                                   
                                                     <template v-if="venta.estado=='Cancelado'">
-                                                        <a class="btn btn-sm btn-default" @click="desactivarVenta(venta.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
+                                                        <a class="btn btn-sm btn-default" @click="desactivarVenta(venta.id)"><i class="icon-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
                                             </tr>
@@ -230,7 +230,7 @@
                                                         <label>Artículo <span class="text-error" v-show="idarticulo==0">(*)</span></label>
                                                         <div class="form-inline">
                                                             <input type="text" class="form-control form-control-sm" v-model="codigo" @keyup.enter="buscarArticulo()" placeholder="Cód. artículo" size="10">
-                                                            <button @click="abrirModal()" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+                                                            <button @click="abrirModal()" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i></button>
                                                             <input type="text" readonly class="form-control form-control-sm" v-model="articulo" size="13">
                                                             <span class="text-info">{{descripcion}}</span>
                                                         </div>
@@ -247,7 +247,7 @@
                                                             <span class="text-error" v-show="cantidad>=stock">Stock: {{stock}}</span>
                                                         </div>                                                    
                                                         <div class="col-md-1">
-                                                            <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="fas fa-plus-circle"></i></button>
+                                                            <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="icon-plus"></i></button>
                                                         </div>
                                                     </template>
                                                 </div>
@@ -267,7 +267,7 @@
                                                             </thead>
                                                             <tbody v-if="arrayDetalle.length">
                                                                 <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
-                                                                    <td align="center"><a href="#" @click="eliminarDetalle(index)"><i class="fas fa-trash-alt"></i></a></td>                                                                 
+                                                                    <td align="center"><a href="#" @click="eliminarDetalle(index)"><i class="icon-trash"></i></a></td>                                                                 
                                                                     <td v-text="detalle.articulo"></td>
                                                                     <td><input v-model="detalle.precio" type="number" step="0.1" min="0.1" max="100" class="form-control form-control-sm"></td>
                                                                     <td>                                                                        
@@ -291,7 +291,7 @@
                                                         </table>                                                       
 
                                                         <table width="250" align="right" v-if="arrayDetalle.length">
-                                                            <tr width="70%">
+                                                            <tr width="70%" >
                                                                 <td align="left"><strong>Abono:</strong></td>
                                                                 <td align="right">                                                                        
                                                                     <input v-model="abono" type="number" step="0.1" min="0" :max="(total)" class="form-control form-control-sm"> 
@@ -304,7 +304,7 @@
                                                             <tr>
                                                                 <td align="left"><strong>Total Impuesto:</strong></td>
                                                                 <td align="right">$ {{ totalImpuesto=(total*impuesto).toFixed(2) }}</td>
-                                                            </tr>
+                                                            </tr> 
                                                             <tr>
                                                                 <td align="left"><strong>Total Neto:</strong></td>
                                                                 <td align="right"><strong>$ {{total=(calcularTotal).toFixed(2)}} </strong> </td>
@@ -336,7 +336,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <h4>
-                                                <i class="fas fa-cash-register"></i> Factura de venta
+                                                <i class="icon-basket"></i> Factura de venta
                                                 <small class="float-right">Fecha: {{ hoyFecha() }} </small>
                                             </h4>
                                         </div>
@@ -430,7 +430,7 @@
             <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document"> 
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" v-text="tituloModal"></h4>
+                        <span class="modal-title text-title" v-text="tituloModal"></span>
                         <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -446,7 +446,7 @@
                                         
                                     </select>
                                     <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control form-control-sm" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                    <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -474,7 +474,7 @@
                                             <div v-else><span class="badge badge-danger">Desactivo</span></div>                                    
                                         </td>
                                         <td align="center">
-                                            <button type="button" @click="agregarDetalleModal(articulo)" class="btn btn-default btn-sm"><i class="far fa-check-circle"></i></button>
+                                            <button type="button" @click="agregarDetalleModal(articulo)" class="btn btn-default btn-sm"><i class="icon-check"></i></button>
                                         </td>
                                     </tr>                       
                                 </tbody>

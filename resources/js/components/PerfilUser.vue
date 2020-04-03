@@ -12,9 +12,8 @@
 
             <label class="text-label">Confirmación</label>   
             <input type="password" v-model="repassword" id="repassword" class="form-control form-control-sm"  v-bind:class="{ 'is-invalid': e_repassword }" >                            
-            <span class="text-error" v-show="a_repass==1">{{msg_repass}}</span>   
+            <span class="text-error" v-show="a_repass==1">{{msg_repass}}</span>               
             
-            <label class="text-label pic-label">Avatar</label> 
             <div class="custom-file file-input">                                        
                 <input type="file" class="custom-file-input" id="avatarFile" @change="subirImagen" accept=".png, .jpg, .jpeg" v-bind:class="{ 'is-invalid': e_avatarFile }" >
                 <label class="custom-file-label" for="avatarFile">Elegir imagen</label>
@@ -27,7 +26,7 @@
                     <div class="col-md-8 file-data">
                         <p class="text-muted">Nombre: <span class="text-primary">{{picName}} </span></p>
                         <p class="text-muted">Tamaño: <span class="text-primary">{{picSize}} </span> bytes</p>
-                        <p class="text-muted">Ancho x Alto: <span class="text-primary">{{picWidth}} X  {{picHeigth}}</span> </p>
+                        <p class="text-muted">Ancho x Alto: <span class="text-primary">{{picWidth}} x {{picHeigth}}</span> px </p>
                     </div>
                 </div>
             </figure>
@@ -44,7 +43,7 @@
 </template>
 
 <script>
-import Inputmask from 'inputmask';
+//import Inputmask from 'inputmask';
 export default {
     props: ['usuario'],
     data (){
@@ -58,7 +57,6 @@ export default {
             picHeigth: 0,
 
             stsImagen: 0,
-            stsBtn: 0,
             a_pass: 0,
             a_repass: 0,
             a_avatar: 0,
@@ -85,7 +83,7 @@ export default {
             this.errorUsuario=0;
             this.errorMostrarMsjUsuario =[];
 
-            if (!this.password && !this.repassword && !this.avatarFile) 
+            if (!this.password && !this.repassword && this.stsImagen == 0) 
             {
                 this.e_password = true;
                 this.e_repassword = true;
@@ -133,35 +131,15 @@ export default {
                 this.a_repass = 0;
                 this.msg_repass = ''; 
             }
-
-
-            // if(this.password.length < 6){
-            //     this.e_password = true;
-            //     this.a_pass = 1;
-            //     this.msg_pass = 'La contraseña debe tener mínimo 6 caracteres'; 
-            //     this.errorMostrarMsjUsuario.push('password');
-            // }else{
-            //     this.e_password = false;
-            //     this.a_pass = 0;
-            // }     
-
              
 
             if (this.errorMostrarMsjUsuario.length) this.errorUsuario = 1;
 
             return this.errorUsuario;
-        },
-        activarBtn(){
-            if(this.password != '' && this.repassword == ''){
-                this.stsBtn = 1;
-            }else{
-                this.stsBtn = 0;
-            }            
-        },        
+        },             
         subirImagen(e){
           let me = this;
           me.stsImagen = 1;
-          me.stsBtn = 1;
 
           var fileReader =  new FileReader();
           fileReader.readAsDataURL(e.target.files[0]);          
@@ -183,13 +161,17 @@ export default {
         }, 
         actualizarUsuario(){ 
             if (this.validarUsuario()){ return; }
-            let me = this;         
+            let me = this;          
 
             axios.put('/user/actualizarUsuario',{
             'password' : this.password,            
             'avatar' : this.avatar
-            }).then(function (response) { 
-                //location.reload();  
+            }).then(function (response) {   
+                sessionStorage.setItem('avatar', me.avatar);
+                if(me.picName != ''){
+                    location.reload();
+                }               
+                location.reload();  
                 Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -207,6 +189,7 @@ export default {
     },
     mounted() {
         this.validarInput();
+
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

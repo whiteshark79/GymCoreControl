@@ -8,7 +8,7 @@
                         <div class="card-header">
                             <div class="card-title"><h3>Servicios</h3></div>
                             <div class="card-tools">
-                                <button type="button" class="btn btn-sm btn-primary" @click="abrirModal('servicio','registrar')"><i class="fas fa-plus-circle">  Nuevo Servicio</i></button>
+                                <button type="button" class="btn btn-sm btn-primary" @click="abrirModal('servicio','registrar')"><i class="icon-plus">  Nuevo Servicio</i></button>
                                 <button type="button" class="btn btn-sm btn-info" @click="cargarPdf()"><i class="fas fa-file-pdf"> Reporte</i></button>  
                             </div>
                         </div>                      
@@ -38,8 +38,8 @@
                                         <template v-else>
                                             <input type="text" v-model="buscar" @keyup.enter="listarServicio(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-sm-3 col-md-3" placeholder="Texto a buscar">
                                         </template>                                    
-                                        <button type="submit" @click="listarServicio(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                        <button type="submit" @click="listarServicio(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>                                 
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>
                                     </div>
                                     <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
                                         <select class="form-control" v-model="paginado" @change="listarServicio(1,buscar,criterio,paginado,ordenado,ascdesc)">
@@ -101,12 +101,12 @@
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
                                             <td align="center" data-label="ACCIONES">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('servicio','actualizar',servicio)"><i class="fas fa-edit" title="Editar"></i></a>                                   
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('servicio','actualizar',servicio)"><i class="icon-note" title="Editar"></i></a>                                   
                                                 <template v-if="servicio.condicion">
-                                                    <a class="btn btn-sm btn-default" @click="desactivarServicio(servicio.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="desactivarServicio(servicio.id)"><i class="icon-ban" title="Desactivar"></i></a>
                                                 </template>
                                                 <template v-else>
-                                                    <a class="btn btn-sm btn-default" @click="activarServicio(servicio.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="activarServicio(servicio.id)"><i class="icon-check" title="Actualizar"></i></a>
                                                 </template>
                                             </td>
                                         </tr>

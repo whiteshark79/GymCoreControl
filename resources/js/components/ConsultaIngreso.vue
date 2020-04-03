@@ -44,8 +44,8 @@
                                         <template v-else>
                                             <input type="number" v-model="buscar" @keyup.enter="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="No del comprobante">
                                         </template>                                       
-                                        <button type="submit" @click="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button> 
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                
+                                        <button type="submit" @click="listarIngreso(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button> 
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                
                                     </div>
                                     <div class="col-4"></div>
                                     <div class="input-group input-group-sm col-1">                                     
@@ -105,9 +105,9 @@
                                                     <div v-else><span class="badge badge-danger">Anulado</span></div>                                    
                                                 </td>
                                                 <td align="center">
-                                                    <a class="btn btn-sm btn-default" @click="verIngreso(ingreso.id)"><i class="far fa-eye"></i></a>                                   
+                                                    <a class="btn btn-sm btn-default" @click="verIngreso(ingreso.id)"><i class="icon-eye"></i></a>                                   
                                                     <template v-if="ingreso.estado=='Registrado'">
-                                                        <a class="btn btn-sm btn-default" @click="desactivarIngreso(ingreso.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
+                                                        <a class="btn btn-sm btn-default" @click="desactivarIngreso(ingreso.id)"><i class="icon-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
                                             </tr>

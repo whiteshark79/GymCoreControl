@@ -23,7 +23,7 @@
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-shopping-cart mr-2"></i> {{item.ingresos.msj}}
+                        <i class="icon-handbag mr-2"></i> {{item.ingresos.msj}}
                         <span class="float-right badge badge-warning">{{item.ingresos.numero}}</span>
                     </a>                    
                     

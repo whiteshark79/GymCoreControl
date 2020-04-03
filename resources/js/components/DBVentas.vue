@@ -10,7 +10,7 @@
                 <div class="row">
                   <div class="col-12 col-sm-6 col-md-6">
                     <div class="info-box">
-                      <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cash-register"></i></span>
+                      <span class="info-box-icon bg-info elevation-1"><i class="icon-basket"></i></span>
                         <div class="info-box-content">                        
                           <span class="info-box-text">{{v_msj}}</span>
                           <span class="info-box-number">Mes: ${{v_val_mes}} <small>( {{v_qtx_mes}} )</small></span>
@@ -21,7 +21,7 @@
 
                   <div class="col-12 col-sm-6 col-md-6">
                     <div class="info-box">
-                      <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                      <span class="info-box-icon bg-warning elevation-1"><i class="icon-handbag"></i></span>
                       <div class="info-box-content">
                           <span class="info-box-text">{{i_msj}}</span>
                           <span class="info-box-number">Mes: ${{i_val_mes}} <small>( {{i_qtx_mes}} )</small></span>
@@ -76,8 +76,8 @@
                             ></v-select>
                           </div>
                         </template>                                                                          
-                        <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> </button>
-                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                  
+                        <button type="submit" @click="listarVentaCliente(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> </button>
+                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                  
                     </div>                      
                     <div class="input-group input-group-sm col-sm-2 col-md-2">                                     
                         <select class="form-control col-sm-12 col-md-12" v-model="paginado_" @change="listarVentaCliente(1,buscar_,criterio_,paginado_)">
@@ -144,7 +144,7 @@
         <div class="modal-dialog modal-primary modal-sm modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <span class="modal-title text-title" v-text="tituloModal"></span>
                     <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

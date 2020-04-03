@@ -8,7 +8,7 @@
                         <div class="card-header">
                             <div class="card-title"><h3>Locales</h3></div>
                             <div class="card-tools">
-                                <button type="button" class="btn btn-sm btn-primary btn-sm" @click="abrirModal('local','registrar')"><i class="fas fa-plus-circle">  Nuevo Local</i></button>
+                                <button type="button" class="btn btn-sm btn-primary btn-sm" @click="abrirModal('local','registrar')"><i class="icon-plus">  Nuevo Local</i></button>
                             </div>
                         </div>                      
 
@@ -20,8 +20,8 @@
                                         <option value="nombre">Nombre</option>
                                         </select>
                                         <input type="text" v-model="buscar" @keyup.enter="listarLocal(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-sm-3 col-md-3" placeholder="Texto a buscar">
-                                        <button type="submit" @click="listarLocal(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                        <button type="submit" @click="listarLocal(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>                                 
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>
                                     </div>
                                     <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
                                         <select class="form-control" v-model="paginado" @change="listarLocal(1,buscar,criterio,paginado,ordenado,ascdesc)">
@@ -83,12 +83,12 @@
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
                                             <td align="center" data-label="ACCIONES">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('local','actualizar',local)"><i class="fas fa-edit" title="Editar"></i></a>                                   
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('local','actualizar',local)"><i class="icon-note" title="Editar"></i></a>                                   
                                                 <template v-if="local.condicion">
-                                                    <a class="btn btn-sm btn-default" @click="desactivarLocal(local.id)"><i class="fas fa-ban" title="Desactivar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="desactivarLocal(local.id)"><i class="icon-ban" title="Desactivar"></i></a>
                                                 </template>
                                                 <template v-else>
-                                                    <a class="btn btn-sm btn-default" @click="activarLocal(local.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="activarLocal(local.id)"><i class="icon-check" title="Actualizar"></i></a>
                                                 </template>
                                             </td>
                                         </tr>
@@ -125,7 +125,7 @@
             <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" v-text="tituloModal"></h4>
+                        <span class="modal-title text-title" v-text="tituloModal"></span>
                         <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>

@@ -9,7 +9,7 @@
                             <div class="card-title"><h3>Cuadres de Caja</h3></div>
                             <div class="card-tools">
                                 <template v-if="listado!=0">
-                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle('')" v-if="btnActivo==0"><i class="fas fa-plus-circle">  Nuevo Cuadre </i></button>
+                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle('')" v-if="btnActivo==0"><i class="icon-plus">  Nuevo Cuadre </i></button>
                                 </template>
                             </div>
                         </div>                      
@@ -24,8 +24,8 @@
                                                 <option value="fecha_hora">Fecha</option>                                   
                                             </select> 
                                             <input type="date" v-model="buscar" class="form-control col-sm-3 col-md-3">                                                                          
-                                            <button type="submit" @click="listarCuadreCaja(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
-                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                            <button type="submit" @click="listarCuadreCaja(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>                                 
+                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>
                                         </div>
                                         
                                         <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
@@ -70,10 +70,10 @@
                                                 <td align="right" data-label="COMPRAS"><small>$</small> {{ caja.compras }}</td>
                                                 <td align="right" data-label="TOTAL"><small>$</small> {{ caja.total  }}<i class="fas fa-sort-up" style="color:green;" v-if="caja.total>0"></i><i class="fas fa-sort-down" style="color:red;" v-else></i></td>                                                
                                                 <td align="center" data-label="ACCIONES">
-                                                    <a class="btn btn-sm btn-default" @click="mostrarDetalle(caja.fecha_hora)"><i class="far fa-eye"></i></a>
-                                                    <a class="btn btn-sm btn-default" @click="pdfCaja(caja.fecha_hora)"><i class="fas fa-print"></i></a>                        
+                                                    <a class="btn btn-sm btn-default" @click="mostrarDetalle(caja.fecha_hora)"><i class="icon-eye"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="pdfCaja(caja.fecha_hora)"><i class="icon-printer"></i></a>                        
                                                     <template v-if="caja.estado=='Cancelado'">
-                                                        <a class="btn btn-sm btn-default" @click="desactivarVenta(caja.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
+                                                        <a class="btn btn-sm btn-default" @click="desactivarVenta(caja.id)"><i class="icon-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
                                             </tr>

@@ -5,89 +5,132 @@
       <!--====================================================
                       ABOUT
       ======================================================-->
-      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">        
-
-          <div class="mp-auto col-sm-6 col-md-5" >                    
-              
-              <h1 class="mb-0">{{nombre}} <span class="text-primary">{{apellido}}</span></h1>
+      <section class="resume-section p-3 p-lg-5 " id="about">    
+        <div class="row">
+          <div class="col-sm-12 col-md-10">
+            <h1 class="mb-0">{{nombre}} <span class="text-primary">{{apellido}}</span></h1>
               <div class="text-cursiva">            
-                  <p class="mb-0">{{f_descripcion}}</p>
-                  <footer class="blockquote-footer">{{f_autor}}</footer>  
+                <p class="mb-0">{{f_descripcion}}</p>
+                <footer class="blockquote-footer">{{f_autor}}</footer>  
               </div>
-              <br>
-              <div class="card-header">
-                <div class="card-title"><h5><i class="far fa-id-card mr-1"></i> Datos Generales</h5></div>                
-                <div class="card-tools">
-                  <button type="button" class="btn btn-primary btn-sm" v-if="stsDatos==0" @click="activarDatos()"><i class="fas fa-edit fa-lg"></i></button> 
-                  <button type="button" class="btn btn-success btn-sm" v-if="stsDatos==1" @click="actualizarAlumno()" :disabled="stsPersona!=''"><i class="fas fa-save fa-lg"></i></button>  
-                </div>
-              </div>          
-              <div class="row">                                        
-                <div class="profile-user-info">                
-                    <div class="profile-info-row">
-                        <div class="profile-info-name">Usuario </div>
-                        <div class="profile-info-value"><span>{{usuario}}</span></div>
-                    </div>
-                    <div class="profile-info-row">
-                        <div class="profile-info-name"> Local </div>
-                        <div class="profile-info-value"><i class="fas fa-store-alt"></i><span> {{local}}</span></div>
-                    </div>
-                    <div class="profile-info-row">
-                      <div class="profile-info-name">C.I. </div>
+          </div>          
+        </div> 
+        <div class="row">
+          <div class="mp-auto col-sm-6 col-md-5" > 
+              
+            <div class="card-header">
+              <div class="card-title"><h5><i class="far fa-id-card mr-1"></i> Datos Generales</h5></div>                
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary btn-sm" v-if="stsDatos==0" @click="activarDatos()"><i class="icon-note"></i></button> 
+                <button type="button" class="btn btn-success btn-sm" v-if="stsDatos==1" @click="actualizarAlumno()" :disabled="stsPersona!=''"><i class="icon-cloud-upload"></i></button>  
+              </div>
+            </div>          
+            <div class="row">                                        
+              <div class="profile-user-info"> 
+                  <div class="profile-info-row">
+                    <div class="profile-info-name">C.I. </div>
+                    <div class="profile-info-value">
+                      <input type="text" v-model="num_documento" id="num_documento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento" @change="existePersonaId()" :disabled="stsDatos == 0">
+                      <input type="hidden" v-model="num_documento_">
+                      <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
+                    </div>                  
+                  </div>                
+                  <div class="profile-info-row">
+                      <div class="profile-info-name"> Cumpleaños </div>
                       <div class="profile-info-value">
-                        <input type="text" v-model="num_documento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_num_documento }" placeholder="Número de documento" @change="existePersonaId()" :disabled="stsDatos == 0">
-                        <input type="hidden" v-model="num_documento_">
-                        <span class="text-error" v-show="stsPersonaId">No de documento ya existe</span>
-                      </div>                  
-                    </div>                
-                    <div class="profile-info-row">
-                        <div class="profile-info-name"> Cumpleaños </div>
-                        <div class="profile-info-value">
-                          <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_fec_nacimiento }" :disabled="stsDatos == 0">
-                        </div>
-                    </div>
-                    <div class="profile-info-row">
-                        <div class="profile-info-name"> Correo </div>
-                        <div class="profile-info-value">
-                          <input type="email" v-model="email" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email" @change="existePersonaEmail()"  :disabled="stsDatos == 0"> 
-                          <input type="hidden" v-model="email_">
-                          <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>
-                        </div>                    
-                    </div>
-                    <div class="profile-info-row">
-                        <div class="profile-info-name"> Celular </div>
-                        <div class="profile-info-value">
-                          <input type="number" v-model="celular" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular" :disabled="stsDatos == 0">
-                        </div>
-                    </div>
-                    <div class="profile-info-row">
-                        <div class="profile-info-name"> Dirección </div>
-                        <div class="profile-info-value">
-                          <textarea  v-model="direccion" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_direccion }" rows="2" maxlength="60" :disabled="stsDatos == 0"></textarea>
-                        </div>
-                    </div>
-                    <div class="profile-info-row">
-                        <div class="profile-info-name"> Avatar </div>
-                        <div class="profile-info-value">
-                          <input type="file"  class="form-control-file" @change="subirImagen" accept=".png, .jpg, .jpeg" :disabled="stsDatos == 0">                          
-                        </div>
-                    </div>
-                    <div class="profile-info-row">
-                        <div class="profile-info-name"> </div>
-                        <div class="profile-info-value">
-                          <figure>
-                            <img :src="imagen" alt="Avatar" class="avatar">
-                          </figure>
-                        </div>
-                    </div>
+                        <input type="date" v-model="fec_nacimiento" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_fec_nacimiento }" :disabled="stsDatos == 0">
+                      </div>
+                  </div>
+                  <div class="profile-info-row">
+                      <div class="profile-info-name"> Correo </div>
+                      <div class="profile-info-value">
+                        <input type="text" v-model="email" id="email" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_email }" placeholder="Email" @change="existePersonaEmail()"  :disabled="stsDatos == 0"> 
+                        <input type="hidden" v-model="email_">
+                        <span class="text-error" v-show="stsPersonaEmail">Correo ya existe</span>
+                      </div>                    
+                  </div>
+                  <div class="profile-info-row">
+                      <div class="profile-info-name"> Celular </div>
+                      <div class="profile-info-value">
+                        <input type="text" v-model="celular" id="celular" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_celular }" placeholder="Celular" :disabled="stsDatos == 0">
+                      </div>
+                  </div>
+                  <div class="profile-info-row">
+                      <div class="profile-info-name"> Dirección </div>
+                      <div class="profile-info-value">
+                        <textarea  v-model="direccion" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_direccion }" rows="2" maxlength="60" :disabled="stsDatos == 0"></textarea>
+                      </div>
+                  </div>                                    
+              </div>    
+            </div> 
 
-                    
-                                      
-                </div>    
-              </div> 
+          </div> 
 
-          </div>     
-       
+          <div class="mp-auto col-sm-6 offset-2 col-md-5" > 
+              
+            <div class="card-header">
+              <div class="card-title"><h5><i class="fas fa-fingerprint mr-1"></i> Perfil</h5></div>                
+              <div class="card-tools">
+                <button type="button" class="btn btn-primary btn-sm" v-if="stsPerfil==0" @click="activarPerfil()"><i class="icon-note"></i></button> 
+                <button type="button" class="btn btn-success btn-sm" v-if="stsPerfil==1" @click="actualizarUsuario()" :disabled="stsPersona!=''"><i class="icon-cloud-upload"></i></button>  
+              </div>
+            </div>          
+            <div class="row">                                        
+              <div class="profile-user-info">                
+                  <div class="profile-info-row">
+                      <div class="profile-info-name">Usuario </div>
+                      <div class="profile-info-value"><span>{{usuario}}</span></div>
+                  </div>
+                  <div class="profile-info-row">
+                      <div class="profile-info-name"> Local </div>
+                      <div class="profile-info-value"><i class="fas fa-store-alt"></i><span> {{local}}</span></div>
+                  </div>  
+                  <div class="profile-info-row">
+                    <div class="profile-info-name">Contraseña </div>
+                    <div class="profile-info-value">
+                      <input type="password" v-model="password" id="password" class="form-control form-control-sm" placeholder="······" v-bind:class="{ 'is-invalid': e_password }" :disabled="stsPerfil == 0">                                
+                    </div>
+                    <span class="text-error" v-show="a_pass==1">{{msg_pass}}</span>                  
+                  </div>  
+                  <div class="profile-info-row">
+                    <div class="profile-info-name">Confirmación </div>
+                    <div class="profile-info-value">
+                      <input type="password" v-model="repassword" id="repassword" class="form-control form-control-sm" v-bind:class="{ 'is-invalid': e_repassword }" :disabled="stsPerfil == 0">                                 
+                    </div>
+                    <span class="text-error" v-show="a_repass==1">{{msg_repass}}</span>                   
+                  </div>               
+                  <div class="profile-info-row">
+                      <div class="profile-info-name"> Avatar </div>
+                      <div class="profile-info-value">
+                        <div class="custom-file">                                        
+                          <input type="file" class="custom-file-input file-avatar" id="avatarFile" @change="subirImagen" accept=".png, .jpg, .jpeg" v-bind:class="{ 'is-invalid': e_avatarFile }" :disabled="stsPerfil == 0">
+                          <label class="custom-file-label" for="avatarFile">Elegir imagen</label>
+                      </div>                          
+                      </div>
+                  </div>
+                  <div class="profile-info-row">
+                      <div class="profile-info-name"> </div>
+                      <div class="profile-info-value">                        
+                        <figure v-show="stsImagen==1">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <img :src="avatar" alt="Avatar" class="avatar-mini">
+                            </div>
+                            <div class="col-md-8 p-4">
+                              <p class="text-muted">Nombre: <span class="text-primary">{{picName}} </span></p>
+                              <p class="text-muted">Tamaño: <span class="text-primary">{{picSize}} </span> bytes</p>
+                              <p class="text-muted">Ancho x Alto: <span class="text-primary">{{picWidth}} x {{picHeigth}}</span> px </p>
+                            </div>
+                          </div>
+                        </figure>
+                        
+                      </div>
+                  </div>                 
+                                    
+              </div>    
+            </div> 
+          </div> 
+        </div>  
           
       </section>
 
@@ -106,8 +149,8 @@
               <div class="card-header">
                 <div class="card-title"><h5><i class="fas fa-briefcase mr-1"></i>Datos Laborales</h5></div>                
                 <div class="card-tools">
-                  <button type="button" class="btn btn-primary btn-sm" v-if="stsLaboral==0" @click="activarLaboral()"><i class="fas fa-edit fa-lg"></i></button>                   
-                  <button type="button" class="btn btn-success btn-sm" v-if="stsLaboral==1" @click="actualizarAlumnoLaboral()"><i class="fas fa-save fa-lg"></i></button>                                   
+                  <button type="button" class="btn btn-primary btn-sm" v-if="stsLaboral==0" @click="activarLaboral()"><i class="icon-note"></i></button>                   
+                  <button type="button" class="btn btn-success btn-sm" v-if="stsLaboral==1" @click="actualizarAlumnoLaboral()"><i class="icon-cloud-upload"></i></button>                                   
                 </div>
               </div>
               <div class="row">
@@ -194,8 +237,8 @@
               <div class="card-header">
                 <div class="card-title"><h5><i class="fas fa-walking mr-1"></i>Datos Físicos</h5></div>                
                 <div class="card-tools">
-                  <button type="button" class="btn btn-primary btn-sm" v-if="stsFisico==0" @click="activarFisico()"><i class="fas fa-edit fa-lg"></i></button>
-                  <button type="button" class="btn btn-success btn-sm" v-if="stsFisico==1" @click="actualizarAlumnoFisico()"><i class="fas fa-save fa-lg"></i></button>                                                                     
+                  <button type="button" class="btn btn-primary btn-sm" v-if="stsFisico==0" @click="activarFisico()"><i class="icon-note"></i></button>
+                  <button type="button" class="btn btn-success btn-sm" v-if="stsFisico==1" @click="actualizarAlumnoFisico()"><i class="icon-cloud-upload"></i></button>                                                                     
                 </div>
               </div>
               <div class="row">
@@ -305,8 +348,8 @@
                           <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
                       </select>
                     </template>                                                                          
-                    <button type="submit" @click="listarInscripcionesAlumnoId(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
-                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                
+                    <button type="submit" @click="listarInscripcionesAlumnoId(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i></button>
+                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                
                   </div>                                
                   <div class="input-group input-group-sm col-2">                                     
                     <select class="form-control" v-model="paginado" @change="listarInscripcionesAlumnoId(1,buscar,criterio,paginado)">
@@ -406,8 +449,8 @@
                             <option value="Cancelado">Cancelado</option>
                         </select>
                     </template>                                                                          
-                    <button type="submit" @click="listarVentasCabeceraAlumno(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
-                    <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                    <button type="submit" @click="listarVentasCabeceraAlumno(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i></button>
+                    <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                 
                   </div>
                   <div class="input-group input-group-sm col-2">                                     
                     <select class="form-control" v-model="paginado_" @change="listarVentasCabeceraAlumno(1,buscar_,criterio_,paginado_)">
@@ -441,7 +484,7 @@
                             <div v-else><span class="badge badge-danger">{{venta.estado}}</span></div>                                    
                         </td>
                         <td align="center">
-                            <a class="btn btn-sm btn-default" @click="listarVentasDetalleAlumno(venta.id)"><i class="far fa-eye"></i></a>  
+                            <a class="btn btn-sm btn-default" @click="listarVentasDetalleAlumno(venta.id)"><i class="icon-eye"></i></a>  
                         </td>                                                                       
                       </tr>
                     </tbody>
@@ -483,7 +526,7 @@
         <div class="modal-dialog modal-primary modal-sm modal-dialog-centered modal-dialog-vertical" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <span class="modal-title text-title" v-text="tituloModal"></span>
                     <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -539,8 +582,27 @@
           email : '',
           email_ : '',    
           
+          password : '',
+          repassword : '',
           avatar: '',
-          miniatura: '',
+          picSize: 0,
+          picName: '',
+          picWidth: 0,
+          picHeigth: 0,
+
+          a_pass: 0,
+          a_repass: 0,
+          a_avatar: 0,
+          msg_pass: '',
+          msg_repass: '',
+          msg_avatar: '',
+
+          errorUsuario : 0,
+          errorMostrarMsjUsuario : [],
+          e_password : false,
+          e_repassword : false,
+          e_avatarFile : false,
+          
 
           usuario : '',
           sexo : 0,
@@ -570,21 +632,21 @@
           f_descripcion: '',
           f_autor: '',
 
-          stsPersona : '',
+          stsPersona : '',          
           stsPersonaId : '',
           stsPersonaEmail : '',
 
           errorPersona : 0,
           errorMostrarMsjPersona : [],                
           e_num_documento : false,
-          e_nombre : false,
-          e_sexo : false,
           e_fec_nacimiento : false,
           e_celular : false,
           e_email : false,
           e_direccion : false,
 
           stsDatos : 0,
+          stsPerfil : 0,
+          stsImagen: 0,
           stsLaboral : 0,
           stsLaboral_ : 0,
           stsFisico : 0,
@@ -663,32 +725,56 @@
 
             return pagesArray_;             
 
-        },
-        imagen(){
-          if(this.stsDatos == 1)
-          {
-            return this.miniatura;
-          }else{
-            this.miniatura = 'avatars/'+ this.avatar;
-            return this.miniatura;
-          }
-          
-        }        
+        }           
       },
       methods : {  
+        validarInput(){             
+          Inputmask("*{6,15}").mask(password);
+          Inputmask("*{6,15}").mask(repassword);
+          Inputmask("99-99999999").mask(num_documento);                        
+          Inputmask("099-999-9999").mask(celular);
+          Inputmask({
+              mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+              greedy: false,
+              onBeforePaste: function (pastedValue, opts) {
+              pastedValue = pastedValue.toLowerCase();
+              return pastedValue.replace("mailto:", "");
+              },
+              definitions: {
+              '*': {
+                  validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                  casing: "lower"
+              }
+              }
+          }).mask(email); 
+        }, 
         subirImagen(e){
           let me = this;
-          //console.log(e.target.files[0]);
+          me.stsImagen = 1;
+
           var fileReader =  new FileReader();
-          fileReader.readAsDataURL(e.target.files[0]);
+          fileReader.readAsDataURL(e.target.files[0]);          
+
+          me.picSize = e.target.files[0].size;
+          me.picName = e.target.files[0].name;
+
           fileReader.onload = (e)=> {
             me.avatar = e.target.result;
-            me.miniatura = me.avatar;
+
+            var image = new Image();
+            image.src = e.target.result;
+
+            image.onload = function () {
+                me.picWidth = this.width;
+                me.picHeigth = this.height;
+            }
           } 
         }, 
-
         activarDatos(){
           this.stsDatos = 1;
+        },
+        activarPerfil(){
+          this.stsPerfil = 1;
         },
         activarLaboral(){
           this.stsLaboral = 1;
@@ -790,7 +876,7 @@
             me.perfil= arrayPersona[0]['perfil'];            
 
             me.usuario=arrayPersona[0]['usuario'];
-            me.avatar=arrayPersona[0]['avatar'];
+            //me.avatar=arrayPersona[0]['avatar'];
             me.sexo= arrayPersona[0]['sexo'];
             me.sector= arrayPersona[0]['sector'];
             me.idlocal= arrayPersona[0]['idlocal'];
@@ -859,6 +945,7 @@
           }else{ me.stsPersona=''; }
         },         
         actualizarAlumno(){ 
+          if (this.validarPersona()){ return; }
           let me = this;         
 
           axios.put('/cliente/actualizarAlumno',{
@@ -867,12 +954,35 @@
             'email' : this.email,                 
             'celular' : this.celular,
             'direccion' : this.direccion,
+            'id': this.persona_id
+          }).then(function (response) { 
+              me.stsDatos = 0;
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '<h5>Registro actualizado</h5>',
+                width: 250,
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }).catch(function (error) {
+                console.log(error);
+          });        
+
+        },
+        actualizarUsuario(){ 
+          if (this.validarUsuario()){ return; }
+          let me = this;         
+
+          axios.put('/user/actualizarUsuario',{
+            'password' : this.password,            
             'avatar' : this.avatar,
             'id': this.persona_id
           }).then(function (response) { 
-              location.reload();           
-              me.stsDatos = 0;
-
+              if(me.picName != ''){
+                location.reload();
+              }                         
+              me.stsPerfil = 0;
               Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -943,14 +1053,70 @@
               this.errorMostrarMsjPersona =[];
 
             if (!this.num_documento) {this.e_num_documento = true; this.errorMostrarMsjPersona.push('num_documento');}else{this.e_num_documento = false}
-            if (!this.nombre) {this.e_nombre = true; this.errorMostrarMsjPersona.push('nombre');}else{this.e_nombre = false}
-            if (!this.sexo) {this.e_sexo = true; this.errorMostrarMsjPersona.push('sexo');}else{this.e_sexo = false}
             if (!this.fec_nacimiento) {this.e_fec_nacimiento = true; this.errorMostrarMsjPersona.push('fec_nacimiento');}else{this.e_fec_nacimiento = false}
             if (!this.celular) {this.e_celular = true; this.errorMostrarMsjPersona.push('celular');}else{this.e_celular = false}
             if (!this.email) {this.e_email = true; this.errorMostrarMsjPersona.push('email');}else{this.e_email = false}
+            if (!this.direccion) {this.e_direccion = true; this.errorMostrarMsjPersona.push('direccion');}else{this.e_direccion = false}
 
               if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
               return this.errorPersona;
+        },
+        validarUsuario(){
+            this.errorUsuario=0;
+            this.errorMostrarMsjUsuario =[];
+
+            if (!this.password && !this.repassword && this.stsImagen == 0) 
+            {
+                this.e_password = true;
+                this.e_repassword = true;
+                this.e_avatarFile = true;    
+                this.a_avatar = 1;
+                this.msg_avatar = 'No existen cambios para guardar';             
+                this.errorMostrarMsjUsuario.push('all');
+
+            }else if(this.password && !this.repassword){
+                this.e_password = false;
+                this.e_repassword = false;
+                this.e_avatarFile = false;
+                this.a_avatar = 0;
+                this.msg_avatar = ''; 
+
+                this.e_repassword = true;
+                this.a_repass = 1;
+                this.msg_repass = 'Digite la confirmación'; 
+                this.errorMostrarMsjUsuario.push('repassword');
+                          
+            }else if(!this.password && this.repassword){
+                this.e_repassword = false;
+                this.a_repass = 0;
+                this.msg_repass = ''; 
+
+                this.e_password = true;
+                this.a_pass = 1;
+                this.msg_pass = 'Digite la contraseña'; 
+                this.errorMostrarMsjUsuario.push('password');
+
+            }else if(this.password != this.repassword){
+                this.e_password = false;
+                this.a_pass = 0;
+                this.msg_pass = ''; 
+
+                this.e_password = true;
+                this.e_repassword = true;
+                this.a_repass = 1;
+                this.msg_repass = 'Las contraseñas no coinciden'; 
+                this.errorMostrarMsjUsuario.push('password');
+                this.errorMostrarMsjUsuario.push('repassword');
+            }else{
+                this.e_password = false;
+                this.e_repassword = false;
+                this.a_repass = 0;
+                this.msg_repass = ''; 
+            }
+
+            if (this.errorMostrarMsjUsuario.length) this.errorUsuario = 1;
+
+            return this.errorUsuario;
         },
 
 
@@ -1046,6 +1212,7 @@
       },
       mounted() {
         this.verAlumno();
+        this.validarInput();
         this.selectProfesion();
         this.selectProvincia();
         this.selectUniversidad();
@@ -1054,6 +1221,11 @@
         this.selectModalidad();   
         this.listarInscripcionesAlumnoId(1,this.buscar,this.criterio,this.paginado);
         this.listarVentasCabeceraAlumno(1,this.buscar_,this.criterio_,this.paginado_);
+
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
       }
     }
 </script>

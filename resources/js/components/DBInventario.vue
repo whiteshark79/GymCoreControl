@@ -42,8 +42,8 @@
                                             </select>
                                         </template>                          
                                         
-                                        <button type="submit" @click="listarArticuloVenta(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                   
+                                        <button type="submit" @click="listarArticuloVenta(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i></button>
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                   
                                     </div>
                                     <div class="input-group input-group-sm col-sm-2 col-md-2">                                     
                                         <select class="form-control col-sm-12 col-md-12" v-model="paginado" @change="listarArticuloVenta(1,buscar,criterio,paginado)">
@@ -61,7 +61,7 @@
                                             <th scope="col" width="20%">MES</th>
                                             <th scope="col">ARTICULO</th>
                                             <th scope="col" width="10%">SUBTOTAL</th>
-                                            <th scope="col" width="10%">OPC</th>                                     
+                                            <!-- <th scope="col" width="10%">OPC</th>                                      -->
                                         </tr> 
                                     </thead>
                                     <tbody v-if="arrayArticuloVenta.length">
@@ -69,9 +69,9 @@
                                             <td v-text="venta.mes" scope="row" data-label="MES"></td>
                                             <td v-text="venta.nombre_articulo" data-label="ARTICULO"></td>
                                             <td align="right" data-label="SUBTOTAL"><small>$</small> {{venta.subtotal}}</td>
-                                            <td align="center" data-label="OPC">
-                                                <a class="btn btn-sm btn-default" @click="verGraf()"><i class="fas fa-chart-pie" title="Grafico"></i></a>
-                                            </td>
+                                            <!-- <td align="center" data-label="OPC">
+                                                <a class="btn btn-sm btn-default" @click="verGraf()"><i class="icon-chart" title="Grafico"></i></a>
+                                            </td> -->
                                         </tr>
                                     </tbody>
                                     <tbody v-else>

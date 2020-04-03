@@ -163,29 +163,14 @@ class ClienteController extends Controller
             DB::beginTransaction();            
             
             $persona = Persona::findOrFail($request->id); 
-            $user = User::findOrFail($persona->id);             
-            
-            $exploded = explode(',', $request->avatar);
-            $decoded = base64_decode($exploded[1]);
-
-            if(str_contains($exploded[0], 'jpeg')) { $ext = 'jpg'; }else{  $ext = 'png'; }
-
-            $usuario = $request->num_documento;
-            $fileName = $usuario.'-'.str_random(3).'.'.$ext;            
-            $path = public_path().'/avatars/'.$fileName;
-            file_put_contents($path , $decoded);      
-            
-            //$value = $request->session()->get($fileName);                
+            $user = User::findOrFail($persona->id); 
                                   
             $persona->num_documento = $request->num_documento;
             $persona->fec_nacimiento = $request->fec_nacimiento;
             $persona->email = $request->email;
             $persona->celular = $request->celular;
             $persona->direccion = $request->direccion; 
-            $persona->save();  
-            
-            $user->avatar = $fileName; 
-            $user->save(); 
+            $persona->save();              
 
             DB::commit();
 

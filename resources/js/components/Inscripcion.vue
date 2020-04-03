@@ -8,7 +8,7 @@
                         <div class="card-header">
                             <div class="card-title"><h3>Inscripciones</h3></div>
                             <div class="card-tools">
-                                <button type="button" class="btn btn-sm btn-primary btn-sm" @click="abrirModal('inscripcion','registrar')"><i class="fas fa-plus-circle">  Nueva Inscripción</i></button>
+                                <button type="button" class="btn btn-sm btn-primary btn-sm" @click="abrirModal('inscripcion','registrar')"><i class="icon-plus">  Nueva Inscripción</i></button>
                             </div>
                         </div>                      
 
@@ -42,8 +42,8 @@
                                                 <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
                                             </select>
                                         </template>                                                                          
-                                        <button type="submit" @click="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                                        <button type="submit" @click="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                 
                                     </div>
                                     <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
                                         <select class="form-control" v-model="paginado" @change="listarInscripcion(1,buscar,criterio,paginado,ordenado,ascdesc)">
@@ -129,11 +129,11 @@
                                             </td>
                                             <td align="center" data-label="ACCIONES">                   
                                                 <template v-if="inscripcion.estado=='Cancelado' || inscripcion.estado=='Debe'">
-                                                    <a class="btn btn-sm btn-default" @click="abrirModal('inscripcion','actualizar',inscripcion)"><i class="fas fa-edit" title="Editar"></i></a>
-                                                    <a class="btn btn-sm btn-default" @click="desactivarInscripcion(inscripcion.id)"><i class="fas fa-ban" title="Desactivar"></i></a>                                                     
+                                                    <a class="btn btn-sm btn-default" @click="abrirModal('inscripcion','actualizar',inscripcion)"><i class="icon-note" title="Editar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="desactivarInscripcion(inscripcion.id)"><i class="icon-ban" title="Desactivar"></i></a>                                                     
                                                 </template>
                                                 <template v-else>
-                                                    <a class="btn btn-sm btn-default" @click="activarInscripcion(inscripcion.id)"><i class="fas fa-sync" title="Actualizar"></i></a>
+                                                    <a class="btn btn-sm btn-default" @click="activarInscripcion(inscripcion.id)"><i class="icon-check" title="Actualizar"></i></a>
                                                 </template>
                                             </td>
                                         </tr>
@@ -170,7 +170,7 @@
             <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" v-text="tituloModal"></h4>
+                        <span class="modal-title text-title" v-text="tituloModal"></span>
                         <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>

@@ -11,7 +11,8 @@
   <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}"> 
   <link rel="shortcut icon" href="img/favicon.png">
   <title>GʏᴍCᴏʀᴇ ᴄᴏɴᴛʀᴏʟ</title>  
-  <link rel="stylesheet" href="css/plantilla.css">
+  <link rel="stylesheet" href="css/plantilla.css">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">  
   
 </head>
 <body class="hold-transition sidebar-mini">    
@@ -57,6 +58,7 @@
     </div>
     <script src="js/app.js"></script>
     <script src="js/plantilla.js"></script>      
+    
        
 </body>
 </html>

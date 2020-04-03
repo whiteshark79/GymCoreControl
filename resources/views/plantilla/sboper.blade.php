@@ -27,55 +27,55 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"> 
           <li @click="menu=0" class="nav-item ">
-            <a href="#" class="nav-link "><span class="icon_title"><i class="nav-icon fas fa-tachometer-alt"></i></span><p class="menu_title">Dashboard</p></a>
+            <a href="#" class="nav-link "><span class="icon_title"><i class="nav-icon icon-speedometer"></i></span><p class="menu_title">Dashboard</p></a>
           </li>
           <li @click="menu=1" class="nav-item ">
             <a href="#" class="nav-link "><span class="icon_title"><i class="nav-icon fas fa-calculator"></i></span><p class="menu_title">Caja</p></a>
           </li>            
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon fas fa-users"></i></span><p class="menu_title">Personas<i class="fas fa-chevron-right fa-xs right"></p></i></a>
+            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon icon-people"></i></span><p class="menu_title">Personas<i class="fas fa-chevron-right fa-xs right"></p></i></a>
             <ul class="nav nav-treeview">
               <li @click="menu=2" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Alumnos</p></a></li>
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Alumnos</p></a></li>
               <li @click="menu=3" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Clientes</p></a></li>
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Clientes</p></a></li>
               <li @click="menu=4" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Proveedores</p></a></li>          
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Proveedores</p></a></li>          
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon fas fa-boxes"></i></span><p class="menu_title">Inventario<i class="fas fa-chevron-right fa-xs right"></i></p></a>
+            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon icon-list"></i></span><p class="menu_title">Inventario<i class="fas fa-chevron-right fa-xs right"></i></p></a>
             <ul class="nav nav-treeview">
               <li @click="menu=5" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Artículos</p></a></li>  
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Artículos</p></a></li>  
               <li @click="menu=6" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Categorías</p></a></li>                          
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Categorías</p></a></li>                          
             </ul>
           </li>
-          <li class="nav-item has-treeview"><a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon fas fa-coins"></i></span><p class="menu_title">Costos<i class="fas fa-chevron-right fa-xs right"></i></p></a>
+          <li class="nav-item has-treeview"><a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon icon-credit-card"></i></span><p class="menu_title">Costos<i class="fas fa-chevron-right fa-xs right"></i></p></a>
             <ul class="nav nav-treeview">
               <li @click="menu=7" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Servicios</p></a></li>
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Servicios</p></a></li>
               <li @click="menu=8" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Clasificaciones</p></a></li>              
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Clasificaciones</p></a></li>              
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon fas fa-cash-register"></i></span><p class="menu_title">Ingresos<i class="fas fa-chevron-right fa-xs right"></i></p></a>
+            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon icon-basket"></i></span><p class="menu_title">Ingresos<i class="fas fa-chevron-right fa-xs right"></i></p></a>
             <ul class="nav nav-treeview">
               <li @click="menu=9" class="nav-item">
-                <a  href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Ventas</p></a></li>
+                <a  href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Ventas</p></a></li>
               <li @click="menu=10" class="nav-item">
-                <a  href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Inscripciones</p></a></li>                         
+                <a  href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Inscripciones</p></a></li>                         
             </ul>
           </li>          
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon fas fa-shopping-cart"></i></span><p class="menu_title">Egresos<i class="fas fa-chevron-right fa-xs right"></i></p></a>
+            <a href="#" class="nav-link"><span class="icon_title"><i class="nav-icon icon-handbag"></i></span><p class="menu_title">Egresos<i class="fas fa-chevron-right fa-xs right"></i></p></a>
             <ul class="nav nav-treeview">
               <li @click="menu=11" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Compras</p></a></li>
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Compras</p></a></li>
               <li @click="menu=12" class="nav-item">
-                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p>Gastos</p></a></li>
+                <a href="#" class="nav-link "><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Gastos</p></a></li>
                            
             </ul>
           </li> 

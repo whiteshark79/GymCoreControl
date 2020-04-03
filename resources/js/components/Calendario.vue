@@ -9,7 +9,7 @@
                             <div class="card-title"><h3>Calendarios</h3></div>
                             <div class="card-tools">
                                 <template v-if="listado!=0">
-                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="fas fa-plus-circle">  Nuevo Calendario</i></button>
+                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="icon-plus">  Nuevo Calendario</i></button>
                                 </template>
                             </div>
                         </div>                      
@@ -35,8 +35,8 @@
                                         <template v-else>
                                             <input type="number" v-model="buscar" @keyup.enter="listarCalendario(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-4" placeholder="No del comprobante">
                                         </template>                                       
-                                        <button type="submit" @click="listarCalendario(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>                                 
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>
+                                        <button type="submit" @click="listarCalendario(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>                                 
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>
                                     </div>
                                     <div class="col-4"></div>
                                     <div class="input-group input-group-sm col-1">                                     
@@ -106,9 +106,9 @@
                                                     <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                                 </td>
                                                 <td align="center">
-                                                    <a class="btn btn-sm btn-default" @click="verCalendario(calendario.id)"><i class="far fa-eye"></i></a>                                 
+                                                    <a class="btn btn-sm btn-default" @click="verCalendario(calendario.id)"><i class="icon-eye"></i></a>                                 
                                                     <template v-if="calendario.estado=='Cancelado'">
-                                                        <a class="btn btn-sm btn-default" @click="desactivarCalendario(calendario.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
+                                                        <a class="btn btn-sm btn-default" @click="desactivarCalendario(calendario.id)"><i class="icon-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
                                             </tr>
@@ -171,7 +171,7 @@
                                     </div>
                                     <div class="col-auto">
                                         <button type="button" class="btn btn-sm btn-primary" @click="generaCalendario()"><i class="far fa-calendar-check"> Generar</i></button>
-                                        <button type="button" @click="ceroFechas();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>   
+                                        <button type="button" @click="ceroFechas();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>   
                                     </div> 
                                 </div>
                                 <span class="text-error" v-show="s_fechas">{{ msg_fechas }}</span>              
@@ -231,7 +231,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <h4>
-                                                <i class="fas fa-cash-register"></i> Factura de calendario
+                                                <i class="icon-basket"></i> Factura de calendario
                                                 <small class="float-right">Fecha: {{ hoyFecha() }} </small>
                                             </h4>
                                         </div>

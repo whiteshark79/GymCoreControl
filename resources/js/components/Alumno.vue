@@ -8,7 +8,7 @@
                         <div class="card-header">
                             <div class="card-title"><h3>Alumnos</h3></div>
                             <div class="card-tools">
-                                <button type="button" class="btn btn-sm btn-primary" @click="abrirModal('persona','registrar')"><i class="fas fa-plus-circle">  Nuevo Alumno</i></button>
+                                <button type="button" class="btn btn-sm btn-primary" @click="abrirModal('persona','registrar')"><i class="icon-plus">  Nuevo Alumno</i></button>
                             </div>
                         </div>                      
 
@@ -31,8 +31,8 @@
                                         <template v-else>
                                             <input type="text" v-model="buscar" @keyup.enter="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control col-sm-3 col-md-3" placeholder="Texto a buscar">
                                         </template>
-                                        <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
-                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                                        <button type="submit" @click="listarPersona(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>
+                                        <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                 
                                     </div>
                                     
                                     <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
@@ -85,7 +85,7 @@
                                             <td v-text="persona.celular" data-label="CELULAR"></td>
                                             <td v-text="persona.email" data-label="EMAIL"></td>
                                             <td align="center" data-label="ACCIONES">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="fas fa-edit" title="Editar"></i></a>
+                                                <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="icon-note" title="Editar"></i></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -121,7 +121,7 @@
             <div class="modal-dialog modal-primary modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" v-text="tituloModal"></h4>
+                        <span class="modal-title text-title" v-text="tituloModal"></span>
                         <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -509,19 +509,19 @@ import Inputmask from 'inputmask';
                 Inputmask("Aa{3,15} Aa{3,15}").mask(nombre);                              
                 Inputmask("099-999-9999").mask(celular);
                 Inputmask({
-                            mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
-                            greedy: false,
-                            onBeforePaste: function (pastedValue, opts) {
-                            pastedValue = pastedValue.toLowerCase();
-                            return pastedValue.replace("mailto:", "");
-                            },
-                            definitions: {
-                            '*': {
-                                validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
-                                casing: "lower"
-                            }
-                            }
-                        }).mask(email);           
+                    mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+                    greedy: false,
+                    onBeforePaste: function (pastedValue, opts) {
+                    pastedValue = pastedValue.toLowerCase();
+                    return pastedValue.replace("mailto:", "");
+                    },
+                    definitions: {
+                    '*': {
+                        validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+                        casing: "lower"
+                    }
+                    }
+                }).mask(email);           
 
             },         
             listarPersona (page,buscar,criterio,paginado,ordenado,ascdesc){

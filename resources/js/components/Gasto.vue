@@ -9,7 +9,7 @@
                             <div class="card-title"><h3>Gastos</h3></div>
                             <div class="card-tools">
                                 <template v-if="listado!=0">
-                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="fas fa-plus-circle">  Nuevo Gasto</i></button>
+                                    <button type="button" class="btn btn-sm btn-primary" @click="mostrarDetalle()"><i class="icon-plus">  Nuevo Gasto</i></button>
                                 </template>
                             </div>
                         </div>                      
@@ -50,8 +50,8 @@
                                             <template v-else>
                                                 <input type="number" v-model="buscar" @keyup.enter="listarGasto(1,buscar,criterio,paginado,ordenado,ascdesc)" class="form-control  col-sm-3 col-md-3" placeholder="No del comprobante">
                                             </template>                                       
-                                            <button type="submit" @click="listarGasto(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
-                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                             
+                                            <button type="submit" @click="listarGasto(1,buscar,criterio,paginado,ordenado,ascdesc)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>
+                                            <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                             
                                         </div>
                                         <div class="input-group input-group-sm col-sm-1 col-md-1">                                     
                                         <select class="form-control" v-model="paginado" @change="listarGasto(1,buscar,criterio,paginado,ordenado,ascdesc)">
@@ -125,9 +125,9 @@
                                                     <div v-if="gasto.estado=='Anulado'"><span class="badge badge-danger">{{ gasto.estado }}</span></div>                                    
                                                 </td>
                                                 <td align="center" data-label="ACCIONES">
-                                                    <a class="btn btn-sm btn-default" @click="verGasto(gasto.id)"><i class="far fa-eye"></i></a>                                   
+                                                    <a class="btn btn-sm btn-default" @click="verGasto(gasto.id)"><i class="icon-eye"></i></a>                                   
                                                     <template v-if="gasto.estado=='Registrado'">
-                                                        <a class="btn btn-sm btn-default" @click="desactivarGasto(gasto.id)"><i class="fas fa-ban" title="Desactivar"></i></a>  
+                                                        <a class="btn btn-sm btn-default" @click="desactivarGasto(gasto.id)"><i class="icon-ban" title="Desactivar"></i></a>  
                                                     </template> 
                                                 </td>
                                             </tr>
@@ -225,7 +225,7 @@
                                                         <label>Servicio <span class="text-error" v-show="idservicio==0">(*)</span></label>
                                                         <div class="form-inline">
                                                             <input type="text" class="form-control form-control-sm" v-model="codigo" @keyup.enter="buscarServicio()" placeholder="Cód. servicio" size="10">
-                                                            <button @click="abrirModal()" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+                                                            <button @click="abrirModal()" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i></button>
                                                             <input type="text" readonly class="form-control form-control-sm" v-model="servicio" size="13">
                                                             <span class="text-info">{{descripcion}}</span>
                                                         </div>
@@ -240,7 +240,7 @@
                                                         <input type="number" value="0" step="1" min="0" max="100" class="form-control form-control-sm" v-model="cantidad">
                                                     </div>
                                                     <div class="col-md-1">
-                                                        <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="fas fa-plus-circle"></i></button>
+                                                        <button @click="agregarDetalle()" class="btn btn-primary btn-sm btnagregar"><i class="icon-plus"></i></button>
                                                     </div>
                                                 </div>
                                                 <hr>       
@@ -258,7 +258,7 @@
                                                             </thead>
                                                             <tbody v-if="arrayDetalle.length">
                                                                 <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
-                                                                    <td><a href="#" @click="eliminarDetalle(index)"><i class="fas fa-trash-alt"></i></a></td>                                                                 
+                                                                    <td><a href="#" @click="eliminarDetalle(index)"><i class="icon-trash"></i></a></td>                                                                 
                                                                     <td v-text="detalle.servicio"></td>
                                                                     <td><input v-model="detalle.precio" type="number" step="any" min="0.1" max="100" class="form-control form-control-sm"></td>
                                                                     <td><input v-model="detalle.cantidad" type="number" min="1" max="100" class="form-control form-control-sm"></td>
@@ -408,7 +408,7 @@
             <div class="modal-dialog modal-primary modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" v-text="tituloModal"></h4>
+                        <span class="modal-title text-title" v-text="tituloModal"></span>
                         <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -424,7 +424,7 @@
                                         
                                     </select>
                                     <input type="text" v-model="buscarA" @keyup.enter="listarServicio(buscarA,criterioA)" class="form-control form-control-sm" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarServicio(buscarA,criterioA)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Buscar</button>
+                                    <button type="submit" @click="listarServicio(buscarA,criterioA)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>

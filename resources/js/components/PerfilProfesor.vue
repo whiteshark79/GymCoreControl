@@ -291,8 +291,8 @@
                           <option v-for="modalidad in arrayModalidad" :key="modalidad.id" :value="modalidad.id" v-text="modalidad.nombre"></option>
                       </select>
                     </template>                                                                          
-                    <button type="submit" @click="listarInscripcionesAlumnoId(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
-                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                
+                    <button type="submit" @click="listarInscripcionesAlumnoId(1,buscar,criterio,paginado)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i></button>
+                    <button type="button" @click="ceroBusqueda();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                
                   </div>                                
                   <div class="input-group input-group-sm col-2">                                     
                     <select class="form-control" v-model="paginado" @change="listarInscripcionesAlumnoId(1,buscar,criterio,paginado)">
@@ -392,8 +392,8 @@
                             <option value="Cancelado">Cancelado</option>
                         </select>
                     </template>                                                                          
-                    <button type="submit" @click="listarVentasCabeceraAlumno(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
-                    <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="fas fa-redo"></i> </button>                                 
+                    <button type="submit" @click="listarVentasCabeceraAlumno(1,buscar_,criterio_,paginado_)" class="btn btn-primary btn-sm"><i class="icon-magnifier"></i></button>
+                    <button type="button" @click="ceroBusqueda_();" class="btn btn-info btn-sm ml-1"><i class="icon-reload"></i> </button>                                 
                   </div>
                   <div class="input-group input-group-sm col-2">                                     
                     <select class="form-control" v-model="paginado_" @change="listarVentasCabeceraAlumno(1,buscar_,criterio_,paginado_)">
@@ -427,7 +427,7 @@
                             <div v-else><span class="badge badge-danger">{{venta.estado}}</span></div>                                    
                         </td>
                         <td align="center">
-                            <a class="btn btn-sm btn-default" @click="listarVentasDetalleAlumno(venta.id)"><i class="far fa-eye"></i></a>  
+                            <a class="btn btn-sm btn-default" @click="listarVentasDetalleAlumno(venta.id)"><i class="icon-eye"></i></a>  
                         </td>                                                                       
                       </tr>
                     </tbody>
@@ -469,7 +469,7 @@
         <div class="modal-dialog modal-primary modal-sm modal-dialog-centered modal-dialog-vertical" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" v-text="tituloModal"></h4>
+                    <span class="modal-title text-title" v-text="tituloModal"></span>
                     <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
