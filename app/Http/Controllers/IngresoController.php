@@ -86,7 +86,7 @@ class IngresoController extends Controller
     }
 
     public function listarIngresosDiario(Request $request){
-        //if (!$request->ajax()) return redirect('/');        
+        if (!$request->ajax()) return redirect('/');        
         
         $fechaActual= date('Y-m-d'); 
         $fecha_hora = $request->fecha;

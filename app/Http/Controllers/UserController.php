@@ -56,10 +56,21 @@ class UserController extends Controller
         if (!$request->ajax()) return redirect('/');
 
         $usuario = $request->usuario;
-        $usuarioUser = User::where('usuario',$usuario)->get();      
+        $avatar = User::where('usuario',$usuario)->get();      
         $stsUsuarioUser=$usuarioUser->count();
  
         return ['stsUsuarioUser'=>$stsUsuarioUser];     
+    }
+
+    public function selectAvatar(Request $request)
+    { 
+        if (!$request->ajax()) return redirect('/');
+
+        $id = \Auth::user()->id;
+
+        $avatarUser = User::select('avatar')->where('id',$id)->get();
+ 
+        return ['avatarUser'=>$avatarUser[0]->avatar];     
     }
 
     public function store(Request $request)
@@ -122,28 +133,10 @@ class UserController extends Controller
         } catch (Exception $e){
             DB::rollBack();
         }
-    }   
-
-    public function actualizarPerfil(Request $request)
-    {                     
-        $id = \Auth::user()->id;
-        $usuario = $request->input('usuario');
-        $password = $request->input('password');
-        
-        $user = User::find($id);
-        
-        $user->usuario = $usuario;
-        $user->password = bcrypt($password);
-        
-        $user->update();
-
-        return  back();
-        
-    }
+    }       
 
     public function actualizarUsuario(Request $request)
-    {               
- 
+    {  
         try{
             DB::beginTransaction();            
             
@@ -151,6 +144,9 @@ class UserController extends Controller
             $user = User::find($id);
             $password= $request->password;
             $avatar= $request->avatar;
+
+            $pic= $request->pic;
+
             
             if($avatar!=''){
                 $exploded = explode(',', $avatar);
@@ -158,7 +154,10 @@ class UserController extends Controller
                 if(str_contains($exploded[0], 'jpeg')) { $ext = 'jpg'; }else{  $ext = 'png'; }            
                 $fileName = time().str_random(3).'.'.$ext;            
                 $path = public_path().'/avatars/'.$fileName;
-                file_put_contents($path , $decoded);   
+                file_put_contents($path , $decoded);  
+
+                $path2 = public_path().'/avatars/'.$pic;
+                unlink($path2); 
             }
 
             if($password!='' && $avatar!=''){

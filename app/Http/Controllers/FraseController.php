@@ -40,7 +40,8 @@ class FraseController extends Controller
         ];
     }
 
-    public function selectFraseId(Request $request){
+    public function selectFraseId(Request $request)
+    {
         if (!$request->ajax()) return redirect('/');
 
         $id = rand(1, 99);
@@ -51,4 +52,41 @@ class FraseController extends Controller
 
         return ['frases' => $frases];
     }
+
+    public function store(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $frase = new Frase();
+        $frase->autor = $request->autor;
+        $frase->descripcion = $request->descripcion;
+        $frase->condicion = '1';
+        $frase->save();
+    }
+
+    public function update(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $frase = Frase::findOrFail($request->id);
+        $frase->autor = $request->autor;
+        $frase->descripcion = $request->descripcion;
+        $frase->condicion = '1';
+        $frase->save();
+    } 
+
+    public function desactivar(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $frase = Frase::findOrFail($request->id);
+        $frase->condicion = '0';
+        $frase->save();
+    }
+
+    public function activar(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $frase = Frase::findOrFail($request->id);
+        $frase->condicion = '1';
+        $frase->save();
+    }
+
 }

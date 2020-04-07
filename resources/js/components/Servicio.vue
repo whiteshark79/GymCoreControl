@@ -11,7 +11,7 @@
                                 <button type="button" class="btn btn-sm btn-primary" @click="abrirModal('servicio','registrar')"><i class="icon-plus">  Nuevo Servicio</i></button>
                                 <button type="button" class="btn btn-sm btn-info" @click="cargarPdf()"><i class="fas fa-file-pdf"> Reporte</i></button>  
                             </div>
-                        </div>                      
+                        </div>                    
 
                         <div class="card-body">
                             <div class="form-group row justify-content-between">
@@ -100,9 +100,9 @@
                                                 <div v-if="servicio.condicion"><span class="badge badge-success">Activo</span></div>
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
-                                            <td align="center" data-label="ACCIONES">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('servicio','actualizar',servicio)"><i class="icon-note" title="Editar"></i></a>                                   
+                                            <td align="center" data-label="ACCIONES">                                   
                                                 <template v-if="servicio.condicion">
+                                                    <a class="btn btn-sm btn-default" @click="abrirModal('servicio','actualizar',servicio)"><i class="icon-note" title="Editar"></i></a>
                                                     <a class="btn btn-sm btn-default" @click="desactivarServicio(servicio.id)"><i class="icon-ban" title="Desactivar"></i></a>
                                                 </template>
                                                 <template v-else>
@@ -424,7 +424,7 @@ import vSelect from 'vue-select';
                     }).then(function (response) {
                         me.listarServicio(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
-                        'Desactivado!',
+                        'Activado!',
                         'El registro ha sido activado con éxito.',
                         'success'
                         )

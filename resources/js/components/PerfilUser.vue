@@ -15,9 +15,10 @@
             <span class="text-error" v-show="a_repass==1">{{msg_repass}}</span>               
             
             <div class="custom-file file-input">                                        
-                <input type="file" class="custom-file-input" id="avatarFile" @change="subirImagen" accept=".png, .jpg, .jpeg" v-bind:class="{ 'is-invalid': e_avatarFile }" >
+                <input type="file" class="custom-file-input" id="avatarFile" @change="subirImagen" accept=".png, .jpg, .jpeg" v-bind:class="{ 'is-invalid': e_avatarFile }" >                
                 <label class="custom-file-label" for="avatarFile">Elegir imagen</label>
             </div>            
+            <input type="hidden" v-model="pic">
             <figure v-show="stsImagen==1">
                 <div class="row file-img">
                     <div class="col-md-4">
@@ -51,6 +52,7 @@ export default {
             password : '',
             repassword : '',
             avatar: '',
+            pic: '',
             picSize: 0,
             picName: '',
             picWidth: 0,
@@ -136,28 +138,78 @@ export default {
             if (this.errorMostrarMsjUsuario.length) this.errorUsuario = 1;
 
             return this.errorUsuario;
-        },             
+        },
+        selectAvatar(){
+            let me=this;
+            var url= '/user/selectAvatar';
+            axios.get(url).then(function (response) {
+            //console.log(response);
+            var respuesta= response.data;
+            me.pic = respuesta.avatarUser;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        },         
         subirImagen(e){
-          let me = this;
-          me.stsImagen = 1;
+          let me = this;          
 
           var fileReader =  new FileReader();
-          fileReader.readAsDataURL(e.target.files[0]);          
+          fileReader.readAsDataURL(e.target.files[0]);      
+          
+          if(e.target.files[0].size > 524288){
+            me.stsImagen = 0;
 
-          me.picSize = e.target.files[0].size;
-          me.picName = e.target.files[0].name;
+            Swal.fire({
+              icon: 'error',
+              title: '<h5>Error al subir imagen</h5>',
+              width: 350,
+              text: 'Tamaño máximo 500Kb'
+            })
 
-          fileReader.onload = (e)=> {
-            me.avatar = e.target.result;
+          }else{          
 
-            var image = new Image();
-            image.src = e.target.result;
+            me.picSize = e.target.files[0].size;
+            me.picName = e.target.files[0].name;
 
-            image.onload = function () {
-                me.picWidth = this.width;
-                me.picHeigth = this.height;
+            fileReader.onload = (e)=> {
+              me.avatar = e.target.result;
+
+              var image = new Image();
+              image.src = e.target.result;
+
+              image.onload = function () {
+                if(this.width > 500 || this.height > 500){
+                  me.stsImagen = 0;
+
+                  Swal.fire({
+                    icon: 'error',
+                    title: '<h5>Error al subir imagen</h5>',
+                    width: 350,
+                    text: 'Dimensión máxima 500 x 500 px'
+                  })
+
+                }else if(this.width < 50 || this.height < 50){
+                  me.stsImagen = 0;
+
+                  Swal.fire({
+                    icon: 'error',
+                    title: '<h5>Error al subir imagen</h5>',
+                    width: 350,
+                    text: 'Dimensión mínima 50 x 50 px'
+                  })
+                  
+                }else{
+                  me.stsImagen = 1;
+
+                  me.picWidth = this.width;
+                  me.picHeigth = this.height;
+                }                
+              }
             }
-          } 
+          }    
+           
         }, 
         actualizarUsuario(){ 
             if (this.validarUsuario()){ return; }
@@ -165,7 +217,8 @@ export default {
 
             axios.put('/user/actualizarUsuario',{
             'password' : this.password,            
-            'avatar' : this.avatar
+            'avatar' : this.avatar,
+            'pic' : this.pic
             }).then(function (response) {   
                 sessionStorage.setItem('avatar', me.avatar);
                 if(me.picName != ''){
@@ -189,6 +242,7 @@ export default {
     },
     mounted() {
         this.validarInput();
+        this.selectAvatar();
 
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();

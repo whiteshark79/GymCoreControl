@@ -162,7 +162,7 @@ class CajaController extends Controller
 
         return $pdf->download('caja_'.$numcuadre[0]->id.'-'.$fecha.'.pdf');        
 
-    }
+    } 
 
     public function store(Request $request)
     {

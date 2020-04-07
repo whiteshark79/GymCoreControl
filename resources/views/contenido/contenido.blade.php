@@ -30,6 +30,7 @@
             <template v-if="menu==23"><especialidad></especialidad></template>
             <template v-if="menu==24"><universidad></universidad></template>
             <template v-if="menu==25"><profesion></profesion></template>
+            <template v-if="menu==26"><frase></frase></template>
         @elseif (Auth::user()->idrol == 2)
             <template v-if="menu==0"><perfilalumno></perfilalumno></template> 
         @elseif (Auth::user()->idrol == 3)

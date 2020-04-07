@@ -30,7 +30,7 @@ Vue.component('caja', require('./components/Caja.vue').default);
 Vue.component('empresa', require('./components/Empresa.vue').default);
 Vue.component('local', require('./components/Local.vue').default);
 Vue.component('calendario', require('./components/Calendario.vue').default);
-
+Vue.component('frase', require('./components/Frase.vue').default);
 
 Vue.component('dbinscripciones', require('./components/DBInscripciones.vue').default);
 Vue.component('dbventas', require('./components/DBVentas.vue').default);

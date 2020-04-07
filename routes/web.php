@@ -60,10 +60,10 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/user/registrar', 'UserController@store');
         Route::put('/user/actualizar', 'UserController@update');
         Route::put('/user/actualizarUsuario', 'UserController@actualizarUsuario');
-        Route::post('/user/perfil', 'UserController@actualizarPerfil')->name('perfil');
         Route::put('/user/desactivar', 'UserController@desactivar');
         Route::put('/user/activar', 'UserController@activar');
         Route::get('/user/selectUsuario', 'UserController@selectUsuario');
+        Route::get('/user/selectAvatar', 'UserController@selectAvatar');
 
         Route::get('/rol', 'RolController@index');
         Route::post('/rol/registrar', 'RolController@store');
@@ -240,6 +240,10 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/rutina/selectRutina', 'RutinaController@selectRutina');
 
         Route::get('/frase', 'FraseController@index');
+        Route::post('/frase/registrar', 'FraseController@store');
+        Route::put('/frase/actualizar', 'FraseController@update');
+        Route::put('/frase/desactivar', 'FraseController@desactivar');
+        Route::put('/frase/activar', 'FraseController@activar');
         Route::get('/frase/selectFraseId', 'FraseController@selectFraseId');
 
     });

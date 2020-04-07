@@ -59,6 +59,7 @@
               {{ csrf_field() }}
             </form>                           
         </ul>
+        
         </div>
       </nav>
       <!-- /.sidebar-menu -->

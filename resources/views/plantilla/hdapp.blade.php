@@ -20,7 +20,7 @@
               <div class="navbar-content">
                   <div class="row">
                       <div class="col-md-6">
-                          <img src="avatars/{{Auth::user()->avatar}}" alt="Avatar" class="img-responsive image avatar" />
+                          <img src="avatars/{{Auth::user()->avatar}}" alt="Avatar" class="img-responsive image avatar pic" />
                       </div>                    
                       <div class="col-md-6 data">
                           <span>{{session('nombre')}}  <span class="text-primary">{{session('apellido')}} </span></span>
@@ -52,7 +52,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div>
-					<img src="avatars/{{session('avatar')}}" alt="Avatar" class="avatar pic" />
+					<img src="avatars/{{Auth::user()->avatar}}" alt="Avatar" class="avatar pic" />
 				</div>				
 				<h4 class="modal-title"><span>{{session('nombre')}}  <span class="text-primary">{{session('apellido')}} </span></span></h4>	
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

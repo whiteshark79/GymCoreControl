@@ -22,7 +22,8 @@
               <div class="card-title"><h5><i class="far fa-id-card mr-1"></i> Datos Generales</h5></div>                
               <div class="card-tools">
                 <button type="button" class="btn btn-primary btn-sm" v-if="stsDatos==0" @click="activarDatos()"><i class="icon-note"></i></button> 
-                <button type="button" class="btn btn-success btn-sm" v-if="stsDatos==1" @click="actualizarAlumno()" :disabled="stsPersona!=''"><i class="icon-cloud-upload"></i></button>  
+                <button type="button" class="btn btn-success btn-sm" v-if="stsDatos==1" @click="actualizarAlumno()" :disabled="stsPersona!=''"><i class="icon-cloud-upload"></i></button> 
+                 
               </div>
             </div>          
             <div class="row">                                        
@@ -103,10 +104,11 @@
                       <div class="profile-info-name"> Avatar </div>
                       <div class="profile-info-value">
                         <div class="custom-file">                                        
-                          <input type="file" class="custom-file-input file-avatar" id="avatarFile" @change="subirImagen" accept=".png, .jpg, .jpeg" v-bind:class="{ 'is-invalid': e_avatarFile }" :disabled="stsPerfil == 0">
+                          <input type="file" class="custom-file-input file-avatar" id="avatarFile" @change="subirImagen" accept=".png, .jpg, .jpeg" v-bind:class="{ 'is-invalid': e_avatarFile }" :disabled="stsPerfil == 0">                          
                           <label class="custom-file-label" for="avatarFile">Elegir imagen</label>
-                      </div>                          
-                      </div>
+                      </div>                    
+                      <input type="hidden" v-model="pic">      
+                      </div> 
                   </div>
                   <div class="profile-info-row">
                       <div class="profile-info-name"> </div>
@@ -583,8 +585,9 @@
           email_ : '',    
           
           password : '',
-          repassword : '',
+          repassword : '',          
           avatar: '',
+          pic: '',
           picSize: 0,
           picName: '',
           picWidth: 0,
@@ -749,26 +752,65 @@
           }).mask(email); 
         }, 
         subirImagen(e){
-          let me = this;
-          me.stsImagen = 1;
+          let me = this;          
 
           var fileReader =  new FileReader();
-          fileReader.readAsDataURL(e.target.files[0]);          
+          fileReader.readAsDataURL(e.target.files[0]);      
+          
+          if(e.target.files[0].size > 524288){
+            me.stsImagen = 0;
 
-          me.picSize = e.target.files[0].size;
-          me.picName = e.target.files[0].name;
+            Swal.fire({
+              icon: 'error',
+              title: '<h5>Error al subir imagen</h5>',
+              width: 350,
+              text: 'Tamaño máximo 500Kb'
+            })
 
-          fileReader.onload = (e)=> {
-            me.avatar = e.target.result;
+          }else{           
 
-            var image = new Image();
-            image.src = e.target.result;
+            me.picSize = e.target.files[0].size;
+            me.picName = e.target.files[0].name;
 
-            image.onload = function () {
-                me.picWidth = this.width;
-                me.picHeigth = this.height;
+            fileReader.onload = (e)=> {
+              me.avatar = e.target.result;
+
+              var image = new Image();
+              image.src = e.target.result;
+
+              image.onload = function () {
+                if(this.width > 500 || this.height > 500){
+                  me.stsImagen = 0;
+
+                  Swal.fire({
+                    icon: 'error',
+                    title: '<h5>Error al subir imagen</h5>',
+                    width: 350,
+                    text: 'Dimensión máxima 500 x 500 px'
+                  })
+
+                }else if(this.width < 50 || this.height < 50){
+                  me.stsImagen = 0;
+
+                  Swal.fire({
+                    icon: 'error',
+                    title: '<h5>Error al subir imagen</h5>',
+                    width: 350,
+                    text: 'Dimensión mínima 50 x 50 px'
+                  })
+                  
+                }else{
+                  me.stsImagen = 1;
+
+                  me.picWidth = this.width;
+                  me.picHeigth = this.height;
+                }
+                
+              }
             }
-          } 
+
+          }     
+           
         }, 
         activarDatos(){
           this.stsDatos = 1;
@@ -876,7 +918,7 @@
             me.perfil= arrayPersona[0]['perfil'];            
 
             me.usuario=arrayPersona[0]['usuario'];
-            //me.avatar=arrayPersona[0]['avatar'];
+            me.pic=arrayPersona[0]['avatar'];
             me.sexo= arrayPersona[0]['sexo'];
             me.sector= arrayPersona[0]['sector'];
             me.idlocal= arrayPersona[0]['idlocal'];
@@ -977,6 +1019,7 @@
           axios.put('/user/actualizarUsuario',{
             'password' : this.password,            
             'avatar' : this.avatar,
+            'pic' : this.pic,
             'id': this.persona_id
           }).then(function (response) { 
               if(me.picName != ''){

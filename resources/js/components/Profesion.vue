@@ -330,7 +330,7 @@
                     }).then(function (response) {
                         me.listarProfesion(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
-                        'Desactivado!',
+                        'Activado!',
                         'El registro ha sido activado con éxito.',
                         'success'
                         )

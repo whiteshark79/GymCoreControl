@@ -410,7 +410,7 @@
                     }).then(function (response) {
                         me.listarHorario(me.pagination.current_page,'','id',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
-                        'Desactivado!',
+                        'Activado!',
                         'El registro ha sido activado con éxito.',
                         'success'
                         )

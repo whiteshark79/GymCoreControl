@@ -56,7 +56,7 @@ class DashboardController extends Controller
     }
      
     public function grafArticulo(Request $request){
-        //if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
         
         $anio=date('Y');
         
@@ -139,7 +139,7 @@ class DashboardController extends Controller
         
         return ['wingresos'=>$wingresos, 'wventas'=>$wventas, 'winscripciones'=>$winscripciones, 'wgastos'=>$wgastos]; 
     }    
-
+ 
     public function widgetAlumnos(Request $request){
         if (!$request->ajax()) return redirect('/');
 

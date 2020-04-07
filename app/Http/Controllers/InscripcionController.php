@@ -190,7 +190,7 @@ class InscripcionController extends Controller
        
     public function store(Request $request)
     {
-       // if (!$request->ajax()) return redirect('/');
+        if (!$request->ajax()) return redirect('/');
  
         $fecha_ini = Carbon::now();
         $fecha_fin = Carbon::now();
@@ -305,7 +305,7 @@ class InscripcionController extends Controller
     public function activar(Request $request){
         if (!$request->ajax()) return redirect('/');
         $inscripcion = Inscripcion::findOrFail($request->id);
-        $inscripcion->estado = 'Registrado';
+        $inscripcion->estado = 'Cancelado';
         $inscripcion->save();
     }
     

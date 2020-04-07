@@ -76,9 +76,9 @@
                                                 <div v-if="persona.condicion"><span class="badge badge-success">Activo</span></div>
                                                 <div v-else><span class="badge badge-danger">Inactivo</span></div>                                    
                                             </td>
-                                            <td align="center">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="icon-note" title="Editar"></i></a>                                   
+                                            <td align="center">                                                                                   
                                                 <template v-if="persona.condicion">
+                                                    <a class="btn btn-sm btn-default" @click="abrirModal('persona','actualizar',persona)"><i class="icon-note" title="Editar"></i></a>
                                                     <a class="btn btn-sm btn-default" @click="desactivarUsuario(persona.id)"><i class="icon-ban" title="Desactivar"></i></a>
                                                 </template>
                                                 <template v-else>
@@ -438,7 +438,7 @@
                     }).then(function (response) {
                         me.listarPersona(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
-                        'Desactivado!',
+                        'Activado!',
                         'El registro ha sido activado con éxito.',
                         'success'
                         )

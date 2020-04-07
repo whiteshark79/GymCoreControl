@@ -73,9 +73,9 @@
                                                 <div v-if="rol.condicion"><span class="badge badge-success">Activo</span></div>
                                                 <div v-else><span class="badge badge-secondary">Inactivo</span></div>                                    
                                             </td>
-                                            <td align="center" data-label="ACCIONES">
-                                                <a class="btn btn-sm btn-default" @click="abrirModal('rol','actualizar',rol)"><i class="icon-note" title="Editar"></i></a>                                   
+                                            <td align="center" data-label="ACCIONES">                                                                                  
                                                 <template v-if="rol.condicion">
+                                                    <a class="btn btn-sm btn-default" @click="abrirModal('rol','actualizar',rol)"><i class="icon-note" title="Editar"></i></a> 
                                                     <a class="btn btn-sm btn-default" @click="desactivarRol(rol.id)"><i class="icon-ban" title="Desactivar"></i></a>
                                                 </template>
                                                 <template v-else>
@@ -327,7 +327,7 @@
                     }).then(function (response) {
                         me.listarRol(me.pagination.current_page,'','nombre',me.paginado,me.ordenado,me.ascdesc);
                         Swal.fire(
-                        'Desactivado!',
+                        'Activado!',
                         'El registro ha sido activado con éxito.',
                         'success'
                         )

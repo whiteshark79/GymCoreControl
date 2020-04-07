@@ -59,7 +59,7 @@
                                                 <th scope="col" width="17%">TOTAL</th>                                                          
                                                 <th scope="col" width="10%">ACCIONES</th>
                                             </tr>
-                                        </thead>
+                                        </thead> 
                                         <tbody v-if="arrayCaja.length">
                                             <tr v-for="caja in arrayCaja" :key="caja.id">
                                                 <td align="center" v-text="caja.id" scope="row" data-label="#"></td>
@@ -497,8 +497,7 @@
                 //Envia la petición para visualizar la data de esa página
                 me.listarCuadreCaja(page,buscar,criterio,paginado,ordenado,ascdesc);
             },   
-            registrarCuadreCaja(){                
-                
+            registrarCuadreCaja(){   
                 let me = this;
 
                 axios.post('/caja/registrar',{
@@ -551,9 +550,7 @@
                     var urlgc= '/gasto/listarGastosDiario';
                     var urlinc= '/ingreso/listarIngresosDiario';
                     var urlie= '/caja/InsOuts';
-
                 }
-
                 
                 axios.get(urlvc).then(function (response) {
                     var respuesta_vc= response.data;
@@ -561,8 +558,7 @@
                 })
                 .catch(function (error) {
                     console.log(error);
-                });        
-
+                });     
                 
                 axios.get(urlic).then(function (response) {
                     var respuesta_ic= response.data;

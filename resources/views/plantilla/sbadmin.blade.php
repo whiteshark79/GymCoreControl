@@ -125,7 +125,13 @@
                   <li @click="menu=25" class="nav-item">
                     <a href="#" class="nav-link "><i class="fas fa-genderless fa-xs nav-icon nav-item-icon-level"></i><p class="p-icon">Profesiones</p></a></li>                
                 </ul>
-              </li>               
+              </li>
+              <li class="nav-item has-treeview"><a href="#" class="nav-link"><i class="fas fa-angle-right fa-xs nav-icon nav-item-icon"></i><p class="p-icon">Sistema<i class="right fas fa-angle-right"></i></p></a>
+                <ul class="nav nav-treeview">
+                  <li @click="menu=26" class="nav-item">
+                    <a href="#" class="nav-link "><i class="fas fa-genderless fa-xs nav-icon nav-item-icon-level"></i><p class="p-icon">Frases</p></a></li>                                  
+                </ul>
+              </li>                
             </ul>
           </li>         
              
